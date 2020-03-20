@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="UserName" jdbcType="VARCHAR" property="username" />
+    <result column="Password" jdbcType="VARCHAR" property="password" />
+    <result column="RealName" jdbcType="VARCHAR" property="realname" />
+    <result column="UserTypeID" jdbcType="INTEGER" property="usertypeid" />
+    <result column="DocTitleID" jdbcType="INTEGER" property="doctitleid" />
+    <result column="IsScheduling" jdbcType="INTEGER" property="isscheduling" />
+    <result column="DeptId" jdbcType="INTEGER" property="deptid" />
+    <result column="RegistId" jdbcType="INTEGER" property="registid" />
+    <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.User">
+    insert into user (id, UserName, Password, 
+      RealName, UserTypeID, DocTitleID, 
+      IsScheduling, DeptId, RegistId, 
+      DelMark)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{realname,jdbcType=VARCHAR}, #{usertypeid,jdbcType=INTEGER}, #{doctitleid,jdbcType=INTEGER}, 
+      #{isscheduling,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, #{registid,jdbcType=INTEGER}, 
+      #{delmark,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.User">
+    update user
+    set UserName = #{username,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      RealName = #{realname,jdbcType=VARCHAR},
+      UserTypeID = #{usertypeid,jdbcType=INTEGER},
+      DocTitleID = #{doctitleid,jdbcType=INTEGER},
+      IsScheduling = #{isscheduling,jdbcType=INTEGER},
+      DeptId = #{deptid,jdbcType=INTEGER},
+      RegistId = #{registid,jdbcType=INTEGER},
+      DelMark = #{delmark,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, UserName, Password, RealName, UserTypeID, DocTitleID, IsScheduling, DeptId, 
+    RegistId, DelMark
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, UserName, Password, RealName, UserTypeID, DocTitleID, IsScheduling, DeptId, 
+    RegistId, DelMark
+    from user
+  </select>
+</mapper>

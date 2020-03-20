@@ -20,6 +20,7 @@
                         connectionURL="jdbc:mysql://localhost/his?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC"
                         userId="root"
                         password="Yy981211">
+            <property name="nullCatalogMeansCurrent" value="true"/>
         </jdbcConnection>
 
        		 <!--生成model类的存放位置 -->
@@ -39,7 +40,7 @@
          </javaClientGenerator>
          
 		 <!-- 生成对应的表及类名 -->
-         <table tableName="his..user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+         <table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
          <!--<table tableName="cart" domainObjectName="Cart" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
          <!--<table tableName="orderitems" domainObjectName="OrderItems" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
          <!--<table tableName="orders" domainObjectName="Orders" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>-->
