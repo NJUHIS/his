@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.MedicalRecordMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.MedicalRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="Case_Number" jdbcType="VARCHAR" property="caseNumber" />
+    <result column="Register_Id" jdbcType="INTEGER" property="registerId" />
+    <result column="Medical_Readme" jdbcType="VARCHAR" property="medicalReadme" />
+    <result column="Medical_Present" jdbcType="VARCHAR" property="medicalPresent" />
+    <result column="Present_Treat" jdbcType="VARCHAR" property="presentTreat" />
+    <result column="Medical_History" jdbcType="VARCHAR" property="medicalHistory" />
+    <result column="Medical_Allergy" jdbcType="VARCHAR" property="medicalAllergy" />
+    <result column="Medical_Physique" jdbcType="VARCHAR" property="medicalPhysique" />
+    <result column="Medical_Diagnosis" jdbcType="VARCHAR" property="medicalDiagnosis" />
+    <result column="Medical_Handling" jdbcType="VARCHAR" property="medicalHandling" />
+    <result column="Case_State" jdbcType="INTEGER" property="caseState" />
+    <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from medicalrecord
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.MedicalRecord">
+    insert into medicalrecord (id, Case_Number, Register_Id, 
+      Medical_Readme, Medical_Present, Present_Treat, 
+      Medical_History, Medical_Allergy, Medical_Physique, 
+      Medical_Diagnosis, Medical_Handling, Case_State, 
+      DelMark)
+    values (#{id,jdbcType=INTEGER}, #{caseNumber,jdbcType=VARCHAR}, #{registerId,jdbcType=INTEGER}, 
+      #{medicalReadme,jdbcType=VARCHAR}, #{medicalPresent,jdbcType=VARCHAR}, #{presentTreat,jdbcType=VARCHAR}, 
+      #{medicalHistory,jdbcType=VARCHAR}, #{medicalAllergy,jdbcType=VARCHAR}, #{medicalPhysique,jdbcType=VARCHAR}, 
+      #{medicalDiagnosis,jdbcType=VARCHAR}, #{medicalHandling,jdbcType=VARCHAR}, #{caseState,jdbcType=INTEGER}, 
+      #{delmark,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.MedicalRecord">
+    update medicalrecord
+    set Case_Number = #{caseNumber,jdbcType=VARCHAR},
+      Register_Id = #{registerId,jdbcType=INTEGER},
+      Medical_Readme = #{medicalReadme,jdbcType=VARCHAR},
+      Medical_Present = #{medicalPresent,jdbcType=VARCHAR},
+      Present_Treat = #{presentTreat,jdbcType=VARCHAR},
+      Medical_History = #{medicalHistory,jdbcType=VARCHAR},
+      Medical_Allergy = #{medicalAllergy,jdbcType=VARCHAR},
+      Medical_Physique = #{medicalPhysique,jdbcType=VARCHAR},
+      Medical_Diagnosis = #{medicalDiagnosis,jdbcType=VARCHAR},
+      Medical_Handling = #{medicalHandling,jdbcType=VARCHAR},
+      Case_State = #{caseState,jdbcType=INTEGER},
+      DelMark = #{delmark,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, Case_Number, Register_Id, Medical_Readme, Medical_Present, Present_Treat, 
+    Medical_History, Medical_Allergy, Medical_Physique, Medical_Diagnosis, Medical_Handling, 
+    Case_State, DelMark
+    from medicalrecord
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, Case_Number, Register_Id, Medical_Readme, Medical_Present, Present_Treat, 
+    Medical_History, Medical_Allergy, Medical_Physique, Medical_Diagnosis, Medical_Handling, 
+    Case_State, DelMark
+    from medicalrecord
+  </select>
+</mapper>

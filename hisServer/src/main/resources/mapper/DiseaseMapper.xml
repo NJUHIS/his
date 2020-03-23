@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.DiseaseMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.Disease">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="DiseaseCode" jdbcType="VARCHAR" property="diseasecode" />
+    <result column="DiseaseName" jdbcType="VARCHAR" property="diseasename" />
+    <result column="DiseaseICD" jdbcType="VARCHAR" property="diseaseicd" />
+    <result column="DiseaseType" jdbcType="VARCHAR" property="diseasetype" />
+    <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from disease
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.Disease">
+    insert into disease (id, DiseaseCode, DiseaseName, 
+      DiseaseICD, DiseaseType, DelMark
+      )
+    values (#{id,jdbcType=INTEGER}, #{diseasecode,jdbcType=VARCHAR}, #{diseasename,jdbcType=VARCHAR}, 
+      #{diseaseicd,jdbcType=VARCHAR}, #{diseasetype,jdbcType=VARCHAR}, #{delmark,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Disease">
+    update disease
+    set DiseaseCode = #{diseasecode,jdbcType=VARCHAR},
+      DiseaseName = #{diseasename,jdbcType=VARCHAR},
+      DiseaseICD = #{diseaseicd,jdbcType=VARCHAR},
+      DiseaseType = #{diseasetype,jdbcType=VARCHAR},
+      DelMark = #{delmark,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, DiseaseCode, DiseaseName, DiseaseICD, DiseaseType, DelMark
+    from disease
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, DiseaseCode, DiseaseName, DiseaseICD, DiseaseType, DelMark
+    from disease
+  </select>
+</mapper>

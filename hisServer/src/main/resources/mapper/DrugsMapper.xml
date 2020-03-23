@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.DrugsMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.Drugs">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="Drugs_Code" jdbcType="CHAR" property="drugsCode" />
+    <result column="Drugs_Name" jdbcType="VARCHAR" property="drugsName" />
+    <result column="Drugs_Format" jdbcType="VARCHAR" property="drugsFormat" />
+    <result column="Drugs_Unit" jdbcType="VARCHAR" property="drugsUnit" />
+    <result column="Manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+    <result column="Drugs_Dosage" jdbcType="VARCHAR" property="drugsDosage" />
+    <result column="Drugs_Type" jdbcType="VARCHAR" property="drugsType" />
+    <result column="Drugs_Price" jdbcType="DECIMAL" property="drugsPrice" />
+    <result column="Mnemonic_Code" jdbcType="VARCHAR" property="mnemonicCode" />
+    <result column="Creation_Date" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="Last_Update_Date" jdbcType="TIMESTAMP" property="lastUpdateDate" />
+    <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from drugs
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.Drugs">
+    insert into drugs (id, Drugs_Code, Drugs_Name, 
+      Drugs_Format, Drugs_Unit, Manufacturer, 
+      Drugs_Dosage, Drugs_Type, Drugs_Price, 
+      Mnemonic_Code, Creation_Date, Last_Update_Date, 
+      DelMark)
+    values (#{id,jdbcType=INTEGER}, #{drugsCode,jdbcType=CHAR}, #{drugsName,jdbcType=VARCHAR}, 
+      #{drugsFormat,jdbcType=VARCHAR}, #{drugsUnit,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
+      #{drugsDosage,jdbcType=VARCHAR}, #{drugsType,jdbcType=VARCHAR}, #{drugsPrice,jdbcType=DECIMAL}, 
+      #{mnemonicCode,jdbcType=VARCHAR}, #{creationDate,jdbcType=TIMESTAMP}, #{lastUpdateDate,jdbcType=TIMESTAMP}, 
+      #{delmark,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Drugs">
+    update drugs
+    set Drugs_Code = #{drugsCode,jdbcType=CHAR},
+      Drugs_Name = #{drugsName,jdbcType=VARCHAR},
+      Drugs_Format = #{drugsFormat,jdbcType=VARCHAR},
+      Drugs_Unit = #{drugsUnit,jdbcType=VARCHAR},
+      Manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      Drugs_Dosage = #{drugsDosage,jdbcType=VARCHAR},
+      Drugs_Type = #{drugsType,jdbcType=VARCHAR},
+      Drugs_Price = #{drugsPrice,jdbcType=DECIMAL},
+      Mnemonic_Code = #{mnemonicCode,jdbcType=VARCHAR},
+      Creation_Date = #{creationDate,jdbcType=TIMESTAMP},
+      Last_Update_Date = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      DelMark = #{delmark,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, Drugs_Code, Drugs_Name, Drugs_Format, Drugs_Unit, Manufacturer, Drugs_Dosage, 
+    Drugs_Type, Drugs_Price, Mnemonic_Code, Creation_Date, Last_Update_Date, DelMark
+    from drugs
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, Drugs_Code, Drugs_Name, Drugs_Format, Drugs_Unit, Manufacturer, Drugs_Dosage, 
+    Drugs_Type, Drugs_Price, Mnemonic_Code, Creation_Date, Last_Update_Date, DelMark
+    from drugs
+  </select>
+</mapper>

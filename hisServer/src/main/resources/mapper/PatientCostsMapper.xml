@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.PatientCostsMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.PatientCosts">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="InvoiceId" jdbcType="INTEGER" property="invoiceid" />
+    <result column="RegisterId" jdbcType="INTEGER" property="registerid" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Price" jdbcType="DECIMAL" property="price" />
+    <result column="DeptId" jdbcType="VARCHAR" property="deptid" />
+    <result column="State" jdbcType="INTEGER" property="state" />
+    <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from patientcosts
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.PatientCosts">
+    insert into patientcosts (id, InvoiceId, RegisterId, 
+      Name, Price, DeptId, 
+      State, DelMark)
+    values (#{id,jdbcType=INTEGER}, #{invoiceid,jdbcType=INTEGER}, #{registerid,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{deptid,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.PatientCosts">
+    update patientcosts
+    set InvoiceId = #{invoiceid,jdbcType=INTEGER},
+      RegisterId = #{registerid,jdbcType=INTEGER},
+      Name = #{name,jdbcType=VARCHAR},
+      Price = #{price,jdbcType=DECIMAL},
+      DeptId = #{deptid,jdbcType=VARCHAR},
+      State = #{state,jdbcType=INTEGER},
+      DelMark = #{delmark,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, InvoiceId, RegisterId, Name, Price, DeptId, State, DelMark
+    from patientcosts
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, InvoiceId, RegisterId, Name, Price, DeptId, State, DelMark
+    from patientcosts
+  </select>
+</mapper>

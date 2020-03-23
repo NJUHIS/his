@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.PrescriptionDetailedMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.PrescriptionDetailed">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="PrescriptionId" jdbcType="INTEGER" property="prescriptionid" />
+    <result column="DrugsId" jdbcType="INTEGER" property="drugsid" />
+    <result column="Useage" jdbcType="VARCHAR" property="useage" />
+    <result column="Dosage" jdbcType="VARCHAR" property="dosage" />
+    <result column="Frequency" jdbcType="VARCHAR" property="frequency" />
+    <result column="Price" jdbcType="DECIMAL" property="price" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prescriptiondetailed
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.PrescriptionDetailed">
+    insert into prescriptiondetailed (id, PrescriptionId, DrugsId, 
+      Useage, Dosage, Frequency, 
+      Price)
+    values (#{id,jdbcType=INTEGER}, #{prescriptionid,jdbcType=INTEGER}, #{drugsid,jdbcType=INTEGER}, 
+      #{useage,jdbcType=VARCHAR}, #{dosage,jdbcType=VARCHAR}, #{frequency,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.PrescriptionDetailed">
+    update prescriptiondetailed
+    set PrescriptionId = #{prescriptionid,jdbcType=INTEGER},
+      DrugsId = #{drugsid,jdbcType=INTEGER},
+      Useage = #{useage,jdbcType=VARCHAR},
+      Dosage = #{dosage,jdbcType=VARCHAR},
+      Frequency = #{frequency,jdbcType=VARCHAR},
+      Price = #{price,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, PrescriptionId, DrugsId, Useage, Dosage, Frequency, Price
+    from prescriptiondetailed
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, PrescriptionId, DrugsId, Useage, Dosage, Frequency, Price
+    from prescriptiondetailed
+  </select>
+</mapper>

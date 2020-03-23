@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.ConstantTypeMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.ConstantType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ConstantTypeCode" jdbcType="VARCHAR" property="constanttypecode" />
+    <result column="ConstantTypeName" jdbcType="VARCHAR" property="constanttypename" />
+    <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from constanttype
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.ConstantType">
+    insert into constanttype (id, ConstantTypeCode, ConstantTypeName, 
+      DelMark)
+    values (#{id,jdbcType=INTEGER}, #{constanttypecode,jdbcType=VARCHAR}, #{constanttypename,jdbcType=VARCHAR}, 
+      #{delmark,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.ConstantType">
+    update constanttype
+    set ConstantTypeCode = #{constanttypecode,jdbcType=VARCHAR},
+      ConstantTypeName = #{constanttypename,jdbcType=VARCHAR},
+      DelMark = #{delmark,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, ConstantTypeCode, ConstantTypeName, DelMark
+    from constanttype
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, ConstantTypeCode, ConstantTypeName, DelMark
+    from constanttype
+  </select>
+</mapper>

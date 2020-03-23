@@ -12,6 +12,7 @@
     <result column="DeptId" jdbcType="INTEGER" property="deptid" />
     <result column="RegistId" jdbcType="INTEGER" property="registid" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+    <result column="IDnumber" jdbcType="CHAR" property="idnumber" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user
@@ -21,11 +22,11 @@
     insert into user (id, UserName, Password, 
       RealName, UserTypeID, DocTitleID, 
       IsScheduling, DeptId, RegistId, 
-      DelMark)
+      DelMark, IDnumber)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{realname,jdbcType=VARCHAR}, #{usertypeid,jdbcType=INTEGER}, #{doctitleid,jdbcType=INTEGER}, 
       #{isscheduling,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, #{registid,jdbcType=INTEGER}, 
-      #{delmark,jdbcType=INTEGER})
+      #{delmark,jdbcType=INTEGER}, #{idnumber,jdbcType=CHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.User">
     update user
@@ -37,18 +38,19 @@
       IsScheduling = #{isscheduling,jdbcType=INTEGER},
       DeptId = #{deptid,jdbcType=INTEGER},
       RegistId = #{registid,jdbcType=INTEGER},
-      DelMark = #{delmark,jdbcType=INTEGER}
+      DelMark = #{delmark,jdbcType=INTEGER},
+      IDnumber = #{idnumber,jdbcType=CHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, UserName, Password, RealName, UserTypeID, DocTitleID, IsScheduling, DeptId, 
-    RegistId, DelMark
+    RegistId, DelMark, IDnumber
     from user
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select id, UserName, Password, RealName, UserTypeID, DocTitleID, IsScheduling, DeptId, 
-    RegistId, DelMark
+    RegistId, DelMark, IDnumber
     from user
   </select>
 </mapper>

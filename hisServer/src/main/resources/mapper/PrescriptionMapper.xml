@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.PrescriptionMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.Prescription">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="Medical_Id" jdbcType="INTEGER" property="medicalId" />
+    <result column="User_Id" jdbcType="INTEGER" property="userId" />
+    <result column="Prescription_Name" jdbcType="VARCHAR" property="prescriptionName" />
+    <result column="Prescription_State" jdbcType="INTEGER" property="prescriptionState" />
+    <result column="Prescription_Time" jdbcType="TIMESTAMP" property="prescriptionTime" />
+    <result column="Invoice_id" jdbcType="VARCHAR" property="invoiceId" />
+    <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prescription
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.Prescription">
+    insert into prescription (id, Medical_Id, User_Id, 
+      Prescription_Name, Prescription_State, Prescription_Time, 
+      Invoice_id, DelMark)
+    values (#{id,jdbcType=INTEGER}, #{medicalId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{prescriptionName,jdbcType=VARCHAR}, #{prescriptionState,jdbcType=INTEGER}, #{prescriptionTime,jdbcType=TIMESTAMP}, 
+      #{invoiceId,jdbcType=VARCHAR}, #{delmark,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Prescription">
+    update prescription
+    set Medical_Id = #{medicalId,jdbcType=INTEGER},
+      User_Id = #{userId,jdbcType=INTEGER},
+      Prescription_Name = #{prescriptionName,jdbcType=VARCHAR},
+      Prescription_State = #{prescriptionState,jdbcType=INTEGER},
+      Prescription_Time = #{prescriptionTime,jdbcType=TIMESTAMP},
+      Invoice_id = #{invoiceId,jdbcType=VARCHAR},
+      DelMark = #{delmark,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, Medical_Id, User_Id, Prescription_Name, Prescription_State, Prescription_Time, 
+    Invoice_id, DelMark
+    from prescription
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, Medical_Id, User_Id, Prescription_Name, Prescription_State, Prescription_Time, 
+    Invoice_id, DelMark
+    from prescription
+  </select>
+</mapper>

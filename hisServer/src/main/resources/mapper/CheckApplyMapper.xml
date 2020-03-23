@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.CheckApplyMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.CheckApply">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Medical_Id" jdbcType="INTEGER" property="medicalId" />
+    <result column="Creation_Time" jdbcType="TIMESTAMP" property="creationTime" />
+    <result column="Total_Sum" jdbcType="DECIMAL" property="totalSum" />
+    <result column="Objective" jdbcType="VARCHAR" property="objective" />
+    <result column="User_Id" jdbcType="INTEGER" property="userId" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="Invoice_Number" jdbcType="VARCHAR" property="invoiceNumber" />
+    <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from checkapply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.CheckApply">
+    insert into checkapply (id, Name, Medical_Id, 
+      Creation_Time, Total_Sum, Objective, 
+      User_Id, state, Invoice_Number, 
+      DelMark)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{medicalId,jdbcType=INTEGER}, 
+      #{creationTime,jdbcType=TIMESTAMP}, #{totalSum,jdbcType=DECIMAL}, #{objective,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{invoiceNumber,jdbcType=VARCHAR}, 
+      #{delmark,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.CheckApply">
+    update checkapply
+    set Name = #{name,jdbcType=VARCHAR},
+      Medical_Id = #{medicalId,jdbcType=INTEGER},
+      Creation_Time = #{creationTime,jdbcType=TIMESTAMP},
+      Total_Sum = #{totalSum,jdbcType=DECIMAL},
+      Objective = #{objective,jdbcType=VARCHAR},
+      User_Id = #{userId,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      Invoice_Number = #{invoiceNumber,jdbcType=VARCHAR},
+      DelMark = #{delmark,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, Name, Medical_Id, Creation_Time, Total_Sum, Objective, User_Id, state, 
+    Invoice_Number, DelMark
+    from checkapply
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, Name, Medical_Id, Creation_Time, Total_Sum, Objective, User_Id, state, 
+    Invoice_Number, DelMark
+    from checkapply
+  </select>
+</mapper>

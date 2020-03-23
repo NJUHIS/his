@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.SchedulingMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.Scheduling">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="SchedDate" jdbcType="DATE" property="scheddate" />
+    <result column="DeptId" jdbcType="INTEGER" property="deptid" />
+    <result column="UserId" jdbcType="INTEGER" property="userid" />
+    <result column="Noon" jdbcType="VARCHAR" property="noon" />
+    <result column="RegistQuota" jdbcType="INTEGER" property="registquota" />
+    <result column="State" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from scheduling
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.Scheduling">
+    insert into scheduling (id, SchedDate, DeptId, 
+      UserId, Noon, RegistQuota, 
+      State)
+    values (#{id,jdbcType=INTEGER}, #{scheddate,jdbcType=DATE}, #{deptid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{noon,jdbcType=VARCHAR}, #{registquota,jdbcType=INTEGER}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Scheduling">
+    update scheduling
+    set SchedDate = #{scheddate,jdbcType=DATE},
+      DeptId = #{deptid,jdbcType=INTEGER},
+      UserId = #{userid,jdbcType=INTEGER},
+      Noon = #{noon,jdbcType=VARCHAR},
+      RegistQuota = #{registquota,jdbcType=INTEGER},
+      State = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, SchedDate, DeptId, UserId, Noon, RegistQuota, State
+    from scheduling
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, SchedDate, DeptId, UserId, Noon, RegistQuota, State
+    from scheduling
+  </select>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.CheckDetailedMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.CheckDetailed">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="CheckAppId" jdbcType="INTEGER" property="checkappid" />
+    <result column="CheckProjId" jdbcType="INTEGER" property="checkprojid" />
+    <result column="DeptId" jdbcType="INTEGER" property="deptid" />
+    <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="Position" jdbcType="VARCHAR" property="position" />
+    <result column="State" jdbcType="INTEGER" property="state" />
+    <result column="Price" jdbcType="DECIMAL" property="price" />
+    <result column="Identification" jdbcType="INTEGER" property="identification" />
+    <result column="InspectTime" jdbcType="TIMESTAMP" property="inspecttime" />
+    <result column="Result" jdbcType="VARCHAR" property="result" />
+    <result column="ResultTime" jdbcType="TIMESTAMP" property="resulttime" />
+    <result column="UserId2" jdbcType="INTEGER" property="userid2" />
+    <result column="UserId" jdbcType="INTEGER" property="userid" />
+    <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from checkdetailed
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.CheckDetailed">
+    insert into checkdetailed (id, CheckAppId, CheckProjId, 
+      DeptId, CreationTime, Position, 
+      State, Price, Identification, 
+      InspectTime, Result, ResultTime, 
+      UserId2, UserId, DelMark
+      )
+    values (#{id,jdbcType=INTEGER}, #{checkappid,jdbcType=INTEGER}, #{checkprojid,jdbcType=INTEGER}, 
+      #{deptid,jdbcType=INTEGER}, #{creationtime,jdbcType=TIMESTAMP}, #{position,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{identification,jdbcType=INTEGER}, 
+      #{inspecttime,jdbcType=TIMESTAMP}, #{result,jdbcType=VARCHAR}, #{resulttime,jdbcType=TIMESTAMP}, 
+      #{userid2,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.CheckDetailed">
+    update checkdetailed
+    set CheckAppId = #{checkappid,jdbcType=INTEGER},
+      CheckProjId = #{checkprojid,jdbcType=INTEGER},
+      DeptId = #{deptid,jdbcType=INTEGER},
+      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      Position = #{position,jdbcType=VARCHAR},
+      State = #{state,jdbcType=INTEGER},
+      Price = #{price,jdbcType=DECIMAL},
+      Identification = #{identification,jdbcType=INTEGER},
+      InspectTime = #{inspecttime,jdbcType=TIMESTAMP},
+      Result = #{result,jdbcType=VARCHAR},
+      ResultTime = #{resulttime,jdbcType=TIMESTAMP},
+      UserId2 = #{userid2,jdbcType=INTEGER},
+      UserId = #{userid,jdbcType=INTEGER},
+      DelMark = #{delmark,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, CheckAppId, CheckProjId, DeptId, CreationTime, Position, State, Price, 
+    Identification, InspectTime, Result, ResultTime, UserId2, UserId, DelMark
+    from checkdetailed
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, CheckAppId, CheckProjId, DeptId, CreationTime, Position, State, Price, 
+    Identification, InspectTime, Result, ResultTime, UserId2, UserId, DelMark
+    from checkdetailed
+  </select>
+</mapper>

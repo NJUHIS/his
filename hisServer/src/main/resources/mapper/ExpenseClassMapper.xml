@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.ExpenseClassMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.ExpenseClass">
+    <result column="ID" jdbcType="INTEGER" property="id" />
+    <result column="ExpCode" jdbcType="VARCHAR" property="expcode" />
+    <result column="ExpName" jdbcType="VARCHAR" property="expname" />
+    <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+  </resultMap>
+  <insert id="insert" parameterType="com.njuhis.his.model.ExpenseClass">
+    insert into expenseclass (ID, ExpCode, ExpName, 
+      DelMark)
+    values (#{id,jdbcType=INTEGER}, #{expcode,jdbcType=VARCHAR}, #{expname,jdbcType=VARCHAR}, 
+      #{delmark,jdbcType=INTEGER})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select ID, ExpCode, ExpName, DelMark
+    from expenseclass
+  </select>
+</mapper>

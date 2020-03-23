@@ -21,6 +21,8 @@ public class User {
 
     private Integer delmark;
 
+    private String idnumber;
+
     public Integer getId() {
         return id;
     }
@@ -99,5 +101,13 @@ public class User {
 
     public void setDelmark(Integer delmark) {
         this.delmark = delmark;
+    }
+
+    public String getIdnumber() {
+        return idnumber;
+    }
+
+    public void setIdnumber(String idnumber) {
+        this.idnumber = idnumber == null ? null : idnumber.trim();
     }
 }

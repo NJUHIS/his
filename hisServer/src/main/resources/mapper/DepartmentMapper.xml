@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.DepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.Department">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="DeptCode" jdbcType="VARCHAR" property="deptcode" />
+    <result column="DeptName" jdbcType="VARCHAR" property="deptname" />
+    <result column="DeptCategory" jdbcType="VARCHAR" property="deptcategory" />
+    <result column="DeptTypeID" jdbcType="INTEGER" property="depttypeid" />
+    <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from department
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.Department">
+    insert into department (id, DeptCode, DeptName, 
+      DeptCategory, DeptTypeID, DelMark
+      )
+    values (#{id,jdbcType=INTEGER}, #{deptcode,jdbcType=VARCHAR}, #{deptname,jdbcType=VARCHAR}, 
+      #{deptcategory,jdbcType=VARCHAR}, #{depttypeid,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Department">
+    update department
+    set DeptCode = #{deptcode,jdbcType=VARCHAR},
+      DeptName = #{deptname,jdbcType=VARCHAR},
+      DeptCategory = #{deptcategory,jdbcType=VARCHAR},
+      DeptTypeID = #{depttypeid,jdbcType=INTEGER},
+      DelMark = #{delmark,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, DeptCode, DeptName, DeptCategory, DeptTypeID, DelMark
+    from department
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, DeptCode, DeptName, DeptCategory, DeptTypeID, DelMark
+    from department
+  </select>
+</mapper>

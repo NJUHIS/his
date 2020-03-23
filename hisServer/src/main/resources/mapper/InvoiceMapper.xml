@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.InvoiceMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.Invoice">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="InvoiceNum" jdbcType="VARCHAR" property="invoicenum" />
+    <result column="Money" jdbcType="DECIMAL" property="money" />
+    <result column="State" jdbcType="INTEGER" property="state" />
+    <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="UserId" jdbcType="INTEGER" property="userid" />
+    <result column="DailyState" jdbcType="INTEGER" property="dailystate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from invoice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.Invoice">
+    insert into invoice (id, InvoiceNum, Money, 
+      State, CreationTime, UserId, 
+      DailyState)
+    values (#{id,jdbcType=INTEGER}, #{invoicenum,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, 
+      #{state,jdbcType=INTEGER}, #{creationtime,jdbcType=TIMESTAMP}, #{userid,jdbcType=INTEGER}, 
+      #{dailystate,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Invoice">
+    update invoice
+    set InvoiceNum = #{invoicenum,jdbcType=VARCHAR},
+      Money = #{money,jdbcType=DECIMAL},
+      State = #{state,jdbcType=INTEGER},
+      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      UserId = #{userid,jdbcType=INTEGER},
+      DailyState = #{dailystate,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, InvoiceNum, Money, State, CreationTime, UserId, DailyState
+    from invoice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, InvoiceNum, Money, State, CreationTime, UserId, DailyState
+    from invoice
+  </select>
+</mapper>
