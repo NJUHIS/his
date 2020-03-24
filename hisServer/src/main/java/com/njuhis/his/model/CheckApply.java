@@ -1,10 +1,7 @@
 package com.njuhis.his.model;
 
-import org.springframework.stereotype.Repository;
-
 import java.math.BigDecimal;
-import java.util.Date;
-@Repository(value="checkApplyDao")
+
 public class CheckApply {
     private Integer id;
 
@@ -12,7 +9,7 @@ public class CheckApply {
 
     private Integer medicalId;
 
-    private Date creationTime;
+    private Integer creationTime;
 
     private BigDecimal totalSum;
 
@@ -50,11 +47,11 @@ public class CheckApply {
         this.medicalId = medicalId;
     }
 
-    public Date getCreationTime() {
+    public Integer getCreationTime() {
         return creationTime;
     }
 
-    public void setCreationTime(Date creationTime) {
+    public void setCreationTime(Integer creationTime) {
         this.creationTime = creationTime;
     }
 

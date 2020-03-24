@@ -6,14 +6,14 @@
     <result column="CheckAppId" jdbcType="INTEGER" property="checkappid" />
     <result column="CheckProjId" jdbcType="INTEGER" property="checkprojid" />
     <result column="DeptId" jdbcType="INTEGER" property="deptid" />
-    <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="CreationTime" jdbcType="INTEGER" property="creationtime" />
     <result column="Position" jdbcType="VARCHAR" property="position" />
     <result column="State" jdbcType="INTEGER" property="state" />
     <result column="Price" jdbcType="DECIMAL" property="price" />
     <result column="Identification" jdbcType="INTEGER" property="identification" />
-    <result column="InspectTime" jdbcType="TIMESTAMP" property="inspecttime" />
+    <result column="InspectTime" jdbcType="INTEGER" property="inspecttime" />
     <result column="Result" jdbcType="VARCHAR" property="result" />
-    <result column="ResultTime" jdbcType="TIMESTAMP" property="resulttime" />
+    <result column="ResultTime" jdbcType="INTEGER" property="resulttime" />
     <result column="UserId2" jdbcType="INTEGER" property="userid2" />
     <result column="UserId" jdbcType="INTEGER" property="userid" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
@@ -30,9 +30,9 @@
       UserId2, UserId, DelMark
       )
     values (#{id,jdbcType=INTEGER}, #{checkappid,jdbcType=INTEGER}, #{checkprojid,jdbcType=INTEGER}, 
-      #{deptid,jdbcType=INTEGER}, #{creationtime,jdbcType=TIMESTAMP}, #{position,jdbcType=VARCHAR}, 
+      #{deptid,jdbcType=INTEGER}, #{creationtime,jdbcType=INTEGER}, #{position,jdbcType=VARCHAR}, 
       #{state,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{identification,jdbcType=INTEGER}, 
-      #{inspecttime,jdbcType=TIMESTAMP}, #{result,jdbcType=VARCHAR}, #{resulttime,jdbcType=TIMESTAMP}, 
+      #{inspecttime,jdbcType=INTEGER}, #{result,jdbcType=VARCHAR}, #{resulttime,jdbcType=INTEGER}, 
       #{userid2,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER}
       )
   </insert>
@@ -41,14 +41,14 @@
     set CheckAppId = #{checkappid,jdbcType=INTEGER},
       CheckProjId = #{checkprojid,jdbcType=INTEGER},
       DeptId = #{deptid,jdbcType=INTEGER},
-      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      CreationTime = #{creationtime,jdbcType=INTEGER},
       Position = #{position,jdbcType=VARCHAR},
       State = #{state,jdbcType=INTEGER},
       Price = #{price,jdbcType=DECIMAL},
       Identification = #{identification,jdbcType=INTEGER},
-      InspectTime = #{inspecttime,jdbcType=TIMESTAMP},
+      InspectTime = #{inspecttime,jdbcType=INTEGER},
       Result = #{result,jdbcType=VARCHAR},
-      ResultTime = #{resulttime,jdbcType=TIMESTAMP},
+      ResultTime = #{resulttime,jdbcType=INTEGER},
       UserId2 = #{userid2,jdbcType=INTEGER},
       UserId = #{userid,jdbcType=INTEGER},
       DelMark = #{delmark,jdbcType=INTEGER}

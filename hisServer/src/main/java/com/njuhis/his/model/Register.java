@@ -35,7 +35,7 @@ public class Register {
 
     private Integer isbook;
 
-    private Date registertime;
+    private Integer registertime;
 
     private Integer registerid;
 
@@ -171,11 +171,11 @@ public class Register {
         this.isbook = isbook;
     }
 
-    public Date getRegistertime() {
+    public Integer getRegistertime() {
         return registertime;
     }
 
-    public void setRegistertime(Date registertime) {
+    public void setRegistertime(Integer registertime) {
         this.registertime = registertime;
     }
 

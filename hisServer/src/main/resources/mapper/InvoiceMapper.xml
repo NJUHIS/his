@@ -6,7 +6,7 @@
     <result column="InvoiceNum" jdbcType="VARCHAR" property="invoicenum" />
     <result column="Money" jdbcType="DECIMAL" property="money" />
     <result column="State" jdbcType="INTEGER" property="state" />
-    <result column="CreationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="CreationTime" jdbcType="INTEGER" property="creationtime" />
     <result column="UserId" jdbcType="INTEGER" property="userid" />
     <result column="DailyState" jdbcType="INTEGER" property="dailystate" />
   </resultMap>
@@ -19,7 +19,7 @@
       State, CreationTime, UserId, 
       DailyState)
     values (#{id,jdbcType=INTEGER}, #{invoicenum,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, 
-      #{state,jdbcType=INTEGER}, #{creationtime,jdbcType=TIMESTAMP}, #{userid,jdbcType=INTEGER}, 
+      #{state,jdbcType=INTEGER}, #{creationtime,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
       #{dailystate,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Invoice">
@@ -27,7 +27,7 @@
     set InvoiceNum = #{invoicenum,jdbcType=VARCHAR},
       Money = #{money,jdbcType=DECIMAL},
       State = #{state,jdbcType=INTEGER},
-      CreationTime = #{creationtime,jdbcType=TIMESTAMP},
+      CreationTime = #{creationtime,jdbcType=INTEGER},
       UserId = #{userid,jdbcType=INTEGER},
       DailyState = #{dailystate,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

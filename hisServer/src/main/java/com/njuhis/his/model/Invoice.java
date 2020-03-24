@@ -1,7 +1,6 @@
 package com.njuhis.his.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class Invoice {
     private Integer id;
@@ -12,7 +11,7 @@ public class Invoice {
 
     private Integer state;
 
-    private Date creationtime;
+    private Integer creationtime;
 
     private Integer userid;
 
@@ -50,11 +49,11 @@ public class Invoice {
         this.state = state;
     }
 
-    public Date getCreationtime() {
+    public Integer getCreationtime() {
         return creationtime;
     }
 
-    public void setCreationtime(Date creationtime) {
+    public void setCreationtime(Integer creationtime) {
         this.creationtime = creationtime;
     }
 

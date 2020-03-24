@@ -1,7 +1,5 @@
 package com.njuhis.his.model;
 
-import java.util.Date;
-
 public class Prescription {
     private Integer id;
 
@@ -13,7 +11,7 @@ public class Prescription {
 
     private Integer prescriptionState;
 
-    private Date prescriptionTime;
+    private Integer prescriptionTime;
 
     private String invoiceId;
 
@@ -59,11 +57,11 @@ public class Prescription {
         this.prescriptionState = prescriptionState;
     }
 
-    public Date getPrescriptionTime() {
+    public Integer getPrescriptionTime() {
         return prescriptionTime;
     }
 
-    public void setPrescriptionTime(Date prescriptionTime) {
+    public void setPrescriptionTime(Integer prescriptionTime) {
         this.prescriptionTime = prescriptionTime;
     }
 

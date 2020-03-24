@@ -1,7 +1,6 @@
 package com.njuhis.his.model;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class CheckDetailed {
     private Integer id;
@@ -12,7 +11,7 @@ public class CheckDetailed {
 
     private Integer deptid;
 
-    private Date creationtime;
+    private Integer creationtime;
 
     private String position;
 
@@ -22,11 +21,11 @@ public class CheckDetailed {
 
     private Integer identification;
 
-    private Date inspecttime;
+    private Integer inspecttime;
 
     private String result;
 
-    private Date resulttime;
+    private Integer resulttime;
 
     private Integer userid2;
 
@@ -66,11 +65,11 @@ public class CheckDetailed {
         this.deptid = deptid;
     }
 
-    public Date getCreationtime() {
+    public Integer getCreationtime() {
         return creationtime;
     }
 
-    public void setCreationtime(Date creationtime) {
+    public void setCreationtime(Integer creationtime) {
         this.creationtime = creationtime;
     }
 
@@ -106,11 +105,11 @@ public class CheckDetailed {
         this.identification = identification;
     }
 
-    public Date getInspecttime() {
+    public Integer getInspecttime() {
         return inspecttime;
     }
 
-    public void setInspecttime(Date inspecttime) {
+    public void setInspecttime(Integer inspecttime) {
         this.inspecttime = inspecttime;
     }
 
@@ -122,11 +121,11 @@ public class CheckDetailed {
         this.result = result == null ? null : result.trim();
     }
 
-    public Date getResulttime() {
+    public Integer getResulttime() {
         return resulttime;
     }
 
-    public void setResulttime(Date resulttime) {
+    public void setResulttime(Integer resulttime) {
         this.resulttime = resulttime;
     }
 
