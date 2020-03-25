@@ -3,6 +3,7 @@ package com.njuhis.his.mapper;
 import com.njuhis.his.model.SettleCategory;
 import java.util.List;
 
+
 public interface SettleCategoryMapper {
     int deleteByPrimaryKey(Integer id);
 
