@@ -12,8 +12,8 @@
     <result column="Drugs_Type" jdbcType="VARCHAR" property="drugsType" />
     <result column="Drugs_Price" jdbcType="DECIMAL" property="drugsPrice" />
     <result column="Mnemonic_Code" jdbcType="VARCHAR" property="mnemonicCode" />
-    <result column="Creation_Date" jdbcType="INTEGER" property="creationDate" />
-    <result column="Last_Update_Date" jdbcType="INTEGER" property="lastUpdateDate" />
+    <result column="Creation_Date" jdbcType="TIMESTAMP" property="creationDate" />
+    <result column="Last_Update_Date" jdbcType="TIMESTAMP" property="lastUpdateDate" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -29,7 +29,7 @@
     values (#{id,jdbcType=INTEGER}, #{drugsCode,jdbcType=CHAR}, #{drugsName,jdbcType=VARCHAR}, 
       #{drugsFormat,jdbcType=VARCHAR}, #{drugsUnit,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
       #{drugsDosage,jdbcType=VARCHAR}, #{drugsType,jdbcType=VARCHAR}, #{drugsPrice,jdbcType=DECIMAL}, 
-      #{mnemonicCode,jdbcType=VARCHAR}, #{creationDate,jdbcType=INTEGER}, #{lastUpdateDate,jdbcType=INTEGER}, 
+      #{mnemonicCode,jdbcType=VARCHAR}, #{creationDate,jdbcType=TIMESTAMP}, #{lastUpdateDate,jdbcType=TIMESTAMP}, 
       #{delmark,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Drugs">
@@ -43,8 +43,8 @@
       Drugs_Type = #{drugsType,jdbcType=VARCHAR},
       Drugs_Price = #{drugsPrice,jdbcType=DECIMAL},
       Mnemonic_Code = #{mnemonicCode,jdbcType=VARCHAR},
-      Creation_Date = #{creationDate,jdbcType=INTEGER},
-      Last_Update_Date = #{lastUpdateDate,jdbcType=INTEGER},
+      Creation_Date = #{creationDate,jdbcType=TIMESTAMP},
+      Last_Update_Date = #{lastUpdateDate,jdbcType=TIMESTAMP},
       DelMark = #{delmark,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

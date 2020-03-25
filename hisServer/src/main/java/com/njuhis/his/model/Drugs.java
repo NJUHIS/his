@@ -1,6 +1,7 @@
 package com.njuhis.his.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Drugs {
     private Integer id;
@@ -23,9 +24,9 @@ public class Drugs {
 
     private String mnemonicCode;
 
-    private Integer creationDate;
+    private Date creationDate;
 
-    private Integer lastUpdateDate;
+    private Date lastUpdateDate;
 
     private Integer delmark;
 
@@ -109,19 +110,19 @@ public class Drugs {
         this.mnemonicCode = mnemonicCode == null ? null : mnemonicCode.trim();
     }
 
-    public Integer getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Integer creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
-    public Integer getLastUpdateDate() {
+    public Date getLastUpdateDate() {
         return lastUpdateDate;
     }
 
-    public void setLastUpdateDate(Integer lastUpdateDate) {
+    public void setLastUpdateDate(Date lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
     }
 

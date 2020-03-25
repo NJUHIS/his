@@ -79,4 +79,11 @@
     VisitState, patientID
     from register
   </select>
+  <select id="selectByIdNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
+  select id, RealName, Gender, IDnumber, BirthDate, Age, AgeType, HomeAddress, CaseNumber,
+  VisitDate, Noon, DeptId, UserId, RegistId, SettleID, IsBook, RegisterTime, RegisterID,
+  VisitState, patientID
+  from register
+  where idnumber = #{idnumber}
+  </select>
 </mapper>

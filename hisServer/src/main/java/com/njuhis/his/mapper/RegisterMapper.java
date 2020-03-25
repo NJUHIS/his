@@ -13,4 +13,6 @@ public interface RegisterMapper {
     List<Register> selectAll();
 
     int updateByPrimaryKey(Register record);
+
+    List<Register> selectByIdNumber(String idNumber);
 }
