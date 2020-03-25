@@ -522,7 +522,7 @@ DROP TABLE IF EXISTS `register`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `register` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `RealName` varchar(64) DEFAULT NULL,
   `Gender` int(9) DEFAULT NULL,
   `IDnumber` varchar(18) DEFAULT NULL,
@@ -531,20 +531,20 @@ CREATE TABLE `register` (
   `AgeType` int(9) DEFAULT NULL,
   `HomeAddress` varchar(64) DEFAULT NULL,
   `CaseNumber` varchar(64) DEFAULT NULL COMMENT '一名患者在同一医院看诊多次，根据患者是否使用同一个病历本，确定该患者的“病历号码”是否相同。',
-  `VisitDate` date NOT NULL,
-  `Noon` int(9) NOT NULL,
+  `VisitDate` date DEFAULT NULL,
+  `Noon` int(9) DEFAULT NULL,
   `DeptId` int(9) DEFAULT NULL,
   `UserId` int(9) DEFAULT NULL,
-  `RegistId` int(9) NOT NULL,
-  `SettleID` int(9) NOT NULL,
-  `IsBook` int(1) NOT NULL,
+  `RegistId` int(9) DEFAULT NULL,
+  `SettleID` int(9) DEFAULT NULL,
+  `IsBook` int(1) DEFAULT NULL,
   `RegisterTime` int(12) DEFAULT NULL,
-  `RegisterID` int(9) NOT NULL,
+  `RegisterID` int(9) DEFAULT NULL,
   `VisitState` int(9) DEFAULT NULL,
   `patientID` int(9) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -553,6 +553,7 @@ CREATE TABLE `register` (
 
 LOCK TABLES `register` WRITE;
 /*!40000 ALTER TABLE `register` DISABLE KEYS */;
+INSERT INTO `register` VALUES (1,'ahillatty',1,'112222222','2020-01-01',1,0,'asdasdasd','1','2020-03-20',1,3,1,1,1,1,11111,1,0,0),(2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `register` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -612,6 +613,7 @@ CREATE TABLE `scheduling` (
 
 LOCK TABLES `scheduling` WRITE;
 /*!40000 ALTER TABLE `scheduling` DISABLE KEYS */;
+INSERT INTO `scheduling` VALUES (1,'2019-03-01',3,1,'1',3,0);
 /*!40000 ALTER TABLE `scheduling` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -672,6 +674,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'ahilla','123qwe','ahilla',1,1,1,3,1,0,'11111111111');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -692,4 +695,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-24 10:51:13
+-- Dump completed on 2020-03-25 16:09:26

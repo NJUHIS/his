@@ -27,7 +27,7 @@
     delete from register
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.Register">
+  <insert id="insert" parameterType="com.njuhis.his.model.Register" useGeneratedKeys="true"  keyProperty="id">
     insert into register (id, RealName, Gender, 
       IDnumber, BirthDate, Age, 
       AgeType, HomeAddress, CaseNumber, 
@@ -85,5 +85,12 @@
   VisitState, patientID
   from register
   where idnumber = #{idnumber}
+  </select>
+  <select id="selectByPatientId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select id, RealName, Gender, IDnumber, BirthDate, Age, AgeType, HomeAddress, CaseNumber,
+  VisitDate, Noon, DeptId, UserId, RegistId, SettleID, IsBook, RegisterTime, RegisterID,
+  VisitState, patientID
+  from register
+  where patientid = #{patientid,jdbcType=INTEGER}
   </select>
 </mapper>

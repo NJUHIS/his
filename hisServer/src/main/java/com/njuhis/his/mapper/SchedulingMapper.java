@@ -13,4 +13,6 @@ public interface SchedulingMapper {
     List<Scheduling> selectAll();
 
     int updateByPrimaryKey(Scheduling record);
+
+    List<Scheduling> selectByDepartment(int departmentID);
 }

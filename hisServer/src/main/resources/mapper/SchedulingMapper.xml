@@ -41,4 +41,9 @@
     select id, SchedDate, DeptId, UserId, Noon, RegistQuota, State
     from scheduling
   </select>
+  <select id="selectByDepartment" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, SchedDate, DeptId, UserId, Noon, RegistQuota, State
+    from scheduling
+    where Deptid = #{departmentID}
+  </select>
 </mapper>
