@@ -1,21 +1,38 @@
 package com.njuhis.his.controller;
 
+import com.njuhis.his.model.Department;
 import com.njuhis.his.service.BasicInfoService;
+import com.njuhis.his.util.QuickLogger;
+import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.logging.Logger;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * @author Paul
  * 基础信息管理
  * 医院系统管理数据维护
  */
-@RequestMapping("basinInfo")
+@RequestMapping("/basicInfo")
 @RestController
 public class BasicInfoController {
-    private Logger logger=Logger.getLogger(getClass().getName());
     @Autowired
     private BasicInfoService basicInfoService;
+    private QuickLogger quickLogger =new QuickLogger(this.getClass());
+
+    /**
+     * 獲取所有的科室
+     * @param httpServletResponse
+     * @return
+     */
+    @RequestMapping(value = "/getAllDepartments")
+    public List<Department> getAllDepartments(HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        List<Department> departments=basicInfoService.getAllDepartments(new ResultMessage(httpServletResponse));
+        quickLogger.logReturn(departments.toString());
+        return departments;
+    }
 }

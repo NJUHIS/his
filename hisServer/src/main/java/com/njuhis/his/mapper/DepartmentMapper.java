@@ -1,8 +1,10 @@
 package com.njuhis.his.mapper;
 
 import com.njuhis.his.model.Department;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+@Component
 public interface DepartmentMapper {
     int deleteByPrimaryKey(Integer id);
 
