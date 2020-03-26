@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -59,6 +60,13 @@ public class dataController {
     @RequestMapping("/se/{departmentID}")
     List<Scheduling> selectScheduling(@PathVariable int departmentID){
         System.out.println(departmentID);
-        return schedulingMapper.selectByDepartment(departmentID);
+        Scheduling scheduling = new Scheduling();
+        scheduling.setDeptid(3);
+        scheduling.setNoon("1");
+        Date date = new Date(2019-1900,03-1,01,8,0);
+        System.out.println(date);
+        scheduling.setScheddate(date);
+        List<Scheduling> s= schedulingMapper.selectByDepartment(scheduling);
+        return schedulingMapper.selectByDepartment(scheduling);
     }
 }
