@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `checkapply`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `checkapply` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) DEFAULT NULL,
   `Medical_Id` int(9) DEFAULT NULL,
   `Creation_Time` int(12) DEFAULT NULL,
@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS `checkdetailed`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `checkdetailed` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `CheckAppId` int(9) DEFAULT NULL,
   `CheckProjId` int(9) DEFAULT NULL,
   `DeptId` int(9) DEFAULT NULL,
@@ -92,7 +92,7 @@ DROP TABLE IF EXISTS `checkresult`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `checkresult` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `Case_Number` varchar(64) DEFAULT NULL,
   `advice` varchar(255) DEFAULT NULL,
   `result` varchar(255) DEFAULT NULL,
@@ -117,13 +117,13 @@ DROP TABLE IF EXISTS `constantitem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `constantitem` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `ConstantTypeId` int(9) DEFAULT NULL,
   `ConstantCode` varchar(64) DEFAULT NULL,
   `ConstantName` varchar(64) DEFAULT NULL,
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=165 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,12 +144,12 @@ DROP TABLE IF EXISTS `constanttype`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `constanttype` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `ConstantTypeCode` varchar(64) DEFAULT NULL,
   `ConstantTypeName` varchar(64) DEFAULT NULL,
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,10 +199,11 @@ DROP TABLE IF EXISTS `diagnosis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `diagnosis` (
-  `id` int(9) DEFAULT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `MedicalId` int(9) DEFAULT NULL,
   `DrugId` int(9) DEFAULT NULL,
-  `state` int(9) DEFAULT NULL
+  `state` int(9) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -223,7 +224,7 @@ DROP TABLE IF EXISTS `disease`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `disease` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `DiseaseCode` varchar(64) DEFAULT NULL,
   `DiseaseName` varchar(255) DEFAULT NULL,
   `DiseaseICD` varchar(64) DEFAULT NULL,
@@ -231,7 +232,7 @@ CREATE TABLE `disease` (
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,7 +253,7 @@ DROP TABLE IF EXISTS `drugs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `drugs` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `Drugs_Code` char(14) DEFAULT NULL,
   `Drugs_Name` varchar(64) DEFAULT NULL,
   `Drugs_Format` varchar(64) DEFAULT NULL,
@@ -267,7 +268,7 @@ CREATE TABLE `drugs` (
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -288,12 +289,12 @@ DROP TABLE IF EXISTS `expenseclass`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `expenseclass` (
-  `ID` int(9) NOT NULL,
+  `ID` int(9) NOT NULL AUTO_INCREMENT,
   `ExpCode` varchar(64) DEFAULT NULL,
   `ExpName` varchar(64) DEFAULT NULL,
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -314,7 +315,7 @@ DROP TABLE IF EXISTS `fmeditem`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `fmeditem` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `ItemCode` varchar(64) DEFAULT NULL,
   `ItemName` varchar(64) DEFAULT NULL,
   `Format` varchar(64) DEFAULT NULL,
@@ -324,7 +325,7 @@ CREATE TABLE `fmeditem` (
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -345,7 +346,7 @@ DROP TABLE IF EXISTS `invoice`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `invoice` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `InvoiceNum` varchar(64) DEFAULT NULL,
   `Money` decimal(8,2) DEFAULT NULL,
   `State` int(1) DEFAULT NULL COMMENT '0 - 作废\n            1 - 正常\n            2 - 重打\n            3 - 补打\n            4 - 红冲',
@@ -373,7 +374,7 @@ DROP TABLE IF EXISTS `medicalrecord`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `medicalrecord` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `Case_Number` varchar(64) NOT NULL,
   `Register_Id` int(9) NOT NULL,
   `Medical_Readme` varchar(512) DEFAULT NULL,
@@ -408,12 +409,13 @@ DROP TABLE IF EXISTS `patient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `patient` (
-  `id` int(9) DEFAULT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
   `IDnumber` varchar(45) DEFAULT NULL,
   `phone` varchar(45) DEFAULT NULL,
   `loginname` varchar(45) DEFAULT NULL,
-  `password` varchar(45) DEFAULT NULL
+  `password` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -434,7 +436,7 @@ DROP TABLE IF EXISTS `patientcosts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `patientcosts` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `InvoiceId` int(9) DEFAULT NULL,
   `RegisterId` int(9) DEFAULT NULL,
   `Name` varchar(64) DEFAULT NULL,
@@ -463,7 +465,7 @@ DROP TABLE IF EXISTS `prescription`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `prescription` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `Medical_Id` int(9) DEFAULT NULL,
   `User_Id` int(9) DEFAULT NULL,
   `Prescription_Name` varchar(64) DEFAULT NULL,
@@ -493,7 +495,7 @@ DROP TABLE IF EXISTS `prescriptiondetailed`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `prescriptiondetailed` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `PrescriptionId` int(9) DEFAULT NULL,
   `DrugsId` int(9) DEFAULT NULL,
   `Useage` varchar(64) DEFAULT NULL,
@@ -595,7 +597,7 @@ DROP TABLE IF EXISTS `scheduling`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `scheduling` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `SchedDate` date NOT NULL,
   `DeptId` int(9) NOT NULL,
   `UserId` int(9) DEFAULT NULL,
@@ -604,7 +606,7 @@ CREATE TABLE `scheduling` (
   `State` int(1) DEFAULT NULL COMMENT '1=有效  0=无效',
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -652,7 +654,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `user` (
-  `id` int(9) NOT NULL,
+  `id` int(9) NOT NULL AUTO_INCREMENT,
   `UserName` varchar(64) NOT NULL,
   `Password` varchar(64) DEFAULT NULL,
   `RealName` varchar(64) NOT NULL,
@@ -665,7 +667,7 @@ CREATE TABLE `user` (
   `IDnumber` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -695,4 +697,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-25 16:09:26
+-- Dump completed on 2020-03-26 20:17:13
