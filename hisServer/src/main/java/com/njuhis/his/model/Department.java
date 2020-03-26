@@ -1,17 +1,12 @@
 package com.njuhis.his.model;
 
 public class Department {
-    private Integer id;
-
-    private String deptcode;
-
-    private String deptname;
-
-    private String deptcategory;
-
-    private Integer depttypeid;
-
-    private Integer delmark;
+    private Integer id;//科室主键ID
+    private String deptcode;//科室编码
+    private String deptname;//科室名称
+    private String deptcategory;//科室分类
+    private Integer depttypeid;//科室类型标识
+    private Integer delmark;//删除标记 1-是 0-否
 
     public Integer getId() {
         return id;

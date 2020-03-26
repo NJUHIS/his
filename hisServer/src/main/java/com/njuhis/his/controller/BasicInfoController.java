@@ -40,17 +40,17 @@ public class BasicInfoController {
 
 
     /**
-     * 新增一名醫生
-     * @param doctor
-     * doctor 的 id 會從無到有
+     * 新增一名用户
+     * @param user
+     * user 的 id 會從無到有
      */
-    @RequestMapping(value = "/addDoctor")
-    public User addDoctor(@RequestBody User doctor, HttpServletResponse httpServletResponse){
+    @RequestMapping(value = "/addUser")
+    public User addDoctor(@RequestBody User user, HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
-        quickLogger.logReceive(doctor);
-        basicInfoService.addDoctor(doctor,new ResultMessage(httpServletResponse));
-        quickLogger.logReturn(doctor);
-        return doctor;
+        quickLogger.logReceive(user);
+        basicInfoService.addUser(user,new ResultMessage(httpServletResponse));
+        quickLogger.logReturn(user);
+        return user;
     }
 
 

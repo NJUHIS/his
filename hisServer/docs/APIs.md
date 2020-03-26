@@ -39,15 +39,15 @@ HTTP 响应示例：
   }
  ]
 
- ### 1.2 新增一名医生/addDoctor
+ ### 1.2 新增一名用户/addUser
 
- 请求体：没有id的医生
+ 请求体：主键ID为null的用户
 
- 返回：有id的医生
+ 返回：主键ID非null的用户
 
  HTTP 请求示例：
 
- POST /his/basicInfo/addDoctor HTTP/1.1
+ POST /his/basicInfo/addUser HTTP/1.1
 Host: localhost:9002
 Content-Type: application/json
 
@@ -65,7 +65,7 @@ Content-Type: application/json
     "idnumber": "3247875"
 }
 
- HTTP 返回示例：
+ HTTP 相应示例：
 
 {
     "id": 11,
@@ -80,6 +80,10 @@ Content-Type: application/json
     "delmark": 0,
     "idnumber": "3247875"
 }
+
+
+
+
 
 
 

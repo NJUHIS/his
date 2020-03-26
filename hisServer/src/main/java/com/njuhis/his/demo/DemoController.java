@@ -2,6 +2,10 @@ package com.njuhis.his.demo;
 
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @author Paul
+ * @deprecated
+ */
 @RestController
 @RequestMapping("/demo")
 public class DemoController {

@@ -21,9 +21,9 @@ public class BasicInfoService {
     }
 
     /**
-     * @param doctor doctor 的 id 會從無到有
+     * @param user user 的 id 會從無到有
      */
-    public void addDoctor(User doctor, ResultMessage resultMessage){
-        userMapper.insert(doctor);
+    public void addUser(User user, ResultMessage resultMessage){
+        userMapper.insert(user);
     }
 }
