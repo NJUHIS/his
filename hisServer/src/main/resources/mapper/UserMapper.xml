@@ -18,7 +18,7 @@
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.User">
+  <insert id="insert" parameterType="com.njuhis.his.model.User" useGeneratedKeys="true"  keyProperty="id">
     insert into user (id, UserName, Password, 
       RealName, UserTypeID, DocTitleID, 
       IsScheduling, DeptId, RegistId, 

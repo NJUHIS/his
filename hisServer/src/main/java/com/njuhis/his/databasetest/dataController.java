@@ -1,13 +1,7 @@
 package com.njuhis.his.databasetest;
 
-import com.njuhis.his.mapper.DepartmentMapper;
-import com.njuhis.his.mapper.DrugsMapper;
-import com.njuhis.his.mapper.RegisterMapper;
-import com.njuhis.his.mapper.SchedulingMapper;
-import com.njuhis.his.model.Department;
-import com.njuhis.his.model.Drugs;
-import com.njuhis.his.model.Register;
-import com.njuhis.his.model.Scheduling;
+import com.njuhis.his.mapper.*;
+import com.njuhis.his.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +21,8 @@ public class dataController {
     RegisterMapper registerMapper;
     @Autowired
     SchedulingMapper schedulingMapper;
+    @Autowired
+    UserMapper userMapper;
     @RequestMapping("/drugs")
     public List<Drugs> selectAllDrugs(){
         return drugsMapper.selectAll();
@@ -68,5 +64,14 @@ public class dataController {
         scheduling.setScheddate(date);
         List<Scheduling> s= schedulingMapper.selectByDepartment(scheduling);
         return schedulingMapper.selectByDepartment(scheduling);
+    }
+    @RequestMapping("/insert")
+    void insertUser(){
+        User user = new User();
+        user.setUsername("aa");
+        user.setRealname("aa");
+        user.setDelmark(0);
+        user.setDeptid(3);
+        userMapper.insert(user);
     }
 }
