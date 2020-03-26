@@ -1,0 +1,6 @@
+GET /his/basicInfo/getAllDepartments HTTP/1.1
+Host: localhost:9002
+
+###
+
+
