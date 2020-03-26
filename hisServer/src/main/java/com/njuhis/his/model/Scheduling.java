@@ -16,6 +16,24 @@ public class Scheduling {
     private Integer registquota;
 
     private Integer state;
+    private User user;
+    private Department department;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
 
     public Integer getId() {
         return id;

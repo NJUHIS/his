@@ -10,6 +10,36 @@
     <result column="RegistQuota" jdbcType="INTEGER" property="registquota" />
     <result column="State" jdbcType="INTEGER" property="state" />
   </resultMap>
+  <resultMap id="BaseResultMap1" type="com.njuhis.his.model.Scheduling">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="SchedDate" jdbcType="DATE" property="scheddate" />
+    <result column="DeptId" jdbcType="INTEGER" property="deptid" />
+    <result column="UserId" jdbcType="INTEGER" property="userid" />
+    <result column="Noon" jdbcType="VARCHAR" property="noon" />
+    <result column="RegistQuota" jdbcType="INTEGER" property="registquota" />
+    <result column="State" jdbcType="INTEGER" property="state" />
+    <association property="user" column="userid" javaType="com.njuhis.his.model.User">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="UserName" jdbcType="VARCHAR" property="username" />
+      <result column="Password" jdbcType="VARCHAR" property="password" />
+      <result column="RealName" jdbcType="VARCHAR" property="realname" />
+      <result column="UserTypeID" jdbcType="INTEGER" property="usertypeid" />
+      <result column="DocTitleID" jdbcType="INTEGER" property="doctitleid" />
+      <result column="IsScheduling" jdbcType="INTEGER" property="isscheduling" />
+      <result column="DeptId" jdbcType="INTEGER" property="deptid" />
+      <result column="RegistId" jdbcType="INTEGER" property="registid" />
+      <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+      <result column="IDnumber" jdbcType="VARCHAR" property="idnumber" />
+    </association>
+    <association property="department" column="deptid" javaType="com.njuhis.his.model.Department">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="DeptCode" jdbcType="VARCHAR" property="deptcode" />
+      <result column="DeptName" jdbcType="VARCHAR" property="deptname" />
+      <result column="DeptCategory" jdbcType="VARCHAR" property="deptcategory" />
+      <result column="DeptTypeID" jdbcType="INTEGER" property="depttypeid" />
+      <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+    </association>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from scheduling
     where id = #{id,jdbcType=INTEGER}
@@ -41,9 +71,9 @@
     select id, SchedDate, DeptId, UserId, Noon, RegistQuota, State
     from scheduling
   </select>
-  <select id="selectByDepartment" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, SchedDate, DeptId, UserId, Noon, RegistQuota, State
-    from scheduling
-    where Deptid = #{departmentID}
+  <select id="selectByDepartment" parameterType="com.njuhis.his.model.Scheduling" resultMap="BaseResultMap1">
+    select d.deptname,d.id,u.username,s.RegistQuota,s.id,s.SchedDate,s.deptid,s.userid,s.noon,s.state from scheduling s inner join department d on s.deptid =d.id
+    inner join user u on s.userid= u.id
+    where s.SchedDate=#{scheddate} and noon = #{noon} and s.deptid=#{deptid}
   </select>
 </mapper>

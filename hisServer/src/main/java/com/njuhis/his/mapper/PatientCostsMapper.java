@@ -13,4 +13,6 @@ public interface PatientCostsMapper {
     List<PatientCosts> selectAll();
 
     int updateByPrimaryKey(PatientCosts record);
+
+    PatientCosts selectByRegisterId(Integer RegisterId);
 }

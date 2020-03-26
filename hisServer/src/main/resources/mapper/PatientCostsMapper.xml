@@ -43,4 +43,9 @@
     select id, InvoiceId, RegisterId, Name, Price, DeptId, State, DelMark
     from patientcosts
   </select>
+  <select id="selectByRegisterId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, InvoiceId, RegisterId, Name, Price, DeptId, State, DelMark
+    from patientcosts
+    where RegisterId = #{RegisterId,jdbcType=INTEGER}
+  </select>
 </mapper>
