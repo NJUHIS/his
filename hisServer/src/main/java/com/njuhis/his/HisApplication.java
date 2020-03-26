@@ -12,6 +12,9 @@ public class HisApplication {
     public static void main(String[] args) {
         SpringApplication.run(HisApplication.class, args);
     }
+
+
+
     /***
      * 跨域訪問。
      * @return WebMvcConfigurer
