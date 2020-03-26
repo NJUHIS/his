@@ -1,9 +1,16 @@
 package com.njuhis.his.util;
 
+import com.google.gson.Gson;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * @author Paul
+ *
+ */
 public class QuickLogger {
+    public static Gson gson=new Gson();
     public Logger logger;
     private String colorfulClassName;
     public QuickLogger(Class paramClass){
@@ -21,10 +28,16 @@ public class QuickLogger {
     public void log(){
         log("",3);
     }
+    public void log(Object obj){
+        log(gson.toJson(obj),3);
+    }
     public void logInvoked(){
         log("Invoked",3);
     }
-    public void logReturn(String message){
-        log("Returns "+message,3);
+    public void logReceive(Object obj){
+        log("Received "+gson.toJson(obj),3);
+    }
+    public void logReturn(Object obj){
+        log("Returned "+gson.toJson(obj),3);
     }
 }

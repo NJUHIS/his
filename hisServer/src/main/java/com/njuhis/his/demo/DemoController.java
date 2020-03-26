@@ -8,7 +8,7 @@ public class DemoController {
 
     @RequestMapping("/printUserWithRequestBody")
     public void printUserWithRequestBody(@RequestBody DemoUser demoUser){
-        System.out.println(demoUser.getName()+" "+demoUser.getPassword());
+
     }
 
     @RequestMapping("/printUserWithRequestParam")
@@ -20,4 +20,5 @@ public class DemoController {
     public void printUserWithPathVariable(@PathVariable String name, @PathVariable String password){
         System.out.println(name+" "+password);
     }
+
 }

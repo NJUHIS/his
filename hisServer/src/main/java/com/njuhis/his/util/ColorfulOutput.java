@@ -1,6 +1,8 @@
 package com.njuhis.his.util;
 
-
+/**
+ * @author Paul
+ */
 public class ColorfulOutput {
     public static final String PURPLE_RED="\033[0;35m";
     public static final String DEFAULT="\033[0m";
