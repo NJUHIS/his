@@ -1,0 +1,15 @@
+POST /his/personalInfo/addPatient HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": null,
+  "name": "MyName",
+  "idnumber": "idnumber23434",
+  "phone": "phone234234",
+  "loginname": "Myloginname",
+  "password": "Mypassword"
+}
+
+###
+

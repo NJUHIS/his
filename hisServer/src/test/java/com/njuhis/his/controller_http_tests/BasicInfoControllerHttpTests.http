@@ -3,4 +3,24 @@ Host: localhost:9002
 
 ###
 
+POST /his/basicInfo/addUser HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id":null,
+  "username": "MyUsername",
+  "password": "MyPassword",
+  "realname": "MyRealName",
+  "usertypeid": 1,
+  "doctitleid": 1,
+  "isscheduling": 1,
+  "deptid": 3,
+  "registid": 1,
+  "delmark": 0,
+  "idnumber": "3247875"
+}
+
+###
+
 

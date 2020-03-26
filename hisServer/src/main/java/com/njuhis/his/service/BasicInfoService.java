@@ -1,8 +1,10 @@
 package com.njuhis.his.service;
 
 import com.njuhis.his.mapper.DepartmentMapper;
+import com.njuhis.his.mapper.PatientMapper;
 import com.njuhis.his.mapper.UserMapper;
 import com.njuhis.his.model.Department;
+import com.njuhis.his.model.Patient;
 import com.njuhis.his.model.User;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ public class BasicInfoService {
     private DepartmentMapper departmentMapper;
     @Autowired
     private UserMapper userMapper;
+
     public List<Department> getAllDepartments(ResultMessage resultMessage){
         return departmentMapper.selectAll();
     }
@@ -24,6 +27,13 @@ public class BasicInfoService {
      * @param user user 的 id 會從無到有
      */
     public void addUser(User user, ResultMessage resultMessage){
-        userMapper.insert(user);
+        try {
+            userMapper.insert(user);
+        }catch (Exception exception){
+            exception.printStackTrace();
+            resultMessage.setUnknownError();
+        }
     }
+
+
 }

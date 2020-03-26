@@ -1,5 +1,7 @@
 # 实体模型文档
 
+By Paul
+
 ### 1. 用户 User
 
 ```java
@@ -41,5 +43,31 @@ public class Department {
 
 
 
+### 3. 患者 Patient
 
+```java
+public class Patient {
+    private Integer id;//患者主键ID
+    private String name;//患者姓名
+    private String idnumber;//患者身份证号
+    private String phone;//患者手机号
+    private String loginname;//患者登陆名
+    private String password;//患者密码
+}
+```
+
+
+
+### 4. 疾病 Disease
+
+```java
+public class Disease {
+    private Integer id; //疾病主键ID
+    private String diseasecode; //疾病助记编码
+    private String diseasename; //疾病名称
+    private String diseaseicd; //疾病国际ICD编码
+    private String diseasetype; //疾病所属分类
+    private Integer delmark; //删除标记 1-是 0-否
+}
+```
 

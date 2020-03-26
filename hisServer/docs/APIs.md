@@ -1,12 +1,14 @@
 # APIs 文檔
 
+By Paul 
+
 ⚠️‼️注意事项
 
 1. 用 IntelliJ IDEA 打开此项目时，请確保安装有 lombok 插件。
 2. 实体对象的说明文档请查阅 models.md。
 3. 強烈建議使用 Typora （或其他合适的工具） 阅读此文档，因为直接在 IntelliJ IDEA 打开的显示效果非常不尽人意，同时并不保证在 IntelliJ IDEA 的显示效果。其他 Markdown 文件同理。
 
-## 1.基础信息管理 /basicInfo
+## 1. 基础信息管理 /basicInfo
 ###1.1 获取所有科室 /getAllDepartments
 
 参数：无
@@ -80,6 +82,52 @@ Content-Type: application/json
     "delmark": 0,
     "idnumber": "3247875"
 }
+
+
+
+## 2. 个人信息管理 /personalInfo
+
+### 2.1 新增/註冊一名患者 /addPatient
+
+请求体：主键ID为null的患者
+
+返回：主键ID非null的患者
+
+ HTTP 请求示例：
+
+POST /his/personalInfo/addPatient HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": null,
+    "name": "MyName",
+    "idnumber": "idnumber23434",
+    "phone": "phone234234",
+    "loginname": "Myloginname",
+    "password": "Mypassword"
+}
+
+HTTP 响应示例：
+
+{
+
+​    "id": null,
+​    "name": "MyName",
+​    "idnumber": "idnumber23434",
+​    "phone": "phone234234",
+​    "loginname": "Myloginname",
+​    "password": "Mypassword"
+
+}
+
+注意：此API中的主键id的更新暂时未实现。
+
+
+
+
+
+
 
 
 

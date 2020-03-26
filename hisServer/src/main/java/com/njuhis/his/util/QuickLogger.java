@@ -32,6 +32,7 @@ public class QuickLogger {
         log(gson.toJson(obj),3);
     }
     public void logInvoked(){
+        System.out.println("--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         log("Invoked",3);
     }
     public void logReceive(Object obj){
@@ -39,5 +40,6 @@ public class QuickLogger {
     }
     public void logReturn(Object obj){
         log("Returned "+gson.toJson(obj),3);
+        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<---------------------------------");
     }
 }

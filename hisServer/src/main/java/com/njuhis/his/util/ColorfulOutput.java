@@ -7,15 +7,20 @@ public class ColorfulOutput {
     public static final String PURPLE_RED="\033[0;35m";
     public static final String DEFAULT="\033[0m";
     public static final String BLUE="\033[0;34m";
+    public static final String RED="\033[0;31m";
+    public static final String YELLOW="\033[0;33m";
     public static String makePurpleRed(String input){
         return PURPLE_RED+input+DEFAULT;
     }
     public static String makeBlue(String input){
         return BLUE+input+DEFAULT;
     }
+    public static String makeRed(String input){return RED+input+DEFAULT;}
+    public static String makeYellow(String input){return YELLOW+input+DEFAULT;}
 }
 
 /**
+ *
  * \033[显示方式;字体颜色;背景颜色m 中间是变颜色的内容 \033[0m
  *
  * 字体色            背景色           颜色

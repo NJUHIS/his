@@ -1,18 +1,12 @@
 package com.njuhis.his.model;
 
 public class Patient {
-    private Integer id;
-
-    private String name;
-
-    private String idnumber;
-
-    private String phone;
-
-    private String loginname;
-
-    private String password;
-
+    private Integer id;//患者主键ID
+    private String name;//患者姓名
+    private String idnumber;//患者身份证号
+    private String phone;//患者手机号
+    private String loginname;//患者登陆名
+    private String password;//患者密码
     public Integer getId() {
         return id;
     }

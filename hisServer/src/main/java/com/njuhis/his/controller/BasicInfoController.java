@@ -1,6 +1,7 @@
 package com.njuhis.his.controller;
 
 import com.njuhis.his.model.Department;
+import com.njuhis.his.model.Patient;
 import com.njuhis.his.model.User;
 import com.njuhis.his.service.BasicInfoService;
 import com.njuhis.his.util.QuickLogger;
@@ -48,10 +49,19 @@ public class BasicInfoController {
     public User addDoctor(@RequestBody User user, HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
         quickLogger.logReceive(user);
-        basicInfoService.addUser(user,new ResultMessage(httpServletResponse));
-        quickLogger.logReturn(user);
-        return user;
+
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+        basicInfoService.addUser(user,resultMessage);
+
+        User result = user;
+        if(!resultMessage.isSuccessful()) {
+            result=null;
+        }
+
+        quickLogger.logReturn(result);
+        return result;
     }
+
 
 
 }
