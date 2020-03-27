@@ -14,15 +14,15 @@ public class Register {
     private Integer age;//患者年龄
     private Integer agetype;//患者年龄类型
     private String homeaddress;//患者家庭住址
-    private Date visitdate;//本次看诊日期
-    private Integer noon;//本次看诊午别
+    private Date visitdate;//预定看诊日期
+    private Integer noon;//预定看诊午别
     //1 - 凌晨
     //2 - 早上
     //3 - 下午
     //4 - 晚上
 
     private Integer patientid;//患者用户主键ID
-    private Integer deptid;//科室主键ID
+    private Integer deptid;//看诊科室主键ID
     private Integer userid;//医生用户主键ID
     private Integer settleid;//结算类型主键ID
 
@@ -33,8 +33,9 @@ public class Register {
     private Integer registertime;//挂号时间。毫秒數。
     private Integer registerid;//挂号员用户主键ID
     private Integer registerLevelId;//挂号级别主键ID
-
-    private Integer visitstate;
+    private Integer visitstate;//看诊状态
+    //1-已看诊
+    //0-未看诊
 
     private String casenumber;
 

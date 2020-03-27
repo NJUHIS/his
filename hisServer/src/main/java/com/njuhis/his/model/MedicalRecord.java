@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class MedicalRecord {
     private Integer id;
 
-    private String caseNumber;
+
 
     private Integer registerId;//挂号的主键ID
 
@@ -26,6 +26,9 @@ public class MedicalRecord {
     private String medicalHandling;
 
     private Integer caseState;
+
+
+    private String caseNumber;
 
     @JsonIgnore
     private Integer delmark;
