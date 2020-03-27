@@ -7,7 +7,7 @@ public class MedicalRecord {
 
     private String caseNumber;
 
-    private Integer registerId;
+    private Integer registerId;//挂号的主键ID
 
     private String medicalReadme;
 

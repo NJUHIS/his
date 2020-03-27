@@ -10,7 +10,7 @@
     <result column="DocTitleID" jdbcType="INTEGER" property="doctitleid" />
     <result column="IsScheduling" jdbcType="INTEGER" property="isscheduling" />
     <result column="DeptId" jdbcType="INTEGER" property="deptid" />
-    <result column="RegistId" jdbcType="INTEGER" property="registid" />
+    <result column="RegistId" jdbcType="INTEGER" property="registerLevelId" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
     <result column="IDnumber" jdbcType="VARCHAR" property="idnumber" />
   </resultMap>
@@ -25,7 +25,7 @@
       DelMark, IDnumber)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{realname,jdbcType=VARCHAR}, #{usertypeid,jdbcType=INTEGER}, #{doctitleid,jdbcType=INTEGER}, 
-      #{isscheduling,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, #{registid,jdbcType=INTEGER}, 
+      #{isscheduling,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, #{registerLevelId,jdbcType=INTEGER},
       #{delmark,jdbcType=INTEGER}, #{idnumber,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.User">
@@ -37,7 +37,7 @@
       DocTitleID = #{doctitleid,jdbcType=INTEGER},
       IsScheduling = #{isscheduling,jdbcType=INTEGER},
       DeptId = #{deptid,jdbcType=INTEGER},
-      RegistId = #{registid,jdbcType=INTEGER},
+      RegistId = #{registerLevelId,jdbcType=INTEGER},
       DelMark = #{delmark,jdbcType=INTEGER},
       IDnumber = #{idnumber,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

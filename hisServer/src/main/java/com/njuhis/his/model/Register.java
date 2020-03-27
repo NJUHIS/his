@@ -30,12 +30,11 @@ public class Register {
     //1-需要
     //0-不需要
 
-    private Integer registertime;//挂号时间
+    private Integer registertime;//挂号时间。毫秒數。
     private Integer registerid;//挂号员用户主键ID
-    private Integer registid;//挂号级别主键ID
+    private Integer registerLevelId;//挂号级别主键ID
 
     private Integer visitstate;
-
 
     private String casenumber;
 
@@ -143,12 +142,12 @@ public class Register {
         this.userid = userid;
     }
 
-    public Integer getRegistid() {
-        return registid;
+    public Integer getRegisterLevelId() {
+        return registerLevelId;
     }
 
-    public void setRegistid(Integer registid) {
-        this.registid = registid;
+    public void setRegisterLevelId(Integer registerLevelId) {
+        this.registerLevelId = registerLevelId;
     }
 
     public Integer getSettleid() {

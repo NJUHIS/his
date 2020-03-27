@@ -15,7 +15,7 @@
     <result column="Noon" jdbcType="INTEGER" property="noon" />
     <result column="DeptId" jdbcType="INTEGER" property="deptid" />
     <result column="UserId" jdbcType="INTEGER" property="userid" />
-    <result column="RegistId" jdbcType="INTEGER" property="registid" />
+    <result column="RegistId" jdbcType="INTEGER" property="registerLevelId" />
     <result column="SettleID" jdbcType="INTEGER" property="settleid" />
     <result column="IsBook" jdbcType="INTEGER" property="isbook" />
     <result column="RegisterTime" jdbcType="INTEGER" property="registertime" />
@@ -39,7 +39,7 @@
       #{idnumber,jdbcType=VARCHAR}, #{birthdate,jdbcType=DATE}, #{age,jdbcType=INTEGER}, 
       #{agetype,jdbcType=INTEGER}, #{homeaddress,jdbcType=VARCHAR}, #{casenumber,jdbcType=VARCHAR}, 
       #{visitdate,jdbcType=DATE}, #{noon,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, 
-      #{userid,jdbcType=INTEGER}, #{registid,jdbcType=INTEGER}, #{settleid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{registerLevelId,jdbcType=INTEGER}, #{settleid,jdbcType=INTEGER},
       #{isbook,jdbcType=INTEGER}, #{registertime,jdbcType=INTEGER}, #{registerid,jdbcType=INTEGER}, 
       #{visitstate,jdbcType=INTEGER}, #{patientid,jdbcType=INTEGER})
   </insert>
@@ -57,7 +57,7 @@
       Noon = #{noon,jdbcType=INTEGER},
       DeptId = #{deptid,jdbcType=INTEGER},
       UserId = #{userid,jdbcType=INTEGER},
-      RegistId = #{registid,jdbcType=INTEGER},
+      RegistId = #{registerLevelId,jdbcType=INTEGER},
       SettleID = #{settleid,jdbcType=INTEGER},
       IsBook = #{isbook,jdbcType=INTEGER},
       RegisterTime = #{registertime,jdbcType=INTEGER},

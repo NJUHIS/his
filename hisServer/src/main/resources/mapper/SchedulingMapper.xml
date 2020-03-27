@@ -27,7 +27,7 @@
       <result column="DocTitleID" jdbcType="INTEGER" property="doctitleid" />
       <result column="IsScheduling" jdbcType="INTEGER" property="isscheduling" />
       <result column="DeptId" jdbcType="INTEGER" property="deptid" />
-      <result column="RegistId" jdbcType="INTEGER" property="registid" />
+      <result column="RegistId" jdbcType="INTEGER" property="registerLevelId" />
       <result column="DelMark" jdbcType="INTEGER" property="delmark" />
       <result column="IDnumber" jdbcType="VARCHAR" property="idnumber" />
     </association>

@@ -1,7 +1,6 @@
 package com.njuhis.his.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 public class User {
     private Integer id;//用戶主键ID
@@ -24,7 +23,7 @@ public class User {
 
     private Integer isscheduling;//是否排班 1-是 0-否
     private Integer deptid;//所在科室主键ID
-    private Integer registid;//挂号级别主键ID
+    private Integer registerLevelId;//挂号级别主键ID
     private String idnumber;//身份证号
 
     @JsonIgnore
@@ -94,12 +93,12 @@ public class User {
         this.deptid = deptid;
     }
 
-    public Integer getRegistid() {
-        return registid;
+    public Integer getRegisterLevelId() {
+        return registerLevelId;
     }
 
-    public void setRegistid(Integer registid) {
-        this.registid = registid;
+    public void setRegisterLevelId(Integer registerLevelId) {
+        this.registerLevelId = registerLevelId;
     }
 
     public Integer getDelmark() {
