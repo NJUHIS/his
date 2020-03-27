@@ -7,6 +7,8 @@ public class Patient {
     private String phone;//患者手机号
     private String loginname;//患者登陆名
     private String password;//患者密码
+
+
     public Integer getId() {
         return id;
     }

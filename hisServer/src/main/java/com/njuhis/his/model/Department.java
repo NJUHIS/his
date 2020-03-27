@@ -7,8 +7,10 @@ public class Department {
     private String deptname;//科室名称
     private String deptcategory;//科室分类
     private Integer depttypeid;//科室类型标识
-    private Integer delmark;//删除标记 1-是 0-否
     private String deptcode;//即科室编码
+
+    @JsonIgnore
+    private Integer delmark;//删除标记 1-是 0-否
 
     public Integer getId() {
         return id;
