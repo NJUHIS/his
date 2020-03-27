@@ -15,7 +15,7 @@
     delete from patientcosts
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.PatientCosts">
+  <insert id="insert" parameterType="com.njuhis.his.model.PatientCosts" useGeneratedKeys="true"  keyProperty="id">
     insert into patientcosts (id, InvoiceId, RegisterId, 
       Name, Price, DeptId, 
       State, DelMark)

@@ -7,7 +7,7 @@
     <result column="ExpName" jdbcType="VARCHAR" property="expname" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
-  <insert id="insert" parameterType="com.njuhis.his.model.ExpenseClass">
+  <insert id="insert" parameterType="com.njuhis.his.model.ExpenseClass" useGeneratedKeys="true"  keyProperty="id">
     insert into expenseclass (ID, ExpCode, ExpName, 
       DelMark)
     values (#{id,jdbcType=INTEGER}, #{expcode,jdbcType=VARCHAR}, #{expname,jdbcType=VARCHAR}, 

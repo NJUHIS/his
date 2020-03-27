@@ -15,7 +15,7 @@
     delete from registlevel
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.RegisterLevel">
+  <insert id="insert" parameterType="com.njuhis.his.model.RegisterLevel" useGeneratedKeys="true"  keyProperty="id">
     insert into registlevel (id, RegistCode, RegistName, 
       IsDefault, Sequence, RegistFee, 
       RegistQuota, DelMark)

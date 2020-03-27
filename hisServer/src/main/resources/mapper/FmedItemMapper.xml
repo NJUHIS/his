@@ -15,7 +15,7 @@
     delete from fmeditem
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.FmedItem">
+  <insert id="insert" parameterType="com.njuhis.his.model.FmedItem" useGeneratedKeys="true"  keyProperty="id">
     insert into fmeditem (id, ItemCode, ItemName, 
       Format, Price, ExpClassID, 
       DeptId, DelMark)

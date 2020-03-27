@@ -11,7 +11,7 @@
     delete from constanttype
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.ConstantType">
+  <insert id="insert" parameterType="com.njuhis.his.model.ConstantType" useGeneratedKeys="true"  keyProperty="id">
     insert into constanttype (id, ConstantTypeCode, ConstantTypeName, 
       DelMark)
     values (#{id,jdbcType=INTEGER}, #{constanttypecode,jdbcType=VARCHAR}, #{constanttypename,jdbcType=VARCHAR}, 

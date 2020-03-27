@@ -11,7 +11,7 @@
     delete from checkresult
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.CheckResult">
+  <insert id="insert" parameterType="com.njuhis.his.model.CheckResult" useGeneratedKeys="true"  keyProperty="id">
     insert into checkresult (id, Case_Number, advice, 
       result)
     values (#{id,jdbcType=INTEGER}, #{caseNumber,jdbcType=VARCHAR}, #{advice,jdbcType=VARCHAR}, 

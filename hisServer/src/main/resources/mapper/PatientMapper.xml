@@ -9,7 +9,7 @@
     <result column="loginname" jdbcType="VARCHAR" property="loginname" />
     <result column="password" jdbcType="VARCHAR" property="password" />
   </resultMap>
-  <insert id="insert" parameterType="com.njuhis.his.model.Patient">
+  <insert id="insert" parameterType="com.njuhis.his.model.Patient" useGeneratedKeys="true"  keyProperty="id">
     insert into patient (id, name, IDnumber, 
       phone, loginname, password
       )
@@ -20,5 +20,10 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select id, name, IDnumber, phone, loginname, password
     from patient
+  </select>
+  <select id="selectByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, name, IDnumber, phone, loginname, password
+    from patient
+    where name =#{name}
   </select>
 </mapper>

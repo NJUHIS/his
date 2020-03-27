@@ -13,7 +13,7 @@
     delete from disease
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.Disease">
+  <insert id="insert" parameterType="com.njuhis.his.model.Disease" useGeneratedKeys="true"  keyProperty="id">
     insert into disease (id, DiseaseCode, DiseaseName, 
       DiseaseICD, DiseaseType, DelMark
       )

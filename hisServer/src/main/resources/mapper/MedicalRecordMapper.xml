@@ -20,7 +20,7 @@
     delete from medicalrecord
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.MedicalRecord">
+  <insert id="insert" parameterType="com.njuhis.his.model.MedicalRecord" useGeneratedKeys="true"  keyProperty="id">
     insert into medicalrecord (id, Case_Number, Register_Id, 
       Medical_Readme, Medical_Present, Present_Treat, 
       Medical_History, Medical_Allergy, Medical_Physique, 

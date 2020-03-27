@@ -44,7 +44,7 @@
     delete from scheduling
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.Scheduling">
+  <insert id="insert" parameterType="com.njuhis.his.model.Scheduling" useGeneratedKeys="true"  keyProperty="id">
     insert into scheduling (id, SchedDate, DeptId, 
       UserId, Noon, RegistQuota, 
       State)

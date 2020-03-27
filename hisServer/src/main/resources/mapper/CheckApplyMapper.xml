@@ -17,7 +17,7 @@
     delete from checkapply
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.CheckApply">
+  <insert id="insert" parameterType="com.njuhis.his.model.CheckApply" useGeneratedKeys="true"  keyProperty="id">
     insert into checkapply (id, Name, Medical_Id, 
       Creation_Time, Total_Sum, Objective, 
       User_Id, state, Invoice_Number, 

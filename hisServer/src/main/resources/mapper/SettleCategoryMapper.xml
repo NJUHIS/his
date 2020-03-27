@@ -13,7 +13,7 @@
     delete from settlecategory
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.SettleCategory">
+  <insert id="insert" parameterType="com.njuhis.his.model.SettleCategory" useGeneratedKeys="true"  keyProperty="id">
     insert into settlecategory (id, SettleCode, SettleName, 
       IsDefault, Sequence, DelMark
       )

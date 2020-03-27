@@ -7,7 +7,7 @@
     <result column="DrugId" jdbcType="INTEGER" property="drugid" />
     <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
-  <insert id="insert" parameterType="com.njuhis.his.model.Diagnosispkm">
+  <insert id="insert" parameterType="com.njuhis.his.model.Diagnosispkm" useGeneratedKeys="true"  keyProperty="id">
     insert into diagnosis (id, MedicalId, DrugId, 
       state)
     values (#{id,jdbcType=INTEGER}, #{medicalid,jdbcType=INTEGER}, #{drugid,jdbcType=INTEGER}, 

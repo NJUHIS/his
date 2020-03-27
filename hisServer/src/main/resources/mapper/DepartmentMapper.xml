@@ -13,7 +13,7 @@
     delete from department
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.Department">
+  <insert id="insert" parameterType="com.njuhis.his.model.Department" useGeneratedKeys="true"  keyProperty="id">
     insert into department (id, DeptCode, DeptName, 
       DeptCategory, DeptTypeID, DelMark
       )

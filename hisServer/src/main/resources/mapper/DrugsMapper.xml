@@ -20,7 +20,7 @@
     delete from drugs
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.Drugs">
+  <insert id="insert" parameterType="com.njuhis.his.model.Drugs" useGeneratedKeys="true"  keyProperty="id">
     insert into drugs (id, Drugs_Code, Drugs_Name, 
       Drugs_Format, Drugs_Unit, Manufacturer, 
       Drugs_Dosage, Drugs_Type, Drugs_Price, 
