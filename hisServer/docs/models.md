@@ -92,3 +92,47 @@ public class RegisterLevel {
 
 
 
+### 6. 排班 Scheduling
+
+```java
+/**
+ * 排班
+ */
+public class Scheduling {
+    private Integer id;//本次排班主键ID
+    private Date scheddate;//本次排班日期
+    private Integer deptid;//排班的部门主键ID
+    private Integer userid;//排班的医生的用户主键ID
+    private Integer noon;//午别
+    //1 - 凌晨
+    //2 - 早上
+    //3 - 下午
+    //4 - 晚上
+
+    private Integer registquota;//该医生在本次排班的挂号数量限额
+    private Integer state;//排班的状态
+    //1 - 已过期
+    //2 - 正在进行中
+    //3 - 未进行
+}
+```
+
+
+
+### 7.  结算类型 SettleCategory
+
+```java
+/**
+ * 结算类型
+ */
+public class SettleCategory {
+    private Integer id;//结算类型主键ID
+    private String settlename;//结算类型名称
+    //如包括自费、医保、新农合等。
+}
+```
+
+
+
+
+

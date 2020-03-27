@@ -601,7 +601,7 @@ CREATE TABLE `scheduling` (
   `SchedDate` date NOT NULL,
   `DeptId` int(9) NOT NULL,
   `UserId` int(9) DEFAULT NULL,
-  `Noon` varchar(64) NOT NULL,
+  `Noon` int(9) NOT NULL,
   `RegistQuota` int(3) NOT NULL,
   `State` int(1) DEFAULT NULL COMMENT '1=有效  0=无效',
   PRIMARY KEY (`id`),

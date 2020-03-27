@@ -2,6 +2,9 @@ package com.njuhis.his.model;
 
 import java.util.Date;
 
+/**
+ * 一次挂号
+ */
 public class Register {
     private Integer id;//本次挂号主键ID
     private String realname;//患者真实姓名
@@ -11,28 +14,30 @@ public class Register {
     private Integer age;//患者年龄
     private Integer agetype;//患者年龄类型
     private String homeaddress;//患者家庭住址
-    private String casenumber;
-
     private Date visitdate;//本次看诊日期
     private Integer noon;//本次看诊午别
+    //1 - 凌晨
+    //2 - 早上
+    //3 - 下午
+    //4 - 晚上
 
-    private Integer deptid;
+    private Integer patientid;//患者用户主键ID
+    private Integer deptid;//科室主键ID
+    private Integer userid;//医生用户主键ID
+    private Integer settleid;//结算类型主键ID
 
-    private Integer userid;
+    private Integer isbook;//是否需要病历本
+    //1-需要
+    //0-不需要
 
-    private Integer registid;
-
-    private Integer settleid;
-
-    private Integer isbook;
-
-    private Integer registertime;
-
-    private Integer registerid;
+    private Integer registertime;//挂号时间
+    private Integer registerid;//挂号员用户主键ID
+    private Integer registid;//挂号级别主键ID
 
     private Integer visitstate;
 
-    private Integer patientid;
+
+    private String casenumber;
 
     public Integer getId() {
         return id;

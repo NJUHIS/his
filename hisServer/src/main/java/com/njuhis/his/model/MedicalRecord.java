@@ -1,5 +1,7 @@
 package com.njuhis.his.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class MedicalRecord {
     private Integer id;
 
@@ -25,6 +27,7 @@ public class MedicalRecord {
 
     private Integer caseState;
 
+    @JsonIgnore
     private Integer delmark;
 
     public Integer getId() {

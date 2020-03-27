@@ -1,24 +1,30 @@
 package com.njuhis.his.model;
 
+import com.sun.tools.corba.se.idl.IncludeGen;
+
 import java.util.Date;
 
 /**
- * 排班表
+ * 排班
  */
 public class Scheduling {
-    private Integer id;
+    private Integer id;//本次排班主键ID
+    private Date scheddate;//本次排班日期
+    private Integer deptid;//排班的部门主键ID
+    private Integer userid;//排班的医生的用户主键ID
+    private Integer noon;//午别
+    //1 - 凌晨
+    //2 - 早上
+    //3 - 下午
+    //4 - 晚上
 
-    private Date scheddate;
+    private Integer registquota;//该医生在本次排班的挂号数量限额
+    private Integer state;//排班的状态
+    //1 - 已过期
+    //2 - 正在进行中
+    //3 - 未进行
 
-    private Integer deptid;
 
-    private Integer userid;
-
-    private Integer noon;
-
-    private Integer registquota;
-
-    private Integer state;
     private User user;
     private Department department;
 
@@ -77,6 +83,7 @@ public class Scheduling {
     public void setNoon(Integer noon) {
         this.noon = noon;
     }
+
 
     public Integer getRegistquota() {
         return registquota;
