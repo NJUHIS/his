@@ -17,6 +17,7 @@ public class User {
     //4 - 药房人员
     //5 - 财务人员
     //6 - 行政人员
+  
     private Integer doctitleid;
     private Integer isscheduling;//是否排班 1-是 0-否
     private Integer deptid;//所在科室主键ID

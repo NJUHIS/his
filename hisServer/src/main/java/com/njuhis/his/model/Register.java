@@ -3,27 +3,18 @@ package com.njuhis.his.model;
 import java.util.Date;
 
 public class Register {
-    private Integer id;
-
-    private String realname;
-
-    private Integer gender;
-
-    private String idnumber;
-
-    private Date birthdate;
-
-    private Integer age;
-
-    private Integer agetype;
-
-    private String homeaddress;
-
+    private Integer id;//本次挂号主键ID
+    private String realname;//患者真实姓名
+    private Integer gender; //患者性别
+    private String idnumber;//患者身份证号码
+    private Date birthdate;//患者出生日期
+    private Integer age;//患者年龄
+    private Integer agetype;//患者年龄类型
+    private String homeaddress;//患者家庭住址
     private String casenumber;
 
-    private Date visitdate;
-
-    private Integer noon;
+    private Date visitdate;//本次看诊日期
+    private Integer noon;//本次看诊午别
 
     private Integer deptid;
 

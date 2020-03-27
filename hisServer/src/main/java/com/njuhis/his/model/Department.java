@@ -1,12 +1,14 @@
 package com.njuhis.his.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Department {
-    private Integer id;//科室主键ID
-    private String deptcode;//科室编码
+    private Integer id;//科室主键ID,
     private String deptname;//科室名称
     private String deptcategory;//科室分类
     private Integer depttypeid;//科室类型标识
     private Integer delmark;//删除标记 1-是 0-否
+    private String deptcode;//即科室编码
 
     public Integer getId() {
         return id;
