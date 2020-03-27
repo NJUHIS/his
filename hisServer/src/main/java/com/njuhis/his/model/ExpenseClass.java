@@ -3,6 +3,7 @@ package com.njuhis.his.model;
 public class ExpenseClass {
     private Integer id;
 
+
     private String expcode;
 
     private String expname;

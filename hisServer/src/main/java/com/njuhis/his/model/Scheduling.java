@@ -2,6 +2,9 @@ package com.njuhis.his.model;
 
 import java.util.Date;
 
+/**
+ * 排班表
+ */
 public class Scheduling {
     private Integer id;
 

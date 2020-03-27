@@ -6,22 +6,28 @@ By Paul
 
 ```java
 public class User {
+private Integer id;//用戶主键ID
     private Integer id;//用戶主键ID
     private String username;//登录名
     private String password;//密码
     private String realname;//真实姓名
     private Integer usertypeid;//用户类别标识
-    //1 - 挂号人员
-    //2 - 门诊医生
-    //3 - 医技医生
-    //4 - 药房人员
-    //5 - 财务人员
-    //6 - 行政人员
-    private Integer doctitleid;
+    // 1 - 挂号人员
+    // 2 - 门诊医生
+    // 3 - 医技医生
+    // 4 - 药房人员
+    // 5 - 财务人员
+    // 6 - 行政人员
+
+    private Integer doctitleid;//医生职称。
+    // 1-主任医师
+    // 2-副主任医师
+    // 3-主治医师
+    // 4-住院医师
+
     private Integer isscheduling;//是否排班 1-是 0-否
     private Integer deptid;//所在科室主键ID
     private Integer registid;//挂号级别主键ID
-    private Integer delmark;//删除标记 1-是 0-否
     private String idnumber;//身份证号
 }
 ```
@@ -32,12 +38,11 @@ public class User {
 
 ```java
 public class Department {
-    private Integer id;//科室主键ID
-    private String deptcode;//科室编码
+    private Integer id;//科室主键ID,
     private String deptname;//科室名称
     private String deptcategory;//科室分类
     private Integer depttypeid;//科室类型标识
-    private Integer delmark;//删除标记 1-是 0-否
+    private String deptcode;//即科室编码
 }
 ```
 
@@ -67,7 +72,23 @@ public class Disease {
     private String diseasename; //疾病名称
     private String diseaseicd; //疾病国际ICD编码
     private String diseasetype; //疾病所属分类
-    private Integer delmark; //删除标记 1-是 0-否
 }
 ```
+
+
+
+### 5. 挂号级别 RegisterLevel
+
+```JAVA
+//挂号级别
+public class RegisterLevel {
+    private Integer id;//挂号级别ID，即挂号级别编码
+    private String registname;//挂号级别名称
+    //如普通号、专家号、急诊号等。
+    
+    private BigDecimal registfee;//挂号级别费用
+}
+```
+
+
 
