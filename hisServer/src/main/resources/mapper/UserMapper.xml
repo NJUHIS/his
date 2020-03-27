@@ -53,4 +53,10 @@
     RegistId, DelMark, IDnumber
     from user
   </select>
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, UserName, Password, RealName, UserTypeID, DocTitleID, IsScheduling, DeptId,
+    RegistId, DelMark, IDnumber
+    from user
+    where UserName = #{username,jdbcType=INTEGER}
+  </select>
 </mapper>

@@ -10,4 +10,6 @@ public interface PatientMapper {
     int insert(Patient record);
 
     List<Patient> selectAll();
+
+    Patient selectByLoginName(String loginname);
 }

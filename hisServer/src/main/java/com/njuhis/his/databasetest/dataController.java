@@ -23,6 +23,8 @@ public class dataController {
     SchedulingMapper schedulingMapper;
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    PatientMapper patientMapper;
     @RequestMapping("/drugs")
     public List<Drugs> selectAllDrugs(){
         return drugsMapper.selectAll();
@@ -73,5 +75,15 @@ public class dataController {
         user.setDelmark(0);
         user.setDeptid(3);
         userMapper.insert(user);
+    }
+    @RequestMapping("/seu")
+    User  seUser(){
+
+        System.out.println(userMapper.selectByUserName("ahilla").toString());
+        return userMapper.selectByUserName("ahilla");
+    }
+    @RequestMapping("/sep")
+    Patient sePatient(){
+        return patientMapper.selectByLoginName("ahilla");
     }
 }
