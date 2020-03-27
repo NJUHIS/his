@@ -60,7 +60,7 @@ public class dataController {
         System.out.println(departmentID);
         Scheduling scheduling = new Scheduling();
         scheduling.setDeptid(3);
-        scheduling.setNoon("1");
+        scheduling.setNoon(1);
         Date date = new Date(2019-1900,03-1,01,8,0);
         System.out.println(date);
         scheduling.setScheddate(date);

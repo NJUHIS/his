@@ -11,7 +11,7 @@ public class Scheduling {
 
     private Integer userid;
 
-    private String noon;
+    private Integer noon;
 
     private Integer registquota;
 
@@ -67,12 +67,12 @@ public class Scheduling {
         this.userid = userid;
     }
 
-    public String getNoon() {
+    public Integer getNoon() {
         return noon;
     }
 
-    public void setNoon(String noon) {
-        this.noon = noon == null ? null : noon.trim();
+    public void setNoon(Integer noon) {
+        this.noon = noon;
     }
 
     public Integer getRegistquota() {

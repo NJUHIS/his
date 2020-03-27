@@ -6,7 +6,7 @@
     <result column="SchedDate" jdbcType="DATE" property="scheddate" />
     <result column="DeptId" jdbcType="INTEGER" property="deptid" />
     <result column="UserId" jdbcType="INTEGER" property="userid" />
-    <result column="Noon" jdbcType="VARCHAR" property="noon" />
+    <result column="Noon" jdbcType="INTEGER" property="noon" />
     <result column="RegistQuota" jdbcType="INTEGER" property="registquota" />
     <result column="State" jdbcType="INTEGER" property="state" />
   </resultMap>
@@ -15,7 +15,7 @@
     <result column="SchedDate" jdbcType="DATE" property="scheddate" />
     <result column="DeptId" jdbcType="INTEGER" property="deptid" />
     <result column="UserId" jdbcType="INTEGER" property="userid" />
-    <result column="Noon" jdbcType="VARCHAR" property="noon" />
+    <result column="Noon" jdbcType="INTEGER" property="noon" />
     <result column="RegistQuota" jdbcType="INTEGER" property="registquota" />
     <result column="State" jdbcType="INTEGER" property="state" />
     <association property="user" column="userid" javaType="com.njuhis.his.model.User">
@@ -49,7 +49,7 @@
       UserId, Noon, RegistQuota, 
       State)
     values (#{id,jdbcType=INTEGER}, #{scheddate,jdbcType=DATE}, #{deptid,jdbcType=INTEGER}, 
-      #{userid,jdbcType=INTEGER}, #{noon,jdbcType=VARCHAR}, #{registquota,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{noon,jdbcType=INTEGER}, #{registquota,jdbcType=INTEGER},
       #{state,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Scheduling">
@@ -57,7 +57,7 @@
     set SchedDate = #{scheddate,jdbcType=DATE},
       DeptId = #{deptid,jdbcType=INTEGER},
       UserId = #{userid,jdbcType=INTEGER},
-      Noon = #{noon,jdbcType=VARCHAR},
+      Noon = #{noon,jdbcType=INTEGER},
       RegistQuota = #{registquota,jdbcType=INTEGER},
       State = #{state,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

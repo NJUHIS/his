@@ -1,5 +1,5 @@
 package com.njuhis.his.model;
-
+//结算类别表
 public class SettleCategory {
     private Integer id;
 
