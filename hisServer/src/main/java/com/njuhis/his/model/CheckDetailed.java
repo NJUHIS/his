@@ -23,7 +23,7 @@ public class CheckDetailed {
     // 3 - 处置项
     private Long inspecttime;//此明细实际检验检查处置时间
     private String result;//此明细的检验检查处置结果
-    private Integer resulttime;//此明细出检验检查处置结果的时间。毫秒数。
+    private Long resulttime;//此明细出检验检查处置结果的时间。毫秒数。
     private Integer operatorid;//此明细的检验检查处置人员的医院员工主键ID
     private Integer entryclerkid;//此明细的结果录入人员的医院员工主键ID
 
@@ -133,11 +133,11 @@ public class CheckDetailed {
         this.result = result == null ? null : result.trim();
     }
 
-    public Integer getResulttime() {
+    public Long getResulttime() {
         return resulttime;
     }
 
-    public void setResulttime(Integer resulttime) {
+    public void setResulttime(Long resulttime) {
         this.resulttime = resulttime;
     }
 

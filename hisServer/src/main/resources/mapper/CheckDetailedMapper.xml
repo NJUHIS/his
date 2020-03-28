@@ -13,7 +13,7 @@
     <result column="Identification" jdbcType="INTEGER" property="identification" />
     <result column="InspectTime" jdbcType="BIGINT" property="inspecttime" />
     <result column="Result" jdbcType="VARCHAR" property="result" />
-    <result column="ResultTime" jdbcType="INTEGER" property="resulttime" />
+    <result column="ResultTime" jdbcType="BIGINT" property="resulttime" />
     <result column="operatorId" jdbcType="INTEGER" property="operatorid" />
     <result column="entryClerkId" jdbcType="INTEGER" property="entryclerkid" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
@@ -32,7 +32,7 @@
     values (#{id,jdbcType=INTEGER}, #{checkappid,jdbcType=INTEGER}, #{checkprojid,jdbcType=INTEGER}, 
       #{deptid,jdbcType=INTEGER}, #{creationtime,jdbcType=BIGINT}, #{position,jdbcType=VARCHAR}, 
       #{state,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{identification,jdbcType=INTEGER}, 
-      #{inspecttime,jdbcType=BIGINT}, #{result,jdbcType=VARCHAR}, #{resulttime,jdbcType=INTEGER}, 
+      #{inspecttime,jdbcType=BIGINT}, #{result,jdbcType=VARCHAR}, #{resulttime,jdbcType=BIGINT},
       #{operatorid,jdbcType=INTEGER}, #{entryclerkid,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER}
       )
   </insert>
@@ -48,7 +48,7 @@
       Identification = #{identification,jdbcType=INTEGER},
       InspectTime = #{inspecttime,jdbcType=BIGINT},
       Result = #{result,jdbcType=VARCHAR},
-      ResultTime = #{resulttime,jdbcType=INTEGER},
+      ResultTime = #{resulttime,jdbcType=BIGINT},
       operatorId = #{operatorid,jdbcType=INTEGER},
       entryClerkId = #{entryclerkid,jdbcType=INTEGER},
       DelMark = #{delmark,jdbcType=INTEGER}

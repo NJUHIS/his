@@ -16,15 +16,6 @@ public class PrescriptionDetailed {
 
 
 
-
-
-
-
-
-
-
-    private Integer prescriptiondetailedcol;
-
     public Integer getId() {
         return id;
     }
@@ -81,13 +72,6 @@ public class PrescriptionDetailed {
         this.price = price;
     }
 
-    public Integer getPrescriptiondetailedcol() {
-        return prescriptiondetailedcol;
-    }
-
-    public void setPrescriptiondetailedcol(Integer prescriptiondetailedcol) {
-        this.prescriptiondetailedcol = prescriptiondetailedcol;
-    }
 
     public Integer getQuantity() {
         return quantity;

@@ -9,7 +9,6 @@
     <result column="Dosage" jdbcType="VARCHAR" property="dosage" />
     <result column="Frequency" jdbcType="VARCHAR" property="frequency" />
     <result column="Price" jdbcType="DECIMAL" property="price" />
-    <result column="prescriptiondetailedcol" jdbcType="INTEGER" property="prescriptiondetailedcol" />
     <result column="quantity" jdbcType="INTEGER" property="quantity" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -23,7 +22,7 @@
       )
     values (#{id,jdbcType=INTEGER}, #{prescriptionid,jdbcType=INTEGER}, #{drugsid,jdbcType=INTEGER}, 
       #{useage,jdbcType=VARCHAR}, #{dosage,jdbcType=VARCHAR}, #{frequency,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{prescriptiondetailedcol,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}
+      #{price,jdbcType=DECIMAL},  #{quantity,jdbcType=INTEGER}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.PrescriptionDetailed">
@@ -34,18 +33,17 @@
       Dosage = #{dosage,jdbcType=VARCHAR},
       Frequency = #{frequency,jdbcType=VARCHAR},
       Price = #{price,jdbcType=DECIMAL},
-      prescriptiondetailedcol = #{prescriptiondetailedcol,jdbcType=INTEGER},
       quantity = #{quantity,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, PrescriptionId, DrugsId, Useage, Dosage, Frequency, Price, prescriptiondetailedcol, 
+    select id, PrescriptionId, DrugsId, Useage, Dosage, Frequency, Price,
     quantity
     from prescriptiondetailed
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, PrescriptionId, DrugsId, Useage, Dosage, Frequency, Price, prescriptiondetailedcol, 
+    select id, PrescriptionId, DrugsId, Useage, Dosage, Frequency, Price,
     quantity
     from prescriptiondetailed
   </select>
