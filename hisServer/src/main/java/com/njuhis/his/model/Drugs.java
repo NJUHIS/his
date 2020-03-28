@@ -1,34 +1,33 @@
 package com.njuhis.his.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class Drugs {
-    private Integer id;
+    private Integer id;//药品主键ID，即药品编码
+    private String drugsName;//药品名称
+    private String drugsFormat;//药品规格
+    private String drugsUnit;//包装单位
+    private String manufacturer;//药品生产厂家
+    private String drugsDosage;//药品剂型
+    private String drugsType;//药品类型
+    private BigDecimal drugsPrice;//药品单价
+    private String mnemonicCode;//拼音助记码
+    private Date creationDate;//创建日期
+    private Date lastUpdateDate;//最后修改日期
 
+    @JsonIgnore
+    private Integer delmark;
+
+    @JsonIgnore
+    /**
+     * @deprecated
+     */
     private String drugsCode;
 
-    private String drugsName;
 
-    private String drugsFormat;
-
-    private String drugsUnit;
-
-    private String manufacturer;
-
-    private String drugsDosage;
-
-    private String drugsType;
-
-    private BigDecimal drugsPrice;
-
-    private String mnemonicCode;
-
-    private Date creationDate;
-
-    private Date lastUpdateDate;
-
-    private Integer delmark;
 
     public Integer getId() {
         return id;
@@ -38,10 +37,15 @@ public class Drugs {
         this.id = id;
     }
 
+    /**
+     * @deprecated
+     */
     public String getDrugsCode() {
         return drugsCode;
     }
-
+    /**
+     * @deprecated
+     */
     public void setDrugsCode(String drugsCode) {
         this.drugsCode = drugsCode == null ? null : drugsCode.trim();
     }

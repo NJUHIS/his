@@ -1,12 +1,13 @@
 package com.njuhis.his.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ConstantType {
-    private Integer id;
+    private Integer id; //常数类型主键ID
+    private String constanttypecode;//常数类型编码
+    private String constanttypename;//常数类型名称
 
-    private String constanttypecode;
-
-    private String constanttypename;
-
+    @JsonIgnore
     private Integer delmark;
 
     public Integer getId() {

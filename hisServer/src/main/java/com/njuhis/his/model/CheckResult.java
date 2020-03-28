@@ -1,5 +1,8 @@
 package com.njuhis.his.model;
 
+/**
+ * @deprecated
+ */
 public class CheckResult {
     private Integer id;
 

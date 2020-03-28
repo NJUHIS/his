@@ -9,6 +9,10 @@ public class Department {
     private Integer depttypeid;//科室类型标识
     private String deptcode;//即科室编码
 
+
+
+
+
     @JsonIgnore
     private Integer delmark;//删除标记 1-是 0-否
 

@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RequestMapping("/basicInfo")
 @RestController
-public class BasicInfoController {
+public class BasicInfomationController {
     @Autowired
     private BasicInfoService basicInfoService;
     private QuickLogger quickLogger =new QuickLogger(this.getClass());

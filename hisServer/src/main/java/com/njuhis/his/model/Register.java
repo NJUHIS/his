@@ -1,7 +1,8 @@
 package com.njuhis.his.model;
 
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.Date;
 /**
  * 一次挂号
  */
@@ -12,7 +13,6 @@ public class Register {
     private String idnumber;//患者身份证号码
     private Date birthdate;//患者出生日期
     private Integer age;//患者年龄
-    private Integer agetype;//患者年龄类型
     private String homeaddress;//患者家庭住址
     private Date visitdate;//预定看诊日期
     private Integer noon;//预定看诊午别
@@ -37,7 +37,17 @@ public class Register {
     //1-已看诊
     //0-未看诊
 
-    private String casenumber;
+
+
+
+    private String casenumber;//病历编号。
+
+
+    /**
+     * @deprecated
+     */
+    @JsonIgnore
+    private Integer agetype;//患者年龄类型
 
     public Integer getId() {
         return id;
@@ -87,10 +97,16 @@ public class Register {
         this.age = age;
     }
 
+    /**
+     * @deprecated
+     */
     public Integer getAgetype() {
         return agetype;
     }
 
+    /**
+     * @deprecated
+     */
     public void setAgetype(Integer agetype) {
         this.agetype = agetype;
     }

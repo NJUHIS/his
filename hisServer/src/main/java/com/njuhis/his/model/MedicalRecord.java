@@ -3,32 +3,25 @@ package com.njuhis.his.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class MedicalRecord {
-    private Integer id;
-
-
-
+    private Integer id;//病历的主键ID
     private Integer registerId;//挂号的主键ID
+    private String medicalReadme;//主诉
+    private String medicalPresent;//现病史
+    private String presentTreat;//现病治疗情况
+    private String medicalHistory;//既往史
+    private String medicalAllergy;//过敏史
+    private String medicalPhysique;//体格检查
+    private String medicalDiagnosis;//诊断结果
+    private String medicalHandling;//处理意见
 
-    private String medicalReadme;
-
-    private String medicalPresent;
-
-    private String presentTreat;
-
-    private String medicalHistory;
-
-    private String medicalAllergy;
-
-    private String medicalPhysique;
-
-    private String medicalDiagnosis;
-
-    private String medicalHandling;
-
-    private Integer caseState;
+    private Integer caseState;//病历状态
+    // 1 - 已预约
+    // 2 - 进行中
+    // 3 - 已完成/诊毕；
 
 
-    private String caseNumber;
+
+    private String caseNumber;//病历编号
 
     @JsonIgnore
     private Integer delmark;
@@ -39,6 +32,8 @@ public class MedicalRecord {
 
     public void setId(Integer id) {
         this.id = id;
+
+
     }
 
     public String getCaseNumber() {

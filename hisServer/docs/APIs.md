@@ -6,7 +6,9 @@ By Paul
 
 1. 用 IntelliJ IDEA 打开此项目时，请確保安装有 lombok 插件。
 2. 实体对象的说明文档请查阅 models.md。
-3. 強烈建議使用 Typora （或其他合适的工具） 阅读此文档，因为直接在 IntelliJ IDEA 打开的显示效果非常不尽人意，同时并不保证在 IntelliJ IDEA 的显示效果。其他 Markdown 文件同理。
+3. 強烈建議使用 Typora （或其他合适的工具） 阅读此文档所提及的其他文档，因为直接在 IntelliJ IDEA 打开的显示效果非常不尽人意，同时并不保证在 IntelliJ IDEA 的显示效果。其他 Markdown 文件同理。
+4. HTTP 请求示例可以在 hisServer/src/test/java/com/njuhis/his/controller_http_tests 中找到，并可以直接运行。
+5. 本文档与所提及的其他文档作为前后端的最重要的协议文件，会不断更新与完善，请密切关注。
 
 ## 1. 基础信息管理 /basicInfo
 ###1.1 获取所有科室 /getAllDepartments

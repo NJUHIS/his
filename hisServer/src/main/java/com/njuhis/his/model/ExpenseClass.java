@@ -1,14 +1,20 @@
 package com.njuhis.his.model;
 
+import com.fasterxml.jackson.annotation.JacksonInject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+//费用类型
 public class ExpenseClass {
-    private Integer id;
+    private Integer id;//费用类型主键ID
+    private String expname;//费用类型名称
+    private String expcode;//费用类型的编号
 
-
-    private String expcode;
-
-    private String expname;
-
+    @JsonIgnore
     private Integer delmark;
+
+
+
+
 
     public Integer getId() {
         return id;

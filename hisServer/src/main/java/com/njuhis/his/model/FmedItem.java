@@ -1,23 +1,22 @@
 package com.njuhis.his.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
-
+//非药品收费项目
 public class FmedItem {
-    private Integer id;
+    private Integer id;//非药品收费项目主键ID
+    private String itemname; //非药品收费项目名稱
+    private String format;//规格
+    private BigDecimal price;//单价
+    private Integer expclassid;//费用科目主键ID
+    private Integer deptid;//执行科室主键ID
+    private String itemcode;//非药品收费项目编码
 
-    private String itemcode;
-
-    private String itemname;
-
-    private String format;
-
-    private BigDecimal price;
-
-    private Integer expclassid;
-
-    private Integer deptid;
-
+    @JsonIgnore
     private Integer delmark;
+
+
 
     public Integer getId() {
         return id;
@@ -26,6 +25,7 @@ public class FmedItem {
     public void setId(Integer id) {
         this.id = id;
     }
+
 
     public String getItemcode() {
         return itemcode;

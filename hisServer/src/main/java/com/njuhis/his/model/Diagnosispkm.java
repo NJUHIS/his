@@ -1,13 +1,20 @@
 package com.njuhis.his.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Diagnosispkm {
-    private Integer id;
+    private Integer id;//诊断主键ID
+    private Integer medicalid;//病历主键ID
+    private Integer drugid; //疾病主键ID
 
-    private Integer medicalid;
 
-    private Integer drugid;
 
-    private Integer state;
+    /**
+     * @deprecated
+     */
+    @JsonIgnore
+    private Integer state; //诊断状态
+
 
     public Integer getId() {
         return id;
@@ -33,10 +40,16 @@ public class Diagnosispkm {
         this.drugid = drugid;
     }
 
+    /**
+     * @deprecated
+     */
     public Integer getState() {
         return state;
     }
 
+    /**
+     * @deprecated
+     */
     public void setState(Integer state) {
         this.state = state;
     }

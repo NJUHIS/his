@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 @RestController
 @RequestMapping("personalInfo")
-public class PersonalInfoController {
+public class PersonalInfomationController {
     @Autowired
     private PersonalInfoService personalInfoService;
     private QuickLogger quickLogger =new QuickLogger(this.getClass());

@@ -1,15 +1,15 @@
 package com.njuhis.his.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ConstantItem {
-    private Integer id;
+    private Integer id;//常数项主键ID
+    private Integer constanttypeid;//常数类型主键ID
+    private String constantcode;//常数项编码
+    private String constantname;//常数项名称
 
-    private Integer constanttypeid;
-
-    private String constantcode;
-
-    private String constantname;
-
-    private Integer delmark;
+    @JsonIgnore
+    private Integer delmark;//
 
     public Integer getId() {
         return id;
