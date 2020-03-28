@@ -49,14 +49,9 @@ public class BasicInformationController {
     public User addDoctor(@RequestBody User user, HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
         quickLogger.logReceive(user);
-
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
-        basicInformationService.addUser(user,resultMessage);
 
-        User result = user;
-        if(!resultMessage.isSuccessful()) {
-            result=null;
-        }
+        User result=basicInformationService.addUser(user,resultMessage);
 
         quickLogger.logReturn(result);
         return result;

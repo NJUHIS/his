@@ -7,8 +7,6 @@ import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.transform.Result;
-import java.util.ResourceBundle;
 
 @Service
 public class RegistrationService {
@@ -18,12 +16,37 @@ public class RegistrationService {
     private RegisterMapper registerMapper;
 
 
-    public void addRegistration(Register registration, ResultMessage resultMessage){
+    public Register addRegistration(Register registration, ResultMessage resultMessage){
         try{
             registerMapper.insert(registration);
+            return registration;
         }catch (Exception exception){
             exception.printStackTrace();
             resultMessage.setUnknownError();
+            return null;
         }
     }
+
+    public Register getRegistrationById(Integer id, ResultMessage resultMessage){
+        Register registration=registerMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(registration!=null){
+            return registration;
+        }else{
+            resultMessage.setClientError(ResultMessage.REGISTRATION_NOT_EXIST);
+            return null;
+        }
+
+    }
+
+    public Register updateRegistration(Register registration, ResultMessage resultMessage){
+        try{
+            registerMapper.updateByPrimaryKey(registration);
+            return registration;
+        }catch (Exception exception){
+            exception.printStackTrace();
+            resultMessage.setUnknownError();
+            return null;
+        }
+    }
+
 }

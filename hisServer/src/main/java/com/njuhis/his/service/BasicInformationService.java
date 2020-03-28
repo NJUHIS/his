@@ -28,12 +28,14 @@ public class BasicInformationService {
     /**
      * @param user user 的 id 會從無到有
      */
-    public void addUser(User user, ResultMessage resultMessage){
+    public User addUser(User user, ResultMessage resultMessage){
         try {
             userMapper.insert(user);
+            return user;
         }catch (Exception exception){
             exception.printStackTrace();
             resultMessage.setUnknownError();
+            return null;
         }
     }
 

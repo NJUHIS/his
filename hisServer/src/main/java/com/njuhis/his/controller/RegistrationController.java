@@ -28,12 +28,9 @@ public class RegistrationController {
     public Register addRegistration(@RequestBody Register registration, HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
         quickLogger.logReceive(registration);
-
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
-        registrationService.addRegistration(registration,resultMessage);
 
-        Register result=registration;
-        if (!resultMessage.isSuccessful()) result=null;
+        Register result=registrationService.addRegistration(registration,resultMessage);
 
         quickLogger.logReturn(result);
         return result;

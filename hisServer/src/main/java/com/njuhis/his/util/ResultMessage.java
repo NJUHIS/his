@@ -47,7 +47,9 @@ public class ResultMessage {
      * 客户端錯誤
      */
     public static final String PATIENT_LOGIN_NAME_EXISTED="The patient login name has existed. 患者登录名已存在。";
-
+    public static final String REGISTRATION_NOT_EXIST="The registration does not exist. 挂号不存在。";
+    public static final String MEDICAL_CARD_NOT_EXIST="The medical record does not exist. 病历不存在。";
+    public static final String USER_NOT_EXIST="The worker user does not exist. 医院员工用户不存在。";
     /**
      * 未知來源錯誤
      */

@@ -1,4 +1,4 @@
-# 实体模型文档
+实体模型文档
 
 To 全体成员
 
@@ -214,8 +214,8 @@ public class Register {
     private Long registertime;//挂号时间。毫秒數。
     private Integer registerid;//挂号员的医院员工主键ID
     private Integer visitstate;//看诊状态
-    //1-已看诊
     //0-未看诊
+    //1-已看诊或正在看诊
     private Integer patientid;//患者主键ID
 
 }

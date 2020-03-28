@@ -1,0 +1,1 @@
+INSERT INTO his.medicalrecord (id, Case_Number, Register_Id, Medical_Readme, Medical_Present, Present_Treat, Medical_History, Medical_Allergy, Medical_Physique, Medical_Diagnosis, Medical_Handling, Case_State, DelMark) VALUES (1, '', 1, null, null, null, null, null, null, null, null, null, null);

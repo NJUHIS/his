@@ -1,0 +1,18 @@
+POST /his/DoctorController/admit?registrationId=1 HTTP/1.1
+Host: localhost:9002
+
+###
+
+
+POST /his/DoctorController/admit?registrationId=10010 HTTP/1.1
+Host: localhost:9002
+
+###
+
+POST /his/DoctorController/addCheckApply HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "medicalId":1
+}
