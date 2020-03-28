@@ -12,7 +12,7 @@ public class Invoice {
     // 2 - 已开出，正常状态
     // 3 - 已作废
     // 4 - 此发票作为红冲
-    private Long creationtime;// 开出时间
+    private Long creationtime;// 生效时间。以确认开立的时间为准。毫秒数。
     private Integer userid;//开立人员主键ID
     private Integer dailystate;//日结审核状态
     // 1 - 未日结审核

@@ -1,0 +1,18 @@
+POST /his/RegistrationController/addRegistration HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "realname": "MyRealName",
+  "gender": 3,
+  "idnumber": 323123123,
+  "deptid": 5,
+  "visitdate":"2020-12-19",
+  "patientid":1,
+  "registid":1,
+  "registerid":1,
+  "settleid":1,
+  "userid":1
+}
+
+###

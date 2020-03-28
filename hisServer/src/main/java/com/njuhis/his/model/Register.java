@@ -9,12 +9,16 @@ public class Register {
     private Integer id;//挂号主键ID
     private String realname;//患者真实姓名
     private Integer gender; //患者性别
+    //1 - 男性
+    //2 - 女性
+    //3 - 其他
     private String idnumber;//患者身份证号码
     private Date birthdate;//患者出生日期
     private Integer age;//患者年龄
     private String homeaddress;//患者家庭住址
     private String casenumber;//病历编码。
     private Date visitdate;//预约看诊日期
+    //standard forms ("yyyy-MM-dd'T'HH:mm:ss.SSSZ", "yyyy-MM-dd'T'HH:mm:ss.SSS", "EEE, dd MMM yyyy HH:mm:ss zzz", "yyyy-MM-dd"))
     private Integer noon;//预约看诊午别
     //1 - 凌晨
     //2 - 早上

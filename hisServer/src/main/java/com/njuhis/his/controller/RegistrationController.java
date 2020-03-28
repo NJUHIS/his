@@ -1,12 +1,15 @@
 package com.njuhis.his.controller;
 
+import com.njuhis.his.model.Register;
 import com.njuhis.his.service.RegistrationService;
 import com.njuhis.his.util.QuickLogger;
+import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.logging.Logger;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Paul
@@ -19,6 +22,24 @@ public class RegistrationController {
     private QuickLogger quickLogger =new QuickLogger(this.getClass());
     @Autowired
     private RegistrationService registrationService;
+
+
+    @RequestMapping("/addRegistration")
+    public Register addRegistration(@RequestBody Register registration, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(registration);
+
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+        registrationService.addRegistration(registration,resultMessage);
+
+        Register result=registration;
+        if (!resultMessage.isSuccessful()) result=null;
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
 }
 
 

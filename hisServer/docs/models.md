@@ -7,11 +7,45 @@ By Paul
 ⚠️‼️注意事项：
 
 - 此文档用于说明和解释实体模型。前后端应根据此文档编写实体模型。尤其是其中的**变量名必须要严格统一**，注意大小写敏感。
+
 - 文档作为前后端的最重要的协议文件，会不断更新与完善，请密切关注。
+
 - 此文档未经本人允许，任何人都不要修改。
-- 如果发现本文档中的一些变量名和类名很反人类很奇葩很不规范，不要问我为什么。因为以下所有变量名和类名都不是我起的！不是我起的！不是我起的！更重要的是它们已经无法修改。
+
+- **如果发现本文档中的一些变量名、类名和类的设计很反人类很奇葩很不规范，不要问我为什么。因为以下所有变量名、类名和类的设计都不是我写的！不是我写的！不是我写的！更重要的是它们已经无法修改。**
+
 - 用 IntelliJ IDEA 打开此项目时，请确保安装有 lombok 插件。
+
 - 強烈推荐使用 Typora （或其他合适的工具） 阅读此文档，因直接在 IntelliJ IDEA 打开的显示效果不尽人意，同时不保证在 IntelliJ IDEA 的显示效果。其他 Markdown 文件同理。
+
+- 如果有时候服务器返回前端的实体模型包含了本文档所罗列的以外的变量，请把它们忽略，当它们不存在。这是数据库侧的遗留问题。
+
+- 强烈建议大家研读本文档，厘清文档中的实体模型的逻辑关系、包含关系、关联关系等等。可以结合 PDM 图来理解。
+
+- 强烈建议前端同学注意那些反人类的、奇葩的、不规范的变量名，千万不要出错！比如说：
+
+  - `id `是主键，而`User`类中`idnumber`  是身份证号码，不是主键。千万注意！
+  - `User`类中的`registerLevelId`和`Register`类中的`registid`指的都是挂号类型主键ID。`MedicalRecord`类中的`registerId`和`PatientCosts`类中的`registerid`都是挂号主键ID，注意大小写的区别。`Register`类中的`registerid`指的是挂号员的医院员工主键ID，并不是挂号主键ID，千万不要和前面的搞混了！
+  - 即使是同一个东西，同一个拼写，也有可能有不同的写法。比如`Prescription`类中的`medicalId`和Diagnosis中的`medicalid`。比如`Prescription`类中的`userId`和`Register`中的`userid`。比如 `Invoice` 类中的 `creationtime` 和 `CheckApply` 类中的 `creationTime`。等等。千万注意。
+  - 还有可能有拼写的错误。"生日"是`birthdate`而不是birthday，"用法"是`useage`而不是usage。千万注意。
+  - 有一些带有id字眼的变量名并不是主键ID。如`User`类中的`usertypeid`和`doctitleid`都不是主键ID。`Department`类中的`depttypeid`也不是主键ID。等等还有很多。千万注意。
+  - 还有一些变量名或类名和实际的意义差别很大。如 `Invoice` 类中的 `creationtime` 并不是指创建时间，而是指生效时间。`CheckApply` 类不仅包括检查检验，还包括了处置，不仅包括申请，还包括结果。`CheckApply` 类中的`objective`不仅包括目的，还包括要求。`CheckDetailed`中的`position`和"位置"没有什么关系，它指的是"目的和要求"。`MedicalRecord`类的`medicalReadme`指的是"主诉"，等等。
+  - 有些作用完全一样、但是长得很相似的东西，实际上却分成了两个东西。如`Prescription`类持有`invoiceId`和`PatientCosts`类持有`invoiceid`，都是持有发票主键ID，而`CheckApply`却持有`invoiceNumber`发票编码。`Prescription`类和`CheckApply`类持有`medicalId`病历主键ID，而`Register`持有的却是`casenumber`病历编码。
+  - 等等。请自行千万注意。
+
+  
+
+
+
+统一规定：
+
+- 一切 Date 类型的数据的标准格式：`"yyyy-MM-dd'T'HH:mm:ss.SSSZ", "yyyy-MM-dd'T'HH:mm:ss.SSS", "EEE, dd MMM yyyy HH:mm:ss zzz", "yyyy-MM-dd"`
+- 一切变量名以 time 结尾的变量都表示时间的**毫秒数**。从 1970 年 1 月 1 日 00:00:00 GMT 开始计算。
+- 这个项目从来就没有"病例"这个概念，只有"病历"这个概念。语言上需要注意。
+
+
+
+
 
 ### 1. 医院员工 User
 
@@ -155,12 +189,16 @@ public class Register {
     private Integer id;//挂号主键ID
     private String realname;//患者真实姓名
     private Integer gender; //患者性别
+    //1 - 男性
+    //2 - 女性
+    //3 - 其他
     private String idnumber;//患者身份证号码
     private Date birthdate;//患者出生日期
     private Integer age;//患者年龄
     private String homeaddress;//患者家庭住址
     private String casenumber;//病历编码。
     private Date visitdate;//预约看诊日期
+    //standard forms ("yyyy-MM-dd'T'HH:mm:ss.SSSZ", "yyyy-MM-dd'T'HH:mm:ss.SSS", "EEE, dd MMM yyyy HH:mm:ss zzz", "yyyy-MM-dd"))
     private Integer noon;//预约看诊午别
     //1 - 凌晨
     //2 - 早上
@@ -179,6 +217,7 @@ public class Register {
     //1-已看诊
     //0-未看诊
     private Integer patientid;//患者主键ID
+
 }
 ```
 
@@ -346,7 +385,7 @@ public class Invoice {
     // 2 - 已开出，正常状态
     // 3 - 已作废
     // 4 - 此发票作为红冲
-    private Long creationtime;// 开出时间
+    private Long creationtime;// 生效时间。以确认开立的时间为准。毫秒数。
     private Integer userid;//开立人员主键ID
     private Integer dailystate;//日结审核状态
     // 1 - 未日结审核

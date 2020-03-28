@@ -1,4 +1,4 @@
-POST /his/personalInfo/addPatient HTTP/1.1
+POST /his/PersonalInformationController/addPatient HTTP/1.1
 Host: localhost:9002
 Content-Type: application/json
 
@@ -10,6 +10,7 @@ Content-Type: application/json
   "loginname": "Myloginname",
   "password": "Mypassword"
 }
+
 
 ###
 

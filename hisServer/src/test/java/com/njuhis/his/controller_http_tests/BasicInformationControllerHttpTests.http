@@ -1,9 +1,9 @@
-GET /his/basicInfo/getAllDepartments HTTP/1.1
+GET /his/BasicInformationController/getAllDepartments HTTP/1.1
 Host: localhost:9002
 
 ###
 
-POST /his/basicInfo/addUser HTTP/1.1
+POST /his/BasicInformationController/addUser HTTP/1.1
 Host: localhost:9002
 Content-Type: application/json
 
@@ -12,14 +12,15 @@ Content-Type: application/json
   "username": "MyUsername",
   "password": "MyPassword",
   "realname": "MyRealName",
-  "usertypeid": 1,
+  "usertypeid": 2,
   "doctitleid": 1,
   "isscheduling": 1,
   "deptid": 3,
-  "registid": 1,
+  "registerLevelId": 1,
   "delmark": 0,
   "idnumber": "3247875"
 }
+
 
 ###
 
