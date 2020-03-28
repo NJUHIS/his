@@ -17,7 +17,6 @@ import javax.annotation.PostConstruct;
 public class TestDataInserter implements ApplicationRunner {
     @Autowired
     private DepartmentMapper departmentMapper;
-
     @Override
     public void run(ApplicationArguments args) throws Exception {
         //TODO

@@ -4,7 +4,6 @@ import com.njuhis.his.model.Department;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-@Component
 public interface DepartmentMapper {
     int deleteByPrimaryKey(Integer id);
 

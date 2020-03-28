@@ -13,7 +13,7 @@ By Paul
 - 文档作为前后端的最重要的协议文件，会不断更新与完善，请密切关注。
 - 此文档未经本人允许，任何人都不要修改。
 
-## 1. 基础信息管理 /basicInfo
+## 1. 基础信息管理 /BasicInformationController
 ###1.1 获取所有科室 /getAllDepartments
 
 参数：无
@@ -22,31 +22,29 @@ By Paul
 
 HTTP 请求示例：
 
-GET /his/basicInfo/getAllDepartments HTTP/1.1 
+GET /his/BasicInformationController/getAllDepartments HTTP/1.1
 Host: localhost:9002
 
 HTTP 响应示例：
 
 [
   {
-    "id": 1,
-    "deptcode": "XXGNK",
-    "deptname": "心血管内科",
-    "deptcategory": "11",
-    "depttypeid": 1,
-    "delmark": 0
-  },
-  {
-    "id": 2,
-    "deptcode": "SJNK",
-    "deptname": "神经内科",
-    "deptcategory": "11",
-    "depttypeid": 1,
-    "delmark": 0
-  }
+        "id": 1,
+        "deptname": "心血管内科",
+        "deptcategory": "11",
+        "depttypeid": 1,
+        "deptcode": "XXGNK"
+    },
+    {
+        "id": 2,
+        "deptname": "神经内科",
+        "deptcategory": "11",
+        "depttypeid": 1,
+        "deptcode": "SJNK"
+    }
  ]
 
- ### 1.2 新增一名用户/addUser
+ ### 1.2 新增一名医院员工/addUser
 
  请求体：主键ID为null的用户
 
@@ -54,7 +52,7 @@ HTTP 响应示例：
 
  HTTP 请求示例：
 
- POST /his/basicInfo/addUser HTTP/1.1
+POST /his/BasicInformationController/addUser HTTP/1.1
 Host: localhost:9002
 Content-Type: application/json
 
@@ -63,11 +61,11 @@ Content-Type: application/json
     "username": "MyUsername",
     "password": "MyPassword",
     "realname": "MyRealName",
-    "usertypeid": 1,
+    "usertypeid": 2,
     "doctitleid": 1,
     "isscheduling": 1,
     "deptid": 3,
-    "registid": 1,
+    "registerLevelId": 1,
     "delmark": 0,
     "idnumber": "3247875"
 }
@@ -75,24 +73,21 @@ Content-Type: application/json
  HTTP 相应示例：
 
 {
-    "id": 11,
+    "id": 3,
     "username": "MyUsername",
     "password": "MyPassword",
     "realname": "MyRealName",
-    "usertypeid": 1,
+    "usertypeid": 2,
     "doctitleid": 1,
     "isscheduling": 1,
     "deptid": 3,
-    "registid": 1,
-    "delmark": 0,
+    "registerLevelId": 1,
     "idnumber": "3247875"
 }
 
+## 2. 个人信息管理 /PersonalInformationController
 
-
-## 2. 个人信息管理 /personalInfo
-
-### 2.1 新增/註冊一名患者 /addPatient
+### 2.1 新增/注册一名患者 /addPatient
 
 请求体：主键ID为null的患者
 
@@ -100,7 +95,7 @@ Content-Type: application/json
 
  HTTP 请求示例：
 
-POST /his/personalInfo/addPatient HTTP/1.1
+POST /his/PersonalInformationController/addPatient HTTP/1.1
 Host: localhost:9002
 Content-Type: application/json
 
@@ -116,17 +111,16 @@ Content-Type: application/json
 HTTP 响应示例：
 
 {
-
-​    "id": null,
-​    "name": "MyName",
-​    "idnumber": "idnumber23434",
-​    "phone": "phone234234",
-​    "loginname": "Myloginname",
-​    "password": "Mypassword"
-
+    "id": 7,
+    "name": "MyName",
+    "idnumber": "idnumber23434",
+    "phone": "phone234234",
+    "loginname": "Myloginname",
+    "password": "Mypassword"
 }
 
-注意：此API中的主键id更新暂时未实现。
+
+
 
 
 
