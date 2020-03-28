@@ -1,6 +1,6 @@
 package com.njuhis.his.model;
 
-import com.sun.tools.corba.se.idl.IncludeGen;
+//import com.sun.tools.corba.se.idl.IncludeGen;
 
 import java.util.Date;
 

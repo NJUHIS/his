@@ -26,7 +26,7 @@ CREATE TABLE `checkapply` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) DEFAULT NULL,
   `Medical_Id` int(9) DEFAULT NULL,
-  `Creation_Time` int(12) DEFAULT NULL,
+  `Creation_Time` int(18) DEFAULT NULL,
   `Total_Sum` decimal(8,2) DEFAULT NULL,
   `Objective` varchar(512) DEFAULT NULL,
   `User_Id` int(9) DEFAULT NULL,
@@ -59,16 +59,16 @@ CREATE TABLE `checkdetailed` (
   `CheckAppId` int(9) DEFAULT NULL,
   `CheckProjId` int(9) DEFAULT NULL,
   `DeptId` int(9) DEFAULT NULL,
-  `CreationTime` int(12) DEFAULT NULL,
+  `CreationTime` int(18) DEFAULT NULL,
   `Position` varchar(512) DEFAULT NULL,
   `State` int(1) DEFAULT NULL COMMENT '1 - 已开立未交费\n            2 - 已交费未检查\n            3 - 已检查无结果\n            4 - 有结果',
   `Price` decimal(8,2) DEFAULT NULL,
   `Identification` int(1) DEFAULT NULL COMMENT '1 - 检查项\n            2 - 检验项\n            3 - 处置项',
-  `InspectTime` int(12) DEFAULT NULL,
+  `InspectTime` int(18) DEFAULT NULL,
   `Result` varchar(512) DEFAULT NULL,
   `ResultTime` int(12) DEFAULT NULL,
-  `UserId2` int(9) DEFAULT NULL,
-  `UserId` int(9) DEFAULT NULL,
+  `operatorId` int(9) DEFAULT NULL,
+  `entryClerkId` int(9) DEFAULT NULL,
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
@@ -85,31 +85,6 @@ LOCK TABLES `checkdetailed` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `checkresult`
---
-
-DROP TABLE IF EXISTS `checkresult`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `checkresult` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
-  `Case_Number` varchar(64) DEFAULT NULL,
-  `advice` varchar(255) DEFAULT NULL,
-  `result` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `checkresult`
---
-
-LOCK TABLES `checkresult` WRITE;
-/*!40000 ALTER TABLE `checkresult` DISABLE KEYS */;
-/*!40000 ALTER TABLE `checkresult` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `constantitem`
 --
 
@@ -123,7 +98,7 @@ CREATE TABLE `constantitem` (
   `ConstantName` varchar(64) DEFAULT NULL,
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=165 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +124,7 @@ CREATE TABLE `constanttype` (
   `ConstantTypeName` varchar(64) DEFAULT NULL,
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,7 +176,7 @@ DROP TABLE IF EXISTS `diagnosis`;
 CREATE TABLE `diagnosis` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `MedicalId` int(9) DEFAULT NULL,
-  `DrugId` int(9) DEFAULT NULL,
+  `diseaseId` int(9) DEFAULT NULL,
   `state` int(9) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -232,7 +207,7 @@ CREATE TABLE `disease` (
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -268,7 +243,7 @@ CREATE TABLE `drugs` (
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +269,7 @@ CREATE TABLE `expenseclass` (
   `ExpName` varchar(64) DEFAULT NULL,
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -325,7 +300,7 @@ CREATE TABLE `fmeditem` (
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -350,11 +325,11 @@ CREATE TABLE `invoice` (
   `InvoiceNum` varchar(64) DEFAULT NULL,
   `Money` decimal(8,2) DEFAULT NULL,
   `State` int(1) DEFAULT NULL COMMENT '0 - 作废\n            1 - 正常\n            2 - 重打\n            3 - 补打\n            4 - 红冲',
-  `CreationTime` int(12) DEFAULT NULL,
+  `CreationTime` int(18) DEFAULT NULL,
   `UserId` int(9) DEFAULT NULL,
   `DailyState` int(1) DEFAULT NULL COMMENT '0 - 未日结审核\n            1 - 已经审核\n            默认值为0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,6 +338,7 @@ CREATE TABLE `invoice` (
 
 LOCK TABLES `invoice` WRITE;
 /*!40000 ALTER TABLE `invoice` DISABLE KEYS */;
+INSERT INTO `invoice` VALUES (1,'2333333',240.00,0,1000000,3,0);
 /*!40000 ALTER TABLE `invoice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -416,7 +392,7 @@ CREATE TABLE `patient` (
   `loginname` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -425,6 +401,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
+INSERT INTO `patient` VALUES (1,'atty','122121','1212121','ahilla','123qwe');
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -445,7 +422,7 @@ CREATE TABLE `patientcosts` (
   `State` int(1) DEFAULT NULL,
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='在实际环境，患者查询费用明细情况较多，费用会从多张表中综合查询，性能较慢；为了提升性能，单独建立本表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='在实际环境，患者查询费用明细情况较多，费用会从多张表中综合查询，性能较慢；为了提升性能，单独建立本表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -454,6 +431,7 @@ CREATE TABLE `patientcosts` (
 
 LOCK TABLES `patientcosts` WRITE;
 /*!40000 ALTER TABLE `patientcosts` DISABLE KEYS */;
+INSERT INTO `patientcosts` VALUES (1,1,1,'大抢救',200.00,'3',0,0),(2,1,1,'洗胃',40.00,'3',0,0);
 /*!40000 ALTER TABLE `patientcosts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -470,7 +448,7 @@ CREATE TABLE `prescription` (
   `User_Id` int(9) DEFAULT NULL,
   `Prescription_Name` varchar(64) DEFAULT NULL,
   `Prescription_State` int(1) DEFAULT NULL,
-  `Prescription_Time` int(12) DEFAULT NULL,
+  `Prescription_Time` int(18) DEFAULT NULL,
   `Invoice_id` varchar(64) DEFAULT NULL,
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -502,6 +480,8 @@ CREATE TABLE `prescriptiondetailed` (
   `Dosage` varchar(64) DEFAULT NULL,
   `Frequency` varchar(64) DEFAULT NULL,
   `Price` decimal(8,2) DEFAULT NULL,
+  `prescriptiondetailedcol` int(9) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -540,7 +520,7 @@ CREATE TABLE `register` (
   `RegistId` int(9) DEFAULT NULL,
   `SettleID` int(9) DEFAULT NULL,
   `IsBook` int(1) DEFAULT NULL,
-  `RegisterTime` int(12) DEFAULT NULL,
+  `RegisterTime` int(18) DEFAULT NULL,
   `RegisterID` int(9) DEFAULT NULL,
   `VisitState` int(9) DEFAULT NULL,
   `patientID` int(9) DEFAULT NULL,
@@ -601,7 +581,7 @@ CREATE TABLE `scheduling` (
   `SchedDate` date NOT NULL,
   `DeptId` int(9) NOT NULL,
   `UserId` int(9) DEFAULT NULL,
-  `Noon` varchar(64) NOT NULL,
+  `Noon` int(11) NOT NULL,
   `RegistQuota` int(3) NOT NULL,
   `State` int(1) DEFAULT NULL COMMENT '1=有效  0=无效',
   PRIMARY KEY (`id`),
@@ -615,7 +595,7 @@ CREATE TABLE `scheduling` (
 
 LOCK TABLES `scheduling` WRITE;
 /*!40000 ALTER TABLE `scheduling` DISABLE KEYS */;
-INSERT INTO `scheduling` VALUES (1,'2019-03-01',3,1,'1',3,0);
+INSERT INTO `scheduling` VALUES (1,'2019-03-01',3,1,1,3,0);
 /*!40000 ALTER TABLE `scheduling` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -634,7 +614,7 @@ CREATE TABLE `settlecategory` (
   `Sequence` int(3) NOT NULL,
   `DelMark` int(1) DEFAULT NULL COMMENT '1为删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -643,6 +623,7 @@ CREATE TABLE `settlecategory` (
 
 LOCK TABLES `settlecategory` WRITE;
 /*!40000 ALTER TABLE `settlecategory` DISABLE KEYS */;
+INSERT INTO `settlecategory` VALUES (1,'zf','自费',1,1,0),(2,'yb','医保',0,2,0),(3,'nb','农保',0,3,0);
 /*!40000 ALTER TABLE `settlecategory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -667,7 +648,7 @@ CREATE TABLE `user` (
   `IDnumber` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -676,7 +657,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'ahilla','123qwe','ahilla',1,1,1,3,1,0,'11111111111');
+INSERT INTO `user` VALUES (1,'ahilla','123qwe','ahilla',1,1,1,3,1,0,'11111111111'),(2,'a','a','a',1,1,1,3,2,0,'111111'),(3,'aa',NULL,'aa',NULL,NULL,NULL,3,NULL,0,NULL),(4,'aa',NULL,'aa',NULL,NULL,NULL,3,NULL,0,NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -697,4 +678,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-26 20:18:27
+-- Dump completed on 2020-03-28 18:49:02

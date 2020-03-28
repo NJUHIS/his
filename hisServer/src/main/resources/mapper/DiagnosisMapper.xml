@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.njuhis.his.mapper.DiagnosisMapper">
+  <resultMap id="BaseResultMap" type="com.njuhis.his.model.Diagnosis">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="MedicalId" jdbcType="INTEGER" property="medicalid" />
+    <result column="diseaseId" jdbcType="INTEGER" property="diseaseid" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from diagnosis
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.njuhis.his.model.Diagnosis">
+    insert into diagnosis (id, MedicalId, diseaseId, 
+      state)
+    values (#{id,jdbcType=INTEGER}, #{medicalid,jdbcType=INTEGER}, #{diseaseid,jdbcType=INTEGER}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Diagnosis">
+    update diagnosis
+    set MedicalId = #{medicalid,jdbcType=INTEGER},
+      diseaseId = #{diseaseid,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, MedicalId, diseaseId, state
+    from diagnosis
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, MedicalId, diseaseId, state
+    from diagnosis
+  </select>
+</mapper>

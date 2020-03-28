@@ -14,26 +14,26 @@
     <result column="InspectTime" jdbcType="INTEGER" property="inspecttime" />
     <result column="Result" jdbcType="VARCHAR" property="result" />
     <result column="ResultTime" jdbcType="INTEGER" property="resulttime" />
-    <result column="UserId2" jdbcType="INTEGER" property="userid2" />
-    <result column="UserId" jdbcType="INTEGER" property="userid" />
+    <result column="operatorId" jdbcType="INTEGER" property="operatorid" />
+    <result column="entryClerkId" jdbcType="INTEGER" property="entryclerkid" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from checkdetailed
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.CheckDetailed" useGeneratedKeys="true"  keyProperty="id">
+  <insert id="insert" parameterType="com.njuhis.his.model.CheckDetailed">
     insert into checkdetailed (id, CheckAppId, CheckProjId, 
       DeptId, CreationTime, Position, 
       State, Price, Identification, 
       InspectTime, Result, ResultTime, 
-      UserId2, UserId, DelMark
+      operatorId, entryClerkId, DelMark
       )
     values (#{id,jdbcType=INTEGER}, #{checkappid,jdbcType=INTEGER}, #{checkprojid,jdbcType=INTEGER}, 
       #{deptid,jdbcType=INTEGER}, #{creationtime,jdbcType=INTEGER}, #{position,jdbcType=VARCHAR}, 
       #{state,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{identification,jdbcType=INTEGER}, 
       #{inspecttime,jdbcType=INTEGER}, #{result,jdbcType=VARCHAR}, #{resulttime,jdbcType=INTEGER}, 
-      #{userid2,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER}
+      #{operatorid,jdbcType=INTEGER}, #{entryclerkid,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.CheckDetailed">
@@ -49,20 +49,20 @@
       InspectTime = #{inspecttime,jdbcType=INTEGER},
       Result = #{result,jdbcType=VARCHAR},
       ResultTime = #{resulttime,jdbcType=INTEGER},
-      UserId2 = #{userid2,jdbcType=INTEGER},
-      UserId = #{userid,jdbcType=INTEGER},
+      operatorId = #{operatorid,jdbcType=INTEGER},
+      entryClerkId = #{entryclerkid,jdbcType=INTEGER},
       DelMark = #{delmark,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, CheckAppId, CheckProjId, DeptId, CreationTime, Position, State, Price, 
-    Identification, InspectTime, Result, ResultTime, UserId2, UserId, DelMark
+    Identification, InspectTime, Result, ResultTime, operatorId, entryClerkId, DelMark
     from checkdetailed
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select id, CheckAppId, CheckProjId, DeptId, CreationTime, Position, State, Price, 
-    Identification, InspectTime, Result, ResultTime, UserId2, UserId, DelMark
+    Identification, InspectTime, Result, ResultTime, operatorId, entryClerkId, DelMark
     from checkdetailed
   </select>
 </mapper>
