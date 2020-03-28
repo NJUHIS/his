@@ -4,6 +4,6 @@ import com.njuhis.his.util.QuickLogger;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UtilityService {
+public class MedicalTechnologyService {
     private QuickLogger quickLogger =new QuickLogger(this.getClass());
 }
