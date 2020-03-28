@@ -30,6 +30,10 @@ public class User {
 
 
 
+
+
+
+
     @JsonIgnore
     private Integer delmark;//删除标记 1-是 0-否
 
