@@ -11,6 +11,17 @@ public class SettleCategory {
     //如包括自费、医保、新农合等。
 
 
+
+
+
+
+
+
+
+
+
+
+    
     @JsonIgnore
     /**
      * @deprecated

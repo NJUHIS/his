@@ -2,9 +2,10 @@ package com.njuhis.his.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+//病历
 public class MedicalRecord {
-    private Integer id;//病历的主键ID
-    private Integer registerId;//挂号的主键ID
+    private Integer id;//病历主键ID
+    private Integer registerId;//挂号主键ID
     private String medicalReadme;//主诉
     private String medicalPresent;//现病史
     private String presentTreat;//现病治疗情况
@@ -13,15 +14,19 @@ public class MedicalRecord {
     private String medicalPhysique;//体格检查
     private String medicalDiagnosis;//诊断结果
     private String medicalHandling;//处理意见
-
     private Integer caseState;//病历状态
     // 1 - 已预约
     // 2 - 进行中
     // 3 - 已完成/诊毕；
 
+    private String caseNumber;//病历编码
 
 
-    private String caseNumber;//病历编号
+
+
+
+
+
 
     @JsonIgnore
     private Integer delmark;

@@ -2,12 +2,13 @@ package com.njuhis.his.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+//医院员工
 public class User {
-    private Integer id;//用戶主键ID
+    private Integer id;//医院员工主键ID
     private String username;//登录名
     private String password;//密码
     private String realname;//真实姓名
-    private Integer usertypeid;//用户类别标识
+    private Integer usertypeid;//医院员工类型
     // 1 - 挂号人员
     // 2 - 门诊医生
     // 3 - 医技医生
@@ -21,13 +22,18 @@ public class User {
     // 3-主治医师
     // 4-住院医师
 
-    private Integer isscheduling;//是否排班 1-是 0-否
-    private Integer deptid;//所在科室主键ID
-    private Integer registerLevelId;//挂号级别主键ID
+    private Integer isscheduling;//医生是否被排班 1-是 0-否
+    private Integer deptid;//医生所在科室主键ID
+    private Integer registerLevelId;//医生挂号类型主键ID
     private String idnumber;//身份证号
+
+
+
 
     @JsonIgnore
     private Integer delmark;//删除标记 1-是 0-否
+
+
 
     public Integer getId() {
         return id;

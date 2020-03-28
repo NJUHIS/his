@@ -1,26 +1,44 @@
 package com.njuhis.his.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
+//检验检查处置
 public class CheckApply {
-    private Integer id;
+    private Integer id;//检验检查处置主键ID
+    private Integer medicalId;//病历主键ID
+    private Long creationTime; //生效时间。以医生确认发出的时间为准。毫秒数。
+    private BigDecimal totalSum; //总金额。自动根据检验检查处置明细计算。
+    private String objective; //目的和要求
+    private Integer userId;//开立医生的医院员工主键ID
+    private Integer state;//检验检查处置状态
+    //1 - 编辑中
+    //2 - 已开立并发出，未收费
+    //3 - 已收费，未检验检查处置
+    //4 - 正在检验检查处置或等待结果
+    //5 - 检验检查处置已完成，结果已出
+    private String invoiceNumber;//发票编码
 
+
+
+
+
+
+
+
+
+
+
+
+
+    /**
+     * @deprecated
+     */
+    @JsonIgnore
     private String name;
 
-    private Integer medicalId;
-
-    private Long creationTime;
-
-    private BigDecimal totalSum;
-
-    private String objective;
-
-    private Integer userId;
-
-    private Integer state;
-
-    private String invoiceNumber;
-
+    @JsonIgnore
     private Integer delmark;
 
     public Integer getId() {
@@ -31,10 +49,16 @@ public class CheckApply {
         this.id = id;
     }
 
+    /**
+     * @deprecated
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @deprecated
+     */
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
     }

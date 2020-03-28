@@ -87,8 +87,8 @@ by Paul
 | registerid      | registrarId        | 挂号员英文 registrar                                         |
 | registerLevelId | registrationTypeId |                                                              |
 | visitstate      | state              |                                                              |
-| 无              | medicalRecordId    | 新增病历主键Id。取代病历编号。                               |
-| casenumber      | 无                 | 应删去。病历编号被病历主键id取代。其他地方都是病历主键id，这里为何要搞特殊，要用病历编号？统一使用病历主键id。 |
+| 无              | medicalRecordId    | 新增病历主键Id。取代病历编码。                               |
+| casenumber      | 无                 | 应删去。病历编码被病历主键id取代。其他地方都是病历主键id，这里为何要搞特殊，要用病历编码？统一使用病历主键id。 |
 | agetype         | 无                 | 我没搞懂有什么用。如果你知道它有什么用，请告诉我，保留它且改成 ageType。如果没用则删去。 |
 
 
@@ -238,7 +238,7 @@ by Paul
 
 | 原名         | 新名             | 解释                                                         |
 | ------------ | ---------------- | ------------------------------------------------------------ |
-| invoicenum   | code             | 编号统一用code这个单词。不要一时用num，一时用number，一时用code。。。 |
+| invoicenum   | code             | 编码统一用code这个单词。不要一时用num，一时用number，一时用code。。。 |
 | money        | sum              | 金额sum。术语。                                              |
 | creationtime | validationTime   | validationTime生效时间。一个发票创建之后进入草稿编辑状态，确认后才正式生效。这里指生效时间而不是创建的时间。 |
 | userid       | tollCollectorId  | 收费员。                                                     |

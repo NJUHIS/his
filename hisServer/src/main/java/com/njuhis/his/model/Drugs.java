@@ -13,10 +13,12 @@ public class Drugs {
     private String manufacturer;//药品生产厂家
     private String drugsDosage;//药品剂型
     private String drugsType;//药品类型
-    private BigDecimal drugsPrice;//药品单价
+    private BigDecimal drugsPrice;//药品价格
     private String mnemonicCode;//拼音助记码
     private Date creationDate;//创建日期
     private Date lastUpdateDate;//最后修改日期
+
+
 
     @JsonIgnore
     private Integer delmark;

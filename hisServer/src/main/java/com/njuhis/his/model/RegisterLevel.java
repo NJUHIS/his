@@ -4,13 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 
-//挂号级别
+//挂号类型
 public class RegisterLevel {
-    private Integer id;//挂号级别ID，即挂号级别编码
-    private String registname;//挂号级别名称
+    private Integer id;//挂号类型主键ID，即挂号级别编码
+    private String registname;//挂号类型名称
     //如普通号、专家号、急诊号等。
+    private BigDecimal registfee;//挂号类型价格
 
-    private BigDecimal registfee;//挂号级别费用
+
+
+
+
+
 
 
 

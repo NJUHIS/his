@@ -8,10 +8,10 @@ import java.util.Date;
  * 排班
  */
 public class Scheduling {
-    private Integer id;//本次排班主键ID
-    private Date scheddate;//本次排班日期
-    private Integer deptid;//排班的部门主键ID
-    private Integer userid;//排班的医生的用户主键ID
+    private Integer id;//排班主键ID
+    private Date scheddate;//排班日期
+    private Integer deptid;//被排班医生的所属部门主键ID
+    private Integer userid;//被排班的医生的医院员工主键ID
     private Integer noon;//午别
     //1 - 凌晨
     //2 - 早上
@@ -23,10 +23,15 @@ public class Scheduling {
     //1 - 已过期
     //2 - 正在进行中
     //3 - 未进行
+    private User user; //被排班的医生
+    private Department department;////被排班医生的所属部门
 
 
-    private User user;
-    private Department department;
+
+
+
+
+
 
     public void setUser(User user) {
         this.user = user;

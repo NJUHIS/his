@@ -174,7 +174,7 @@ public class Register {
     //1-已看诊
     //0-未看诊
     
-    private String casenumber;//病历编号。
+    private String casenumber;//病历编码。
 }
 ```
 
@@ -198,7 +198,7 @@ public class MedicalRecord {
     // 1 - 已预约
     // 2 - 进行中
     // 3 - 已完成
-    private String caseNumber;//病历编号
+    private String caseNumber;//病历编码
 }
 ```
 
@@ -237,7 +237,7 @@ public class Prescription {
     //3 - 已收费，未取药。
     //4 - 已取药。
   
-    private Integer prescriptionTime;//开立时间。毫秒数。
+    private Long prescriptionTime;//开立时间。毫秒数。
     private String invoiceId;//发票主键ID
 }
 ```
@@ -281,7 +281,7 @@ public class CheckApply {
     //3 - 已收费，未检验检查处置
     //4 - 正在检验检查处置或等待结果
     //5 - 检验检查处置已完成，结果已出
-    //TODO 最好把发票编号改为发票主键ID
+    //TODO 最好把发票编码改为发票主键ID
 }
 ```
 
@@ -329,7 +329,7 @@ public class Diagnosispkm {
 ```java
 public class Invoice {
     private Integer id;//发票ID
-    private String invoicenum;//发票编号
+    private String invoicenum;//发票编码
     private BigDecimal money;//发票金额
     private Integer state;//发票状态
     // 1 - 未开出
