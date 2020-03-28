@@ -1,9 +1,8 @@
 package com.njuhis.his.controller;
 
 import com.njuhis.his.model.Department;
-import com.njuhis.his.model.Patient;
 import com.njuhis.his.model.User;
-import com.njuhis.his.service.BasicInfoService;
+import com.njuhis.his.service.BasicInformationService;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +18,11 @@ import java.util.List;
  * 基础信息管理
  * 医院系统管理数据维护
  */
-@RequestMapping("/basicInfo")
+@RequestMapping("/BasicInformationController")
 @RestController
-public class BasicInfomationController {
+public class BasicInformationController {
     @Autowired
-    private BasicInfoService basicInfoService;
+    private BasicInformationService basicInformationService;
     private QuickLogger quickLogger =new QuickLogger(this.getClass());
 
     /**
@@ -34,7 +33,7 @@ public class BasicInfomationController {
     @RequestMapping(value = "/getAllDepartments")
     public List<Department> getAllDepartments(HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
-        List<Department> departments=basicInfoService.getAllDepartments(new ResultMessage(httpServletResponse));
+        List<Department> departments= basicInformationService.getAllDepartments(new ResultMessage(httpServletResponse));
         quickLogger.logReturn(departments);
         return departments;
     }
@@ -51,7 +50,7 @@ public class BasicInfomationController {
         quickLogger.logReceive(user);
 
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
-        basicInfoService.addUser(user,resultMessage);
+        basicInformationService.addUser(user,resultMessage);
 
         User result = user;
         if(!resultMessage.isSuccessful()) {

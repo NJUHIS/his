@@ -6,6 +6,7 @@ import com.njuhis.his.mapper.UserMapper;
 import com.njuhis.his.model.Department;
 import com.njuhis.his.model.Patient;
 import com.njuhis.his.model.User;
+import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class BasicInfoService {
+public class BasicInformationService {
+    private QuickLogger quickLogger =new QuickLogger(this.getClass());
     @Autowired
     private DepartmentMapper departmentMapper;
     @Autowired

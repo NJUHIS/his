@@ -1,7 +1,7 @@
 package com.njuhis.his.controller;
 
 import com.njuhis.his.model.Patient;
-import com.njuhis.his.service.PersonalInfoService;
+import com.njuhis.his.service.PersonalInformationService;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.logging.Logger;
 
 /**
  * @author Paul
@@ -18,10 +17,10 @@ import java.util.logging.Logger;
  * 个人信息数据修改维护
  */
 @RestController
-@RequestMapping("personalInfo")
-public class PersonalInfomationController {
+@RequestMapping("/PersonalInformationController")
+public class PersonalInformationController {
     @Autowired
-    private PersonalInfoService personalInfoService;
+    private PersonalInformationService personalInformationService;
     private QuickLogger quickLogger =new QuickLogger(this.getClass());
 
     /**
@@ -37,7 +36,7 @@ public class PersonalInfomationController {
         quickLogger.logReceive(patient);
 
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
-        personalInfoService.addPatient(patient,resultMessage);
+        personalInformationService.addPatient(patient,resultMessage);
 
         Patient result=patient;
         if(!resultMessage.isSuccessful()){
