@@ -4,9 +4,7 @@ package com.njuhis.his.model;
 
 import java.util.Date;
 
-/**
- * 排班
- */
+//排班
 public class Scheduling {
     private Integer id;//排班主键ID
     private Date scheddate;//排班日期

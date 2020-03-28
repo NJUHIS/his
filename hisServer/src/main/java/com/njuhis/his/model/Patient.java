@@ -1,5 +1,7 @@
 package com.njuhis.his.model;
 
+
+//患者
 public class Patient {
     private Integer id;//患者主键ID
     private String name;//患者真实姓名

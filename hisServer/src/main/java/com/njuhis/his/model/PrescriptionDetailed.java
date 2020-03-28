@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 //处方明细
 public class PrescriptionDetailed {
-    private Integer id;//处方明细表主键ID
+    private Integer id;//处方明细主键ID
     private Integer prescriptionid;//处方主键ID
     private Integer drugsid;//药品主键ID
     private String useage;//用法

@@ -2,12 +2,22 @@ package com.njuhis.his.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+//疾病
 public class Disease {
     private Integer id; //疾病主键ID
     private String diseasecode; //疾病助记编码
     private String diseasename; //疾病名称
     private String diseaseicd; //疾病国际ICD编码
     private String diseasetype; //疾病类型
+
+
+
+
+
+
+
+
+
 
     @JsonIgnore
     private Integer delmark; //删除标记 1-是 0-否

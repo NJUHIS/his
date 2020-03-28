@@ -2,9 +2,8 @@ package com.njuhis.his.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-/**
- * 结算类型
- */
+
+//结算类型
 public class SettleCategory {
     private Integer id;//结算类型主键ID
     private String settlename;//结算类型名称

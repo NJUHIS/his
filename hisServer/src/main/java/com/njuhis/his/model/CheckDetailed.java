@@ -1,37 +1,43 @@
 package com.njuhis.his.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
+//检验检查处置明细
 public class CheckDetailed {
-    private Integer id;
+    private Integer id; //检验检查处置明细主键ID
+    private Integer checkappid; //检验检查处置主键ID
+    private Integer checkprojid;//检验检查处置项目（属于非药品项目）主键ID
+    private Integer deptid;//执行科室主键ID
+    private String position;//检验检查处置明细目的和要求
+    private Integer state;//检验检查处置明细状态
+    // 1 - 等待检验检查处置
+    // 2 - 检验检查处置中
+    // 3 - 检验检查处置完成，结果未出
+    // 4 - 结果已出
+    private BigDecimal price; //价格
+    private Integer identification;//检验检查处置明细类型
+    // 1 - 检查项
+    // 2 - 检验项
+    // 3 - 处置项
+    private Long inspecttime;//此明细实际检验检查处置时间
+    private String result;//此明细的检验检查处置结果
+    private Integer resulttime;//此明细出检验检查处置结果的时间。毫秒数。
+    private Integer operatorid;//此明细的检验检查处置人员的医院员工主键ID
+    private Integer entryclerkid;//此明细的结果录入人员的医院员工主键ID
 
-    private Integer checkappid;
 
-    private Integer checkprojid;
 
-    private Integer deptid;
 
-    private Long creationtime;
 
-    private String position;
-
-    private Integer state;
-
-    private BigDecimal price;
-
-    private Integer identification;
-
-    private Long inspecttime;
-
-    private String result;
-
-    private Integer resulttime;
-
-    private Integer operatorid;
-
-    private Integer entryclerkid;
-
+    @JsonIgnore
     private Integer delmark;
+    /**
+     * @deprecated
+     */
+    @JsonIgnore
+    private Long creationtime;
 
     public Integer getId() {
         return id;
@@ -65,10 +71,16 @@ public class CheckDetailed {
         this.deptid = deptid;
     }
 
+    /**
+     * @deprecated
+     */
     public Long getCreationtime() {
         return creationtime;
     }
 
+    /**
+     * @deprecated
+     */
     public void setCreationtime(Long creationtime) {
         this.creationtime = creationtime;
     }

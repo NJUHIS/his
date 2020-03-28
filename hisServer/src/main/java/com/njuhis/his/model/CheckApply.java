@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 
 //检验检查处置
+//这个类是个巨无霸，耦合了非常多的业务。包括检查Examination、检验Test和处置Disposal
 public class CheckApply {
     private Integer id;//检验检查处置主键ID
     private Integer medicalId;//病历主键ID

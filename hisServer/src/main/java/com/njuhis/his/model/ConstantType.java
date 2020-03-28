@@ -2,6 +2,7 @@ package com.njuhis.his.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+//常数类型
 public class ConstantType {
     private Integer id; //常数类型主键ID
     private String constanttypecode;//常数类型编码

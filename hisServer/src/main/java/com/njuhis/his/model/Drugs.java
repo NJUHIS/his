@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.math.BigDecimal;
 import java.util.Date;
 
+//药品
 public class Drugs {
     private Integer id;//药品主键ID，即药品编码
     private String drugsName;//药品名称
@@ -17,6 +18,12 @@ public class Drugs {
     private String mnemonicCode;//拼音助记码
     private Date creationDate;//创建日期
     private Date lastUpdateDate;//最后修改日期
+
+
+
+
+
+
 
 
 
