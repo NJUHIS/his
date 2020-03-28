@@ -16,7 +16,12 @@ public class PrescriptionDetailed {
 
 
 
-    
+
+
+
+
+
+
 
     private Integer prescriptiondetailedcol;
 

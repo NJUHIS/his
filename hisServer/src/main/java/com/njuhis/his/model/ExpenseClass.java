@@ -7,14 +7,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class ExpenseClass {
     private Integer id;//费用类型主键ID
     private String expname;//费用类型名称
-    private String expcode;//费用类型的编码
+    private String expcode;//费用类型编码
+
+
+
+
+
+
+
+
 
     @JsonIgnore
     private Integer delmark;
-
-
-
-
 
     public Integer getId() {
         return id;

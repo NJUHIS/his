@@ -26,12 +26,6 @@ public class CheckApply {
 
 
 
-
-
-
-
-
-
     /**
      * @deprecated
      */

@@ -3,15 +3,24 @@ package com.njuhis.his.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
-//非药品收费项目
+
+//非药品项目
 public class FmedItem {
-    private Integer id;//非药品收费项目主键ID
-    private String itemname; //非药品收费项目名稱
+    private Integer id;//非药品项目主键ID
+    private String itemname; //非药品项目名稱
     private String format;//规格
     private BigDecimal price;//价格
-    private Integer expclassid;//费用科目主键ID
+    private Integer expclassid;//费用类型主键ID
     private Integer deptid;//执行科室主键ID
-    private String itemcode;//非药品收费项目编码
+    private String itemcode;//非药品收费编码
+
+
+
+
+
+
+
+
 
     @JsonIgnore
     private Integer delmark;

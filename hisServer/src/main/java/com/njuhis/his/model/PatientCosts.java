@@ -4,17 +4,20 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
 
-//患者费用明细
+//发票明细
 public class PatientCosts {
-    private Integer id;//患者费用明细主键ID
+    private Integer id;//发票明细主键ID
     private Integer invoiceid;//发票主键ID
     private Integer registerid;//挂号主键ID
-    private String name;//项目名称
-    private BigDecimal price;//项目价格
-    private String deptid;//执行科室名称
+    private String name;//名称
+    private BigDecimal price;//价格
+    private String deptid;//执行科室主键ID
     private Integer state;//状态
     // 1 - 未交费
     // 2 - 已交费
+
+
+
 
     @JsonIgnore
     private Integer delmark;
