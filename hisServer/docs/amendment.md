@@ -6,19 +6,23 @@ by Paul
 
 
 
+另外，之前说的Time 应该指的是秒数而不是毫秒数。如果是毫秒数的话Integer就爆了。
+
+
+
 ### 1. User (Worker)
 
-| 原名            | 新名                | 解释                                                         |
-| --------------- | ------------------- | ------------------------------------------------------------ |
-| 类名 User       | Worker              | User 概念上包括员工和病人，Worker 只指医院员工。显然后者更准确。 |
-| realname        | realName            |                                                              |
-| usertypeid      | workerType          | 不涉及主键，不使用ID一词。                                   |
-| doctitleid      | doctorTitle         | 不涉及主键，不使用ID一词。                                   |
-| isscheduling    | isScheduled         | 是否**被**排班。被动。                                       |
-| deptid          | departmentId        | 不要一时缩写，一时全写(如Department类名)。统一写完整了。写完整并不会增加打字时间，因为有IDE快捷辅助提示，反而看起来清楚清晰很多。 |
-| registerLevelId | registrationLevelId | 见 RegisterLevel(RegistrationLevel) 类。                     |
-| idnumber        | idCardNumber        | 身份证全称 idCard。把身份证idCard和主键id区别开来。不然容易弄混，别人以为idnumber是主键id。 |
-| delmark         | isDeleted           |                                                              |
+| 原名            | 新名               | 解释                                                         |
+| --------------- | ------------------ | ------------------------------------------------------------ |
+| 类名 User       | Worker             | User 概念上包括员工和病人，Worker 只指医院员工。显然后者更准确。 |
+| realname        | realName           |                                                              |
+| usertypeid      | workerType         | 不涉及主键，不使用ID一词。                                   |
+| doctitleid      | doctorTitle        | 不涉及主键，不使用ID一词。                                   |
+| isscheduling    | isScheduled        | 是否**被**排班。被动。                                       |
+| deptid          | departmentId       | 不要一时缩写，一时全写(如Department类名)。统一写完整了。写完整并不会增加打字时间，因为有IDE快捷辅助提示，反而看起来清楚清晰很多。 |
+| registerLevelId | registrationTypeId | 见 RegisterLevel(RegistrationType) 类。                      |
+| idnumber        | idCardNumber       | 身份证全称 idCard。把身份证idCard和主键id区别开来。不然容易弄混，别人以为idnumber是主键id。 |
+| delmark         | isDeleted          |                                                              |
 
 
 
@@ -65,27 +69,27 @@ by Paul
 
 
 
-| 原名            | 新名                | 解释                                                         |
-| --------------- | ------------------- | ------------------------------------------------------------ |
-| 类名 Register   | Registration        | Register 是挂号动词，Registration 是挂号名词。类名当然要用名词了。 |
-| realname        | realName            |                                                              |
-| idnumber        | idCardNumber        |                                                              |
-| birthdate       | birthday            | 生日的英文 birthday                                          |
-| homeaddress     | homeAddress         |                                                              |
-| visitdate       | appointmentDate     | 预约日期。他什么时候实际去visit我不管。这里只是预约appointment。 |
-| noon            | partOfDay           | noon是正午。                                                 |
-| patientid       | patientId           |                                                              |
-| deptid          | departmentId        |                                                              |
-| userid          | doctorId            | 需要写清楚是医生的id，不然谁知道user指的是谁？医生？病人？挂号员？ |
-| settleid        | settlementTypeId    |                                                              |
-| isBook          | needBook            | 是否需要病历本                                               |
-| registertime    | registrationTime    |                                                              |
-| registerid      | registrarId         | 挂号员英文 registrar                                         |
-| registerLevelId | registrationLevelId |                                                              |
-| visitstate      | state               |                                                              |
-| 无              | medicalRecordId     | 新增病历主键Id。取代病历编号。                               |
-| casenumber      | 无                  | 应删去。病历编号被病历主键id取代。其他地方都是病历主键id，这里为何要搞特殊，要用病历编号？统一使用病历主键id。 |
-| agetype         | 无                  | 我没搞懂有什么用。如果你知道它有什么用，请告诉我，保留它且改成 ageType。如果没用则删去。 |
+| 原名            | 新名               | 解释                                                         |
+| --------------- | ------------------ | ------------------------------------------------------------ |
+| 类名 Register   | Registration       | Register 是挂号动词，Registration 是挂号名词。类名当然要用名词了。 |
+| realname        | realName           |                                                              |
+| idnumber        | idCardNumber       |                                                              |
+| birthdate       | birthday           | 生日的英文 birthday                                          |
+| homeaddress     | homeAddress        |                                                              |
+| visitdate       | appointmentDate    | 预约日期。他什么时候实际去visit我不管。这里只是预约appointment。 |
+| noon            | partOfDay          | noon是正午。                                                 |
+| patientid       | patientId          |                                                              |
+| deptid          | departmentId       |                                                              |
+| userid          | doctorId           | 需要写清楚是医生的id，不然谁知道user指的是谁？医生？病人？挂号员？ |
+| settleid        | settlementTypeId   |                                                              |
+| isBook          | needBook           | 是否需要病历本                                               |
+| registertime    | registrationTime   |                                                              |
+| registerid      | registrarId        | 挂号员英文 registrar                                         |
+| registerLevelId | registrationTypeId |                                                              |
+| visitstate      | state              |                                                              |
+| 无              | medicalRecordId    | 新增病历主键Id。取代病历编号。                               |
+| casenumber      | 无                 | 应删去。病历编号被病历主键id取代。其他地方都是病历主键id，这里为何要搞特殊，要用病历编号？统一使用病历主键id。 |
+| agetype         | 无                 | 我没搞懂有什么用。如果你知道它有什么用，请告诉我，保留它且改成 ageType。如果没用则删去。 |
 
 
 
@@ -268,7 +272,7 @@ by Paul
 
 
 
-### 14. RegisterLevel (RegistrationLevel)
+### 14. RegisterLevel (RegistrationType)
 
 | 原名        | 新名      | 解释                                   |
 | ----------- | --------- | -------------------------------------- |
