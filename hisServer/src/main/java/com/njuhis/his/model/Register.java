@@ -1,53 +1,47 @@
 package com.njuhis.his.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.Date;
-/**
- * 一次挂号
- */
+
 public class Register {
-    private Integer id;//本次挂号主键ID
-    private String realname;//患者真实姓名
-    private Integer gender; //患者性别
-    private String idnumber;//患者身份证号码
-    private Date birthdate;//患者出生日期
-    private Integer age;//患者年龄
-    private String homeaddress;//患者家庭住址
-    private Date visitdate;//预定看诊日期
-    private Integer noon;//预定看诊午别
-    //1 - 凌晨
-    //2 - 早上
-    //3 - 下午
-    //4 - 晚上
+    private Integer id;
 
-    private Integer patientid;//患者用户主键ID
-    private Integer deptid;//看诊科室主键ID
-    private Integer userid;//医生用户主键ID
-    private Integer settleid;//结算类型主键ID
+    private String realname;
 
-    private Integer isbook;//是否需要病历本
-    //1-需要
-    //0-不需要
+    private Integer gender;
 
-    private Integer registertime;//挂号时间。毫秒數。
-    private Integer registerid;//挂号员用户主键ID
-    private Integer registerLevelId;//挂号级别主键ID
-    private Integer visitstate;//看诊状态
-    //1-已看诊
-    //0-未看诊
+    private String idnumber;
 
+    private Date birthdate;
 
+    private Integer age;
 
+    private Integer agetype;
 
-    private String casenumber;//病历编号。
+    private String homeaddress;
 
+    private String casenumber;
 
-    /**
-     * @deprecated
-     */
-    @JsonIgnore
-    private Integer agetype;//患者年龄类型
+    private Date visitdate;
+
+    private Integer noon;
+
+    private Integer deptid;
+
+    private Integer userid;
+
+    private Integer registid;
+
+    private Integer settleid;
+
+    private Integer isbook;
+
+    private Long registertime;
+
+    private Integer registerid;
+
+    private Integer visitstate;
+
+    private Integer patientid;
 
     public Integer getId() {
         return id;
@@ -97,16 +91,10 @@ public class Register {
         this.age = age;
     }
 
-    /**
-     * @deprecated
-     */
     public Integer getAgetype() {
         return agetype;
     }
 
-    /**
-     * @deprecated
-     */
     public void setAgetype(Integer agetype) {
         this.agetype = agetype;
     }
@@ -159,12 +147,12 @@ public class Register {
         this.userid = userid;
     }
 
-    public Integer getRegisterLevelId() {
-        return registerLevelId;
+    public Integer getRegistid() {
+        return registid;
     }
 
-    public void setRegisterLevelId(Integer registerLevelId) {
-        this.registerLevelId = registerLevelId;
+    public void setRegistid(Integer registid) {
+        this.registid = registid;
     }
 
     public Integer getSettleid() {
@@ -183,11 +171,11 @@ public class Register {
         this.isbook = isbook;
     }
 
-    public Integer getRegistertime() {
+    public Long getRegistertime() {
         return registertime;
     }
 
-    public void setRegistertime(Integer registertime) {
+    public void setRegistertime(Long registertime) {
         this.registertime = registertime;
     }
 

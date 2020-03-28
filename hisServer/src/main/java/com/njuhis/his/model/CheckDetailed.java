@@ -11,7 +11,7 @@ public class CheckDetailed {
 
     private Integer deptid;
 
-    private Integer creationtime;
+    private Long creationtime;
 
     private String position;
 
@@ -21,7 +21,7 @@ public class CheckDetailed {
 
     private Integer identification;
 
-    private Integer inspecttime;
+    private Long inspecttime;
 
     private String result;
 
@@ -65,11 +65,11 @@ public class CheckDetailed {
         this.deptid = deptid;
     }
 
-    public Integer getCreationtime() {
+    public Long getCreationtime() {
         return creationtime;
     }
 
-    public void setCreationtime(Integer creationtime) {
+    public void setCreationtime(Long creationtime) {
         this.creationtime = creationtime;
     }
 
@@ -105,11 +105,11 @@ public class CheckDetailed {
         this.identification = identification;
     }
 
-    public Integer getInspecttime() {
+    public Long getInspecttime() {
         return inspecttime;
     }
 
-    public void setInspecttime(Integer inspecttime) {
+    public void setInspecttime(Long inspecttime) {
         this.inspecttime = inspecttime;
     }
 

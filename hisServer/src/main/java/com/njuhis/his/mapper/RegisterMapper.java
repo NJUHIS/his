@@ -14,6 +14,6 @@ public interface RegisterMapper {
 
     int updateByPrimaryKey(Register record);
 
-    List<Register> selectByIdNumber(String idNumber);
     List<Register> selectByPatientId(Integer patientId);
+    List<Register> selectByIdNumber(String idNumber);
 }

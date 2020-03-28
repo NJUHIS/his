@@ -15,10 +15,10 @@
     <result column="Noon" jdbcType="INTEGER" property="noon" />
     <result column="DeptId" jdbcType="INTEGER" property="deptid" />
     <result column="UserId" jdbcType="INTEGER" property="userid" />
-    <result column="RegistId" jdbcType="INTEGER" property="registerLevelId" />
+    <result column="RegistId" jdbcType="INTEGER" property="registid" />
     <result column="SettleID" jdbcType="INTEGER" property="settleid" />
     <result column="IsBook" jdbcType="INTEGER" property="isbook" />
-    <result column="RegisterTime" jdbcType="INTEGER" property="registertime" />
+    <result column="RegisterTime" jdbcType="BIGINT" property="registertime" />
     <result column="RegisterID" jdbcType="INTEGER" property="registerid" />
     <result column="VisitState" jdbcType="INTEGER" property="visitstate" />
     <result column="patientID" jdbcType="INTEGER" property="patientid" />
@@ -27,7 +27,7 @@
     delete from register
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.Register" useGeneratedKeys="true"  keyProperty="id">
+  <insert id="insert" parameterType="com.njuhis.his.model.Register">
     insert into register (id, RealName, Gender, 
       IDnumber, BirthDate, Age, 
       AgeType, HomeAddress, CaseNumber, 
@@ -39,8 +39,8 @@
       #{idnumber,jdbcType=VARCHAR}, #{birthdate,jdbcType=DATE}, #{age,jdbcType=INTEGER}, 
       #{agetype,jdbcType=INTEGER}, #{homeaddress,jdbcType=VARCHAR}, #{casenumber,jdbcType=VARCHAR}, 
       #{visitdate,jdbcType=DATE}, #{noon,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, 
-      #{userid,jdbcType=INTEGER}, #{registerLevelId,jdbcType=INTEGER}, #{settleid,jdbcType=INTEGER},
-      #{isbook,jdbcType=INTEGER}, #{registertime,jdbcType=INTEGER}, #{registerid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER}, #{registid,jdbcType=INTEGER}, #{settleid,jdbcType=INTEGER}, 
+      #{isbook,jdbcType=INTEGER}, #{registertime,jdbcType=BIGINT}, #{registerid,jdbcType=INTEGER}, 
       #{visitstate,jdbcType=INTEGER}, #{patientid,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Register">
@@ -57,10 +57,10 @@
       Noon = #{noon,jdbcType=INTEGER},
       DeptId = #{deptid,jdbcType=INTEGER},
       UserId = #{userid,jdbcType=INTEGER},
-      RegistId = #{registerLevelId,jdbcType=INTEGER},
+      RegistId = #{registid,jdbcType=INTEGER},
       SettleID = #{settleid,jdbcType=INTEGER},
       IsBook = #{isbook,jdbcType=INTEGER},
-      RegisterTime = #{registertime,jdbcType=INTEGER},
+      RegisterTime = #{registertime,jdbcType=BIGINT},
       RegisterID = #{registerid,jdbcType=INTEGER},
       VisitState = #{visitstate,jdbcType=INTEGER},
       patientID = #{patientid,jdbcType=INTEGER}
@@ -93,4 +93,5 @@
   from register
   where patientid = #{patientid,jdbcType=INTEGER}
   </select>
+
 </mapper>

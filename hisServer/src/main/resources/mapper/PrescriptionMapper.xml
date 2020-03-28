@@ -7,7 +7,7 @@
     <result column="User_Id" jdbcType="INTEGER" property="userId" />
     <result column="Prescription_Name" jdbcType="VARCHAR" property="prescriptionName" />
     <result column="Prescription_State" jdbcType="INTEGER" property="prescriptionState" />
-    <result column="Prescription_Time" jdbcType="INTEGER" property="prescriptionTime" />
+    <result column="Prescription_Time" jdbcType="BIGINT" property="prescriptionTime" />
     <result column="Invoice_id" jdbcType="VARCHAR" property="invoiceId" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
@@ -15,12 +15,12 @@
     delete from prescription
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.Prescription" useGeneratedKeys="true"  keyProperty="id">
+  <insert id="insert" parameterType="com.njuhis.his.model.Prescription">
     insert into prescription (id, Medical_Id, User_Id, 
       Prescription_Name, Prescription_State, Prescription_Time, 
       Invoice_id, DelMark)
     values (#{id,jdbcType=INTEGER}, #{medicalId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{prescriptionName,jdbcType=VARCHAR}, #{prescriptionState,jdbcType=INTEGER}, #{prescriptionTime,jdbcType=INTEGER}, 
+      #{prescriptionName,jdbcType=VARCHAR}, #{prescriptionState,jdbcType=INTEGER}, #{prescriptionTime,jdbcType=BIGINT}, 
       #{invoiceId,jdbcType=VARCHAR}, #{delmark,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Prescription">
@@ -29,7 +29,7 @@
       User_Id = #{userId,jdbcType=INTEGER},
       Prescription_Name = #{prescriptionName,jdbcType=VARCHAR},
       Prescription_State = #{prescriptionState,jdbcType=INTEGER},
-      Prescription_Time = #{prescriptionTime,jdbcType=INTEGER},
+      Prescription_Time = #{prescriptionTime,jdbcType=BIGINT},
       Invoice_id = #{invoiceId,jdbcType=VARCHAR},
       DelMark = #{delmark,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

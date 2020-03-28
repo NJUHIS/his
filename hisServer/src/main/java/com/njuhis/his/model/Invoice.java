@@ -3,20 +3,19 @@ package com.njuhis.his.model;
 import java.math.BigDecimal;
 
 public class Invoice {
-    private Integer id;//发票ID
-    private String invoicenum;//发票编号
-    private BigDecimal money;//发票金额
-    private Integer state;//发票状态
-    // 1 - 未开出
-    // 2 - 已开出，正常状态
-    // 3 - 已作废
-    // 4 - 此发票作为红冲
+    private Integer id;
 
-    private Integer creationtime;// 开出时间
-    private Integer userid;//开立人员主键ID
-    private Integer dailystate;//日结审核状态
-    // 1 - 未日结审核
-    // 2 - 已日结审核
+    private String invoicenum;
+
+    private BigDecimal money;
+
+    private Integer state;
+
+    private Long creationtime;
+
+    private Integer userid;
+
+    private Integer dailystate;
 
     public Integer getId() {
         return id;
@@ -50,11 +49,11 @@ public class Invoice {
         this.state = state;
     }
 
-    public Integer getCreationtime() {
+    public Long getCreationtime() {
         return creationtime;
     }
 
-    public void setCreationtime(Integer creationtime) {
+    public void setCreationtime(Long creationtime) {
         this.creationtime = creationtime;
     }
 

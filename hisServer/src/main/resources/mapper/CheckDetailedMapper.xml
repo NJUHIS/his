@@ -6,12 +6,12 @@
     <result column="CheckAppId" jdbcType="INTEGER" property="checkappid" />
     <result column="CheckProjId" jdbcType="INTEGER" property="checkprojid" />
     <result column="DeptId" jdbcType="INTEGER" property="deptid" />
-    <result column="CreationTime" jdbcType="INTEGER" property="creationtime" />
+    <result column="CreationTime" jdbcType="BIGINT" property="creationtime" />
     <result column="Position" jdbcType="VARCHAR" property="position" />
     <result column="State" jdbcType="INTEGER" property="state" />
     <result column="Price" jdbcType="DECIMAL" property="price" />
     <result column="Identification" jdbcType="INTEGER" property="identification" />
-    <result column="InspectTime" jdbcType="INTEGER" property="inspecttime" />
+    <result column="InspectTime" jdbcType="BIGINT" property="inspecttime" />
     <result column="Result" jdbcType="VARCHAR" property="result" />
     <result column="ResultTime" jdbcType="INTEGER" property="resulttime" />
     <result column="operatorId" jdbcType="INTEGER" property="operatorid" />
@@ -30,9 +30,9 @@
       operatorId, entryClerkId, DelMark
       )
     values (#{id,jdbcType=INTEGER}, #{checkappid,jdbcType=INTEGER}, #{checkprojid,jdbcType=INTEGER}, 
-      #{deptid,jdbcType=INTEGER}, #{creationtime,jdbcType=INTEGER}, #{position,jdbcType=VARCHAR}, 
+      #{deptid,jdbcType=INTEGER}, #{creationtime,jdbcType=BIGINT}, #{position,jdbcType=VARCHAR}, 
       #{state,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{identification,jdbcType=INTEGER}, 
-      #{inspecttime,jdbcType=INTEGER}, #{result,jdbcType=VARCHAR}, #{resulttime,jdbcType=INTEGER}, 
+      #{inspecttime,jdbcType=BIGINT}, #{result,jdbcType=VARCHAR}, #{resulttime,jdbcType=INTEGER}, 
       #{operatorid,jdbcType=INTEGER}, #{entryclerkid,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER}
       )
   </insert>
@@ -41,12 +41,12 @@
     set CheckAppId = #{checkappid,jdbcType=INTEGER},
       CheckProjId = #{checkprojid,jdbcType=INTEGER},
       DeptId = #{deptid,jdbcType=INTEGER},
-      CreationTime = #{creationtime,jdbcType=INTEGER},
+      CreationTime = #{creationtime,jdbcType=BIGINT},
       Position = #{position,jdbcType=VARCHAR},
       State = #{state,jdbcType=INTEGER},
       Price = #{price,jdbcType=DECIMAL},
       Identification = #{identification,jdbcType=INTEGER},
-      InspectTime = #{inspecttime,jdbcType=INTEGER},
+      InspectTime = #{inspecttime,jdbcType=BIGINT},
       Result = #{result,jdbcType=VARCHAR},
       ResultTime = #{resulttime,jdbcType=INTEGER},
       operatorId = #{operatorid,jdbcType=INTEGER},

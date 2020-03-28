@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="Name" jdbcType="VARCHAR" property="name" />
     <result column="Medical_Id" jdbcType="INTEGER" property="medicalId" />
-    <result column="Creation_Time" jdbcType="INTEGER" property="creationTime" />
+    <result column="Creation_Time" jdbcType="BIGINT" property="creationTime" />
     <result column="Total_Sum" jdbcType="DECIMAL" property="totalSum" />
     <result column="Objective" jdbcType="VARCHAR" property="objective" />
     <result column="User_Id" jdbcType="INTEGER" property="userId" />
@@ -17,13 +17,13 @@
     delete from checkapply
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.CheckApply" useGeneratedKeys="true"  keyProperty="id">
+  <insert id="insert" parameterType="com.njuhis.his.model.CheckApply">
     insert into checkapply (id, Name, Medical_Id, 
       Creation_Time, Total_Sum, Objective, 
       User_Id, state, Invoice_Number, 
       DelMark)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{medicalId,jdbcType=INTEGER}, 
-      #{creationTime,jdbcType=INTEGER}, #{totalSum,jdbcType=DECIMAL}, #{objective,jdbcType=VARCHAR}, 
+      #{creationTime,jdbcType=BIGINT}, #{totalSum,jdbcType=DECIMAL}, #{objective,jdbcType=VARCHAR}, 
       #{userId,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{invoiceNumber,jdbcType=VARCHAR}, 
       #{delmark,jdbcType=INTEGER})
   </insert>
@@ -31,7 +31,7 @@
     update checkapply
     set Name = #{name,jdbcType=VARCHAR},
       Medical_Id = #{medicalId,jdbcType=INTEGER},
-      Creation_Time = #{creationTime,jdbcType=INTEGER},
+      Creation_Time = #{creationTime,jdbcType=BIGINT},
       Total_Sum = #{totalSum,jdbcType=DECIMAL},
       Objective = #{objective,jdbcType=VARCHAR},
       User_Id = #{userId,jdbcType=INTEGER},
