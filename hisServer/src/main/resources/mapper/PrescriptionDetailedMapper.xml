@@ -49,46 +49,4 @@
     quantity
     from prescriptiondetailed
   </select>
-  <resultMap id="BaseResultMap" type="com.njuhis.his.model.PrescriptionDetailed">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="PrescriptionId" jdbcType="INTEGER" property="prescriptionid" />
-    <result column="DrugsId" jdbcType="INTEGER" property="drugsid" />
-    <result column="Useage" jdbcType="VARCHAR" property="useage" />
-    <result column="Dosage" jdbcType="VARCHAR" property="dosage" />
-    <result column="Frequency" jdbcType="VARCHAR" property="frequency" />
-    <result column="Price" jdbcType="DECIMAL" property="price" />
-    <result column="prescriptiondetailedcol" jdbcType="INTEGER" property="prescriptiondetailedcol" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from prescriptiondetailed
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.PrescriptionDetailed">
-    insert into prescriptiondetailed (id, PrescriptionId, DrugsId, 
-      Useage, Dosage, Frequency, 
-      Price, prescriptiondetailedcol)
-    values (#{id,jdbcType=INTEGER}, #{prescriptionid,jdbcType=INTEGER}, #{drugsid,jdbcType=INTEGER}, 
-      #{useage,jdbcType=VARCHAR}, #{dosage,jdbcType=VARCHAR}, #{frequency,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{prescriptiondetailedcol,jdbcType=INTEGER})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.PrescriptionDetailed">
-    update prescriptiondetailed
-    set PrescriptionId = #{prescriptionid,jdbcType=INTEGER},
-      DrugsId = #{drugsid,jdbcType=INTEGER},
-      Useage = #{useage,jdbcType=VARCHAR},
-      Dosage = #{dosage,jdbcType=VARCHAR},
-      Frequency = #{frequency,jdbcType=VARCHAR},
-      Price = #{price,jdbcType=DECIMAL},
-      prescriptiondetailedcol = #{prescriptiondetailedcol,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, PrescriptionId, DrugsId, Useage, Dosage, Frequency, Price, prescriptiondetailedcol
-    from prescriptiondetailed
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, PrescriptionId, DrugsId, Useage, Dosage, Frequency, Price, prescriptiondetailedcol
-    from prescriptiondetailed
-  </select>
 </mapper>
