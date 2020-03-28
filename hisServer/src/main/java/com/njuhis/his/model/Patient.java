@@ -11,6 +11,12 @@ public class Patient {
     private String password;//患者密码
 
 
+
+
+
+
+
+
     public Integer getId() {
         return id;
     }

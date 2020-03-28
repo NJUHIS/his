@@ -9,6 +9,13 @@ public class ConstantItem {
     private String constantcode;//常数项编码
     private String constantname;//常数项名称
 
+
+
+
+
+
+
+
     @JsonIgnore
     private Integer delmark;//
 
