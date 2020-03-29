@@ -12,4 +12,6 @@ public interface PatientMapper {
     List<Patient> selectAll();
 
     Patient selectByLoginName(String loginname);
+
+
 }

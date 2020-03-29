@@ -23,6 +23,20 @@
     <result column="VisitState" jdbcType="INTEGER" property="visitstate" />
     <result column="patientID" jdbcType="INTEGER" property="patientid" />
   </resultMap>
+  <resultMap id="BaseResultMapCollection" type="com.njuhis.his.model.Register" extends="BaseResultMap">
+    <collection property="diagnosisList" ofType="com.njuhis.his.model.Diagnosis">
+      <id column="did" jdbcType="INTEGER" property="id" />
+      <result column="MedicalId" jdbcType="INTEGER" property="medicalid" />
+      <result column="diseaseId" jdbcType="INTEGER" property="diseaseid" />
+      <result column="state" jdbcType="INTEGER" property="state" />
+      <association property="disease" column="diseaseId" javaType="com.njuhis.his.model.Disease">
+        <id column="diid" jdbcType="INTEGER" property="id" />
+        <result column="DiseaseCode" jdbcType="VARCHAR" property="diseasecode" />
+        <result column="DiseaseName" jdbcType="VARCHAR" property="diseasename" />
+        <result column="DiseaseType" jdbcType="VARCHAR" property="diseasetype" />
+      </association>
+    </collection>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from register
     where id = #{id,jdbcType=INTEGER}
@@ -93,5 +107,12 @@
   from register
   where patientid = #{patientid,jdbcType=INTEGER}
   </select>
-
+  <select id="selectAllJoin" resultMap="BaseResultMapCollection">
+    select r.id, r.RealName, r.Gender, r.IDnumber, r.BirthDate, r.Age, r.AgeType, r.HomeAddress, r.CaseNumber,
+    r.VisitDate, r.Noon, r.DeptId, r.UserId, r.RegistId, r.SettleID, r.IsBook, r.RegisterTime, r.RegisterID,
+    r.VisitState, r.patientID,d.id did, d.MedicalId, d.diseaseId, d.state,di.id diid, di.DiseaseCode, di.DiseaseName, di.DiseaseICD, di.DiseaseType, di.DelMark
+    from register r
+    inner join diagnosis d on d.MedicalId =r.id
+    inner join disease di on di.id = d.diseaseid
+  </select>
 </mapper>

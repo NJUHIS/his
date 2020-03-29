@@ -3,6 +3,7 @@ package com.njuhis.his.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
+import java.util.List;
 
 //挂号
 public class Register {
@@ -38,6 +39,8 @@ public class Register {
     //1-已看诊或正在看诊
     private Integer patientid;//患者主键ID
 
+
+    private List<Diagnosis> diagnosisList;
 
 
 
@@ -218,5 +221,13 @@ public class Register {
 
     public void setPatientid(Integer patientid) {
         this.patientid = patientid;
+    }
+
+    public List<Diagnosis> getDiagnosisList() {
+        return diagnosisList;
+    }
+
+    public void setDiagnosisList(List<Diagnosis> diagnosisList) {
+        this.diagnosisList = diagnosisList;
     }
 }

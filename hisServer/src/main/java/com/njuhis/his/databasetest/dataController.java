@@ -64,8 +64,8 @@ public class dataController {
         Date date = new Date(2019-1900,03-1,01,8,0);
         System.out.println(date);
         scheduling.setScheddate(date);
-        List<Scheduling> s= schedulingMapper.selectByDepartment(scheduling);
-        return schedulingMapper.selectByDepartment(scheduling);
+        List<Scheduling> s= schedulingMapper.selectByDepartmentAndNoon(scheduling);
+        return schedulingMapper.selectByDepartmentAndNoon(scheduling);
     }
     @RequestMapping("/insert")
     void insertUser(){
@@ -85,5 +85,31 @@ public class dataController {
     @RequestMapping("/sep")
     Patient sePatient(){
         return patientMapper.selectByLoginName("ahilla");
+    }
+    @Autowired
+    PrescriptionMapper prescriptionMapper;
+    @RequestMapping("/pso")
+    List<Prescription> sePrescription(){
+        return prescriptionMapper.selectAllJoin();
+    }
+    @Autowired
+    CheckApplyMapper checkApplyMapper;
+    @RequestMapping("/cso")
+    List<CheckApply> seCheckApplly(){
+        return checkApplyMapper.selectAllJoin();
+    }
+
+
+    @Autowired
+    InvoiceMapper invoiceMapper;
+    @RequestMapping("/iso")
+    List<Invoice> seInvoice(){
+        return  invoiceMapper.selectAllJoin();
+    }
+
+
+    @RequestMapping("/rso")
+    List<Register> seRegister(){
+        return  registerMapper.selectAllJoin();
     }
 }

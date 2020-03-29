@@ -19,4 +19,6 @@ public interface RegisterMapper {
 
     List<Register> selectByPatientId(Integer patientId);
     List<Register> selectByIdNumber(String idNumber);
+
+    List<Register> selectAllJoin();
 }

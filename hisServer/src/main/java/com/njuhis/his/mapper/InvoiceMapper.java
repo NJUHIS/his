@@ -13,4 +13,6 @@ public interface InvoiceMapper {
     List<Invoice> selectAll();
 
     int updateByPrimaryKey(Invoice record);
+
+    List<Invoice> selectAllJoin();
 }

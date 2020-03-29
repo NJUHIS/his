@@ -2,6 +2,8 @@ package com.njuhis.his.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.List;
+
 //处方
 public class Prescription {
     private Integer id;//处方主键ID
@@ -18,11 +20,22 @@ public class Prescription {
 
 
 
+    private List<PrescriptionDetailed> prescriptionDetailedList;//一对多 包含明细
+
+
 
     @JsonIgnore
     private Integer delmark;
 
 
+
+    public List<PrescriptionDetailed> getPrescriptionDetailedList() {
+        return prescriptionDetailedList;
+    }
+
+    public void setPrescriptionDetailedList(List<PrescriptionDetailed> prescriptionDetailedList) {
+        this.prescriptionDetailedList = prescriptionDetailedList;
+    }
     public Integer getId() {
         return id;
     }

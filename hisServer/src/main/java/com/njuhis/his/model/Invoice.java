@@ -1,6 +1,7 @@
 package com.njuhis.his.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 //发票
 public class Invoice {
@@ -17,7 +18,7 @@ public class Invoice {
     private Integer dailystate;//日结审核状态
     // 1 - 未日结审核
     // 2 - 已日结审核
-
+    private List<PatientCosts> patientCostsList;
 
 
 
@@ -75,5 +76,13 @@ public class Invoice {
 
     public void setDailystate(Integer dailystate) {
         this.dailystate = dailystate;
+    }
+
+    public List<PatientCosts> getPatientCostsList() {
+        return patientCostsList;
+    }
+
+    public void setPatientCostsList(List<PatientCosts> patientCostsList) {
+        this.patientCostsList = patientCostsList;
     }
 }

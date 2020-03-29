@@ -71,7 +71,7 @@
     select id, SchedDate, DeptId, UserId, Noon, RegistQuota, State
     from scheduling
   </select>
-  <select id="selectByDepartment" parameterType="com.njuhis.his.model.Scheduling" resultMap="BaseResultMap1">
+  <select id="selectByDepartmentAndNoon" parameterType="com.njuhis.his.model.Scheduling" resultMap="BaseResultMap1">
     select d.deptname,d.id,u.username,s.RegistQuota,s.id,s.SchedDate,s.deptid,s.userid,s.noon,s.state from scheduling s inner join department d on s.deptid =d.id
     inner join user u on s.userid= u.id
     where s.SchedDate=#{scheddate} and noon = #{noon} and s.deptid=#{deptid}

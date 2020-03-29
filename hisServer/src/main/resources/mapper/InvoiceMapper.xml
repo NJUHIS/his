@@ -10,6 +10,18 @@
     <result column="UserId" jdbcType="INTEGER" property="userid" />
     <result column="DailyState" jdbcType="INTEGER" property="dailystate" />
   </resultMap>
+  <resultMap id="BaseResultMapCollection" type="com.njuhis.his.model.Invoice" extends="BaseResultMap">
+    <collection property="patientCostsList" ofType="com.njuhis.his.model.PatientCosts">
+      <id column="pid" jdbcType="INTEGER" property="id" />
+      <result column="InvoiceId" jdbcType="INTEGER" property="invoiceid" />
+      <result column="RegisterId" jdbcType="INTEGER" property="registerid" />
+      <result column="Name" jdbcType="VARCHAR" property="name" />
+      <result column="Price" jdbcType="DECIMAL" property="price" />
+      <result column="DeptId" jdbcType="VARCHAR" property="deptid" />
+      <result column="pstate" jdbcType="INTEGER" property="state" />
+      <result column="pdelmark" jdbcType="INTEGER" property="delmark" />
+    </collection>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from invoice
     where id = #{id,jdbcType=INTEGER}
@@ -40,5 +52,11 @@
   <select id="selectAll" resultMap="BaseResultMap">
     select id, InvoiceNum, Money, State, CreationTime, UserId, DailyState
     from invoice
+  </select>
+  <select id="selectAllJoin" resultMap="BaseResultMapCollection">
+    select i.id, i.InvoiceNum, i.Money, i.State, i.CreationTime, i.UserId, i.DailyState,
+    p.id pid, p.InvoiceId, p.RegisterId, p.Name, p.Price, p.DeptId, p.State pstate, p.DelMark pdelmark
+    from invoice i
+    inner join patientCosts p on p.InvoiceId = i.id
   </select>
 </mapper>

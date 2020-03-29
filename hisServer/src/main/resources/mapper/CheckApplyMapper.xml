@@ -13,6 +13,25 @@
     <result column="Invoice_Number" jdbcType="VARCHAR" property="invoiceNumber" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
+  <resultMap id="BaseResultMapCollection" type="com.njuhis.his.model.CheckApply" extends="BaseResultMap">
+    <collection property="checkDetailedList" ofType="com.njuhis.his.model.CheckDetailed">
+      <id column="did" jdbcType="INTEGER" property="id" />
+      <result column="CheckAppId" jdbcType="INTEGER" property="checkappid" />
+      <result column="CheckProjId" jdbcType="INTEGER" property="checkprojid" />
+      <result column="DeptId" jdbcType="INTEGER" property="deptid" />
+      <result column="CreationTime" jdbcType="BIGINT" property="creationtime" />
+      <result column="Position" jdbcType="VARCHAR" property="position" />
+      <result column="dstate" jdbcType="INTEGER" property="state" />
+      <result column="Price" jdbcType="DECIMAL" property="price" />
+      <result column="Identification" jdbcType="INTEGER" property="identification" />
+      <result column="InspectTime" jdbcType="BIGINT" property="inspecttime" />
+      <result column="Result" jdbcType="VARCHAR" property="result" />
+      <result column="ResultTime" jdbcType="BIGINT" property="resulttime" />
+      <result column="operatorId" jdbcType="INTEGER" property="operatorid" />
+      <result column="entryClerkId" jdbcType="INTEGER" property="entryclerkid" />
+      <result column="ddelmark" jdbcType="INTEGER" property="delmark" />
+    </collection>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from checkapply
     where id = #{id,jdbcType=INTEGER}
@@ -50,5 +69,12 @@
     select id, Name, Medical_Id, Creation_Time, Total_Sum, Objective, User_Id, state, 
     Invoice_Number, DelMark
     from checkapply
+  </select>
+  <select id="selectAllJoin" resultMap="BaseResultMapCollection">
+    select c.id, c.Name, c.Medical_Id, c.Creation_Time, c.Total_Sum, c.Objective, c.User_Id, c.state,
+    c.Invoice_Number, c.DelMark,d.id did, d.CheckAppId, d.CheckProjId, d.DeptId, d.CreationTime, d.Position, d.State dstate, d.Price,
+    d.Identification, d.InspectTime, d.Result, d.ResultTime, d.operatorId, d.entryClerkId, d.DelMark ddelmark
+    from checkapply c
+    inner join checkdetailed d on c.id = d.CheckAppId
   </select>
 </mapper>

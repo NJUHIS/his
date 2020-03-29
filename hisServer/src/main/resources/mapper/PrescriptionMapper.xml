@@ -11,6 +11,22 @@
     <result column="Invoice_id" jdbcType="VARCHAR" property="invoiceId" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
+  <resultMap id="BaseResultMapCollection" type="com.njuhis.his.model.Prescription" extends="BaseResultMap">
+    <collection property="prescriptionDetailedList" ofType="com.njuhis.his.model.PrescriptionDetailed">
+      <id column="pdid" jdbcType="INTEGER" property="id" />
+      <result column="DrugsId" jdbcType="INTEGER" property="drugsid" />
+      <result column="Useage" jdbcType="VARCHAR" property="useage" />
+      <result column="Dosage" jdbcType="VARCHAR" property="dosage" />
+      <result column="Frequency" jdbcType="VARCHAR" property="frequency" />
+      <result column="Price" jdbcType="DECIMAL" property="price" />
+      <result column="quantity" jdbcType="INTEGER" property="quantity" />
+      <association property="drugs" column="DrugsId" javaType="com.njuhis.his.model.Drugs">
+        <id column="did" jdbcType="INTEGER" property="id" />
+        <result column="Drugs_Code" jdbcType="CHAR" property="drugsCode" />
+        <result column="Drugs_Name" jdbcType="VARCHAR" property="drugsName" />
+      </association>
+    </collection>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from prescription
     where id = #{id,jdbcType=INTEGER}
@@ -44,5 +60,23 @@
     select id, Medical_Id, User_Id, Prescription_Name, Prescription_State, Prescription_Time, 
     Invoice_id, DelMark
     from prescription
+  </select>
+  <select id="selectAllJoin" resultMap="BaseResultMapCollection">
+    select p.id, p.Medical_Id, p.User_Id, p.Prescription_Name, p.Prescription_State, p.Prescription_Time,
+    p.Invoice_id, p.DelMark,pd.id pdid, pd.PrescriptionId, pd.DrugsId, pd.Useage, pd.Dosage, pd.Frequency, pd.Price,
+    pd.quantity,d.id did, d.Drugs_Code, d.Drugs_Name
+    from prescription p
+    inner join PrescriptionDetailed pd on pd.PrescriptionId = p.id
+    inner join Drugs d on d.id = pd.DrugsID
+  </select>
+
+  <select id="selectByRegisterId" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
+    select p.id, p.Medical_Id, p.User_Id, p.Prescription_Name, p.Prescription_State, p.Prescription_Time,
+    p.Invoice_id, p.DelMark,pd.id pdid, pd.PrescriptionId, pd.DrugsId, pd.Useage, pd.Dosage, pd.Frequency, pd.Price,
+    pd.quantity,d.id did, d.Drugs_Code, d.Drugs_Name
+    from prescription p
+    inner join PrescriptionDetailed pd on pd.PrescriptionId = p.id
+    inner join Drugs d on d.id = pd.DrugsID
+    where p.Medical_Id = #{RegisterId,jdbcType=INTEGER}
   </select>
 </mapper>

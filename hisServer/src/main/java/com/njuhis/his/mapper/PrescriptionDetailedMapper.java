@@ -13,4 +13,6 @@ public interface PrescriptionDetailedMapper {
     List<PrescriptionDetailed> selectAll();
 
     int updateByPrimaryKey(PrescriptionDetailed record);
+
+
 }

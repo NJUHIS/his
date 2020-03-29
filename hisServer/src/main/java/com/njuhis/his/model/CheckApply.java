@@ -3,6 +3,7 @@ package com.njuhis.his.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 //检验检查处置
 //这个类是个巨无霸，耦合了非常多的业务。包括检查Examination、检验Test和处置Disposal
@@ -22,6 +23,8 @@ public class CheckApply {
     private String invoiceNumber;//发票编码
 
 
+
+    private List<CheckDetailed> checkDetailedList ;
 
 
 
@@ -43,7 +46,13 @@ public class CheckApply {
     public void setId(Integer id) {
         this.id = id;
     }
+    public void setCheckDetailedList(List<CheckDetailed> checkDetailedList) {
+        this.checkDetailedList = checkDetailedList;
+    }
 
+    public List<CheckDetailed> getCheckDetailedList() {
+        return checkDetailedList;
+    }
     /**
      * @deprecated
      */

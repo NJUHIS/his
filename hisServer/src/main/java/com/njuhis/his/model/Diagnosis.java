@@ -7,7 +7,7 @@ public class Diagnosis {
     private Integer id;//诊断主键ID
     private Integer medicalid;//病历主键ID
     private Integer diseaseid;//疾病主键ID
-
+    private Disease disease;
 
 
 
@@ -55,5 +55,13 @@ public class Diagnosis {
      */
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Disease getDisease() {
+        return disease;
+    }
+
+    public void setDisease(Disease disease) {
+        this.disease = disease;
     }
 }

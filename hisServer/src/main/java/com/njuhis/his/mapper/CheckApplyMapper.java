@@ -16,4 +16,6 @@ public interface CheckApplyMapper {
     List<CheckApply> selectAll();
 
     int updateByPrimaryKey(CheckApply record);
+
+    List<CheckApply> selectAllJoin();
 }

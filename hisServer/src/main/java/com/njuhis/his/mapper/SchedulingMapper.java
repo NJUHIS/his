@@ -14,5 +14,5 @@ public interface SchedulingMapper {
 
     int updateByPrimaryKey(Scheduling record);
 
-    List<Scheduling> selectByDepartment(Scheduling scheduling);
+    List<Scheduling> selectByDepartmentAndNoon(Scheduling scheduling);
 }
