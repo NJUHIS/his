@@ -13,4 +13,6 @@ public interface CheckDetailedMapper {
     List<CheckDetailed> selectAll();
 
     int updateByPrimaryKey(CheckDetailed record);
+
+    List<CheckDetailed> selectByDeptId(Integer deptId);
 }

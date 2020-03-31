@@ -2,6 +2,8 @@ package com.njuhis.his.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.List;
+
 //科室
 public class Department {
     private Integer id;//科室主键ID
@@ -11,7 +13,7 @@ public class Department {
     private String deptcode;//科室编码
 
 
-
+    private List<User> userList;
 
 
     @JsonIgnore
@@ -62,5 +64,13 @@ public class Department {
 
     public void setDelmark(Integer delmark) {
         this.delmark = delmark;
+    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 }

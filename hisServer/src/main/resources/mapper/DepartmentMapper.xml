@@ -9,6 +9,30 @@
     <result column="DeptTypeID" jdbcType="INTEGER" property="depttypeid" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
+  <resultMap id="BaseResultMapCollection" type="com.njuhis.his.model.Department" extends="BaseResultMap">
+    <collection property="userList" ofType="com.njuhis.his.model.User">
+      <id column="uid" jdbcType="INTEGER" property="id" />
+      <result column="UserName" jdbcType="VARCHAR" property="username" />
+      <result column="Password" jdbcType="VARCHAR" property="password" />
+      <result column="RealName" jdbcType="VARCHAR" property="realname" />
+      <result column="UserTypeID" jdbcType="INTEGER" property="usertypeid" />
+      <result column="DocTitleID" jdbcType="INTEGER" property="doctitleid" />
+      <result column="IsScheduling" jdbcType="INTEGER" property="isscheduling" />
+      <result column="DeptId" jdbcType="INTEGER" property="deptid" />
+      <result column="RegistId" jdbcType="INTEGER" property="registerLevelId" />
+      <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+      <result column="IDnumber" jdbcType="VARCHAR" property="idnumber" />
+    <collection property="schedulingList" ofType="com.njuhis.his.model.Scheduling">
+      <id column="sid" jdbcType="INTEGER" property="id" />
+      <result column="SchedDate" jdbcType="DATE" property="scheddate" />
+      <result column="DeptId" jdbcType="INTEGER" property="deptid" />
+      <result column="UserId" jdbcType="INTEGER" property="userid" />
+      <result column="Noon" jdbcType="INTEGER" property="noon" />
+      <result column="RegistQuota" jdbcType="INTEGER" property="registquota" />
+      <result column="State" jdbcType="INTEGER" property="state" />
+    </collection>
+   </collection>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from department
     where id = #{id,jdbcType=INTEGER}
@@ -37,6 +61,16 @@
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select id, DeptCode, DeptName, DeptCategory, DeptTypeID, DelMark
+
     from department
+  </select>
+  <select id="selectAllJoin" resultMap="BaseResultMapCollection">
+    select d.id, d.DeptCode, d.DeptName, d.DeptCategory, d.DeptTypeID, d.DelMark,
+    s.id sid, s.SchedDate, s.DeptId, s.UserId, s.Noon, s.RegistQuota, s.State,u.id uid,
+     u.UserName, u.Password, u.RealName, u.UserTypeID, u.DocTitleID, u.IsScheduling, u.DeptId,
+    u.RegistId, u.DelMark, u.IDnumber
+    from department d
+    inner join User u on u.DeptId = d.id
+    inner join Scheduling s on s.userId = u.id
   </select>
 </mapper>

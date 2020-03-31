@@ -18,4 +18,8 @@ public interface CheckApplyMapper {
     int updateByPrimaryKey(CheckApply record);
 
     List<CheckApply> selectAllJoin();
+
+    CheckApply selectByMedicalId(Integer medicalId);
+
+    CheckApply selectJoinByPrimaryKey(Integer id);
 }

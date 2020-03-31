@@ -65,4 +65,13 @@
     Identification, InspectTime, Result, ResultTime, operatorId, entryClerkId, DelMark
     from checkdetailed
   </select>
+  <select id="selectByDeptId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, CheckAppId, CheckProjId, DeptId, CreationTime, Position, State, Price,
+    Identification, InspectTime, Result, ResultTime, operatorId, entryClerkId, DelMark
+    from checkdetailed
+    where DeptId = #{deptid}
+  </select>
+
+
+
 </mapper>

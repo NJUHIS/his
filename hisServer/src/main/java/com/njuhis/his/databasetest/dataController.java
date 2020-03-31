@@ -112,4 +112,10 @@ public class dataController {
     List<Register> seRegister(){
         return  registerMapper.selectAllJoin();
     }
+
+
+    @RequestMapping("/dso")
+    List<Department> seDept(){
+        return  departmentMapper.selectAllJoin();
+    }
 }

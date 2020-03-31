@@ -2,6 +2,8 @@ package com.njuhis.his.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.List;
+
 //医院员工
 public class User {
     private Integer id;//医院员工主键ID
@@ -28,7 +30,7 @@ public class User {
     private String idnumber;//身份证号
 
 
-
+    private List<Scheduling> schedulingList;
 
 
 
@@ -125,5 +127,13 @@ public class User {
 
     public void setIdnumber(String idnumber) {
         this.idnumber = idnumber == null ? null : idnumber.trim();
+    }
+
+    public List<Scheduling> getSchedulingList() {
+        return schedulingList;
+    }
+
+    public void setSchedulingList(List<Scheduling> schedulingList) {
+        this.schedulingList = schedulingList;
     }
 }
