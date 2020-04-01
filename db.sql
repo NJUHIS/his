@@ -26,7 +26,7 @@ CREATE TABLE `checkapply` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) DEFAULT NULL,
   `Medical_Id` int(9) DEFAULT NULL,
-  `Creation_Time` int(18) DEFAULT NULL,
+  `Creation_Time` bigint(64) DEFAULT NULL,
   `Total_Sum` decimal(8,2) DEFAULT NULL,
   `Objective` varchar(512) DEFAULT NULL,
   `User_Id` int(9) DEFAULT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE `checkapply` (
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,6 +44,7 @@ CREATE TABLE `checkapply` (
 
 LOCK TABLES `checkapply` WRITE;
 /*!40000 ALTER TABLE `checkapply` DISABLE KEYS */;
+INSERT INTO `checkapply` VALUES (1,'a',1,1,3.00,'qq',1,1,'1',0);
 /*!40000 ALTER TABLE `checkapply` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,20 +60,20 @@ CREATE TABLE `checkdetailed` (
   `CheckAppId` int(9) DEFAULT NULL,
   `CheckProjId` int(9) DEFAULT NULL,
   `DeptId` int(9) DEFAULT NULL,
-  `CreationTime` int(18) DEFAULT NULL,
+  `CreationTime` bigint(64) DEFAULT NULL,
   `Position` varchar(512) DEFAULT NULL,
   `State` int(1) DEFAULT NULL COMMENT '1 - 已开立未交费\n            2 - 已交费未检查\n            3 - 已检查无结果\n            4 - 有结果',
   `Price` decimal(8,2) DEFAULT NULL,
   `Identification` int(1) DEFAULT NULL COMMENT '1 - 检查项\n            2 - 检验项\n            3 - 处置项',
-  `InspectTime` int(18) DEFAULT NULL,
+  `InspectTime` bigint(64) DEFAULT NULL,
   `Result` varchar(512) DEFAULT NULL,
-  `ResultTime` int(12) DEFAULT NULL,
+  `ResultTime` bigint(64) DEFAULT NULL,
   `operatorId` int(9) DEFAULT NULL,
   `entryClerkId` int(9) DEFAULT NULL,
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,6 +82,7 @@ CREATE TABLE `checkdetailed` (
 
 LOCK TABLES `checkdetailed` WRITE;
 /*!40000 ALTER TABLE `checkdetailed` DISABLE KEYS */;
+INSERT INTO `checkdetailed` VALUES (1,1,1,3,1,'1',1,1.00,1,111111,'1',1,1,1,0),(2,1,1,3,1,'1',1,1.00,1,222222,'1',1,1,1,0);
 /*!40000 ALTER TABLE `checkdetailed` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +181,7 @@ CREATE TABLE `diagnosis` (
   `diseaseId` int(9) DEFAULT NULL,
   `state` int(9) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,6 +190,7 @@ CREATE TABLE `diagnosis` (
 
 LOCK TABLES `diagnosis` WRITE;
 /*!40000 ALTER TABLE `diagnosis` DISABLE KEYS */;
+INSERT INTO `diagnosis` VALUES (1,1,1,0),(2,1,2,0),(3,1,3,0);
 /*!40000 ALTER TABLE `diagnosis` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,7 +328,7 @@ CREATE TABLE `invoice` (
   `InvoiceNum` varchar(64) DEFAULT NULL,
   `Money` decimal(8,2) DEFAULT NULL,
   `State` int(1) DEFAULT NULL COMMENT '0 - 作废\n            1 - 正常\n            2 - 重打\n            3 - 补打\n            4 - 红冲',
-  `CreationTime` int(18) DEFAULT NULL,
+  `CreationTime` bigint(64) DEFAULT NULL,
   `UserId` int(9) DEFAULT NULL,
   `DailyState` int(1) DEFAULT NULL COMMENT '0 - 未日结审核\n            1 - 已经审核\n            默认值为0',
   PRIMARY KEY (`id`)
@@ -448,12 +451,12 @@ CREATE TABLE `prescription` (
   `User_Id` int(9) DEFAULT NULL,
   `Prescription_Name` varchar(64) DEFAULT NULL,
   `Prescription_State` int(1) DEFAULT NULL,
-  `Prescription_Time` int(18) DEFAULT NULL,
+  `Prescription_Time` bigint(64) DEFAULT NULL,
   `Invoice_id` varchar(64) DEFAULT NULL,
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -462,6 +465,7 @@ CREATE TABLE `prescription` (
 
 LOCK TABLES `prescription` WRITE;
 /*!40000 ALTER TABLE `prescription` DISABLE KEYS */;
+INSERT INTO `prescription` VALUES (1,1,1,'aa',1,1,'1',1);
 /*!40000 ALTER TABLE `prescription` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -480,11 +484,10 @@ CREATE TABLE `prescriptiondetailed` (
   `Dosage` varchar(64) DEFAULT NULL,
   `Frequency` varchar(64) DEFAULT NULL,
   `Price` decimal(8,2) DEFAULT NULL,
-  `prescriptiondetailedcol` int(9) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -493,6 +496,7 @@ CREATE TABLE `prescriptiondetailed` (
 
 LOCK TABLES `prescriptiondetailed` WRITE;
 /*!40000 ALTER TABLE `prescriptiondetailed` DISABLE KEYS */;
+INSERT INTO `prescriptiondetailed` VALUES (1,1,1,'1','1','1',1.00,1),(2,1,2,'1','1','1',1.00,1),(3,1,3,'1','1','1',1.00,1);
 /*!40000 ALTER TABLE `prescriptiondetailed` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -520,7 +524,7 @@ CREATE TABLE `register` (
   `RegistId` int(9) DEFAULT NULL,
   `SettleID` int(9) DEFAULT NULL,
   `IsBook` int(1) DEFAULT NULL,
-  `RegisterTime` int(18) DEFAULT NULL,
+  `RegisterTime` bigint(64) DEFAULT NULL,
   `RegisterID` int(9) DEFAULT NULL,
   `VisitState` int(9) DEFAULT NULL,
   `patientID` int(9) DEFAULT NULL,
@@ -586,7 +590,7 @@ CREATE TABLE `scheduling` (
   `State` int(1) DEFAULT NULL COMMENT '1=有效  0=无效',
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -595,7 +599,7 @@ CREATE TABLE `scheduling` (
 
 LOCK TABLES `scheduling` WRITE;
 /*!40000 ALTER TABLE `scheduling` DISABLE KEYS */;
-INSERT INTO `scheduling` VALUES (1,'2019-03-01',3,1,1,3,0);
+INSERT INTO `scheduling` VALUES (1,'2019-03-01',3,1,1,3,0),(2,'2019-03-01',3,2,1,3,0),(3,'2019-03-01',3,1,2,3,0),(4,'2019-03-01',3,2,2,3,0);
 /*!40000 ALTER TABLE `scheduling` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -678,4 +682,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-28 18:49:02
+-- Dump completed on 2020-04-01 15:28:48
