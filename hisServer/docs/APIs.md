@@ -11,7 +11,7 @@ By Paul
 - 強烈推荐使用 Typora （或其他合适的工具） 阅读此文档，因直接在 IntelliJ IDEA 打开的显示效果不尽人意，同时不保证在 IntelliJ IDEA 的显示效果。其他 Markdown 文件同理。
 - HTTP 请求示例可以在 hisServer/src/test/java/com/njuhis/his/controller_http_tests 中找到，并可以直接运行。
 - 文档作为前后端的最重要的协议文件，会不断更新与完善，请密切关注。
-- -此文档未经本人允许，任何人都不要修改。
+- -此文档未经本人允许，任何人都不要修改。有问题请与我联系。
 - 「关键必须字段」列表仅供参考。请**根据实际业务**来判断。
 
 
@@ -40,7 +40,14 @@ By Paul
 
   
 
-- 一些 HTTP 请求成功后，可能会返回的东西前端不需要，或者不完全需要，那就忽略它好啦。服务器尽可能会提供周全的返回。
+- 一些 HTTP 请求成功后，可能会返回的东西前端不需要，或者不完全需要，那就忽略它即可。服务器尽可能会提供周全的返回，方便调试侦错。比如说更新\保存 update 类的API，如果成功，按道理应该会返回和请求体一样的对象，为的是方便调试侦错，如果没用，请忽略它即可。
+
+- 关于分页功能的需求：由于 PageHelper 是在 MyBatis 查询的时候起作用的，所以有
+
+  - 如果它是由数据层实现的查询（或联立查询），则可以加入分页功能；
+  - 如果它是由业务逻辑层实现的查询（或联立查询），则没有分页功能。
+
+  所以前端的同学如果某一个接口需要分页功能的话，请告知我，或直接写在 todo list.md 文件中。我可能需要和数据库层同学进行商榷。
 
 
 
@@ -131,6 +138,101 @@ Content-Type: application/json
 }
 ```
 
+### 1.3 根据预约日期获取医院员工（医生）列表 /getUsersBetweenScheduleDates
+
+请求参数：起始日期（毫秒数）`startDate`、结束日期（毫秒数）`endDate`
+
+返回：医院员工的列表
+
+
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getUsersBetweenScheduleDates?startDate=1&endDate=2 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 1,
+        "username": "ahilla",
+        "password": "123qwe",
+        "realname": "ahilla",
+        "usertypeid": 1,
+        "doctitleid": 1,
+        "isscheduling": 1,
+        "deptid": 3,
+        "registerLevelId": 1,
+        "idnumber": "11111111111",
+        "schedulingList": null
+    },
+    {
+        "id": 2,
+        "username": "MyUsername",
+        "password": "MyPassword",
+        "realname": "MyRealName",
+        "usertypeid": 2,
+        "doctitleid": 1,
+        "isscheduling": 1,
+        "deptid": 3,
+        "registerLevelId": 1,
+        "idnumber": "3247875",
+        "schedulingList": null
+    }
+]
+```
+
+备注：逻辑未完善。
+
+
+
+### 1.4 根据预约日期获取患者列表 /getPatientsBetweenScheduleDates
+
+请求参数：起始日期（毫秒数）`startDate`、结束日期（毫秒数）`endDate`
+
+返回：患者的列表
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getPatientsBetweenScheduleDates?startDate=1&endDate=2 HTTP/1.1
+Host: localhost:9002
+
+
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 1,
+        "name": "MyName",
+        "idnumber": "idnumber23434",
+        "phone": "phone234234",
+        "loginname": "Myloginname",
+        "password": "Mypassword"
+    },
+    {
+        "id": 7,
+        "name": "MyName",
+        "idnumber": "idnumber23434",
+        "phone": "phone234234",
+        "loginname": "Myloginname",
+        "password": "Mypassword"
+    }
+]
+```
+
+备注：逻辑未完善。
+
 
 
 ## 2. 个人信息管理 /PersonalInformationController
@@ -175,11 +277,7 @@ HTTP 响应示例：
 
 ### 2.2 通过主键ID获取一个医院员工/addUserById
 
-参数：医院员工的主键ID
-
-```
-id
-```
+参数：医院员工的主键ID `id`
 
 返回：医院员工
 
@@ -274,6 +372,107 @@ HTTP 响应示例：
 ```
 
 备注：目前返回的挂号id字段有数据的功能还未实现。
+
+
+
+### 3.2 新增一张发票 /addInvoice
+
+请求体：主键ID为null的发票。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：添加成功后返回主键ID非null的字段完整的发票。
+
+HTTP 请求示例：
+
+```http
+POST /his/RegistrationController/addInvoice HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+	"userid":1
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": null,
+    "invoicenum": null,
+    "money": null,
+    "state": null,
+    "creationtime": null,
+    "userid": 1,
+    "dailystate": null,
+    "patientCostsList": null
+}
+```
+
+备注：目前返回的发票id字段有数据的功能还未实现。
+
+
+
+### 3.3 通过主键ID获取一个挂号 /getRegistrationById
+
+参数：挂号的主键ID `id`
+
+返回：挂号
+
+HTTP 请求示例：
+
+```http
+GET /his/RegistrationController/getRegistrationById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "realname": "ahillatty",
+    "gender": 1,
+    "idnumber": "112222222",
+    "birthdate": "2020-01-01T06:00:00.000+0000",
+    "age": 1,
+    "homeaddress": "asdasdasd",
+    "casenumber": "1",
+    "visitdate": "2020-03-20T05:00:00.000+0000",
+    "noon": 1,
+    "deptid": 3,
+    "userid": 1,
+    "registid": 1,
+    "settleid": 1,
+    "isbook": 1,
+    "registertime": 11111,
+    "registerid": 1,
+    "visitstate": 1,
+    "patientid": 0,
+    "diagnosisList": null
+}
+```
+
+### 3.4 通过主键ID获取一张发票  /getInvoiceById
+
+参数：发票的主键ID `id`
+
+返回：发票
+
+说明：返回的发票中包含发票明细列表。详见 models.md。
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

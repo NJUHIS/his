@@ -19,4 +19,6 @@ public class AdministrationController {
     @Autowired
     private AdministrationService administrationService;
     private QuickLogger quickLogger =new QuickLogger(this.getClass());
+
+
 }

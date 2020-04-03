@@ -18,8 +18,7 @@ public class Invoice {
     private Integer dailystate;//日结审核状态
     // 1 - 未日结审核
     // 2 - 已日结审核
-    private List<PatientCosts> patientCostsList;
-
+    private List<PatientCosts> patientCostsList; //发票明细的列表
 
 
     public Integer getId() {

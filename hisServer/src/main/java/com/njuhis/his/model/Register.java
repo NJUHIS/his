@@ -44,12 +44,6 @@ public class Register {
 
 
 
-
-
-
-
-
-
     @JsonIgnore
     /**
      * @deprecated

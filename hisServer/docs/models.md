@@ -10,7 +10,7 @@ By Paul
 
 - 文档作为前后端的最重要的协议文件，会不断更新与完善，请密切关注。
 
-- 此文档未经本人允许，任何人都不要修改。
+- -此文档未经本人允许，任何人都不要修改。有问题请与我联系。
 
 - **如果发现本文档中的一些变量名、类名和类的设计很反人类很奇葩很不规范，不要问我为什么。因为以下所有变量名、类名和类的设计都不是我写的！不是我写的！不是我写的！更重要的是它们已经无法修改。**
 
@@ -74,6 +74,8 @@ public class User {
     private Integer deptid;//医生所在科室主键ID
     private Integer registerLevelId;//医生挂号类型主键ID
     private String idnumber;//身份证号
+    
+    private List<Scheduling> schedulingList; //排班的列表
 }
 ```
 
@@ -390,6 +392,7 @@ public class Invoice {
     private Integer dailystate;//日结审核状态
     // 1 - 未日结审核
     // 2 - 已日结审核
+    private List<PatientCosts> patientCostsList; //发票明细的列表
 }
 ```
 

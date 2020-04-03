@@ -57,7 +57,15 @@ public class QuickLogger {
 
     public void logReceive(Object object) {
         try {
-            log("Received " + objectMapper.writeValueAsString(object),3);
+            log("Received " +  objectMapper.writeValueAsString(object),3);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void logReceive(String variableName,Object object) {
+        try {
+            log("Received " +variableName+": "+  objectMapper.writeValueAsString(object),3);
         } catch (Exception exception) {
             exception.printStackTrace();
         }

@@ -12,6 +12,10 @@ import java.util.logging.Logger;
 import static com.njuhis.his.util.ColorfulOutput.makeRed;
 import static com.njuhis.his.util.ColorfulOutput.makeYellow;
 
+/**
+ * @author Paul
+ * 此類用以設置與發送錯誤信息。
+ */
 @Data
 public class ResultMessage {
     private static final Logger logger=Logger.getLogger(ResultMessage.class.getName());
@@ -49,6 +53,7 @@ public class ResultMessage {
     public static final String PATIENT_LOGIN_NAME_EXISTED="The patient login name has existed. 患者登录名已存在。";
     public static final String REGISTRATION_NOT_EXIST="The registration does not exist. 挂号不存在。";
     public static final String MEDICAL_CARD_NOT_EXIST="The medical record does not exist. 病历不存在。";
+    public static final String INVOICE_NOT_EXIST="The invoice does not exist. 发票不存在。";
     public static final String USER_NOT_EXIST="The worker user does not exist. 医院员工用户不存在。";
     /**
      * 未知來源錯誤

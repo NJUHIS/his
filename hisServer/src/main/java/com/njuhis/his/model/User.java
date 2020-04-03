@@ -29,8 +29,7 @@ public class User {
     private Integer registerLevelId;//医生挂号类型主键ID
     private String idnumber;//身份证号
 
-
-    private List<Scheduling> schedulingList;
+    private List<Scheduling> schedulingList; //排班的列表
 
 
 

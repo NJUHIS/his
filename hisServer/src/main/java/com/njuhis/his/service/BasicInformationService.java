@@ -1,5 +1,8 @@
 package com.njuhis.his.service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.njuhis.his.mapper.DepartmentMapper;
 import com.njuhis.his.mapper.PatientMapper;
 import com.njuhis.his.mapper.UserMapper;
@@ -20,6 +23,8 @@ public class BasicInformationService {
     private DepartmentMapper departmentMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private PatientMapper patientMapper;
 
     public List<Department> getAllDepartments(ResultMessage resultMessage){
         return departmentMapper.selectAll();
@@ -37,6 +42,25 @@ public class BasicInformationService {
             resultMessage.setUnknownError();
             return null;
         }
+    }
+
+    public List<User> getUsersBetweenScheduleDates(Long startDate, Long endDate,int pageNumber, int pageSize,  ResultMessage resultMessage){
+        //TODO 邏輯待補充完整
+
+        //下面作為PageHelper的使用範例
+//        PageHelper.startPage(pageNumber,pageSize);
+//        List<User> userList=userMapper.selectAll();
+//        return new PageInfo(userList);
+
+        List<User> userList=userMapper.selectAll();
+        return userList;
+
+    }
+
+    public List<Patient> getPatientsBetweenScheduleDates(Long startDate, Long endDate,int pageNumber, int pageSize,  ResultMessage resultMessage){
+        //TODO 邏輯待補充完整
+
+        return patientMapper.selectAll();
     }
 
 
