@@ -14,7 +14,7 @@ By Paul
 - [ ]  有联立查询的类（比如包含了明细列表的类）会有「联立保存」吗？保存上应该是怎样的一种方案？分开保存吗？是在业务逻辑层实现还是在数据层实现？
 - [ ]  PrescriptionMapper.java 中的 「Prescription selectByRegisterId(Integer RegisterID);//通过病例id查询到处方明细」，RegisterId 到底是病历主键ID还是挂号主键ID？
 - [ ]  InvoiceMapper 的 selectByPrimaryId() 似乎没有联立查询？不知是我的程序故障还是你没有写。如果没写的话，希望新增一个selectJoinByPrimaryId()，或直接把selectByPrimaryId() 升级为联立查询。其他相关的 Mapper 同理。
-- [ ]  
+- [ ]  PatientMapper 需要 selectByPrimaryId()和updateByPrimaryId()
 
 
 

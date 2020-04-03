@@ -2,6 +2,7 @@ package com.njuhis.his.service;
 
 import com.njuhis.his.mapper.PatientMapper;
 import com.njuhis.his.mapper.UserMapper;
+import com.njuhis.his.model.Invoice;
 import com.njuhis.his.model.Patient;
 import com.njuhis.his.model.User;
 import com.njuhis.his.util.QuickLogger;
@@ -36,4 +37,53 @@ public class PersonalInformationService {
         if(user==null) resultMessage.setClientError(ResultMessage.USER_NOT_EXIST);
         return user;
     }
+
+    public User updateUser(User user, ResultMessage resultMessage){
+        getUserById(user.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                userMapper.updateByPrimaryKey(user);
+                return getUserById(user.getId(),resultMessage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+    public Patient getPatientById(Integer id, ResultMessage resultMessage){
+        Patient patient=null;
+        //TODO
+        //Patient patient=patientMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(patient!=null){
+            return patient;
+        }else{
+            resultMessage.setClientError(ResultMessage.INVOICE_NOT_EXIST);
+            return null;
+        }
+
+    }
+
+
+    public Patient updatePatient(Patient patient, ResultMessage resultMessage){
+        getPatientById(patient.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                //patientMapper.updateByPrimaryKey(patient);
+                //TODO
+                return getPatientById(patient.getId(),resultMessage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+
 }

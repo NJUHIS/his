@@ -1,5 +1,6 @@
 package com.njuhis.his.controller;
 
+import com.njuhis.his.model.Invoice;
 import com.njuhis.his.model.Patient;
 import com.njuhis.his.model.User;
 import com.njuhis.his.service.PersonalInformationService;
@@ -55,4 +56,53 @@ public class PersonalInformationController {
         quickLogger.logReturn(result);
         return result;
     }
+
+
+    @RequestMapping("/updateUser")
+    public User updateInvoice(@RequestBody User user, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(user);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        User result=personalInformationService.updateUser(user, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    //TODO 待測試
+    @RequestMapping("/getPatientById")
+    public Patient getIPatientById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Patient result=personalInformationService.getPatientById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+    //TODO 待測試
+    @RequestMapping("/updatePatient")
+    public Patient updateInvoice(@RequestBody Patient patient,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(patient);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Patient result=personalInformationService.updatePatient(patient, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+
+
+
+
+
 }

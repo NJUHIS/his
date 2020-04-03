@@ -455,20 +455,50 @@ HTTP 响应示例：
 
 
 
+### 2.3 更新/保存一个医院员工 /updateUser
 
+请求体：一个主键ID非null的医院员工。所有字段必须完整，否则会被null取代。
 
-
+返回：更新/保存成功后返回保存后的医院员工。理论上返回体应该和请求体一模一样。
 
 HTTP 请求示例：
 
 ```http
+POST /his/PersonalInformationController/updateUser HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
 
+{
+    "id": 1,
+    "username": "sdsdfsf",
+    "password": "123qwe",
+    "realname": "ahillasdffffffffff",
+    "usertypeid": 1,
+    "doctitleid": 1,
+    "isscheduling": 1,
+    "deptid": 3,
+    "registerLevelId": 1,
+    "idnumber": "11111111111",
+    "schedulingList": null
+}
 ```
 
 HTTP 响应示例：
 
 ```json
-
+{
+    "id": 1,
+    "username": "sdsdfsf",
+    "password": "123qwe",
+    "realname": "ahillasdffffffffff",
+    "usertypeid": 1,
+    "doctitleid": 1,
+    "isscheduling": 1,
+    "deptid": 3,
+    "registerLevelId": 1,
+    "idnumber": "11111111111",
+    "schedulingList": null
+}
 ```
 
 HTTP 请求示例：
