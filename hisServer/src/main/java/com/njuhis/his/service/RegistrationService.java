@@ -70,6 +70,7 @@ public class RegistrationService {
             }
     }
 
+
     public Invoice getInvoiceById(Integer id, ResultMessage resultMessage){
         Invoice invoice=invoiceMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
         if(invoice!=null){
@@ -80,6 +81,7 @@ public class RegistrationService {
         }
 
     }
+
 
     public Invoice updateInvoice(Invoice invoice, ResultMessage resultMessage){
         getInvoiceById(invoice.getId(),resultMessage);

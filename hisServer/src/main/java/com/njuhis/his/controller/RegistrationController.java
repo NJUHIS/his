@@ -89,6 +89,7 @@ public class RegistrationController {
         return result;
     }
 
+
     @RequestMapping("/updateInvoice")
     public Invoice updateInvoice(@RequestBody Invoice invoice,HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();

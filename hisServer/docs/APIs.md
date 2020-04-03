@@ -1052,7 +1052,7 @@ HTTP 响应示例：
 
 
 
-### 4.5 更新/保存一个病历 /updateMedicalRecord
+### 4.6 更新/保存一个病历 /updateMedicalRecord
 
 请求体：一个主键ID非null的病历。所有字段必须完整，否则会被null取代。
 
@@ -1102,52 +1102,114 @@ HTTP 响应示例：
 
 
 
+### 4.7 新增一个处方 /addPrescription
 
+请求体：主键ID为null的处方。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
-
-
-HTTP 请求示例：
-
-```http
-
-```
-
-HTTP 响应示例：
-
-```json
-
-```
-
-
+返回：注册成功后返回主键ID非null的字段完整的处方。
 
 
 
 HTTP 请求示例：
 
 ```http
+POST /his/DoctorController/addPrescription HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
 
+{
+	"prescriptionName":"含笑半步癲"
+}
 ```
 
 HTTP 响应示例：
 
 ```json
-
+{
+    "id": 11,
+    "medicalId": null,
+    "userId": null,
+    "prescriptionName": "含笑半步癲",
+    "prescriptionState": null,
+    "prescriptionTime": null,
+    "invoiceId": null,
+    "prescriptionDetailedList": null
+}
 ```
 
 
 
+### 4.8 通过主键ID获取一个处方 /getPrescriptionById
 
+参数：处方的主键ID `id`
+
+返回：处方
 
 HTTP 请求示例：
 
 ```http
+GET /his/DoctorController/getPrescriptionById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
+{
+    "id": 1,
+    "medicalId": 1,
+    "userId": null,
+    "prescriptionName": null,
+    "prescriptionState": null,
+    "prescriptionTime": null,
+    "invoiceId": null,
+    "prescriptionDetailedList": null
+}
+```
 
+
+
+### 4.9 更新/保存一个处方 /updatePrescription
+
+请求体：一个主键ID非null的处方。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的处方。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/DoctorController/updatePrescription HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 1,
+    "medicalId": 1,
+    "userId": null,
+    "prescriptionName": "葵花寶典",
+    "prescriptionState": null,
+    "prescriptionTime": null,
+    "invoiceId": null,
+    "prescriptionDetailedList": null
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "medicalId": 1,
+    "userId": null,
+    "prescriptionName": "葵花寶典",
+    "prescriptionState": null,
+    "prescriptionTime": null,
+    "invoiceId": null,
+    "prescriptionDetailedList": null
+}
 ```
 
 

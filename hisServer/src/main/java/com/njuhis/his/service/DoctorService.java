@@ -2,10 +2,8 @@ package com.njuhis.his.service;
 
 import com.njuhis.his.mapper.CheckApplyMapper;
 import com.njuhis.his.mapper.MedicalRecordMapper;
-import com.njuhis.his.model.CheckApply;
-import com.njuhis.his.model.Invoice;
-import com.njuhis.his.model.MedicalRecord;
-import com.njuhis.his.model.Register;
+import com.njuhis.his.mapper.PrescriptionMapper;
+import com.njuhis.his.model.*;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 //import com.sun.tools.javac.comp.Check;
@@ -24,6 +22,12 @@ public class DoctorService {
     private RegistrationService registrationService;
     @Autowired
     private CheckApplyMapper checkApplyMapper;
+    @Autowired
+    private PrescriptionMapper prescriptionMapper;
+
+
+
+
     public Register admit(Integer registrationId, ResultMessage resultMessage){
         Register registration=registrationService.getRegistrationById(registrationId,resultMessage);
         if(resultMessage.isSuccessful()){
@@ -97,6 +101,49 @@ public class DoctorService {
             return null;
         }
     }
+
+    public Prescription addPrescription(Prescription prescription, ResultMessage resultMessage){
+        try {
+            prescriptionMapper.insert(prescription);
+            return prescription;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage.setUnknownError();
+            return null;
+        }
+    }
+
+
+    public Prescription getPrescriptionById(Integer id, ResultMessage resultMessage){
+        Prescription prescription=prescriptionMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(prescription!=null){
+            return prescription;
+        }else{
+            resultMessage.setClientError(ResultMessage.INVOICE_NOT_EXIST);
+            return null;
+        }
+
+    }
+
+
+    public Prescription updatePrescription(Prescription prescription, ResultMessage resultMessage){
+        getPrescriptionById(prescription.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                prescriptionMapper.updateByPrimaryKey(prescription);
+                return getPrescriptionById(prescription.getId(),resultMessage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+
+
 
 
 

@@ -1,9 +1,6 @@
 package com.njuhis.his.controller;
 
-import com.njuhis.his.model.CheckApply;
-import com.njuhis.his.model.Invoice;
-import com.njuhis.his.model.MedicalRecord;
-import com.njuhis.his.model.Register;
+import com.njuhis.his.model.*;
 import com.njuhis.his.service.DoctorService;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
@@ -103,4 +100,47 @@ public class DoctorController {
         return result;
 
     }
+
+
+    @RequestMapping("/addPrescription")
+    public Prescription addPrescription(@RequestBody Prescription prescription,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(prescription);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Prescription result=doctorService.addPrescription(prescription, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    @RequestMapping("/getPrescriptionById")
+    public Prescription getPrescriptionById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Prescription result=doctorService.getPrescriptionById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+    @RequestMapping("/updatePrescription")
+    public Prescription updateInvoice(@RequestBody Prescription prescription,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(prescription);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Prescription result=doctorService.updatePrescription(prescription, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+
 }
