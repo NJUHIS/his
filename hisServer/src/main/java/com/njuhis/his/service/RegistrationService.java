@@ -44,10 +44,10 @@ public class RegistrationService {
 
     public Register updateRegistration(Register registration, ResultMessage resultMessage){
         getRegistrationById(registration.getId(),resultMessage);
-        if(resultMessage.isSuccessful()) {
+        if(resultMessage.isSuccessful()) {//如果 id 存在
             try {
                 registerMapper.updateByPrimaryKey(registration);
-                return registration;
+                return getRegistrationById(registration.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.setUnknownError();
@@ -60,8 +60,6 @@ public class RegistrationService {
 
 
     public Invoice addInvoice(Invoice invoice,ResultMessage resultMessage){
-        getInvoiceById(invoice.getId(),resultMessage);
-        if(resultMessage.isSuccessful()) {
             try {
                 invoiceMapper.insert(invoice);
                 return invoice;
@@ -70,9 +68,6 @@ public class RegistrationService {
                 resultMessage.setUnknownError();
                 return null;
             }
-        }else{
-            return null;
-        }
     }
 
     public Invoice getInvoiceById(Integer id, ResultMessage resultMessage){
@@ -87,12 +82,17 @@ public class RegistrationService {
     }
 
     public Invoice updateInvoice(Invoice invoice, ResultMessage resultMessage){
-        try{
-            invoiceMapper.updateByPrimaryKey(invoice);
-            return invoice;
-        }catch (Exception exception){
-            exception.printStackTrace();
-            resultMessage.setUnknownError();
+        getInvoiceById(invoice.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                invoiceMapper.updateByPrimaryKey(invoice);
+                return getInvoiceById(invoice.getId(),resultMessage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
             return null;
         }
     }

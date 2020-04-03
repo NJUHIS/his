@@ -19,3 +19,14 @@ By Paul
 
 
 
+- SpringBoot 鏈接數據庫時避免亂碼的方法：
+
+  spring.datasource.url=jdbc:mysql://yeungfanstudio.com:3306/his?characterEncoding=utf8
+
+  在後面聲名UTF-8。
+
+
+
+- 
+- 
+

@@ -36,6 +36,36 @@ Host: localhost:9002
 
 
 
+POST /his/BasicInformationController/addDepartment HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "deptcode":"BYRK",
+  "deptname":"变异人科",
+  "depttypeid":2
+}
+###
+
+GET /his/BasicInformationController/getDepartmentById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+###
+POST /his/BasicInformationController/updateDepartment HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": 139,
+  "deptname": "变异人類科",
+  "deptcategory": null,
+  "depttypeid": 2,
+  "deptcode": "BYRLK",
+  "userList": null
+}
+
 
 
 

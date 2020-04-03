@@ -7,6 +7,7 @@ import com.njuhis.his.mapper.DepartmentMapper;
 import com.njuhis.his.mapper.PatientMapper;
 import com.njuhis.his.mapper.UserMapper;
 import com.njuhis.his.model.Department;
+import com.njuhis.his.model.Invoice;
 import com.njuhis.his.model.Patient;
 import com.njuhis.his.model.User;
 import com.njuhis.his.util.QuickLogger;
@@ -62,6 +63,47 @@ public class BasicInformationService {
 
         return patientMapper.selectAll();
     }
+
+    public Department addDepartment(Department department, ResultMessage resultMessage){
+        try {
+            departmentMapper.insert(department);
+            return department;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage.setUnknownError();
+            return null;
+        }
+    }
+
+    public Department getDepartmentById(Integer id, ResultMessage resultMessage){
+        Department department=departmentMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(department!=null){
+            return department;
+        }else{
+            resultMessage.setClientError(ResultMessage.DEPARTMENT_NOT_EXIST);
+            return null;
+        }
+
+    }
+
+    public Department updateDepartment(Department department, ResultMessage resultMessage){
+        getDepartmentById(department.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                departmentMapper.updateByPrimaryKey(department);
+                return getDepartmentById(department.getId(),resultMessage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+
+
 
 
 }

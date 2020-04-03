@@ -239,6 +239,109 @@ HTTP 响应示例：
 
 
 
+### 1.5 新增一个科室 /addDepartment
+
+请求体：主键ID为null的科室。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：注册成功后返回主键ID非null的字段完整的科室。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/addDepartment HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+	"deptcode":"BYRK",
+	"deptname":"变异人科",
+	"depttypeid":2
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 144,
+    "deptname": "变异人科",
+    "deptcategory": null,
+    "depttypeid": 2,
+    "deptcode": "BYRK",
+    "userList": null
+}
+```
+
+
+
+### 1.6 通过主键ID获取一个科室 /getDepartmentById
+
+参数：科室的主键ID `id`
+
+返回：科室
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getDepartmentById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "deptname": "心血管内科",
+    "deptcategory": "11",
+    "depttypeid": 1,
+    "deptcode": "XXGNK",
+    "userList": null
+}
+```
+
+
+
+### 1.7 更新/保存一个科室 /updateDepartment
+
+请求体：一个主键ID非null的科室。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的科室。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/updateDepartment HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 139,
+    "deptname": "变异人類科",
+    "deptcategory": null,
+    "depttypeid": 2,
+    "deptcode": "BYRLK",
+    "userList": null
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 139,
+    "deptname": "变异人類科",
+    "deptcategory": null,
+    "depttypeid": 2,
+    "deptcode": "BYRLK",
+    "userList": null
+}
+```
+
+
+
 
 
 
@@ -468,7 +571,7 @@ HTTP 响应示例：
 
 返回：发票
 
-说明：返回的发票中包含发票明细列表。详见 models.md。
+说明：返回的发票中包含发票明细列表。详见 [models.md](models.md) 。
 
 HTTP 请求示例：
 
@@ -494,6 +597,8 @@ HTTP 响应示例：
     "patientCostsList": null
 }
 ```
+
+备注：「返回的发票中包含发票明细列表」的功能暂时还没有实现。
 
 
 

@@ -51,6 +51,19 @@ public class RegistrationController {
         return result;
     }
 
+    @RequestMapping("/updateRegistration")
+    public Register updateRegistration(@RequestBody Register register, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(register);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Register result=registrationService.updateRegistration(register, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
     @RequestMapping("/addInvoice")
     public Invoice addInvoice(@RequestBody Invoice invoice,HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
@@ -89,18 +102,7 @@ public class RegistrationController {
 
     }
 
-    @RequestMapping("/updateRegistration")
-    public Register updateRegistration(@RequestBody Register register, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
-        quickLogger.logReceive(register);
-        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        Register result=registrationService.updateRegistration(register, resultMessage);
-
-        quickLogger.logReturn(result);
-        return result;
-
-    }
 
 
 }

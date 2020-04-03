@@ -2,6 +2,7 @@ package com.njuhis.his.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.njuhis.his.model.Department;
+import com.njuhis.his.model.Invoice;
 import com.njuhis.his.model.Patient;
 import com.njuhis.his.model.User;
 import com.njuhis.his.service.BasicInformationService;
@@ -106,9 +107,48 @@ public class BasicInformationController {
 
         quickLogger.logReturn(result);
         return result;
+    }
 
+    @RequestMapping("/addDepartment")
+    public Department addDepartment(@RequestBody Department department, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(department);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Department result=basicInformationService.addDepartment(department, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
 
     }
+
+    @RequestMapping("/getDepartmentById")
+    public Department getInvoiceById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Department result=basicInformationService.getDepartmentById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+    @RequestMapping("/updateDepartment")
+    public Department updateInvoice(@RequestBody Department department,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(department);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Department result=basicInformationService.updateDepartment(department, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+
 
 
 }
