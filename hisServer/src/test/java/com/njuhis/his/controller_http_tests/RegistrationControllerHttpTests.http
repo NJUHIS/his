@@ -25,4 +25,65 @@ Content-Type: application/json
   "userid":1
 }
 
+
+
+
+
 ###
+GET /his/RegistrationController/getRegistrationById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+###
+GET /his/RegistrationController/getInvoiceById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+
+
+
+###
+
+POST /his/RegistrationController/updateRegistration HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": 1,
+  "realname": "MyRealjjjjrName",
+  "gender": null,
+  "idnumber": null,
+  "birthdate": null,
+  "age": null,
+  "homeaddress": null,
+  "casenumber": null,
+  "visitdate": null,
+  "noon": null,
+  "deptid": null,
+  "userid": null,
+  "registid": null,
+  "settleid": null,
+  "registertime": null,
+  "registerid": null,
+  "visitstate": null,
+  "patientid": null,
+  "diagnosisList": null
+}
+
+###
+POST /his/RegistrationController/updateInvoice HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+"id": 1,
+"invoicenum": null,
+"money": null,
+"state": null,
+"creationtime": null,
+"userid": 2,
+"dailystate": null,
+"patientCostsList": null
+}
+

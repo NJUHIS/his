@@ -29,6 +29,7 @@ public class Register {
     private Integer userid;//医生的医院员工主键ID
     private Integer registid;//挂号类型主键ID
     private Integer settleid;//结算类型主键ID
+    @JsonIgnore
     private Integer isbook;//是否需要病历本
     //1-需要
     //0-不需要

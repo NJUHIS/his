@@ -49,6 +49,14 @@ public class QuickLogger {
         }
     }
 
+    public void log(String message,Object object) {
+        try {
+            log(message+" "+  objectMapper.writeValueAsString(object),3);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
     public void logInvoked() {
         System.out.println("--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         log("Invoked",3);
@@ -65,7 +73,7 @@ public class QuickLogger {
 
     public void logReceive(String variableName,Object object) {
         try {
-            log("Received " +variableName+": "+  objectMapper.writeValueAsString(object),3);
+            log("Received " +variableName+" "+  objectMapper.writeValueAsString(object),3);
         } catch (Exception exception) {
             exception.printStackTrace();
         }

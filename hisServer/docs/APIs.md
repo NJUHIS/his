@@ -36,7 +36,7 @@ By Paul
     });
   ```
 
-  axios 文档参考   <http://www.axios-js.com/zh-cn/docs/>>
+  [axios 文档参考](http://www.axios-js.com/zh-cn/docs/)
 
   
 
@@ -48,6 +48,10 @@ By Paul
   - 如果它是由业务逻辑层实现的查询（或联立查询），则没有分页功能。
 
   所以前端的同学如果某一个接口需要分页功能的话，请告知我，或直接写在 todo list.md 文件中。我可能需要和数据库层同学进行商榷。
+
+- **更新/保存 update 类的API，请求体的字段必须完整，否则在数据库中会以 null 覆盖。**
+
+  
 
 
 
@@ -232,6 +236,10 @@ HTTP 响应示例：
 ```
 
 备注：逻辑未完善。
+
+
+
+
 
 
 
@@ -462,15 +470,136 @@ HTTP 响应示例：
 
 说明：返回的发票中包含发票明细列表。详见 models.md。
 
+HTTP 请求示例：
+
+```http
+GET /his/RegistrationController/getInvoiceById?id=1 HTTP/1.1
+Host: localhost:9002
 
 
 
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "invoicenum": null,
+    "money": null,
+    "state": null,
+    "creationtime": null,
+    "userid": null,
+    "dailystate": null,
+    "patientCostsList": null
+}
+```
 
 
 
+### 3.5 更新/保存一个挂号 /updateRegistration
+
+请求体：一个主键ID非null的挂号。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的挂号。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/RegistrationController/updateRegistration HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 1,
+    "realname": "MyRealjjjjrName",
+    "gender": null,
+    "idnumber": null,
+    "birthdate": null,
+    "age": null,
+    "homeaddress": null,
+    "casenumber": null,
+    "visitdate": null,
+    "noon": null,
+    "deptid": null,
+    "userid": null,
+    "registid": null,
+    "settleid": null,
+    "registertime": null,
+    "registerid": null,
+    "visitstate": null,
+    "patientid": null,
+    "diagnosisList": null
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "realname": "MyRealjjjjrName",
+    "gender": null,
+    "idnumber": null,
+    "birthdate": null,
+    "age": null,
+    "homeaddress": null,
+    "casenumber": null,
+    "visitdate": null,
+    "noon": null,
+    "deptid": null,
+    "userid": null,
+    "registid": null,
+    "settleid": null,
+    "registertime": null,
+    "registerid": null,
+    "visitstate": null,
+    "patientid": null,
+    "diagnosisList": null
+}
+```
 
 
 
+### 3.6 更新/保存一张发票 /updateInvoice
+
+请求体：一个主键ID非null的发票。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的发票。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/RegistrationController/updateInvoice HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 1,
+    "invoicenum": null,
+    "money": null,
+    "state": null,
+    "creationtime": null,
+    "userid": 2,
+    "dailystate": null,
+    "patientCostsList": null
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "invoicenum": null,
+    "money": null,
+    "state": null,
+    "creationtime": null,
+    "userid": 2,
+    "dailystate": null,
+    "patientCostsList": null
+}
+```
 
 
 
@@ -620,18 +749,6 @@ HTTP 响应示例：
 
 
 
-HTTP 请求示例：
-
-```http
-
-```
-
-HTTP 响应示例：
-
-```json
-
-```
-
 
 
 
@@ -649,52 +766,6 @@ HTTP 响应示例：
 ```json
 
 ```
-
-
-
-
-
-
-
-HTTP 请求示例：
-
-```http
-
-```
-
-HTTP 响应示例：
-
-```json
-
-```
-
-
-
-
-
-HTTP 请求示例：
-
-```http
-
-```
-
-HTTP 响应示例：
-
-```json
-
-```
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

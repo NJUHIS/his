@@ -43,24 +43,34 @@ public class RegistrationService {
     }
 
     public Register updateRegistration(Register registration, ResultMessage resultMessage){
-        try{
-            registerMapper.updateByPrimaryKey(registration);
-            return registration;
-        }catch (Exception exception){
-            exception.printStackTrace();
-            resultMessage.setUnknownError();
+        getRegistrationById(registration.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {
+            try {
+                registerMapper.updateByPrimaryKey(registration);
+                return registration;
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
             return null;
         }
     }
 
 
     public Invoice addInvoice(Invoice invoice,ResultMessage resultMessage){
-        try{
-            invoiceMapper.insert(invoice);
-            return invoice;
-        }catch (Exception exception){
-            exception.printStackTrace();
-            resultMessage.setUnknownError();
+        getInvoiceById(invoice.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {
+            try {
+                invoiceMapper.insert(invoice);
+                return invoice;
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
             return null;
         }
     }
