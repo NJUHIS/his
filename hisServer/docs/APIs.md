@@ -40,7 +40,7 @@ By Paul
 
   
 
-- 一些 HTTP 请求成功后，可能会返回的东西前端不需要，或者不完全需要，那就忽略它即可。服务器尽可能会提供周全的返回，方便调试侦错。比如说更新\保存 update 类的API，如果成功，按道理应该会返回和请求体一样的对象，为的是方便调试侦错，如果没用，请忽略它即可。
+- 一些 HTTP 请求成功后，可能会返回的东西前端不需要，或者不完全需要，那就忽略它即可。服务器尽可能会提供周全的返回，方便调试侦错。比如说更新\保存 update 类的API，如果成功，按道理应该会返回和请求体一样的对象，为的是方便调试侦错，如果不需要，请忽略它即可。
 
 - 关于分页功能的需求：由于 PageHelper 是在 MyBatis 查询的时候起作用的，所以有
 
@@ -342,6 +342,42 @@ HTTP 响应示例：
 
 
 
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
 
 
 
@@ -416,6 +452,52 @@ HTTP 响应示例：
     "idnumber": "11111111111"
 }
 ```
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
 
 
 
@@ -710,6 +792,48 @@ HTTP 响应示例：
 
 
 
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+
+
 ## 4. 门诊医生工作站 /DoctorController
 
 ### 4.1 接诊/收治 /admit
@@ -813,11 +937,11 @@ HTTP 响应示例：
 
 
 
-### 4.3 新增一个检查检验处置。/addCheckApply
+### 4.3 新增一个检查（检验或处置）/addCheckApply
 
-请求体：主键ID为null的检查检验处置。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+请求体：主键ID为null的检查（检验或处置）。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
-返回：注册成功后返回主键ID非null的字段完整的检查检验处置。
+返回：注册成功后返回主键ID非null的字段完整的检查（检验或处置）。
 
 HTTP 请求示例：
 
@@ -850,9 +974,131 @@ HTTP 响应示例：
 
 
 
+### 4.4 通过主键ID获取一个检查（检验或处置）/getCheckApplyById
+
+参数：检查（检验或处置）的主键ID `id`
+
+返回：检查（检验或处置）
+
+HTTP 请求示例：
+
+```http
+GET /his/DoctorController/getCheckApplyById?id=1 HTTP/1.1
+Host: localhost:9002
 
 
 
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "medicalId": null,
+    "creationTime": null,
+    "totalSum": null,
+    "objective": null,
+    "userId": null,
+    "state": null,
+    "invoiceNumber": null,
+    "checkDetailedList": null
+}
+```
+
+
+
+### 4.5 更新/保存一个检查（检验或处置）/updateCheckApply
+
+请求体：一个主键ID非null的检查（检验或处置）。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的检查（检验或处置）。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/DoctorController/updateCheckApply HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 1,
+    "medicalId": null,
+    "creationTime": null,
+    "totalSum": null,
+    "objective": "I don't know....",
+    "userId": null,
+    "state": null,
+    "invoiceNumber": null,
+    "checkDetailedList": null
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "medicalId": null,
+    "creationTime": null,
+    "totalSum": null,
+    "objective": "I don't know....",
+    "userId": null,
+    "state": null,
+    "invoiceNumber": null,
+    "checkDetailedList": null
+}
+```
+
+
+
+### 4.5 更新/保存一个病历 /updateMedicalRecord
+
+请求体：一个主键ID非null的病历。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的病历。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/DoctorController/updateMedicalRecord HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 1,
+    "registerId": 1,
+    "medicalReadme": "脑残",
+    "medicalPresent": null,
+    "presentTreat": null,
+    "medicalHistory": null,
+    "medicalAllergy": null,
+    "medicalPhysique": null,
+    "medicalDiagnosis": null,
+    "medicalHandling": null,
+    "caseState": null,
+    "caseNumber": "3"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "registerId": 1,
+    "medicalReadme": "脑残",
+    "medicalPresent": null,
+    "presentTreat": null,
+    "medicalHistory": null,
+    "medicalAllergy": null,
+    "medicalPhysique": null,
+    "medicalDiagnosis": null,
+    "medicalHandling": null,
+    "caseState": null,
+    "caseNumber": "3"
+}
+```
 
 
 
@@ -875,6 +1121,68 @@ HTTP 响应示例：
 
 
 
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
 
 
 

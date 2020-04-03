@@ -311,24 +311,24 @@ public class PrescriptionDetailed {
 
 
 
-### 13. 检验检查处置 CheckApply
+### 13. 检查（检验或处置） CheckApply
 
 ```java
-//检验检查处置
+//检查（检验或处置）
 //这个类是个巨无霸，耦合了非常多的业务。包括检查Examination、检验Test和处置Disposal
 public class CheckApply {
-    private Integer id;//检验检查处置主键ID
+    private Integer id;//检查（检验或处置）主键ID
     private Integer medicalId;//病历主键ID
     private Long creationTime; //生效时间。以医生确认发出的时间为准。毫秒数。
-    private BigDecimal totalSum; //总金额。自动根据检验检查处置明细计算。
+    private BigDecimal totalSum; //总金额。自动根据检查（检验或处置）明细计算。
     private String objective; //目的和要求
     private Integer userId;//开立医生的医院员工主键ID
-    private Integer state;//检验检查处置状态
+    private Integer state;//检查（检验或处置）状态
     //1 - 编辑中
     //2 - 已开立并发出，未收费
-    //3 - 已收费，未检验检查处置
-    //4 - 正在检验检查处置或等待结果
-    //5 - 检验检查处置已完成，结果已出
+    //3 - 已收费，未检查（检验或处置）
+    //4 - 正在检查（检验或处置）或等待结果
+    //5 - 检查（检验或处置）已完成，结果已出
     private String invoiceNumber;//发票编码
 ```
 
@@ -419,7 +419,7 @@ public class PatientCosts {
 
 
 
-### 19. 检验检查处置明细 CheckDetailed
+### 19. 检验（检验或处置）明细 CheckDetailed
 
 ```java
 //检验检查处置明细

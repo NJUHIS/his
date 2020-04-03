@@ -16,3 +16,48 @@ Content-Type: application/json
 {
   "medicalId":1
 }
+
+###
+GET /his/DoctorController/getCheckApplyById?id=1 HTTP/1.1
+Host: localhost:9002
+
+###
+
+POST /his/DoctorController/updateCheckApply HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 1,
+    "medicalId": null,
+    "creationTime": null,
+    "totalSum": null,
+    "objective": "I don't know....",
+    "userId": null,
+    "state": null,
+    "invoiceNumber": null,
+    "checkDetailedList": null
+}
+
+
+
+###
+
+POST /his/DoctorController/updateMedicalRecord HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": 1,
+  "registerId": 1,
+  "medicalReadme": "脑残",
+  "medicalPresent": null,
+  "presentTreat": null,
+  "medicalHistory": null,
+  "medicalAllergy": null,
+  "medicalPhysique": null,
+  "medicalDiagnosis": null,
+  "medicalHandling": null,
+  "caseState": null,
+  "caseNumber": "3"
+}

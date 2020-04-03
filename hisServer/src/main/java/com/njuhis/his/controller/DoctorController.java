@@ -1,6 +1,7 @@
 package com.njuhis.his.controller;
 
 import com.njuhis.his.model.CheckApply;
+import com.njuhis.his.model.Invoice;
 import com.njuhis.his.model.MedicalRecord;
 import com.njuhis.his.model.Register;
 import com.njuhis.his.service.DoctorService;
@@ -62,5 +63,44 @@ public class DoctorController {
 
         quickLogger.logReturn(result);
         return result;
+    }
+
+
+    @RequestMapping("/getCheckApplyById")
+    public CheckApply getCheckApplyById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        CheckApply result=doctorService.getCheckApplyById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+    @RequestMapping("/updateCheckApply")
+    public CheckApply updateCheckApply(@RequestBody CheckApply checkApply,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(checkApply);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        CheckApply result=doctorService.updateCheckApply(checkApply, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    @RequestMapping("/updateMedicalRecord")
+    public MedicalRecord updateMedicalRecord(@RequestBody MedicalRecord medicalRecord,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(medicalRecord);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        MedicalRecord result=doctorService.updateMedicalRecord(medicalRecord, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
     }
 }
