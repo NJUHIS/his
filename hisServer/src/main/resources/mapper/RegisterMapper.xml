@@ -41,7 +41,7 @@
     delete from register
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.Register">
+  <insert id="insert" parameterType="com.njuhis.his.model.Register" useGeneratedKeys="true"  keyProperty="id">
     insert into register (id, RealName, Gender, 
       IDnumber, BirthDate, Age, 
       AgeType, HomeAddress, CaseNumber, 

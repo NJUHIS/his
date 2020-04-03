@@ -11,7 +11,7 @@
     delete from diagnosis
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.Diagnosis">
+  <insert id="insert" parameterType="com.njuhis.his.model.Diagnosis" useGeneratedKeys="true"  keyProperty="id">
     insert into diagnosis (id, MedicalId, diseaseId, 
       state)
     values (#{id,jdbcType=INTEGER}, #{medicalid,jdbcType=INTEGER}, #{diseaseid,jdbcType=INTEGER}, 

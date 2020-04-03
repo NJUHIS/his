@@ -22,7 +22,7 @@
     delete from checkdetailed
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.CheckDetailed">
+  <insert id="insert" parameterType="com.njuhis.his.model.CheckDetailed" useGeneratedKeys="true"  keyProperty="id">
     insert into checkdetailed (id, CheckAppId, CheckProjId, 
       DeptId, CreationTime, Position, 
       State, Price, Identification, 

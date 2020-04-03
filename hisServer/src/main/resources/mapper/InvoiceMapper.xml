@@ -26,7 +26,7 @@
     delete from invoice
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.Invoice">
+  <insert id="insert" parameterType="com.njuhis.his.model.Invoice" useGeneratedKeys="true"  keyProperty="id">
     insert into invoice (id, InvoiceNum, Money, 
       State, CreationTime, UserId, 
       DailyState)

@@ -31,7 +31,7 @@
     delete from prescription
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.njuhis.his.model.Prescription">
+  <insert id="insert" parameterType="com.njuhis.his.model.Prescription" useGeneratedKeys="true"  keyProperty="id">
     insert into prescription (id, Medical_Id, User_Id, 
       Prescription_Name, Prescription_State, Prescription_Time, 
       Invoice_id, DelMark)
