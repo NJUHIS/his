@@ -4,7 +4,9 @@ To 全体成员
 
 By Paul 
 
-⚠️‼️注意事项：
+[TOC]
+
+## 注意事项⚠️‼️
 
 - 此文档用于说明和解释 HTTP 请求。前后端应根据此文档调用 HTTP 请求。
 - 用 IntelliJ IDEA 打开此项目时，请确保安装有 lombok 插件。
@@ -16,7 +18,7 @@ By Paul
 
 
 
-统一规定：
+## 统一规定
 
 - 鉴于前端使用 axios，服务器返回的如"登录密码错误"、"患者登录名不存在"、"挂号配额已满"等错误的信息在 error.message 中。示例：
 
@@ -501,16 +503,40 @@ HTTP 响应示例：
 }
 ```
 
+
+
+### 2.4 医院员工登录 /updateUser
+
+参数：医院员工的用户名`username`和密码`password`
+
+返回：登录成功后返回医院员工。
+
 HTTP 请求示例：
 
 ```http
+GET /his/PersonalInformationController/userSignIn?username=sdsdfsf&password=123qwe HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+{
+    "id": 1,
+    "username": "sdsdfsf",
+    "password": "123qwe",
+    "realname": "ahillasdffffffffff",
+    "usertypeid": 1,
+    "doctitleid": 1,
+    "isscheduling": 1,
+    "deptid": 3,
+    "registerLevelId": 1,
+    "idnumber": "11111111111",
+    "schedulingList": null
+}
 ```
 
 HTTP 请求示例：

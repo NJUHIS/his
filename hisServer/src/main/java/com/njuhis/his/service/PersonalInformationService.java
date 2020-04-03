@@ -9,6 +9,7 @@ import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Paul
@@ -34,7 +35,13 @@ public class PersonalInformationService {
 
     public User getUserById(Integer id, ResultMessage resultMessage){
         User user=userMapper.selectByPrimaryKey(id);
-        if(user==null) resultMessage.setClientError(ResultMessage.USER_NOT_EXIST);
+        if(user==null) resultMessage.setClientError(ResultMessage.USER_NOT_EXIST); //异常流程
+        return user;
+    }
+
+    public User getUserByUsername(String username, ResultMessage resultMessage){
+        User user=userMapper.selectByUserName(username);
+        if(user==null) resultMessage.setClientError(ResultMessage.USER_NOT_EXIST); //异常流程
         return user;
     }
 
@@ -52,6 +59,20 @@ public class PersonalInformationService {
         }else{
             return null;
         }
+    }
+
+    public User userSignIn(String username, String password, ResultMessage resultMessage){
+        User user=getUserByUsername(username,resultMessage);
+        if(!resultMessage.isSuccessful()) return null;//异常流程返回
+
+        if(user.getPassword().equals(password)){//密码正确
+            return user;
+
+        }else{//密码错误，异常流程
+            resultMessage.setClientError(ResultMessage.INCORRECT_PASSWORD);
+            return null;
+        }
+
     }
 
     public Patient getPatientById(Integer id, ResultMessage resultMessage){

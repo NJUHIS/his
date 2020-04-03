@@ -1,6 +1,5 @@
 package com.njuhis.his.controller;
 
-import com.njuhis.his.model.Invoice;
 import com.njuhis.his.model.Patient;
 import com.njuhis.his.model.User;
 import com.njuhis.his.service.PersonalInformationService;
@@ -69,6 +68,19 @@ public class PersonalInformationController {
         quickLogger.logReturn(result);
         return result;
 
+    }
+
+    @RequestMapping("/userSignIn")
+    public User userSignIn(@RequestParam String username, @RequestParam String password,HttpServletResponse httpServletResponse ){
+        quickLogger.logInvoked();
+        quickLogger.logReceive("username",username);
+        quickLogger.logReceive("password",password);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        User user=personalInformationService.userSignIn(username,password,resultMessage);
+
+        quickLogger.logReturn(user);
+        return user;
     }
 
     //TODO 待測試
