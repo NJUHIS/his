@@ -45,6 +45,12 @@ public class PersonalInformationService {
         return user;
     }
 
+    public Patient getPatientByUsername(String username, ResultMessage resultMessage){
+        Patient patient=patientMapper.selectByLoginName(username);
+        if(patient==null) resultMessage.setClientError(ResultMessage.USER_NOT_EXIST); //异常流程
+        return patient;
+    }
+
     public User updateUser(User user, ResultMessage resultMessage){
         getUserById(user.getId(),resultMessage);
         if(resultMessage.isSuccessful()) {//如果 id 存在
@@ -67,6 +73,20 @@ public class PersonalInformationService {
 
         if(user.getPassword().equals(password)){//密码正确
             return user;
+
+        }else{//密码错误，异常流程
+            resultMessage.setClientError(ResultMessage.INCORRECT_PASSWORD);
+            return null;
+        }
+
+    }
+
+    public Patient patientSignIn(String username, String password, ResultMessage resultMessage){
+        Patient patient=getPatientByUsername(username,resultMessage);
+        if(!resultMessage.isSuccessful()) return null;//异常流程返回
+
+        if(patient.getPassword().equals(password)){//密码正确
+            return patient;
 
         }else{//密码错误，异常流程
             resultMessage.setClientError(ResultMessage.INCORRECT_PASSWORD);

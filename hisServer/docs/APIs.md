@@ -505,7 +505,7 @@ HTTP 响应示例：
 
 
 
-### 2.4 医院员工登录 /updateUser
+### 2.4 医院员工登录 /userSignIn
 
 参数：医院员工的用户名`username`和密码`password`
 
@@ -539,16 +539,33 @@ HTTP 响应示例：
 }
 ```
 
+### 2.5 患者登录 /patientSignIn
+
+参数：患者的用户名`username`和密码`password`
+
+返回：登录成功后返回患者。
+
 HTTP 请求示例：
 
 ```http
+GET /his/PersonalInformationController/patientSignIn?username=ssss&password=ssss HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+{
+    "id": 8,
+    "name": "ssss",
+    "idnumber": "",
+    "phone": null,
+    "loginname": "ssss",
+    "password": "ssss"
+}
 ```
 
 

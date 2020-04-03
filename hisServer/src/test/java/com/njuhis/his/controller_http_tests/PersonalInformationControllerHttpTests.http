@@ -43,3 +43,8 @@ Content-Type: application/json
 GET /his/PersonalInformationController/userSignIn?username=sdsdfsf&password=123qwe HTTP/1.1
 Host: localhost:9002
 
+###
+GET /his/PersonalInformationController/patientSignIn?username=ssss&password=ssss HTTP/1.1
+Host: localhost:9002
+
+

@@ -55,6 +55,7 @@ public class ResultMessage {
     public static final String MEDICAL_CARD_NOT_EXIST="The medical record does not exist. 该病历不存在。";
     public static final String INVOICE_NOT_EXIST="The invoice does not exist. 该发票不存在。";
     public static final String USER_NOT_EXIST="The worker user does not exist. 该医院员工用户不存在。";
+    public static final String PATIENT_NOT_EXIST="The patient user does not exist. 该患者用户不存在。";
     public static final String DEPARTMENT_NOT_EXIST="The department does not exist. 该科室不存在。";
     public static final String EXAMINATION_TEST_DISPOSAL_NOT_EXIST="The examination (test or disposal) does not exist. 该检查（检验或处置）不存在。";
     public static final String INCORRECT_PASSWORD="Incorrect password. 密码错误。";

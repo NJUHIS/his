@@ -83,6 +83,19 @@ public class PersonalInformationController {
         return user;
     }
 
+    @RequestMapping("patientSignIn")
+    public Patient patient(@RequestParam String username, @RequestParam String password, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive("username",username);
+        quickLogger.logReceive("password",password);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Patient patient=personalInformationService.patientSignIn(username,password,resultMessage);
+
+        quickLogger.logReturn(patient);
+        return patient;
+    }
+
     //TODO 待測試
     @RequestMapping("/getPatientById")
     public Patient getIPatientById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
