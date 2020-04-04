@@ -59,4 +59,11 @@
     from invoice i
     inner join patientCosts p on p.InvoiceId = i.id
   </select>
+  <select id="selectByPrimaryKeyJoin" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
+    select i.id, i.InvoiceNum, i.Money, i.State, i.CreationTime, i.UserId, i.DailyState,
+    p.id pid, p.InvoiceId, p.RegisterId, p.Name, p.Price, p.DeptId, p.State pstate, p.DelMark pdelmark
+    from invoice i
+    inner join patientCosts p on p.InvoiceId = i.id
+    where id = #{id,jdbcType=INTEGER}
+  </select>
 </mapper>

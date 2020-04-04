@@ -21,5 +21,5 @@ public interface CheckApplyMapper {
 
     CheckApply selectByMedicalId(Integer medicalId);
 
-    CheckApply selectJoinByPrimaryKey(Integer id);
+    CheckApply selectByPrimaryKeyJoin(Integer id);
 }

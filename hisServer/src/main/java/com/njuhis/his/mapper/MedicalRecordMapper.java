@@ -15,4 +15,8 @@ public interface MedicalRecordMapper {
     List<MedicalRecord> selectAll();
 
     int updateByPrimaryKey(MedicalRecord record);
+
+    List<MedicalRecord> selectAllJoin();
+
+    MedicalRecord selectByPrimaryKeyJoin(Integer id);
 }

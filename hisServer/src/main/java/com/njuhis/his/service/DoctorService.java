@@ -7,7 +7,7 @@ import com.njuhis.his.model.*;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 //import com.sun.tools.javac.comp.Check;
-import com.sun.tools.javac.comp.Check;
+//import com.sun.tools.javac.comp.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

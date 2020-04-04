@@ -16,6 +16,23 @@
     <result column="Case_State" jdbcType="INTEGER" property="caseState" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
+
+  <resultMap id="BaseResultMapCollection" type="com.njuhis.his.model.MedicalRecord" extends="BaseResultMap">
+    <collection property="diagnosisList" ofType="com.njuhis.his.model.Diagnosis">
+      <id column="did" jdbcType="INTEGER" property="id" />
+      <result column="MedicalId" jdbcType="INTEGER" property="medicalid" />
+      <result column="diseaseId" jdbcType="INTEGER" property="diseaseid" />
+      <result column="state" jdbcType="INTEGER" property="state" />
+      <association property="disease" column="diseaseid" javaType="com.njuhis.his.model.Disease">
+        <id column="diid" jdbcType="INTEGER" property="id" />
+        <result column="DiseaseCode" jdbcType="VARCHAR" property="diseasecode" />
+        <result column="DiseaseName" jdbcType="VARCHAR" property="diseasename" />
+        <result column="DiseaseICD" jdbcType="VARCHAR" property="diseaseicd" />
+        <result column="DiseaseType" jdbcType="VARCHAR" property="diseasetype" />
+        <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+      </association>
+    </collection>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from medicalrecord
     where id = #{id,jdbcType=INTEGER}
@@ -60,5 +77,21 @@
     Medical_History, Medical_Allergy, Medical_Physique, Medical_Diagnosis, Medical_Handling, 
     Case_State, DelMark
     from medicalrecord
+  </select>
+  <select id="selectAllJoin" resultMap="BaseResultMapCollection">
+    select m.id, m.Case_Number, m.Register_Id, m.Medical_Readme, m.Medical_Present, m.Present_Treat,
+    m.Medical_History, m.Medical_Allergy, m.Medical_Physique, m.Medical_Diagnosis, m.Medical_Handling,
+    m.Case_State, m.DelMark,d.id did, d.MedicalId, d.diseaseId, d.state,di.id diid, di.DiseaseCode, di.DiseaseName, di.DiseaseICD, di.DiseaseType, di.DelMark
+    from medicalrecord m
+    inner join diagnosis d on d.MedicalId =m.id
+    inner join disease di on di.id = d.diseaseid
+  </select>
+  <select id="selectByPrimaryKeyJoin" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
+    select m.id, m.Case_Number, m.Register_Id, m.Medical_Readme, m.Medical_Present, m.Present_Treat,
+    m.Medical_History, m.Medical_Allergy, m.Medical_Physique, m.Medical_Diagnosis, m.Medical_Handling,
+    m.Case_State, m.DelMark,d.id did, d.MedicalId, d.diseaseId, d.state,di.id diid, di.DiseaseCode, di.DiseaseName, di.DiseaseICD, di.DiseaseType, di.DelMark
+    from medicalrecord m
+    inner join diagnosis d on d.MedicalId =m.id
+    inner join disease di on di.id = d.diseaseid
   </select>
 </mapper>

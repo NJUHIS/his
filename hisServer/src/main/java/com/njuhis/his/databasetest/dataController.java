@@ -107,10 +107,11 @@ public class dataController {
         return  invoiceMapper.selectAllJoin();
     }
 
-
+    @Autowired
+    MedicalRecordMapper medicalRecordMapper;
     @RequestMapping("/rso")
-    List<Register> seRegister(){
-        return  registerMapper.selectAllJoin();
+    List<MedicalRecord> seRegister(){
+        return  medicalRecordMapper.selectAllJoin();
     }
 
 

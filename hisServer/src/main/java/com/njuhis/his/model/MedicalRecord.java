@@ -2,6 +2,8 @@ package com.njuhis.his.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.List;
+
 //病历
 public class MedicalRecord {
     private Integer id;//病历主键ID
@@ -20,6 +22,8 @@ public class MedicalRecord {
     // 3 - 已完成/诊毕；
 
     private String caseNumber;//病历编码
+
+    private List<Diagnosis> diagnosisList;
 
 
 
@@ -135,5 +139,13 @@ public class MedicalRecord {
 
     public void setDelmark(Integer delmark) {
         this.delmark = delmark;
+    }
+
+    public List<Diagnosis> getDiagnosisList() {
+        return diagnosisList;
+    }
+
+    public void setDiagnosisList(List<Diagnosis> diagnosisList) {
+        this.diagnosisList = diagnosisList;
     }
 }

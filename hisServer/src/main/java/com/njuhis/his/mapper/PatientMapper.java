@@ -13,5 +13,7 @@ public interface PatientMapper {
 
     Patient selectByLoginName(String loginname);
 
+    int updateByPrimaryKey(Patient record);
 
+    Patient selectByPrimaryKey(int id);
 }

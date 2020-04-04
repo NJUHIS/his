@@ -26,4 +26,19 @@
     from patient
     where loginname =#{loginname}
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, name, IDnumber, phone, loginname, password
+    from patient
+    where id =#{id}
+  </select>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Patient">
+    update patient
+    set id = #{id},
+      name = #{name},
+      IDnumber = #{idnumber},
+      phone = #{phone},
+      loginname = #{loginname},
+      password = #{password}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

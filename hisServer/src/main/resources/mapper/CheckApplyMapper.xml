@@ -85,7 +85,7 @@
     inner join checkdetailed d on c.id = d.CheckAppId
     where c.Medical_Id = {#medicalId,jdbcType=INTEGER}
   </select>
-  <select id="selectJoinByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
+  <select id="selectByPrimaryKeyJoin" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
     select c.id, c.Name, c.Medical_Id, c.Creation_Time, c.Total_Sum, c.Objective, c.User_Id, c.state,
     c.Invoice_Number, c.DelMark,d.id did, d.CheckAppId, d.CheckProjId, d.DeptId, d.CreationTime, d.Position, d.State dstate, d.Price,
     d.Identification, d.InspectTime, d.Result, d.ResultTime, d.operatorId, d.entryClerkId, d.DelMark ddelmark

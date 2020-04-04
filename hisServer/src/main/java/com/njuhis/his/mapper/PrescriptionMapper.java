@@ -19,5 +19,6 @@ public interface PrescriptionMapper {
 
     List<Prescription> selectAllJoin();//查询全部药品处方 包含明细
 
-    Prescription selectByRegisterId(Integer RegisterID);//通过病例id查询到处方明细
+    //通过病例id查询到处方明细
+    Prescription selectByMedicalId(Integer MedicalID);
 }

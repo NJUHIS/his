@@ -41,8 +41,8 @@ public class Register {
     private Integer patientid;//患者主键ID
 
 
-    private List<Diagnosis> diagnosisList;
 
+    private List<PatientCosts> patientCostsList;
 
 
     @JsonIgnore
@@ -218,11 +218,12 @@ public class Register {
         this.patientid = patientid;
     }
 
-    public List<Diagnosis> getDiagnosisList() {
-        return diagnosisList;
+
+    public List<PatientCosts> getPatientCostsList() {
+        return patientCostsList;
     }
 
-    public void setDiagnosisList(List<Diagnosis> diagnosisList) {
-        this.diagnosisList = diagnosisList;
+    public void setPatientCostsList(List<PatientCosts> patientCostsList) {
+        this.patientCostsList = patientCostsList;
     }
 }
