@@ -119,4 +119,13 @@ public class dataController {
     List<Department> seDept(){
         return  departmentMapper.selectAllJoin();
     }
+
+    @Autowired
+    PatientCostsMapper patientCostsMapper;
+    @RequestMapping("/cost")
+    CostPo costPo(){
+        CostPo costPo =new CostPo(0,0,999,1000002);
+
+        return  patientCostsMapper.selectCostInvoice(costPo);
+    }
 }
