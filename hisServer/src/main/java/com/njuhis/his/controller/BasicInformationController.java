@@ -1,10 +1,7 @@
 package com.njuhis.his.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.njuhis.his.model.Department;
-import com.njuhis.his.model.Invoice;
-import com.njuhis.his.model.Patient;
-import com.njuhis.his.model.User;
+import com.njuhis.his.model.*;
 import com.njuhis.his.service.BasicInformationService;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
@@ -35,6 +32,7 @@ public class BasicInformationController {
      * @param httpServletResponse
      * @return
      */
+    
     @RequestMapping(value = "/getAllDepartments")
     public List<Department> getAllDepartments(HttpServletResponse httpServletResponse) {
         quickLogger.logInvoked();
@@ -146,6 +144,229 @@ public class BasicInformationController {
         return result;
 
     }
+
+
+        //TODO 待测试
+    @RequestMapping(value = "/getAllConstantItems")
+    public List<ConstantItem> getAllConstantItems(HttpServletResponse httpServletResponse) {
+        quickLogger.logInvoked();
+        List<ConstantItem> result = basicInformationService.getAllConstantItems(new ResultMessage(httpServletResponse));
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+    //TODO 待测试
+    @RequestMapping("/addConstantItem")
+    public ConstantItem addConstantItem(@RequestBody ConstantItem constantItem, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(constantItem);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        ConstantItem result=basicInformationService.addConstantItem(constantItem, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    //TODO 待测试
+
+    @RequestMapping("/getConstantItemById")
+    public ConstantItem getConstantItemById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        ConstantItem result=basicInformationService.getConstantItemById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+    //TODO 待测试
+
+    @RequestMapping("/updateConstantItem")
+    public ConstantItem updateConstantItem(@RequestBody ConstantItem constantItem, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(constantItem);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        ConstantItem result=basicInformationService.updateConstantItem(constantItem, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+
+    //TODO 待测试
+    @RequestMapping(value = "/getAllConstantTypes")
+    public List<ConstantType> getAllConstantTypes(HttpServletResponse httpServletResponse) {
+        quickLogger.logInvoked();
+        List<ConstantType> result = basicInformationService.getAllConstantTypes(new ResultMessage(httpServletResponse));
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+    //TODO 待测试
+    @RequestMapping("/addConstantType")
+    public ConstantType addConstantType(@RequestBody ConstantType constantType, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(constantType);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        ConstantType result=basicInformationService.addConstantType(constantType, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    //TODO 待测试
+
+    @RequestMapping("/getConstantTypeById")
+    public ConstantType getConstantTypeById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        ConstantType result=basicInformationService.getConstantTypeById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+    //TODO 待测试
+
+    @RequestMapping("/updateConstantType")
+    public ConstantType updateConstantType(@RequestBody ConstantType constantType,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(constantType);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        ConstantType result=basicInformationService.updateConstantType(constantType, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+
+
+
+    //TODO 待测试
+    @RequestMapping(value = "/getAllRegisterLevels")
+    public List<RegisterLevel> getAllRegisterLevels(HttpServletResponse httpServletResponse) {
+        quickLogger.logInvoked();
+        List<RegisterLevel> result = basicInformationService.getAllRegisterLevels(new ResultMessage(httpServletResponse));
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+    //TODO 待测试
+    @RequestMapping("/addRegisterLevel")
+    public RegisterLevel addRegisterLevel(@RequestBody RegisterLevel registerLevel, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(registerLevel);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        RegisterLevel result=basicInformationService.addRegisterLevel(registerLevel, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    //TODO 待测试
+
+    @RequestMapping("/getRegisterLevelById")
+    public RegisterLevel getRegisterLevelById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        RegisterLevel result=basicInformationService.getRegisterLevelById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+    //TODO 待测试
+
+    @RequestMapping("/updateRegisterLevel")
+    public RegisterLevel updateRegisterLevel(@RequestBody RegisterLevel registerLevel,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(registerLevel);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        RegisterLevel result=basicInformationService.updateRegisterLevel(registerLevel, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+    //TODO 待测试
+    @RequestMapping(value = "/getAllSettleCategories")
+    public List<SettleCategory> getAllSettleCategories(HttpServletResponse httpServletResponse) {
+        quickLogger.logInvoked();
+        List<SettleCategory> result = basicInformationService.getAllSettleCategories(new ResultMessage(httpServletResponse));
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+    //TODO 待测试
+    @RequestMapping("/addSettleCategory")
+    public SettleCategory addSettleCategory(@RequestBody SettleCategory settleCategory, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(settleCategory);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        SettleCategory result=basicInformationService.addSettleCategory(settleCategory, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    //TODO 待测试
+
+    @RequestMapping("/getSettleCategoryById")
+    public SettleCategory getSettleCategoryById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        SettleCategory result=basicInformationService.getSettleCategoryById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+    //TODO 待测试
+
+    @RequestMapping("/updateSettleCategory")
+    public SettleCategory updateSettleCategory(@RequestBody SettleCategory settleCategory,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(settleCategory);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        SettleCategory result=basicInformationService.updateSettleCategory(settleCategory, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+
 
 
 

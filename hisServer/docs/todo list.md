@@ -6,6 +6,7 @@ To 杨洋
 
 By Paul
 
+- [ ] 缺少expenseClassMapper.updateByPrimaryKey()以及expenseClassMapper.selectByPrimaryKey(id)。
 - [ ] CheckDetailedMapper.insert()失敗。估計是UserId和UserId2的名字問題。
 - [ ] PrescriptionDetailedMapper.insert() 失敗。
 - [ ] RegisterMapper.insert() 的 id 没有自动更新。

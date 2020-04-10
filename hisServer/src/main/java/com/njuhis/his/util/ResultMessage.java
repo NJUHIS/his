@@ -63,8 +63,11 @@ public class ResultMessage {
     public static final String PRESCRIPTION_DETAIL_NOT_EXIST="The prescription detail does not exist. 该处方明细不存在。";
     public static final String PRESCRIPTION_NOT_EXIST="The prescription does not exist. 该处方不存在。";
     public static final String INVOICE_DETAIL_NOT_EXIST="The invoice detail does not exist. 该发票明细不存在。";
-
-
+    public static final String CONSTANT_ITEM_NOT_EXIST="The constant item does not exist. 该常数项不存在。";
+    public static final String CONSTANT_TYPE_NOT_EXIST="The constant type does not exist. 该常数类型不存在。";
+    public static final String EXPENSE_TYPE_NOT_EXIST="The expense type does not exist. 该费用类型不存在。";
+    public static final String REGISTRATION_TYPE_NOT_EXIST="The registration type does not exist. 该挂号类型不存在。";
+    public static final String SETTLEMENT_TYPE_NOT_EXIST="The settlement type does not exist. 该结算类型不存在。";
     public static final String INCORRECT_PASSWORD="Incorrect password. 密码错误。";
     /**
      * 未知來源錯誤
