@@ -1714,7 +1714,7 @@ HTTP 响应示例：
 
 
 
-### 4.7 新增一条处方明细 /addPrescriptionDetailed
+### 4.13 新增一条处方明细 /addPrescriptionDetailed
 
 请求体：主键ID为null的处方明细。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
@@ -1749,29 +1749,85 @@ HTTP 响应示例：
 
 
 
+### 4.14 通过主键ID获取一个处方明细 /getPrescriptionDetailedById
+
+参数：处方明细的主键ID `id`
+
+返回：处方明细
+
 HTTP 请求示例：
 
 ```http
+GET /his/DoctorController/getPrescriptionDetailedById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+{
+    "id": 1,
+    "prescriptionid": 1,
+    "drugsid": 1,
+    "useage": "1",
+    "dosage": "1",
+    "frequency": "1",
+    "price": 1.00,
+    "quantity": 1,
+    "drugs": null
+}
 ```
 
 
 
+
+
+
+
+
+
+### 4.15 更新/保存一个处方明细 /updatePrescriptionDetailed
+
+请求体：一个主键ID非null的处方明细。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的处方明细。理论上返回体应该和请求体一模一样。
+
 HTTP 请求示例：
 
 ```http
+POST /his/DoctorController/updatePrescriptionDetailed HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
 
+{
+    "id": 1,
+    "prescriptionid": 1,
+    "drugsid": 1,
+    "useage": "1",
+    "dosage": "1",
+    "frequency": "10000000",
+    "price": 1.00,
+    "quantity": 1,
+    "drugs": null
+}
 ```
 
 HTTP 响应示例：
 
 ```json
-
+{
+    "id": 1,
+    "prescriptionid": 1,
+    "drugsid": 1,
+    "useage": "1",
+    "dosage": "1",
+    "frequency": "10000000",
+    "price": 1.00,
+    "quantity": 1,
+    "drugs": null
+}
 ```
 
