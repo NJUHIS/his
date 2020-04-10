@@ -96,7 +96,7 @@ public class PersonalInformationController {
         return patient;
     }
 
-    //TODO 待測試
+
     @RequestMapping("/getPatientById")
     public Patient getIPatientById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
@@ -110,7 +110,7 @@ public class PersonalInformationController {
     }
 
 
-    //TODO 待測試
+
     @RequestMapping("/updatePatient")
     public Patient updateInvoice(@RequestBody Patient patient,HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();

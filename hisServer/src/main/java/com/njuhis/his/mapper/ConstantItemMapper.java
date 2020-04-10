@@ -1,8 +1,11 @@
 package com.njuhis.his.mapper;
 
 import com.njuhis.his.model.ConstantItem;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public interface ConstantItemMapper {
     int deleteByPrimaryKey(Integer id);
 

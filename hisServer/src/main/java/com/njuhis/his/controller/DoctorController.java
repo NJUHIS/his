@@ -141,6 +141,7 @@ public class DoctorController {
 
     }
 
+    //TODO 待測試
     @RequestMapping("/addCheckDetailed")
     public CheckDetailed addInvoice(@RequestBody CheckDetailed checkDetailed,HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
@@ -154,6 +155,7 @@ public class DoctorController {
 
     }
 
+    //TODO 待測試
     @RequestMapping("/getCheckDetailedById")
     public CheckDetailed getInvoiceById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
@@ -167,6 +169,7 @@ public class DoctorController {
     }
 
 
+    //TODO 待測試
     @RequestMapping("/updateCheckDetailed")
     public CheckDetailed updateCheckDetailed(@RequestBody CheckDetailed checkDetailed,HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
@@ -180,6 +183,7 @@ public class DoctorController {
 
     }
 
+    //TODO 待測試
     @RequestMapping("/addPrescriptionDetailed")
     public PrescriptionDetailed addPrescriptionDetailed(@RequestBody PrescriptionDetailed prescriptionDetailed,HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
@@ -193,6 +197,7 @@ public class DoctorController {
 
     }
 
+    //TODO 待測試
     @RequestMapping("/getPrescriptionDetailedById")
     public PrescriptionDetailed getPrescriptionDetailedById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
@@ -206,6 +211,7 @@ public class DoctorController {
     }
 
 
+    //TODO 待測試
     @RequestMapping("/updatePrescriptionDetailed")
     public PrescriptionDetailed updateCheckDetailed(@RequestBody PrescriptionDetailed prescriptionDetailed,HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();

@@ -6,6 +6,8 @@ To 杨洋
 
 By Paul
 
+- [ ] CheckDetailedMapper.insert()失敗。估計是UserId和UserId2的名字問題。
+- [ ] PrescriptionDetailedMapper.insert() 失敗。
 - [ ] RegisterMapper.insert() 的 id 没有自动更新。
 - [ ] CheckApplyMapper.insert() 的 id 没有自动更新。
 - [ ] InvoiceMapper.insert() 的 id 没有自动更新。
