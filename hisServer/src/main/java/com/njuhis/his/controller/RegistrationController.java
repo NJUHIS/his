@@ -64,6 +64,14 @@ public class RegistrationController {
 
     }
 
+
+    /**
+     * 範例
+     * @param invoice
+     * @param httpServletResponse
+     * @return
+     */
+
     @RequestMapping("/addInvoice")
     public Invoice addInvoice(@RequestBody Invoice invoice,HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();

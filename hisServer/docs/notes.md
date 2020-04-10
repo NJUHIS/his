@@ -27,6 +27,6 @@ By Paul
 
 
 
-- 
+- lombok 提供@ToString 注釋，可以方便重寫 toString() 方法。
 - 
 

@@ -141,6 +141,87 @@ public class DoctorController {
 
     }
 
+    @RequestMapping("/addCheckDetailed")
+    public CheckDetailed addInvoice(@RequestBody CheckDetailed checkDetailed,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(checkDetailed);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        CheckDetailed result=doctorService.addCheckDetailed(checkDetailed, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    @RequestMapping("/getCheckDetailedById")
+    public CheckDetailed getInvoiceById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        CheckDetailed result=doctorService.getCheckDetailedById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+    @RequestMapping("/updateCheckDetailed")
+    public CheckDetailed updateCheckDetailed(@RequestBody CheckDetailed checkDetailed,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(checkDetailed);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        CheckDetailed result=doctorService.updateCheckDetailed(checkDetailed, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    @RequestMapping("/addPrescriptionDetailed")
+    public PrescriptionDetailed addPrescriptionDetailed(@RequestBody PrescriptionDetailed prescriptionDetailed,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(prescriptionDetailed);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        PrescriptionDetailed result=doctorService.addPrescriptionDetailed(prescriptionDetailed, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    @RequestMapping("/getPrescriptionDetailedById")
+    public PrescriptionDetailed getPrescriptionDetailedById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        PrescriptionDetailed result=doctorService.getPrescriptionDetailedById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+    @RequestMapping("/updatePrescriptionDetailed")
+    public PrescriptionDetailed updateCheckDetailed(@RequestBody PrescriptionDetailed prescriptionDetailed,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(prescriptionDetailed);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        PrescriptionDetailed result=doctorService.updatePrescriptionDetailed(prescriptionDetailed, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+
+
 
 
 }

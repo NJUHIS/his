@@ -96,9 +96,8 @@ public class PersonalInformationService {
     }
 
     public Patient getPatientById(Integer id, ResultMessage resultMessage){
-        Patient patient=null;
-        //TODO
-        //Patient patient=patientMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+
+        Patient patient=patientMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
         if(patient!=null){
             return patient;
         }else{
@@ -113,8 +112,7 @@ public class PersonalInformationService {
         getPatientById(patient.getId(),resultMessage);
         if(resultMessage.isSuccessful()) {//如果 id 存在
             try {
-                //patientMapper.updateByPrimaryKey(patient);
-                //TODO
+                patientMapper.updateByPrimaryKey(patient);
                 return getPatientById(patient.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();

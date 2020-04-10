@@ -15,6 +15,7 @@ public class PrescriptionDetailed {
     private Integer quantity;//数量
     private Drugs drugs;//一对一对应药品
 
+
     public void setDrugs(Drugs drugs) {
         this.drugs = drugs;
     }

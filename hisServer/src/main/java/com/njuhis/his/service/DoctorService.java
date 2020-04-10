@@ -1,8 +1,6 @@
 package com.njuhis.his.service;
 
-import com.njuhis.his.mapper.CheckApplyMapper;
-import com.njuhis.his.mapper.MedicalRecordMapper;
-import com.njuhis.his.mapper.PrescriptionMapper;
+import com.njuhis.his.mapper.*;
 import com.njuhis.his.model.*;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
@@ -24,6 +22,10 @@ public class DoctorService {
     private CheckApplyMapper checkApplyMapper;
     @Autowired
     private PrescriptionMapper prescriptionMapper;
+    @Autowired
+    private CheckDetailedMapper checkDetailedMapper;
+    @Autowired
+    private PrescriptionDetailedMapper prescriptionDetailedMapper;
 
 
 
@@ -141,6 +143,88 @@ public class DoctorService {
             return null;
         }
     }
+
+    public CheckDetailed addCheckDetailed(CheckDetailed checkDetailed,ResultMessage resultMessage){
+        try {
+            checkDetailedMapper.insert(checkDetailed);
+            return checkDetailed;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage.setUnknownError();
+            return null;
+        }
+    }
+
+
+    public CheckDetailed getCheckDetailedById(Integer id, ResultMessage resultMessage){
+        CheckDetailed checkDetailed=checkDetailedMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(checkDetailed!=null){
+            return checkDetailed;
+        }else{
+            resultMessage.setClientError(ResultMessage.INVOICE_NOT_EXIST);
+            return null;
+        }
+
+    }
+
+
+    public CheckDetailed updateCheckDetailed(CheckDetailed checkDetailed, ResultMessage resultMessage){
+        getCheckDetailedById(checkDetailed.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                checkDetailedMapper.updateByPrimaryKey(checkDetailed);
+                return getCheckDetailedById(checkDetailed.getId(),resultMessage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+
+    public PrescriptionDetailed addPrescriptionDetailed(PrescriptionDetailed prescriptionDetailed,ResultMessage resultMessage){
+        try {
+            prescriptionDetailedMapper.insert(prescriptionDetailed);
+            return prescriptionDetailed;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage.setUnknownError();
+            return null;
+        }
+    }
+
+
+    public PrescriptionDetailed getPrescriptionDetailedById(Integer id, ResultMessage resultMessage){
+        PrescriptionDetailed prescriptionDetailed=prescriptionDetailedMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(prescriptionDetailed!=null){
+            return prescriptionDetailed;
+        }else{
+            resultMessage.setClientError(ResultMessage.INVOICE_NOT_EXIST);
+            return null;
+        }
+
+    }
+
+
+    public PrescriptionDetailed updatePrescriptionDetailed(PrescriptionDetailed prescriptionDetailed, ResultMessage resultMessage){
+        getCheckDetailedById(prescriptionDetailed.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                prescriptionDetailedMapper.updateByPrimaryKey(prescriptionDetailed);
+                return getPrescriptionDetailedById(prescriptionDetailed.getId(),resultMessage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
 
 
 

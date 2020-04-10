@@ -572,6 +572,54 @@ HTTP 响应示例：
 
 
 
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
 
 
 ## 3. 门诊挂号收费 /RegistrationController
