@@ -13,7 +13,7 @@ By Paul
 - 強烈推荐使用 Typora （或其他合适的工具） 阅读此文档，因直接在 IntelliJ IDEA 打开的显示效果不尽人意，同时不保证在 IntelliJ IDEA 的显示效果。其他 Markdown 文件同理。
 - HTTP 请求示例可以在 hisServer/src/test/java/com/njuhis/his/controller_http_tests 中找到，并可以直接运行。
 - 文档作为前后端的最重要的协议文件，会不断更新与完善，请密切关注。
-- -此文档未经本人允许，任何人都不要修改。有问题请与我联系。
+- 此文档未经本人允许，任何人都不要修改。有问题请与我联系。
 - 「关键必须字段」列表仅供参考。请**根据实际业务**来判断。
 
 
@@ -786,7 +786,7 @@ HTTP 响应示例：
 
 请求体：主键ID为null的发票。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
-返回：添加成功后返回主键ID非null的字段完整的发票。
+返回：新增成功后返回主键ID非null的字段完整的发票。
 
 HTTP 请求示例：
 
@@ -1008,7 +1008,7 @@ HTTP 响应示例：
 
 请求体：主键ID为null的发票明細。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
-返回：添加成功后返回主键ID非null的字段完整的发票明細。
+返回：新增成功后返回主键ID非null的字段完整的发票明細。
 
 HTTP 请求示例：
 
@@ -1307,7 +1307,7 @@ HTTP 响应示例：
 
 请求体：主键ID为null的检查（检验或处置）。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
-返回：注册成功后返回主键ID非null的字段完整的检查（检验或处置）。
+返回：新增成功后返回主键ID非null的字段完整的检查（检验或处置）。
 
 HTTP 请求示例：
 
@@ -1472,7 +1472,7 @@ HTTP 响应示例：
 
 请求体：主键ID为null的处方。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
-返回：注册成功后返回主键ID非null的字段完整的处方。
+返回：新增成功后返回主键ID非null的字段完整的处方。
 
 
 
@@ -1580,6 +1580,173 @@ HTTP 响应示例：
 
 
 
+### 4.10 新增一条检查（检验或处置）明细 /addCheckDetailed
+
+请求体：主键ID为null的检查（检验或处置）明细。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：新增成功后返回主键ID非null的字段完整的检查（检验或处置）明细。
+
+HTTP 请求示例：
+
+```http
+POST /his/DoctorController/addCheckDetailed HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+	"checkappid": 1
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 11,
+    "checkappid": 1,
+    "checkprojid": null,
+    "deptid": null,
+    "position": null,
+    "state": null,
+    "price": null,
+    "identification": null,
+    "inspecttime": null,
+    "result": null,
+    "resulttime": null,
+    "operatorid": null,
+    "entryclerkid": null
+}
+```
+
+
+
+### 4.11 通过主键ID获取一条检查（检验或处置）明细 /getCheckDetailedById
+
+参数：检查（检验或处置）明细的主键ID `id`
+
+返回：检查（检验或处置）明细
+
+
+
+HTTP 请求示例：
+
+```http
+GET /his/DoctorController/getCheckDetailedById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "checkappid": 1,
+    "checkprojid": 1,
+    "deptid": 3,
+    "position": "1",
+    "state": 1,
+    "price": 1.00,
+    "identification": 1,
+    "inspecttime": 111111,
+    "result": "1",
+    "resulttime": 1,
+    "operatorid": 1,
+    "entryclerkid": 1
+}
+```
+
+
+
+### 4.12 更新/保存一条检查（检验或处置）明细 /updateCheckDetailed
+
+请求体：一条主键ID非null的检查（检验或处置）明细。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的检查（检验或处置）明细。理论上返回体应该和请求体一模一样。
+
+
+
+HTTP 请求示例：
+
+```http
+POST /his/DoctorController/updateCheckDetailed HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 1,
+    "checkappid": 1,
+    "checkprojid": 1,
+    "deptid": 3,
+    "position": "1",
+    "state": 1,
+    "price": 1.00,
+    "identification": 1,
+    "inspecttime": 111111,
+    "result": "133333333333333333333333",
+    "resulttime": 1,
+    "operatorid": 1,
+    "entryclerkid": 1
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "checkappid": 1,
+    "checkprojid": 1,
+    "deptid": 3,
+    "position": "1",
+    "state": 1,
+    "price": 1.00,
+    "identification": 1,
+    "inspecttime": 111111,
+    "result": "133333333333333333333333",
+    "resulttime": 1,
+    "operatorid": 1,
+    "entryclerkid": 1
+}
+```
+
+
+
+### 4.7 新增一条处方明细 /addPrescriptionDetailed
+
+请求体：主键ID为null的处方明细。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：新增成功后返回主键ID非null的字段完整的处方明细。
+
+HTTP 请求示例：
+
+```http
+POST /his/DoctorController/addPrescriptionDetailed HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 7,
+    "prescriptionid": null,
+    "drugsid": null,
+    "useage": null,
+    "dosage": null,
+    "frequency": null,
+    "price": null,
+    "quantity": null,
+    "drugs": null
+}
+```
+
 
 
 HTTP 请求示例：
@@ -1593,46 +1760,6 @@ HTTP 响应示例：
 ```json
 
 ```
-
-
-
-
-
-
-
-HTTP 请求示例：
-
-```http
-
-```
-
-HTTP 响应示例：
-
-```json
-
-```
-
-
-
-
-
-
-
-HTTP 请求示例：
-
-```http
-
-```
-
-HTTP 响应示例：
-
-```json
-
-```
-
-
-
-
 
 
 
