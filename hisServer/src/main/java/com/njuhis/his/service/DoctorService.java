@@ -9,8 +9,6 @@ import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
-
 @Service
 public class DoctorService {
     private QuickLogger quickLogger =new QuickLogger(this.getClass());
@@ -42,7 +40,7 @@ public class DoctorService {
     public MedicalRecord getMedicalRecordById(Integer id,ResultMessage resultMessage){
         MedicalRecord medicalRecord=medicalRecordMapper.selectByPrimaryKey(id);
         if(medicalRecord==null){
-            resultMessage.setClientError(ResultMessage.MEDICAL_CARD_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.MEDICAL_RECORD_NOT_EXIST);
         }
         return medicalRecord;
     }
@@ -121,7 +119,7 @@ public class DoctorService {
         if(prescription!=null){
             return prescription;
         }else{
-            resultMessage.setClientError(ResultMessage.INVOICE_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.PRESCRIPTION_NOT_EXIST);
             return null;
         }
 
@@ -161,7 +159,7 @@ public class DoctorService {
         if(checkDetailed!=null){
             return checkDetailed;
         }else{
-            resultMessage.setClientError(ResultMessage.INVOICE_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.EXAMINATION_TEST_DISPOSAL_DETAIL_NOT_EXIST);
             return null;
         }
 
@@ -202,7 +200,7 @@ public class DoctorService {
         if(prescriptionDetailed!=null){
             return prescriptionDetailed;
         }else{
-            resultMessage.setClientError(ResultMessage.INVOICE_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.PRESCRIPTION_DETAIL_NOT_EXIST);
             return null;
         }
 
@@ -210,7 +208,7 @@ public class DoctorService {
 
 
     public PrescriptionDetailed updatePrescriptionDetailed(PrescriptionDetailed prescriptionDetailed, ResultMessage resultMessage){
-        getCheckDetailedById(prescriptionDetailed.getId(),resultMessage);
+        getPrescriptionDetailedById(prescriptionDetailed.getId(),resultMessage);
         if(resultMessage.isSuccessful()) {//如果 id 存在
             try {
                 prescriptionDetailedMapper.updateByPrimaryKey(prescriptionDetailed);
