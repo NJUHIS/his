@@ -1,6 +1,7 @@
 package com.njuhis.his.mapper;
 
 import com.njuhis.his.model.Patient;
+import com.njuhis.his.model.CostPo;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,4 +17,6 @@ public interface PatientMapper {
     int updateByPrimaryKey(Patient record);
 
     Patient selectByPrimaryKey(int id);
+
+
 }

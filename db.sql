@@ -368,7 +368,7 @@ CREATE TABLE `medicalrecord` (
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -377,6 +377,7 @@ CREATE TABLE `medicalrecord` (
 
 LOCK TABLES `medicalrecord` WRITE;
 /*!40000 ALTER TABLE `medicalrecord` DISABLE KEYS */;
+INSERT INTO `medicalrecord` VALUES (1,'1',1,'1','1','1','1','1','1','1','1',1,1);
 /*!40000 ALTER TABLE `medicalrecord` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -682,4 +683,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-01 15:28:48
+-- Dump completed on 2020-04-07 12:06:31
