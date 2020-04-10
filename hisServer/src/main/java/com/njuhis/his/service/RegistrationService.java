@@ -1,8 +1,10 @@
 package com.njuhis.his.service;
 
 import com.njuhis.his.mapper.InvoiceMapper;
+import com.njuhis.his.mapper.PatientCostsMapper;
 import com.njuhis.his.mapper.RegisterMapper;
 import com.njuhis.his.model.Invoice;
+import com.njuhis.his.model.PatientCosts;
 import com.njuhis.his.model.Register;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
@@ -18,6 +20,8 @@ public class RegistrationService {
     private RegisterMapper registerMapper;
     @Autowired
     private InvoiceMapper invoiceMapper;
+    @Autowired
+    private PatientCostsMapper patientCostsMapper;
 
 
     public Register addRegistration(Register registration, ResultMessage resultMessage){
@@ -89,6 +93,46 @@ public class RegistrationService {
             try {
                 invoiceMapper.updateByPrimaryKey(invoice);
                 return getInvoiceById(invoice.getId(),resultMessage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+    public PatientCosts addPatientCosts(PatientCosts patientCosts, ResultMessage resultMessage){
+        try {
+            patientCostsMapper.insert(patientCosts);
+            return patientCosts;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage.setUnknownError();
+            return null;
+        }
+    }
+
+
+    public PatientCosts getPatientCostsById(Integer id, ResultMessage resultMessage){
+        PatientCosts patientCosts=patientCostsMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(patientCosts!=null){
+            return patientCosts;
+        }else{
+            resultMessage.setClientError(ResultMessage.INVOICE_NOT_EXIST);
+            return null;
+        }
+
+    }
+
+
+    public PatientCosts updatePatientCosts(PatientCosts patientCosts, ResultMessage resultMessage){
+        getPatientCostsById(patientCosts.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                patientCostsMapper.updateByPrimaryKey(patientCosts);
+                return getPatientCostsById(patientCosts.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.setUnknownError();

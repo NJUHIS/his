@@ -570,6 +570,75 @@ HTTP 响应示例：
 
 
 
+### 2.6 通过主键ID获取一个患者/addPatientById
+
+参数：患者的主键ID `id`
+
+返回：患者
+
+HTTP 请求示例：
+
+```http
+GET /his/PersonalInformationController/getPatientById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "name": "MyName",
+    "idnumber": "idnumber23434",
+    "phone": "phone234234",
+    "loginname": "Myloginname",
+    "password": "Mypassword"
+}
+```
+
+
+
+### 2.7 更新/保存一个患者 /updatePatient
+
+请求体：一个主键ID非null的患者。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的患者。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/PersonalInformationController/updatePatient HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 1,
+    "name": "MyName22222",
+    "idnumber": "idnumber23434",
+    "phone": "phone234234",
+    "loginname": "Myloginname",
+    "password": "Mypassword"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "name": "MyName22222",
+    "idnumber": "idnumber23434",
+    "phone": "phone234234",
+    "loginname": "Myloginname",
+    "password": "Mypassword"
+}
+```
+
+
+
 
 
 HTTP 请求示例：
@@ -588,6 +657,8 @@ HTTP 响应示例：
 
 
 
+
+
 HTTP 请求示例：
 
 ```http
@@ -599,6 +670,28 @@ HTTP 响应示例：
 ```json
 
 ```
+
+
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
 
 
 
@@ -911,6 +1004,114 @@ HTTP 响应示例：
 
 
 
+### 3.7 新增一条发票明細 /addPatientCosts
+
+请求体：主键ID为null的发票明細。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：添加成功后返回主键ID非null的字段完整的发票明細。
+
+HTTP 请求示例：
+
+```http
+POST /his/RegistrationController/addPatientCosts HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+	
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "invoiceid": null,
+    "registerid": null,
+    "name": null,
+    "price": null,
+    "deptid": null,
+    "state": null
+}
+```
+
+### 3.8 通过主键ID获取一条发票明細  /getPatientCostsById
+
+参数：发票明細的主键ID `id`
+
+返回：发票明細
+
+HTTP 请求示例：
+
+```http
+GET /his/RegistrationController/getPatientCostsById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "invoiceid": null,
+    "registerid": null,
+    "name": null,
+    "price": null,
+    "deptid": null,
+    "state": null
+}
+```
+
+
+
+### 3.9 更新/保存一条发票明細 /updatePatientCosts
+
+请求体：一个主键ID非null的发票明細。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的发票明細。理论上返回体应该和请求体一模一样。
+
+
+
+HTTP 请求示例：
+
+```http
+POST /his/RegistrationController/updatePatientCosts HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 1,
+    "invoiceid": null,
+    "registerid": null,
+    "name": "lllllllllllllllll",
+    "price": null,
+    "deptid": null,
+    "state": null
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "invoiceid": null,
+    "registerid": null,
+    "name": "lllllllllllllllll",
+    "price": null,
+    "deptid": null,
+    "state": null
+}
+```
+
+
+
+
+
 
 
 HTTP 请求示例：
@@ -925,6 +1126,12 @@ HTTP 响应示例：
 
 ```
 
+
+
+
+
+
+
 HTTP 请求示例：
 
 ```http
@@ -937,6 +1144,12 @@ HTTP 响应示例：
 
 ```
 
+
+
+
+
+
+
 HTTP 请求示例：
 
 ```http
@@ -952,6 +1165,38 @@ HTTP 响应示例：
 
 
 
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
 
 
 
@@ -1369,4 +1614,37 @@ HTTP 响应示例：
 
 
 
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
 

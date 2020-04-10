@@ -1,6 +1,7 @@
 package com.njuhis.his.controller;
 
 import com.njuhis.his.model.Invoice;
+import com.njuhis.his.model.PatientCosts;
 import com.njuhis.his.model.Register;
 import com.njuhis.his.service.RegistrationService;
 import com.njuhis.his.util.QuickLogger;
@@ -105,6 +106,45 @@ public class RegistrationController {
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
         Invoice result=registrationService.updateInvoice(invoice, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    @RequestMapping("/addPatientCosts")
+    public PatientCosts addPatientCosts(@RequestBody PatientCosts patientCosts, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(patientCosts);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        PatientCosts result=registrationService.addPatientCosts(patientCosts, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    @RequestMapping("/getPatientCostsById")
+    public PatientCosts getPatientCostsById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        PatientCosts result=registrationService.getPatientCostsById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+    @RequestMapping("/updatePatientCosts")
+    public PatientCosts updateInvoice(@RequestBody PatientCosts patientCosts,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoked();
+        quickLogger.logReceive(patientCosts);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        PatientCosts result=registrationService.updatePatientCosts(patientCosts, resultMessage);
 
         quickLogger.logReturn(result);
         return result;
