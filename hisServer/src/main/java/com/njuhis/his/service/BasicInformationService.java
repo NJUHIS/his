@@ -26,6 +26,8 @@ public class BasicInformationService {
     private UserMapper userMapper;
     @Autowired
     private PatientMapper patientMapper;
+    @Autowired
+    private PersonalInformationService personalInformationService;
 
     public List<Department> getAllDepartments(ResultMessage resultMessage){
         return departmentMapper.selectAll();
@@ -35,6 +37,9 @@ public class BasicInformationService {
      * @param user user 的 id 會從無到有
      */
     public User addUser(User user, ResultMessage resultMessage){
+        personalInformationService.makeSureUserUsernameNotExist(user.getUsername(),resultMessage);
+        if(!resultMessage.isSuccessful()) return null;
+
         try {
             userMapper.insert(user);
             return user;

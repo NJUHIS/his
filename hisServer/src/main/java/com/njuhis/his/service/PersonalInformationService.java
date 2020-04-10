@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.xml.transform.Result;
+
 /**
  * @author Paul
  */
@@ -23,6 +25,11 @@ public class PersonalInformationService {
     private UserMapper userMapper;
 
     public Patient addPatient(Patient patient, ResultMessage resultMessage){
+
+        //确保用户名不存在。
+        makeSurePatientUsernameNotExist(patient.getLoginname(),resultMessage);
+        if(!resultMessage.isSuccessful()) return null;//异常流程。用户名已存在。返回。
+
         try {
             patientMapper.insert(patient);
             return patient;
@@ -47,7 +54,7 @@ public class PersonalInformationService {
 
     public Patient getPatientByUsername(String username, ResultMessage resultMessage){
         Patient patient=patientMapper.selectByLoginName(username);
-        if(patient==null) resultMessage.setClientError(ResultMessage.USER_NOT_EXIST); //异常流程
+        if(patient==null) resultMessage.setClientError(ResultMessage.PATIENT_NOT_EXIST); //异常流程
         return patient;
     }
 
@@ -108,6 +115,7 @@ public class PersonalInformationService {
     }
 
 
+
     public Patient updatePatient(Patient patient, ResultMessage resultMessage){
         getPatientById(patient.getId(),resultMessage);
         if(resultMessage.isSuccessful()) {//如果 id 存在
@@ -123,6 +131,67 @@ public class PersonalInformationService {
             return null;
         }
     }
+
+    public boolean ifPatientIdExist(Integer patientId){
+        Patient patient=patientMapper.selectByPrimaryKey(patientId);//如果失败，并不会抛出异常，只会返回null。
+        if(patient!=null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean ifPatientUsernameExist(String patientUsername){
+        Patient patient=patientMapper.selectByLoginName(patientUsername);//如果失败，并不会抛出异常，只会返回null。
+        if(patient!=null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public ResultMessage makeSurePatientUsernameNotExist(String patientUsername, ResultMessage resultMessage){
+        if(!ifPatientUsernameExist(patientUsername)){
+            return resultMessage;
+        }else{
+            resultMessage.setClientError(ResultMessage.PATIENT_USERNAME_EXISTED);
+            return resultMessage;
+        }
+    }
+
+    public boolean ifUserIdExist(Integer userId){
+        User user=userMapper.selectByPrimaryKey(userId);//如果失败，并不会抛出异常，只会返回null。
+        if(user!=null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean ifUserUsernameExist(String userUsername){
+        User user=userMapper.selectByUserName(userUsername);//如果失败，并不会抛出异常，只会返回null。
+        if(user!=null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public ResultMessage makeSureUserUsernameNotExist(String userUsername, ResultMessage resultMessage){
+        if(!ifUserUsernameExist(userUsername)){
+            return resultMessage;
+        }else{
+            resultMessage.setClientError(ResultMessage.WORKER_USERNAME_EXISTED);
+            return resultMessage;
+        }
+    }
+
+
+
+
+
+
+
 
 
 }

@@ -50,7 +50,8 @@ public class ResultMessage {
     /**
      * 客户端錯誤
      */
-    public static final String PATIENT_LOGIN_NAME_EXISTED="The patient login name has existed. 该患者登录名已存在。";
+    public static final String PATIENT_USERNAME_EXISTED="The patient username has existed. 该患者用户名已存在。";
+    public static final String WORKER_USERNAME_EXISTED="The worker username has existed. 该医院员工用户名已存在。";
     public static final String REGISTRATION_NOT_EXIST="The registration does not exist. 该挂号不存在。";
     public static final String MEDICAL_RECORD_NOT_EXIST ="The medical record does not exist. 该病历不存在。";
     public static final String INVOICE_NOT_EXIST="The invoice does not exist. 该发票不存在。";
