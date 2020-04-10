@@ -128,4 +128,14 @@ public class dataController {
 
         return  patientCostsMapper.selectCostInvoice(costPo);
     }
+    @Autowired
+    PrescriptionDetailedMapper prescriptionDetailedMapper;
+    @Autowired
+    CheckDetailedMapper checkDetailedMapper;
+    @RequestMapping("/ins")
+    void ins(){
+        prescriptionDetailedMapper.insert(new PrescriptionDetailed());
+        checkDetailedMapper.insert(new CheckDetailed());
+    }
+
 }

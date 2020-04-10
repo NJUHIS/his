@@ -13,6 +13,9 @@ public class PrescriptionDetailed {
     private BigDecimal price;//开立处方时药品的单价。
     // 主要是为了防止药品价格变动，所以留下记录。
     private Integer quantity;//数量
+
+
+
     private Drugs drugs;//一对一对应药品
 
 

@@ -73,7 +73,7 @@ CREATE TABLE `checkdetailed` (
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,7 +82,7 @@ CREATE TABLE `checkdetailed` (
 
 LOCK TABLES `checkdetailed` WRITE;
 /*!40000 ALTER TABLE `checkdetailed` DISABLE KEYS */;
-INSERT INTO `checkdetailed` VALUES (1,1,1,3,1,'1',1,1.00,1,111111,'1',1,1,1,0),(2,1,1,3,1,'1',1,1.00,1,222222,'1',1,1,1,0);
+INSERT INTO `checkdetailed` VALUES (1,1,1,3,1,'1',1,1.00,1,111111,'1',1,1,1,0),(2,1,1,3,1,'1',1,1.00,1,222222,'1',1,1,1,0),(3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `checkdetailed` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -332,7 +332,7 @@ CREATE TABLE `invoice` (
   `UserId` int(9) DEFAULT NULL,
   `DailyState` int(1) DEFAULT NULL COMMENT '0 - 未日结审核\n            1 - 已经审核\n            默认值为0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -341,7 +341,7 @@ CREATE TABLE `invoice` (
 
 LOCK TABLES `invoice` WRITE;
 /*!40000 ALTER TABLE `invoice` DISABLE KEYS */;
-INSERT INTO `invoice` VALUES (1,'2333333',240.00,0,1000000,3,0);
+INSERT INTO `invoice` VALUES (1,'2333333',240.00,0,1000000,3,0),(2,'2444444',186.00,0,1000000,3,0),(3,'2555555',2231.00,0,10000001,3,0),(4,'2666666',10.00,0,1000000,3,0);
 /*!40000 ALTER TABLE `invoice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -426,7 +426,7 @@ CREATE TABLE `patientcosts` (
   `State` int(1) DEFAULT NULL,
   `DelMark` int(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='在实际环境，患者查询费用明细情况较多，费用会从多张表中综合查询，性能较慢；为了提升性能，单独建立本表';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='在实际环境，患者查询费用明细情况较多，费用会从多张表中综合查询，性能较慢；为了提升性能，单独建立本表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -435,7 +435,7 @@ CREATE TABLE `patientcosts` (
 
 LOCK TABLES `patientcosts` WRITE;
 /*!40000 ALTER TABLE `patientcosts` DISABLE KEYS */;
-INSERT INTO `patientcosts` VALUES (1,1,1,'大抢救',200.00,'3',0,0),(2,1,1,'洗胃',40.00,'3',0,0);
+INSERT INTO `patientcosts` VALUES (1,1,1,'大抢救',200.00,'3',0,0),(2,1,1,'洗胃',40.00,'3',0,0),(3,2,2,'sasa',40.00,'3',0,0),(4,2,2,'saqw',45.00,'3',0,0),(5,3,3,'qqqw',121.00,'3',0,0),(6,3,3,'qqe',111.00,'3',0,0),(7,3,3,'qwq',1999.00,'3',0,0),(8,4,4,'qwa',10.00,'3',0,0);
 /*!40000 ALTER TABLE `patientcosts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -488,7 +488,7 @@ CREATE TABLE `prescriptiondetailed` (
   `quantity` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -497,7 +497,7 @@ CREATE TABLE `prescriptiondetailed` (
 
 LOCK TABLES `prescriptiondetailed` WRITE;
 /*!40000 ALTER TABLE `prescriptiondetailed` DISABLE KEYS */;
-INSERT INTO `prescriptiondetailed` VALUES (1,1,1,'1','1','1',1.00,1),(2,1,2,'1','1','1',1.00,1),(3,1,3,'1','1','1',1.00,1);
+INSERT INTO `prescriptiondetailed` VALUES (1,1,1,'1','1','1',1.00,1),(2,1,2,'1','1','1',1.00,1),(3,1,3,'1','1','1',1.00,1),(4,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `prescriptiondetailed` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -531,7 +531,7 @@ CREATE TABLE `register` (
   `patientID` int(9) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -540,7 +540,7 @@ CREATE TABLE `register` (
 
 LOCK TABLES `register` WRITE;
 /*!40000 ALTER TABLE `register` DISABLE KEYS */;
-INSERT INTO `register` VALUES (1,'ahillatty',1,'112222222','2020-01-01',1,0,'asdasdasd','1','2020-03-20',1,3,1,1,1,1,11111,1,0,0),(2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `register` VALUES (1,'ahillatty',1,'112222222','2020-01-01',1,0,'asdasdasd','1','2020-03-20',1,3,1,1,1,1,11111,1,0,0),(2,'tty',1,'113333333','2020-01-01',1,0,'asdasdasd','2','2020-03-20',1,3,1,1,1,1,111113,1,0,0),(3,'ts',1,'114444444','2020-01-01',1,0,'asdasdasd','3','2020-03-20',1,3,1,1,1,1,11111,1,0,0),(4,'tk',1,'115555555','2020-01-01',1,0,'asdasasd','4','2020-03-20',1,3,1,1,1,1,11111,1,0,0);
 /*!40000 ALTER TABLE `register` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -683,4 +683,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-07 12:06:31
+-- Dump completed on 2020-04-10 19:07:31
