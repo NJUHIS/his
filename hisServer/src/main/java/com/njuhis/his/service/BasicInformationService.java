@@ -9,7 +9,6 @@ import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.jvm.hotspot.runtime.RegisterMap;
 
 import java.util.List;
 
