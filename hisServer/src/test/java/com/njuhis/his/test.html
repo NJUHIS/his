@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+<script language="javascript">
+    function test(){
+        var settings = {
+            "url": "http://localhost:9002/his/PersonalInformationController/addPatient",
+            "method": "POST",
+            "timeout": 0,
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "data": JSON.stringify({"id":3,"name":"MyName","idnumber":"idnumber23434","phone":"phone234234","loginname":"Myloginname","password":"Mypassword"}),
+        };
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+    }
+    test()
+</script>
+
+</html>

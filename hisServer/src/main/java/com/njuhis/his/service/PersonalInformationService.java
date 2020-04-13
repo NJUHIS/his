@@ -108,7 +108,7 @@ public class PersonalInformationService {
         if(patient!=null){
             return patient;
         }else{
-            resultMessage.setClientError(ResultMessage.INVOICE_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.PATIENT_NOT_EXIST);
             return null;
         }
 
