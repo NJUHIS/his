@@ -35,7 +35,7 @@ public class ResultMessage {
         }
     }
     public void setUnknownError(){
-        setUnknownError(UNKNOWN_ERROR_OCCURRED);
+        setUnknownError(ErrorMessage.UNKNOWN_ERROR_OCCURRED);
     }
     public void setUnknownError(String errorMessage){
         isSuccessful=false;
@@ -50,28 +50,30 @@ public class ResultMessage {
     /**
      * 客户端錯誤
      */
-    public static final String PATIENT_USERNAME_EXISTED="The patient username has existed. 该患者用户名已存在。";
-    public static final String WORKER_USERNAME_EXISTED="The worker username has existed. 该医院员工用户名已存在。";
-    public static final String REGISTRATION_NOT_EXIST="The registration does not exist. 该挂号不存在。";
-    public static final String MEDICAL_RECORD_NOT_EXIST ="The medical record does not exist. 该病历不存在。";
-    public static final String INVOICE_NOT_EXIST="The invoice does not exist. 该发票不存在。";
-    public static final String USER_NOT_EXIST="The worker user does not exist. 该医院员工用户不存在。";
-    public static final String PATIENT_NOT_EXIST="The patient user does not exist. 该患者用户不存在。";
-    public static final String DEPARTMENT_NOT_EXIST="The department does not exist. 该科室不存在。";
-    public static final String EXAMINATION_TEST_DISPOSAL_NOT_EXIST="The examination (test or disposal) does not exist. 该检查（检验或处置）不存在。";
-    public static final String EXAMINATION_TEST_DISPOSAL_DETAIL_NOT_EXIST="The examination (test or disposal) detail does not exist. 该检查（检验或处置）明细不存在。";
-    public static final String PRESCRIPTION_DETAIL_NOT_EXIST="The prescription detail does not exist. 该处方明细不存在。";
-    public static final String PRESCRIPTION_NOT_EXIST="The prescription does not exist. 该处方不存在。";
-    public static final String INVOICE_DETAIL_NOT_EXIST="The invoice detail does not exist. 该发票明细不存在。";
-    public static final String CONSTANT_ITEM_NOT_EXIST="The constant item does not exist. 该常数项不存在。";
-    public static final String CONSTANT_TYPE_NOT_EXIST="The constant type does not exist. 该常数类型不存在。";
-    public static final String EXPENSE_TYPE_NOT_EXIST="The expense type does not exist. 该费用类型不存在。";
-    public static final String REGISTRATION_TYPE_NOT_EXIST="The registration type does not exist. 该挂号类型不存在。";
-    public static final String SETTLEMENT_TYPE_NOT_EXIST="The settlement type does not exist. 该结算类型不存在。";
-    public static final String INCORRECT_PASSWORD="Incorrect password. 密码错误。";
-    /**
-     * 未知來源錯誤
-     */
-    public static final String UNKNOWN_ERROR_OCCURRED = "Unknown error occurred. 发生未知错误。";
+    public class ErrorMessage {
+        public static final String PATIENT_USERNAME_EXISTED = "The patient username has existed. 该患者用户名已存在。\n";
+        public static final String WORKER_USERNAME_EXISTED = "The worker username has existed. 该医院员工用户名已存在。\n";
+        public static final String REGISTRATION_NOT_EXIST = "The registration does not exist. 该挂号不存在。\n";
+        public static final String MEDICAL_RECORD_NOT_EXIST = "The medical record does not exist. 该病历不存在。\n";
+        public static final String INVOICE_NOT_EXIST = "The invoice does not exist. 该发票不存在。\n";
+        public static final String USER_NOT_EXIST = "The worker user does not exist. 该医院员工用户不存在。\n";
+        public static final String PATIENT_NOT_EXIST = "The patient user does not exist. 该患者用户不存在。\n";
+        public static final String DEPARTMENT_NOT_EXIST = "The department does not exist. 该科室不存在。\n";
+        public static final String EXAMINATION_TEST_DISPOSAL_NOT_EXIST = "The examination (test or disposal) does not exist. 该检查（检验或处置）不存在。\n";
+        public static final String EXAMINATION_TEST_DISPOSAL_DETAIL_NOT_EXIST = "The examination (test or disposal) detail does not exist. 该检查（检验或处置）明细不存在。\n";
+        public static final String PRESCRIPTION_DETAIL_NOT_EXIST = "The prescription detail does not exist. 该处方明细不存在。\n";
+        public static final String PRESCRIPTION_NOT_EXIST = "The prescription does not exist. 该处方不存在。\n";
+        public static final String INVOICE_DETAIL_NOT_EXIST = "The invoice detail does not exist. 该发票明细不存在。\n";
+        public static final String CONSTANT_ITEM_NOT_EXIST = "The constant item does not exist. 该常数项不存在。\n";
+        public static final String CONSTANT_TYPE_NOT_EXIST = "The constant type does not exist. 该常数类型不存在。\n";
+        public static final String EXPENSE_TYPE_NOT_EXIST = "The expense type does not exist. 该费用类型不存在。\n";
+        public static final String REGISTRATION_TYPE_NOT_EXIST = "The registration type does not exist. 该挂号类型不存在。\n";
+        public static final String SETTLEMENT_TYPE_NOT_EXIST = "The settlement type does not exist. 该结算类型不存在。\n";
+        public static final String INCORRECT_PASSWORD = "Incorrect password. 密码错误。";
+        /**
+         * 未知來源錯誤
+         */
+        public static final String UNKNOWN_ERROR_OCCURRED = "Unknown error occurred. 发生未知错误。";
+    }
 
 }

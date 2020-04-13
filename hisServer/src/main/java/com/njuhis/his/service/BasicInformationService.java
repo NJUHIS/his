@@ -90,7 +90,7 @@ public class BasicInformationService {
         if(department!=null){
             return department;
         }else{
-            resultMessage.setClientError(ResultMessage.DEPARTMENT_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.DEPARTMENT_NOT_EXIST);
             return null;
         }
 
@@ -138,7 +138,7 @@ public class BasicInformationService {
         if(constantItem!=null){
             return constantItem;
         }else{
-            resultMessage.setClientError(ResultMessage.CONSTANT_ITEM_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.CONSTANT_ITEM_NOT_EXIST);
             return null;
         }
     }
@@ -184,7 +184,7 @@ public class BasicInformationService {
         if(constantType!=null){
             return constantType;
         }else{
-            resultMessage.setClientError(ResultMessage.CONSTANT_TYPE_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.CONSTANT_TYPE_NOT_EXIST);
             return null;
         }
 
@@ -279,7 +279,7 @@ public class BasicInformationService {
         if(settleCategory!=null){
             return settleCategory;
         }else{
-            resultMessage.setClientError(ResultMessage.SETTLEMENT_TYPE_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.SETTLEMENT_TYPE_NOT_EXIST);
             return null;
         }
 
@@ -328,7 +328,7 @@ public class BasicInformationService {
         if(registerLevel!=null){
             return registerLevel;
         }else{
-            resultMessage.setClientError(ResultMessage.REGISTRATION_TYPE_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.REGISTRATION_TYPE_NOT_EXIST);
             return null;
         }
 

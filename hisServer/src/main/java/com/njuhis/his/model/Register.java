@@ -1,11 +1,17 @@
 package com.njuhis.his.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.mybatis.generator.config.IgnoredColumn;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 //挂号
+@Data
 public class Register {
     private Integer id;//挂号主键ID
     private String realname;//患者真实姓名
@@ -29,7 +35,6 @@ public class Register {
     private Integer userid;//医生的医院员工主键ID
     private Integer registid;//挂号类型主键ID
     private Integer settleid;//结算类型主键ID
-    @JsonIgnore
     private Integer isbook;//是否需要病历本
     //1-需要
     //0-不需要
@@ -39,7 +44,6 @@ public class Register {
     //0-未看诊
     //1-已看诊或正在看诊
     private Integer patientid;//患者主键ID
-
 
 
     private List<PatientCosts> patientCostsList;
@@ -130,6 +134,7 @@ public class Register {
         this.casenumber = casenumber == null ? null : casenumber.trim();
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh", timezone="GMT+8")
     public Date getVisitdate() {
         return visitdate;
     }
@@ -225,5 +230,34 @@ public class Register {
 
     public void setPatientCostsList(List<PatientCosts> patientCostsList) {
         this.patientCostsList = patientCostsList;
+    }
+
+    //不能為空的字段
+    @JsonIgnore
+    private static final String[][] notEmptyFieldsCheckListString =new String[][]{
+            //字段名+英文名+中文翻譯
+            {"patientid","Patient ID","患者主键ID"},
+            {"noon","Part of Day","预约看诊午别"},
+            {"isbook","Need Book","是否需要病历本"},
+            {"visitdate","Appointment Date","预约看诊日期"},
+            {"userid","Doctor ID","医生的医院员工主键ID"},
+            {"settleid","Settlement Type ID","结算类型主键ID"},
+            {"registid","Registration Type ID","挂号类型主键ID"},
+            {"deptid","Department ID","看诊科室主键ID"}
+
+    };
+    @JsonIgnore
+    private static final Map<String, String[]> notEmptyFieldsCheckList =new HashMap<>();
+    public Register(){
+        for(String[]fieldToCheckNotEmpty: notEmptyFieldsCheckListString){
+            String[] fieldTranslations=new String[]{
+                    fieldToCheckNotEmpty[1],fieldToCheckNotEmpty[2]
+            };
+            notEmptyFieldsCheckList.put(fieldToCheckNotEmpty[0],fieldTranslations);
+        }
+    }
+
+    public static Map<String, String[]> getNotEmptyFieldsCheckList() {
+        return notEmptyFieldsCheckList;
     }
 }

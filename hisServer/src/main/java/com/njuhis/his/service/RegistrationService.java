@@ -1,5 +1,6 @@
 package com.njuhis.his.service;
 
+import com.njuhis.his.datacleaner.RegistrationDataCleaner;
 import com.njuhis.his.mapper.InvoiceMapper;
 import com.njuhis.his.mapper.PatientCostsMapper;
 import com.njuhis.his.mapper.RegisterMapper;
@@ -10,6 +11,8 @@ import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 
 @Service
@@ -22,17 +25,32 @@ public class RegistrationService {
     private InvoiceMapper invoiceMapper;
     @Autowired
     private PatientCostsMapper patientCostsMapper;
+    @Autowired
+    private RegistrationDataCleaner registrationDataCleaner;
 
 
     public Register addRegistration(Register registration, ResultMessage resultMessage){
+
+        //數據清洗
+        registrationDataCleaner.cleanRegistration(registration,resultMessage);
+        if(!resultMessage.isSuccessful()) return null;
+
+        registration.setVisitstate(0);//看診狀態為 未看診。
+        registration.setRegistertime(new Date().getTime());//掛號的時間。
+
         try{
             registerMapper.insert(registration);
-            return registration;
         }catch (Exception exception){
             exception.printStackTrace();
             resultMessage.setUnknownError();
             return null;
         }
+
+        registration.setCasenumber(registration.getId().toString());//保存後設置病歷編碼。
+        registration=updateRegistration(registration,resultMessage);
+
+        return registration;
+
     }
 
     public Register getRegistrationById(Integer id, ResultMessage resultMessage){
@@ -40,7 +58,7 @@ public class RegistrationService {
         if(registration!=null){
             return registration;
         }else{
-            resultMessage.setClientError(ResultMessage.REGISTRATION_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.REGISTRATION_NOT_EXIST);
             return null;
         }
 
@@ -80,7 +98,7 @@ public class RegistrationService {
         if(invoice!=null){
             return invoice;
         }else{
-            resultMessage.setClientError(ResultMessage.INVOICE_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.INVOICE_NOT_EXIST);
             return null;
         }
 
@@ -120,7 +138,7 @@ public class RegistrationService {
         if(patientCosts!=null){
             return patientCosts;
         }else{
-            resultMessage.setClientError(ResultMessage.INVOICE_DETAIL_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.INVOICE_DETAIL_NOT_EXIST);
             return null;
         }
 

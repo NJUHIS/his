@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.annotation.PostConstruct;
+import java.util.TimeZone;
+
 @SpringBootApplication
 public class HisApplication {
 
@@ -25,6 +28,13 @@ public class HisApplication {
                 registry.addMapping("/**");
             }
         };
+    }
+
+    @PostConstruct
+    void setTimeZone() {
+        //TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+        //TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
+        //TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
     }
 
 }

@@ -40,7 +40,7 @@ public class DoctorService {
     public MedicalRecord getMedicalRecordById(Integer id,ResultMessage resultMessage){
         MedicalRecord medicalRecord=medicalRecordMapper.selectByPrimaryKey(id);
         if(medicalRecord==null){
-            resultMessage.setClientError(ResultMessage.MEDICAL_RECORD_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.MEDICAL_RECORD_NOT_EXIST);
         }
         return medicalRecord;
     }
@@ -51,7 +51,7 @@ public class DoctorService {
         if(checkApply!=null){
             return checkApply;
         }else{
-            resultMessage.setClientError(ResultMessage.EXAMINATION_TEST_DISPOSAL_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.EXAMINATION_TEST_DISPOSAL_NOT_EXIST);
             return null;
         }
 
@@ -119,7 +119,7 @@ public class DoctorService {
         if(prescription!=null){
             return prescription;
         }else{
-            resultMessage.setClientError(ResultMessage.PRESCRIPTION_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.PRESCRIPTION_NOT_EXIST);
             return null;
         }
 
@@ -159,7 +159,7 @@ public class DoctorService {
         if(checkDetailed!=null){
             return checkDetailed;
         }else{
-            resultMessage.setClientError(ResultMessage.EXAMINATION_TEST_DISPOSAL_DETAIL_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.EXAMINATION_TEST_DISPOSAL_DETAIL_NOT_EXIST);
             return null;
         }
 
@@ -200,7 +200,7 @@ public class DoctorService {
         if(prescriptionDetailed!=null){
             return prescriptionDetailed;
         }else{
-            resultMessage.setClientError(ResultMessage.PRESCRIPTION_DETAIL_NOT_EXIST);
+            resultMessage.setClientError(ResultMessage.ErrorMessage.PRESCRIPTION_DETAIL_NOT_EXIST);
             return null;
         }
 
