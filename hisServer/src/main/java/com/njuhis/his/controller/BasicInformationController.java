@@ -146,7 +146,7 @@ public class BasicInformationController {
     }
 
 
-        //TODO 待测试
+
     @RequestMapping(value = "/getAllConstantItems")
     public List<ConstantItem> getAllConstantItems(HttpServletResponse httpServletResponse) {
         quickLogger.logInvoked();
@@ -155,7 +155,7 @@ public class BasicInformationController {
         return result;
     }
 
-    //TODO 待测试
+
     @RequestMapping("/addConstantItem")
     public ConstantItem addConstantItem(@RequestBody ConstantItem constantItem, HttpServletResponse httpServletResponse){
         quickLogger.logInvoked();
@@ -169,7 +169,7 @@ public class BasicInformationController {
 
     }
 
-    //TODO 待测试
+
 
     @RequestMapping("/getConstantItemById")
     public ConstantItem getConstantItemById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
@@ -184,7 +184,7 @@ public class BasicInformationController {
     }
 
 
-    //TODO 待测试
+
 
     @RequestMapping("/updateConstantItem")
     public ConstantItem updateConstantItem(@RequestBody ConstantItem constantItem, HttpServletResponse httpServletResponse){
@@ -258,7 +258,7 @@ public class BasicInformationController {
 
 
 
-    //TODO 待测试
+
     @RequestMapping(value = "/getAllRegisterLevels")
     public List<RegisterLevel> getAllRegisterLevels(HttpServletResponse httpServletResponse) {
         quickLogger.logInvoked();

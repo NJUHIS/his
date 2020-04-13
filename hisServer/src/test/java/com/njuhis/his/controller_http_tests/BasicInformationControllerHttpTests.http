@@ -67,5 +67,52 @@ Content-Type: application/json
 }
 
 
+###
+GET /his/BasicInformationController/getAllConstantItems HTTP/1.1
+Host: localhost:9002
+
+
+###
+POST /his/BasicInformationController/addConstantItem HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "constanttypeid": 1,
+  "constantcode": "NKttttt",
+  "constantname": "内科ttttttt"
+}
+
+
+###
+POST /his/BasicInformationController/updateConstantItem HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": 168,
+  "constanttypeid": 1,
+  "constantcode": "NKttttt",
+  "constantname": "内科ttttttt9999999"
+}
+
+
+###
+GET /his/BasicInformationController/getConstantItemById?id=11 HTTP/1.1
+Host: localhost:9002
+
+
+###
+GET /his/BasicInformationController/getAllRegisterLevels HTTP/1.1
+Host: localhost:9002
+
+
+
+
+
+
+
+
+
 
 

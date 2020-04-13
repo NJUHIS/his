@@ -115,12 +115,12 @@ public class BasicInformationService {
    
 
 
-    //TODO 待测试
+
     public List<ConstantItem> getAllConstantItems(ResultMessage resultMessage){
         return constantItemMapper.selectAll();
     }
 
-    //TODO 待测试
+
     public ConstantItem addConstantItem(ConstantItem constantItem,ResultMessage resultMessage){
         try {
             constantItemMapper.insert(constantItem);
@@ -132,7 +132,7 @@ public class BasicInformationService {
         }
     }
 
-    //TODO 待测试
+
     public ConstantItem getConstantItemById(Integer id, ResultMessage resultMessage){
         ConstantItem constantItem=constantItemMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
         if(constantItem!=null){
@@ -143,7 +143,7 @@ public class BasicInformationService {
         }
     }
 
-    //TODO 待测试
+
     public ConstantItem updateConstantItem(ConstantItem constantItem, ResultMessage resultMessage){
         getConstantItemById(constantItem.getId(),resultMessage);
         if(resultMessage.isSuccessful()) {//如果 id 存在
@@ -305,7 +305,6 @@ public class BasicInformationService {
 
 
 
-    //TODO 待测试
     public List<RegisterLevel> getAllRegisterLevels(ResultMessage resultMessage){
         return registerLevelMapper.selectAll();
     }
