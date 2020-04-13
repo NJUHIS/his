@@ -25,7 +25,7 @@ public class Register {
     private String homeaddress;//患者家庭住址
     private String casenumber;//病历编码。
     private Date visitdate;//预约看诊日期
-    //standard forms ("yyyy-MM-dd'T'HH:mm:ss.SSSZ", "yyyy-MM-dd'T'HH:mm:ss.SSS", "EEE, dd MMM yyyy HH:mm:ss zzz", "yyyy-MM-dd"))
+    //standard forms ("yyyy-MM-dd"))
     private Integer noon;//预约看诊午别
     //1 - 凌晨
     //2 - 早上
