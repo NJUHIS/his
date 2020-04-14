@@ -8,6 +8,7 @@ import java.util.List;
 @Component
 public interface ExpenseClassMapper {
     int insert(ExpenseClass record);
-
+    int updateByPrimaryKey(ExpenseClass record);
     List<ExpenseClass> selectAll();
+    ExpenseClass selectByPrimaryKey(int id);
 }

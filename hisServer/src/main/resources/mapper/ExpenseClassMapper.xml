@@ -17,4 +17,18 @@
     select ID, ExpCode, ExpName, DelMark
     from expenseclass
   </select>
+  <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.ExpenseClass">
+    update fmeditem
+    set ID = #{id},
+    ExpCode = #{ExpCode},
+    ExpName = #{ExpName},
+    DelMark = #{DelMark},
+
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    select ID, ExpCode, ExpName, DelMark
+    from expenseclass
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
 </mapper>
