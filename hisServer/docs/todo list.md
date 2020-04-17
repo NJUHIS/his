@@ -6,7 +6,7 @@ To 杨洋
 
 By Paul
 
-- [ ] PatientCostsMapper.selectByRegisterId(Integer RegisterId) 为什么只返回一个 PatientCosts ？难道一个挂号对应多个发票明细吗？
+- [ ] PatientCostsMapper.selectByRegisterId(Integer RegisterId) 为什么只返回一个 PatientCosts ？难道不是一个挂号对应多个发票明细吗？
 
 - [ ] 確認一下， CostPo selectCostInvoice(CostPo costPo) 有考虑红冲和作废的发票吗？CostPo selectCostRegister(CostPo costPo) 有考虑挂了号，但是没有就诊的病人吗？
 
