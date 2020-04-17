@@ -53,13 +53,16 @@ By Paul
 
 - **更新/保存 update 类的API，请求体的字段必须完整，否则在数据库中会以 null 覆盖。**
 
-  
+- 设置 IntelliJ IDEA 的数据库可视化：
 
-
-
-
-
-
+  ```json
+  Host: 47.101.197.23
+  Port: 3306
+  User: remoteuser
+  Password: 21LS69CxGDtS$VS&
+  Database: his
+  URL: jdbc:mysql://47.101.197.23:3306/his?characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+  ```
 
 ## 1. 基础信息管理 /BasicInformationController
 
@@ -976,11 +979,156 @@ HTTP 响应示例：
 
 備註：目前此 API 暂时不可用。
 
+###1.28 获取所有排班 /getAllScheduling
+
+参数：无
+
+返回：排班列表
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getAllSchedulings HTTP/1.1
+Host: localhost:9002
 
 
 
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 1,
+        "scheddate": "2019-03-01",
+        "deptid": 3,
+        "userid": 1,
+        "noon": 1,
+        "registquota": 3,
+        "state": 0,
+        "user": null,
+        "department": null
+    }
+]
+```
 
 
+
+### 1.29 通过主键ID获取一个排班 /getSchedulingById
+
+参数：排班的主键ID `id`
+
+返回：排班
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getSchedulingById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "scheddate": "2019-03-01",
+    "deptid": 3,
+    "userid": 1,
+    "noon": 1,
+    "registquota": 3,
+    "state": 0,
+    "user": null,
+    "department": null
+}
+```
+
+### 1.30 更新/保存一个排班/updateScheduling
+
+请求体：一个主键ID非null的排班。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的排班。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/updateScheduling HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 1,
+    "scheddate": "2019-03-02",
+    "deptid": 3,
+    "userid": 1,
+    "noon": 1,
+    "registquota": 3,
+    "state": 0,
+    "user": null,
+    "department": null
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "scheddate": "2019-03-02",
+    "deptid": 3,
+    "userid": 1,
+    "noon": 1,
+    "registquota": 3,
+    "state": 0,
+    "user": null,
+    "department": null
+}
+```
+
+### 1.31 新增一个排班 /addScheduling
+
+请求体：主键ID为null的排班。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：新增成功后返回主键ID非null的字段完整的排班。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/addScheduling HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "scheddate": "2019-03-02",
+    "deptid": 3,
+    "userid": 1,
+    "noon": 1,
+    "registquota": 3,
+    "state": 0,
+    "user": null,
+    "department": null
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 2,
+    "scheddate": "2019-03-02",
+    "deptid": 3,
+    "userid": 1,
+    "noon": 1,
+    "registquota": 3,
+    "state": 0,
+    "user": null,
+    "department": null
+}
+```
 
 
 
@@ -1000,18 +1148,6 @@ HTTP 响应示例：
 
 
 
-HTTP 请求示例：
-
-```http
-
-```
-
-HTTP 响应示例：
-
-```json
-
-```
-
 
 
 HTTP 请求示例：
@@ -1025,8 +1161,6 @@ HTTP 响应示例：
 ```json
 
 ```
-
-
 
 
 

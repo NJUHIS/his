@@ -48,7 +48,7 @@ public class CheckUtil {
         }
         if(!emptyFields.isEmpty()){
             for(String fieldName:emptyFields){
-                errorMessages.append("\nThe \""+notEmptyFieldsCheckList.get(fieldName)[0]+"\" cannot be left empty. 「"+notEmptyFieldsCheckList.get(fieldName)[1]+"」不能为空。");
+                errorMessages.append("\nThe \""+notEmptyFieldsCheckList.get(fieldName)[0]+" ("+fieldName+")\" cannot be left empty. 「"+notEmptyFieldsCheckList.get(fieldName)[1]+"」不能为空。");
             }
             resultMessage.setClientError(errorMessages.toString());
         }

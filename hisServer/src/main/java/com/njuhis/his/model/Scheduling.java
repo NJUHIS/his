@@ -2,6 +2,8 @@ package com.njuhis.his.model;
 
 //import com.sun.tools.corba.se.idl.IncludeGen;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 //排班
@@ -55,6 +57,7 @@ public class Scheduling {
         this.id = id;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh", timezone="GMT+8")
     public Date getScheddate() {
         return scheddate;
     }
