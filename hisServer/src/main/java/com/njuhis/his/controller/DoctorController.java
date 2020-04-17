@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.util.logging.Logger;
 
 /**
  * @author Paul
@@ -27,7 +26,7 @@ public class DoctorController {
 
     @RequestMapping("/admit")
     public Register admit(@RequestParam Integer registrationId, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(registrationId);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -40,7 +39,7 @@ public class DoctorController {
 
     @RequestMapping("/getMedicalRecordById")
     public MedicalRecord getMedicalRecordById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -52,7 +51,7 @@ public class DoctorController {
 
     @RequestMapping("/addCheckApply")
     public CheckApply addCheckApply(@RequestBody CheckApply checkApply,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(checkApply);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -65,7 +64,7 @@ public class DoctorController {
 
     @RequestMapping("/getCheckApplyById")
     public CheckApply getCheckApplyById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -77,7 +76,7 @@ public class DoctorController {
 
     @RequestMapping("/updateCheckApply")
     public CheckApply updateCheckApply(@RequestBody CheckApply checkApply,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(checkApply);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -90,7 +89,7 @@ public class DoctorController {
 
     @RequestMapping("/updateMedicalRecord")
     public MedicalRecord updateMedicalRecord(@RequestBody MedicalRecord medicalRecord,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(medicalRecord);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -104,7 +103,7 @@ public class DoctorController {
 
     @RequestMapping("/addPrescription")
     public Prescription addPrescription(@RequestBody Prescription prescription,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(prescription);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -117,7 +116,7 @@ public class DoctorController {
 
     @RequestMapping("/getPrescriptionById")
     public Prescription getPrescriptionById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -130,7 +129,7 @@ public class DoctorController {
 
     @RequestMapping("/updatePrescription")
     public Prescription updateInvoice(@RequestBody Prescription prescription,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(prescription);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -144,7 +143,7 @@ public class DoctorController {
     //TODO 待測試
     @RequestMapping("/addCheckDetailed")
     public CheckDetailed addInvoice(@RequestBody CheckDetailed checkDetailed,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(checkDetailed);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -158,7 +157,7 @@ public class DoctorController {
     //TODO 待測試
     @RequestMapping("/getCheckDetailedById")
     public CheckDetailed getInvoiceById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -172,7 +171,7 @@ public class DoctorController {
     //TODO 待測試
     @RequestMapping("/updateCheckDetailed")
     public CheckDetailed updateCheckDetailed(@RequestBody CheckDetailed checkDetailed,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(checkDetailed);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -186,7 +185,7 @@ public class DoctorController {
     //TODO 待測試
     @RequestMapping("/addPrescriptionDetailed")
     public PrescriptionDetailed addPrescriptionDetailed(@RequestBody PrescriptionDetailed prescriptionDetailed,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(prescriptionDetailed);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -200,7 +199,7 @@ public class DoctorController {
     //TODO 待測試
     @RequestMapping("/getPrescriptionDetailedById")
     public PrescriptionDetailed getPrescriptionDetailedById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -214,7 +213,7 @@ public class DoctorController {
     //TODO 待測試
     @RequestMapping("/updatePrescriptionDetailed")
     public PrescriptionDetailed updateCheckDetailed(@RequestBody PrescriptionDetailed prescriptionDetailed,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(prescriptionDetailed);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 

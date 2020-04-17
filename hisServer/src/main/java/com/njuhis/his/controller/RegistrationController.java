@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.Registration;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -30,7 +29,7 @@ public class RegistrationController {
 
     @RequestMapping("/addRegistration")
     public Register addRegistration(@RequestBody Register registration, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(registration);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -42,7 +41,7 @@ public class RegistrationController {
 
     @RequestMapping("/getRegistrationById")
     public Register getRegistrationById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -54,7 +53,7 @@ public class RegistrationController {
 
     @RequestMapping("/updateRegistration")
     public Register updateRegistration(@RequestBody Register register, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(register);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -75,7 +74,7 @@ public class RegistrationController {
 
     @RequestMapping("/addInvoice")
     public Invoice addInvoice(@RequestBody Invoice invoice,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(invoice);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -88,7 +87,7 @@ public class RegistrationController {
 
     @RequestMapping("/getInvoiceById")
     public Invoice getInvoiceById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -101,7 +100,7 @@ public class RegistrationController {
 
     @RequestMapping("/updateInvoice")
     public Invoice updateInvoice(@RequestBody Invoice invoice,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(invoice);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -114,7 +113,7 @@ public class RegistrationController {
 
     @RequestMapping("/addPatientCosts")
     public PatientCosts addPatientCosts(@RequestBody PatientCosts patientCosts, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(patientCosts);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -127,7 +126,7 @@ public class RegistrationController {
 
     @RequestMapping("/getPatientCostsById")
     public PatientCosts getPatientCostsById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -140,7 +139,7 @@ public class RegistrationController {
 
     @RequestMapping("/updatePatientCosts")
     public PatientCosts updateInvoice(@RequestBody PatientCosts patientCosts,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(patientCosts);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 

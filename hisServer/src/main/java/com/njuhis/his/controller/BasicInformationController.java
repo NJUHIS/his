@@ -1,6 +1,5 @@
 package com.njuhis.his.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.njuhis.his.model.*;
 import com.njuhis.his.service.BasicInformationService;
 import com.njuhis.his.util.QuickLogger;
@@ -35,7 +34,7 @@ public class BasicInformationController {
     
     @RequestMapping(value = "/getAllDepartments")
     public List<Department> getAllDepartments(HttpServletResponse httpServletResponse) {
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         List<Department> departments = basicInformationService.getAllDepartments(new ResultMessage(httpServletResponse));
         quickLogger.logReturn(departments);
         return departments;
@@ -49,7 +48,7 @@ public class BasicInformationController {
      */
     @RequestMapping(value = "/addUser")
     public User addDoctor(@RequestBody User user, HttpServletResponse httpServletResponse) {
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(user);
         ResultMessage resultMessage = new ResultMessage(httpServletResponse);
 
@@ -70,7 +69,7 @@ public class BasicInformationController {
      */
     @RequestMapping(value = "/getUsersBetweenScheduleDates")
     public List<User> getUsersBetweenScheduleDates(@RequestParam Long startDate, @RequestParam Long endDate, @RequestParam(defaultValue = "0") int pageNumber, @RequestParam(defaultValue = "0") int pageSize, HttpServletResponse httpServletResponse) {
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(startDate);
         quickLogger.logReceive(endDate);
         quickLogger.logReceive(pageNumber);
@@ -94,7 +93,7 @@ public class BasicInformationController {
      */
     @RequestMapping(value = "/getPatientsBetweenScheduleDates")
     public List<Patient> getPatientsBetweenScheduleDates(@RequestParam Long startDate, @RequestParam Long endDate, @RequestParam(defaultValue = "0") int pageNumber, @RequestParam(defaultValue = "0") int pageSize, HttpServletResponse httpServletResponse) {
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive("startDate",startDate);
         quickLogger.logReceive("endDate",endDate);
         quickLogger.logReceive("pageNumber",pageNumber);
@@ -109,7 +108,7 @@ public class BasicInformationController {
 
     @RequestMapping("/addDepartment")
     public Department addDepartment(@RequestBody Department department, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(department);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -122,7 +121,7 @@ public class BasicInformationController {
 
     @RequestMapping("/getDepartmentById")
     public Department getInvoiceById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -134,7 +133,7 @@ public class BasicInformationController {
 
     @RequestMapping("/updateDepartment")
     public Department updateInvoice(@RequestBody Department department,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(department);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -149,7 +148,7 @@ public class BasicInformationController {
 
     @RequestMapping(value = "/getAllConstantItems")
     public List<ConstantItem> getAllConstantItems(HttpServletResponse httpServletResponse) {
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         List<ConstantItem> result = basicInformationService.getAllConstantItems(new ResultMessage(httpServletResponse));
         quickLogger.logReturn(result);
         return result;
@@ -158,7 +157,7 @@ public class BasicInformationController {
 
     @RequestMapping("/addConstantItem")
     public ConstantItem addConstantItem(@RequestBody ConstantItem constantItem, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(constantItem);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -173,7 +172,7 @@ public class BasicInformationController {
 
     @RequestMapping("/getConstantItemById")
     public ConstantItem getConstantItemById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -188,7 +187,7 @@ public class BasicInformationController {
 
     @RequestMapping("/updateConstantItem")
     public ConstantItem updateConstantItem(@RequestBody ConstantItem constantItem, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(constantItem);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -201,19 +200,19 @@ public class BasicInformationController {
 
 
 
-    //TODO 待测试
+
     @RequestMapping(value = "/getAllConstantTypes")
     public List<ConstantType> getAllConstantTypes(HttpServletResponse httpServletResponse) {
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         List<ConstantType> result = basicInformationService.getAllConstantTypes(new ResultMessage(httpServletResponse));
         quickLogger.logReturn(result);
         return result;
     }
 
-    //TODO 待测试
+
     @RequestMapping("/addConstantType")
     public ConstantType addConstantType(@RequestBody ConstantType constantType, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(constantType);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -224,11 +223,10 @@ public class BasicInformationController {
 
     }
 
-    //TODO 待测试
 
     @RequestMapping("/getConstantTypeById")
     public ConstantType getConstantTypeById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -239,11 +237,10 @@ public class BasicInformationController {
     }
 
 
-    //TODO 待测试
 
     @RequestMapping("/updateConstantType")
     public ConstantType updateConstantType(@RequestBody ConstantType constantType,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(constantType);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -261,16 +258,16 @@ public class BasicInformationController {
 
     @RequestMapping(value = "/getAllRegisterLevels")
     public List<RegisterLevel> getAllRegisterLevels(HttpServletResponse httpServletResponse) {
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         List<RegisterLevel> result = basicInformationService.getAllRegisterLevels(new ResultMessage(httpServletResponse));
         quickLogger.logReturn(result);
         return result;
     }
 
-    //TODO 待测试
+
     @RequestMapping("/addRegisterLevel")
     public RegisterLevel addRegisterLevel(@RequestBody RegisterLevel registerLevel, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(registerLevel);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -281,11 +278,11 @@ public class BasicInformationController {
 
     }
 
-    //TODO 待测试
+
 
     @RequestMapping("/getRegisterLevelById")
     public RegisterLevel getRegisterLevelById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -296,11 +293,11 @@ public class BasicInformationController {
     }
 
 
-    //TODO 待测试
+
 
     @RequestMapping("/updateRegisterLevel")
     public RegisterLevel updateRegisterLevel(@RequestBody RegisterLevel registerLevel,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(registerLevel);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -315,7 +312,7 @@ public class BasicInformationController {
     //TODO 待测试
     @RequestMapping(value = "/getAllSettleCategories")
     public List<SettleCategory> getAllSettleCategories(HttpServletResponse httpServletResponse) {
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         List<SettleCategory> result = basicInformationService.getAllSettleCategories(new ResultMessage(httpServletResponse));
         quickLogger.logReturn(result);
         return result;
@@ -324,7 +321,7 @@ public class BasicInformationController {
     //TODO 待测试
     @RequestMapping("/addSettleCategory")
     public SettleCategory addSettleCategory(@RequestBody SettleCategory settleCategory, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(settleCategory);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -339,7 +336,7 @@ public class BasicInformationController {
 
     @RequestMapping("/getSettleCategoryById")
     public SettleCategory getSettleCategoryById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -354,11 +351,65 @@ public class BasicInformationController {
 
     @RequestMapping("/updateSettleCategory")
     public SettleCategory updateSettleCategory(@RequestBody SettleCategory settleCategory,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(settleCategory);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
         SettleCategory result=basicInformationService.updateSettleCategory(settleCategory, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+        //TODO 待测试
+    @RequestMapping(value = "/getAllExpenseClasses")
+    public List<ExpenseClass> getAllExpenseClasses(HttpServletResponse httpServletResponse) {
+        quickLogger.logInvoke();
+        List<ExpenseClass> result = basicInformationService.getAllExpenseClasses(new ResultMessage(httpServletResponse));
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+    //TODO 待测试
+    @RequestMapping("/addExpenseClass")
+    public ExpenseClass addExpenseClass(@RequestBody ExpenseClass expenseClass, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(expenseClass);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        ExpenseClass result=basicInformationService.addExpenseClass(expenseClass, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    //TODO 待测试
+
+    @RequestMapping("/getExpenseClassById")
+    public ExpenseClass getExpenseClassById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        ExpenseClass result=basicInformationService.getExpenseClassById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+    //TODO 待测试
+
+    @RequestMapping("/updateExpenseClass")
+    public ExpenseClass updateExpenseClass(@RequestBody ExpenseClass expenseClass,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(expenseClass);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        ExpenseClass result=basicInformationService.updateExpenseClass(expenseClass, resultMessage);
 
         quickLogger.logReturn(result);
         return result;

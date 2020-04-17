@@ -4,6 +4,10 @@
 -- ------------------------------------------------------
 -- Server version	8.0.11
 
+
+set global max_allowed_packet = 2*1024*1024*10;
+
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -628,10 +632,10 @@ DROP TABLE IF EXISTS `settlecategory`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `settlecategory` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `SettleCode` varchar(64) NOT NULL,
+  `SettleCode` varchar(64) ,
   `SettleName` varchar(64) NOT NULL,
   `IsDefault` int(1) DEFAULT NULL,
-  `Sequence` int(3) NOT NULL,
+  `Sequence` int(3) ,
   `DelMark` int(1) DEFAULT NULL COMMENT '1为删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -27,7 +27,7 @@ public class DemoUser {
 //    public List<Example> getAllExamples(HttpServletResponse httpServletResponse) {
 //        quickLogger.logInvoked();
 //        List<Example> result = eggService.getAllExamples(new ResultMessage(httpServletResponse));
-//        quickLogger.logReturn(result);
+//        quickLogger.logReturned(result);
 //        return result;
 //    }
 //
@@ -35,12 +35,12 @@ public class DemoUser {
 //    @RequestMapping("/addExample")
 //    public Example addExample(@RequestBody Example example, HttpServletResponse httpServletResponse){
 //        quickLogger.logInvoked();
-//        quickLogger.logReceive(example);
+//        quickLogger.logReceived(example);
 //        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 //
 //        Example result=eggService.addExample(example, resultMessage);
 //
-//        quickLogger.logReturn(result);
+//        quickLogger.logReturned(result);
 //        return result;
 //
 //    }
@@ -50,12 +50,12 @@ public class DemoUser {
 //    @RequestMapping("/getExampleById")
 //    public Example getExampleById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
 //        quickLogger.logInvoked();
-//        quickLogger.logReceive(id);
+//        quickLogger.logReceived(id);
 //        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 //
 //        Example result=eggService.getExampleById(id,resultMessage);
 //
-//        quickLogger.logReturn(result);
+//        quickLogger.logReturned(result);
 //        return result;
 //    }
 //
@@ -65,12 +65,12 @@ public class DemoUser {
 //    @RequestMapping("/updateExample")
 //    public Example updateExample(@RequestBody Example example,HttpServletResponse httpServletResponse){
 //        quickLogger.logInvoked();
-//        quickLogger.logReceive(example);
+//        quickLogger.logReceived(example);
 //        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 //
 //        Example result=eggService.updateExample(example, resultMessage);
 //
-//        quickLogger.logReturn(result);
+//        quickLogger.logReturned(result);
 //        return result;
 //
 //    }

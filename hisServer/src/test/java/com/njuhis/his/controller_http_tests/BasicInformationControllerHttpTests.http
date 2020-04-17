@@ -108,7 +108,128 @@ Host: localhost:9002
 
 
 
+###
+GET /his/BasicInformationController/getAllConstantTypes HTTP/1.1
+Host: localhost:9002
 
+
+###
+POST /his/BasicInformationController/addConstantType HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "constanttypecode": "DeptCategory555555",
+  "constanttypename": "科室分类555555"
+}
+
+
+###
+GET /his/BasicInformationController/getConstantTypeById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+###
+POST /his/BasicInformationController/updateConstantType HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": 13,
+  "constanttypecode": "DeptCategory",
+  "constanttypename": "科室分类mmmmmmmmm"
+}
+
+###
+GET /his/BasicInformationController/getRegisterLevelById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+###
+POST /his/BasicInformationController/addRegisterLevel HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "registname": "超级号",
+  "registfee": 333320.00
+}
+
+
+###
+POST /his/BasicInformationController/updateRegisterLevel HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": 4,
+  "registname": "超级号",
+  "registfee": 30020.00
+}
+
+
+###
+GET /his/BasicInformationController/getAllSettleCategories HTTP/1.1
+Host: localhost:9002
+
+
+###
+POST /his/BasicInformationController/addSettleCategory HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "settlename": "新农合"
+}
+
+###
+GET /his/BasicInformationController/getSettleCategoryById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+###
+POST /his/BasicInformationController/updateSettleCategory HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": 1,
+  "settlename": "醫保qqqqqqq"
+}
+
+###
+GET /his/BasicInformationController/getAllExpenseClasses HTTP/1.1
+Host: localhost:9002
+
+
+###
+POST /his/BasicInformationController/addExpenseClass HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "expname": "AZF",
+  "expcode": "安葬费"
+}
+
+
+###
+GET /his/BasicInformationController/getExpenseClassById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+###
+POST /his/BasicInformationController/updateExpenseClass HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": 23,
+  "expname": "AZF",
+  "expcode": "安葬费mmmmmmmmmm"
+}
 
 
 

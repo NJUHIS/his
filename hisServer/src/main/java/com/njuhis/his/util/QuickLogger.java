@@ -57,7 +57,7 @@ public class QuickLogger {
         }
     }
 
-    public void logInvoked() {
+    public void logInvoke() {
         System.out.println("--------------------------------->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         log("Invoked",3);
 
@@ -71,7 +71,7 @@ public class QuickLogger {
         }
     }
 
-    public void logReceive(String variableName,Object object) {
+    public void logReceive(String variableName, Object object) {
         try {
             log("Received " +variableName+" "+  objectMapper.writeValueAsString(object),3);
         } catch (Exception exception) {
