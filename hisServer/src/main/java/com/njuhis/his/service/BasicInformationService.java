@@ -33,6 +33,8 @@ public class BasicInformationService {
     private SettleCategoryMapper settleCategoryMapper;
     @Autowired
     private RegisterLevelMapper registerLevelMapper;
+    @Autowired
+    private SchedulingMapper schedulingMapper;
 
     public List<Department> getAllDepartments(ResultMessage resultMessage){
         return departmentMapper.selectAll();
@@ -337,6 +339,52 @@ public class BasicInformationService {
             try {
                 registerLevelMapper.updateByPrimaryKey(registerLevel);
                 return getRegisterLevelById(registerLevel.getId(),resultMessage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+        //TODO 待测试
+    public List<Scheduling> getAllSchedulings(ResultMessage resultMessage){
+        return schedulingMapper.selectAll();
+    }
+
+    //TODO 待测试
+    public Scheduling addScheduling(Scheduling scheduling,ResultMessage resultMessage){
+        try {
+            schedulingMapper.insert(scheduling);
+            return scheduling;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage.setUnknownError();
+            return null;
+        }
+    }
+
+    //TODO 待测试
+    public Scheduling getSchedulingById(Integer id, ResultMessage resultMessage){
+        Scheduling scheduling=schedulingMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(scheduling!=null){
+            return scheduling;
+        }else{
+            resultMessage.setClientError(ResultMessage.ErrorMessage.SCHEDULE_NOT_EXIST);
+            return null;
+        }
+
+    }
+
+    //TODO 待测试
+    public Scheduling updateScheduling(Scheduling scheduling, ResultMessage resultMessage){
+        getSchedulingById(scheduling.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                schedulingMapper.updateByPrimaryKey(scheduling);
+                return getSchedulingById(scheduling.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.setUnknownError();

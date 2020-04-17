@@ -53,7 +53,7 @@ public class DemoController {
 //        if(example!=null){
 //            return example;
 //        }else{
-//            resultMessage.setClientError(ResultMessage.EXAMPLE_NOT_EXIST);
+//            resultMessage.setClientError(ResultMessage.ErrorMessage.EXAMPLE_NOT_EXIST);
 //            return null;
 //        }
 //

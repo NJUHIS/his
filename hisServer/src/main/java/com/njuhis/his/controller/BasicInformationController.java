@@ -417,6 +417,60 @@ public class BasicInformationController {
     }
 
 
+    //TODO 待测试
+    @RequestMapping(value = "/getAllSchedulings")
+    public List<Scheduling> getAllSchedulings(HttpServletResponse httpServletResponse) {
+        quickLogger.logInvoke();
+        List<Scheduling> result = basicInformationService.getAllSchedulings(new ResultMessage(httpServletResponse));
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+    //TODO 待测试
+    @RequestMapping("/addScheduling")
+    public Scheduling addScheduling(@RequestBody Scheduling scheduling, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(scheduling);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Scheduling result=basicInformationService.addScheduling(scheduling, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+    //TODO 待测试
+
+    @RequestMapping("/getSchedulingById")
+    public Scheduling getSchedulingById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Scheduling result=basicInformationService.getSchedulingById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+    //TODO 待测试
+
+    @RequestMapping("/updateScheduling")
+    public Scheduling updateScheduling(@RequestBody Scheduling scheduling,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(scheduling);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Scheduling result=basicInformationService.updateScheduling(scheduling, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
 
 
 

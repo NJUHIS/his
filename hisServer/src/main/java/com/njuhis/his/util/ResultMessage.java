@@ -69,6 +69,7 @@ public class ResultMessage {
         public static final String EXPENSE_TYPE_NOT_EXIST = "The expense type does not exist. 该费用类型不存在。";
         public static final String REGISTRATION_TYPE_NOT_EXIST = "The registration type does not exist. 该挂号类型不存在。";
         public static final String SETTLEMENT_TYPE_NOT_EXIST = "The settlement type does not exist. 该结算类型不存在。";
+        public static final String SCHEDULE_NOT_EXIST="The schedule does not exist. 该排班不存在。";
         public static final String INCORRECT_PASSWORD = "Incorrect password. 密码错误。";
         /**
          * 未知來源錯誤

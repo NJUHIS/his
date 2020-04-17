@@ -25,22 +25,22 @@ public class DemoUser {
 //    //TODO 待测试
 //    @RequestMapping(value = "/getAllExamples")
 //    public List<Example> getAllExamples(HttpServletResponse httpServletResponse) {
-//        quickLogger.logInvoked();
+//        quickLogger.logInvoke();
 //        List<Example> result = eggService.getAllExamples(new ResultMessage(httpServletResponse));
-//        quickLogger.logReturned(result);
+//        quickLogger.logReturn(result);
 //        return result;
 //    }
 //
 //    //TODO 待测试
 //    @RequestMapping("/addExample")
 //    public Example addExample(@RequestBody Example example, HttpServletResponse httpServletResponse){
-//        quickLogger.logInvoked();
-//        quickLogger.logReceived(example);
+//        quickLogger.logInvoke();
+//        quickLogger.logReceive(example);
 //        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 //
 //        Example result=eggService.addExample(example, resultMessage);
 //
-//        quickLogger.logReturned(result);
+//        quickLogger.logReturn(result);
 //        return result;
 //
 //    }
@@ -49,13 +49,13 @@ public class DemoUser {
 //
 //    @RequestMapping("/getExampleById")
 //    public Example getExampleById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-//        quickLogger.logInvoked();
-//        quickLogger.logReceived(id);
+//        quickLogger.logInvoke();
+//        quickLogger.logReceive(id);
 //        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 //
 //        Example result=eggService.getExampleById(id,resultMessage);
 //
-//        quickLogger.logReturned(result);
+//        quickLogger.logReturn(result);
 //        return result;
 //    }
 //
@@ -64,13 +64,13 @@ public class DemoUser {
 //
 //    @RequestMapping("/updateExample")
 //    public Example updateExample(@RequestBody Example example,HttpServletResponse httpServletResponse){
-//        quickLogger.logInvoked();
-//        quickLogger.logReceived(example);
+//        quickLogger.logInvoke();
+//        quickLogger.logReceive(example);
 //        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 //
 //        Example result=eggService.updateExample(example, resultMessage);
 //
-//        quickLogger.logReturned(result);
+//        quickLogger.logReturn(result);
 //        return result;
 //
 //    }
