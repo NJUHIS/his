@@ -43,7 +43,7 @@ By Paul
 
 ## 统一规定
 
-- 一切 Date 类型的数据的标准格式：`"yyyy-MM-dd'T'HH:mm:ss.SSSZ", "yyyy-MM-dd'T'HH:mm:ss.SSS", "EEE, dd MMM yyyy HH:mm:ss zzz", "yyyy-MM-dd"`
+- 一切 Date 类型的数据的标准格式：`"yyyy-MM-dd"`
 - 一切变量名以 time 结尾的变量都表示时间的**毫秒数**。从 1970 年 1 月 1 日 00:00:00 GMT 开始计算。
 - 这个项目从来就没有"病例"这个概念，只有"病历"这个概念。语言上需要注意。
 
@@ -53,7 +53,7 @@ By Paul
 
 ## 实体模型
 
-### 1. 医院员工 User
+### 1. User - 医院员工 Worker
 
 ```java
 //医院员工
@@ -87,7 +87,7 @@ public class User {
 
 
 
-### 2. 科室 Department
+### 2. Department - 科室 Department
 
 ```java
 //科室
@@ -102,7 +102,7 @@ public class Department {
 
 
 
-### 3. 患者 Patient
+### 3. Patient - 患者 Patient
 
 ```java
 //患者
@@ -118,7 +118,7 @@ public class Patient {
 
 
 
-### 4. 疾病 Disease
+### 4. Disease - 疾病 Disease
 
 ```java
 //疾病
@@ -133,7 +133,7 @@ public class Disease {
 
 
 
-### 5. 挂号类型 RegisterLevel
+### 5. RegisterLevel - 挂号类型 Registration Type
 
 ```JAVA
 //挂号类型
@@ -147,7 +147,7 @@ public class RegisterLevel {
 
 
 
-### 6. 排班 Scheduling
+### 6. Scheduling - 排班 Schedule
 
 ```java
 //排班
@@ -174,7 +174,7 @@ public class Scheduling {
 
 
 
-### 7.  结算类型 SettleCategory
+### 7. SettleCategory - 结算类型 Settlement Type
 
 ```java
 //结算类型
@@ -189,12 +189,12 @@ public class SettleCategory {
 
 
 
-### 8. 挂号 Register
+### 8. Register - 挂号 Registration
 
 ```java
 //挂号
 public class Register {
-    private Integer id;//挂号主键ID
+ private Integer id;//挂号主键ID
     private String realname;//患者真实姓名
     private Integer gender; //患者性别
     //1 - 男性
@@ -231,7 +231,7 @@ public class Register {
 
 
 
-### 9. 病历 MedicalRecord
+### 9. MedicalRecord - 病历 Medical Record 
 
 ```java
 //病历
@@ -255,7 +255,7 @@ public class MedicalRecord {
 }
 ```
 
-### 10. 药品 Drugs
+### 10. Drugs - 药品 Drug
 
 ```JAVA
 //药品
@@ -276,7 +276,7 @@ public class Drugs {
 
 
 
-### 11. 处方 Prescription
+### 11. Prescription - 处方 Prescription 
 
 ```java
 //处方
@@ -297,7 +297,7 @@ public class Prescription {
 
 
 
-### 12. 处方明细 PrescriptionDetailed
+### 12. PrescriptionDetailed - 处方明细 Prescription Detail
 
 ```java
 //处方明细
@@ -317,7 +317,7 @@ public class PrescriptionDetailed {
 
 
 
-### 13. 检查（检验或处置） CheckApply
+### 13. CheckApply - 检查（检验或处置）Examination (Test or Disposal) 
 
 ```java
 //检查（检验或处置）
@@ -336,10 +336,9 @@ public class CheckApply {
     //4 - 正在检查（检验或处置）或等待结果
     //5 - 检查（检验或处置）已完成，结果已出
     private String invoiceNumber;//发票编码
-}
 ```
 
-### 14. 非药品项目 FmedItem
+### 14. FmedItem - 非药品项目 Non-drug Item
 
 ```java
 //非药品项目
@@ -356,7 +355,7 @@ public class FmedItem {
 
 
 
-### 15. 费用类型 ExpenseClass
+### 15. ExpenseClass - 费用类型 Expense Type 
 
 ```java
 //费用类型
@@ -369,7 +368,7 @@ public class ExpenseClass {
 
 
 
-### 16. 诊断 Diagnosis
+### 16. Diagnosis - 诊断 Diagnosis
 
 ```java
 //诊断
@@ -381,7 +380,7 @@ public class Diagnosis {
 }
 ```
 
-  ### 17. 发票 Invoice
+  ### 17. Invoice - 发票 Invoice 
 
 ```java
 //发票
@@ -405,7 +404,7 @@ public class Invoice {
 
 
 
-### 18. 发票明细 PatientCosts
+### 18. PatientCosts - 发票明细 Invoice Detail 
 
 ```java
 //发票明细
@@ -426,7 +425,7 @@ public class PatientCosts {
 
 
 
-### 19. 检验（检验或处置）明细 CheckDetailed
+### 19. CheckDetailed - 检验（检验或处置）明细  Examination (Test or Disposal) Detail 
 
 ```java
 //检验检查处置明细
@@ -456,7 +455,7 @@ public class CheckDetailed {
 
 
 
-### 20. 常数类型 ConstantType
+### 20. ConstantType - 常数类型 Constant Type
 
 ```java
 //常数类型
@@ -469,7 +468,7 @@ public class ConstantType {
 
 
 
-### 21 常数项 ConstantItem
+### 21. ConstantItem - 常数项 Constant Item
 
 ```java
 //常数项

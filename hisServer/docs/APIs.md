@@ -245,7 +245,7 @@ HTTP 响应示例：
 
 请求体：主键ID为null的科室。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
-返回：注册成功后返回主键ID非null的字段完整的科室。
+返回：新增成功后返回主键ID非null的字段完整的科室。
 
 HTTP 请求示例：
 
@@ -342,6 +342,648 @@ HTTP 响应示例：
 }
 ```
 
+###1.8 获取所有常数项 /getAllConstantItems
+
+参数：无
+
+返回：常数项列表
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getAllConstantItems HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 11,
+        "constanttypeid": 1,
+        "constantcode": "NK",
+        "constantname": "内科"
+    },
+    {
+        "id": 12,
+        "constanttypeid": 1,
+        "constantcode": "WK",
+        "constantname": "外科"
+    }
+    {
+]
+```
+
+
+
+### 1.9 新增一个常数项 /addConstantItem
+
+请求体：主键ID为null的常数项。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：新增成功后返回主键ID非null的字段完整的常数项。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/addConstantItem HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+        "constanttypeid": 1,
+        "constantcode": "NKttttt",
+        "constantname": "内科ttttttt"
+    },
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 168,
+    "constanttypeid": 1,
+    "constantcode": "NKttttt",
+    "constantname": "内科ttttttt"
+}
+```
+
+
+
+### 1.10 更新/保存一个常数项 /updateConstantItem
+
+请求体：一个主键ID非null的常数项。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的常数项。理论上返回体应该和请求体一模一样。
+
+
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/updateConstantItem HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 168,
+    "constanttypeid": 1,
+    "constantcode": "NKttttt",
+    "constantname": "内科ttttttt9999999"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 168,
+    "constanttypeid": 1,
+    "constantcode": "NKttttt",
+    "constantname": "内科ttttttt9999999"
+}
+```
+
+### 1.11 通过主键ID获取一个常数项 /getConstantItemById
+
+参数：常数项的主键ID `id`
+
+返回：常数项
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getConstantItemById?id=11 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 11,
+    "constanttypeid": 1,
+    "constantcode": "NK",
+    "constantname": "内科"
+}
+```
+
+###1.12 获取所有挂号类型 /getAllRegisterLevels
+
+参数：无
+
+返回：挂号类型列表
+
+
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getAllRegisterLevels HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 1,
+        "registname": "普通号",
+        "registfee": 20.00
+    },
+    {
+        "id": 2,
+        "registname": "专家号",
+        "registfee": 30.00
+    },
+    {
+        "id": 3,
+        "registname": "急诊号",
+        "registfee": 40.00
+    }
+]
+```
+
+###1.13 获取所有常数类型 /getAllConstantTypes
+
+参数：无
+
+返回：常数类型列表
+
+
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getAllConstantTypes HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 1,
+        "constanttypecode": "DeptCategory",
+        "constanttypename": "科室分类"
+    },
+    {
+        "id": 5,
+        "constanttypecode": "FeeType",
+        "constanttypename": "收费方式"
+    }
+]
+```
+
+
+
+### 1.14 新增一个常数类型 /addConstantType
+
+请求体：主键ID为null的常数类型。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：新增成功后返回主键ID非null的字段完整的常数类型。
+
+
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/addConstantType HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "constanttypecode": "DeptCategory555555",
+    "constanttypename": "科室分类555555"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 15,
+    "constanttypecode": "DeptCategory555555",
+    "constanttypename": "科室分类555555"
+}
+```
+
+### 1.15 通过主键ID获取一个常数类型 /getConstantTypeById
+
+参数：常数类型的主键ID `id`
+
+返回：常数类型
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getConstantTypeById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "constanttypecode": "DeptCategory",
+    "constanttypename": "科室分类"
+}
+```
+
+
+
+### 1.16 更新/保存一个常数类型 /updateConstantType
+
+请求体：一个主键ID非null的常数类型。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的常数类型。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/updateConstantType HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 13,
+    "constanttypecode": "DeptCategory",
+    "constanttypename": "科室分类mmmmmmmmm"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 13,
+    "constanttypecode": "DeptCategory",
+    "constanttypename": "科室分类mmmmmmmmm"
+}
+```
+
+
+
+### 1.17 通过主键ID获取一个挂号类型 /getRegisterLevelById
+
+参数：挂号类型的主键ID `id`
+
+返回：挂号类型
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getRegisterLevelById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "registname": "普通号",
+    "registfee": 20.00
+}
+```
+
+
+
+### 1.18 新增一个挂号类型 /addRegisterLevel
+
+请求体：主键ID为null的挂号类型。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：新增成功后返回主键ID非null的字段完整的挂号类型。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/addRegisterLevel HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "registname": "超级号",
+    "registfee": 333320.00
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 4,
+    "registname": "超级号",
+    "registfee": 333320.00
+}
+```
+
+
+
+### 1.19 更新/保存一个挂号类型/updateRegisterLevel
+
+请求体：一个主键ID非null的挂号类型。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的挂号类型。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/updateRegisterLevel HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 4,
+    "registname": "超级号",
+    "registfee": 30020.00
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 4,
+    "registname": "超级号",
+    "registfee": 30020.00
+}
+```
+
+
+
+###1.20 获取所有结算类型 /getAllSettleCategories
+
+参数：无
+
+返回：结算列表
+
+
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getAllSettleCategories HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 1,
+        "settlename": "醫保"
+    },
+    {
+        "id": 2,
+        "settlename": "自費"
+    }
+]
+```
+
+### 1.21 新增一个结算类型 /addSettleCategory
+
+请求体：主键ID为null的结算类型。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：新增成功后返回主键ID非null的字段完整的结算类型。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/addSettleCategory HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "settlename": "新农合"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 4,
+    "settlename": "新农合"
+}
+```
+
+### 1.22 通过主键ID获取一个结算类型 /getSettleCategoryById
+
+参数：结算类型的主键ID `id`
+
+返回：结算类型
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getSettleCategoryById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "settlename": "醫保qqqqqqq"
+}
+```
+
+### 1.23 更新/保存一个结算类型/updateSettleCategory
+
+请求体：一个主键ID非null的结算类型。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的结算类型。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/updateSettleCategory HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 1,
+    "settlename": "醫保qqqqqqq"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "settlename": "醫保qqqqqqq"
+}
+```
+
+
+
+
+
+###1.24 获取所有费用类型 /getAllExpenseClasses
+
+参数：无
+
+返回：费用类型列表
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getAllExpenseClasses HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 1,
+        "expname": "挂号费",
+        "expcode": "GHF"
+    },
+    {
+        "id": 2,
+        "expname": "诊疗费",
+        "expcode": "ZLF"
+    }
+]
+```
+
+
+
+### 1.25 新增一个费用类型 /addExpenseClass
+
+请求体：主键ID为null的費用类型。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：新增成功后返回主键ID非null的字段完整的费用类型。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/addExpenseClass HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "expname": "AZF",
+    "expcode": "安葬费"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 23,
+    "expname": "AZF",
+    "expcode": "安葬费"
+}
+```
+
+### 1.26 通过主键ID获取一个结算类型 /getExpenseClassById
+
+参数：结算类型的主键ID `id`
+
+返回：结算类型
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getExpenseClassById?id=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "expname": "挂号费",
+    "expcode": "GHF"
+}
+```
+
+
+
+### 1.27 更新/保存一个费用类型/updateExpenseClass
+
+请求体：一个主键ID非null的费用类型。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的费用类型。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/updateExpenseClass HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 23,
+    "expname": "AZF",
+    "expcode": "安葬费mmmmmmmmmm"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "timestamp": "2020-04-17T09:44:53.464+0000",
+    "status": 500,
+    "error": "Internal Server Error",
+    "message": "Unknown error occurred. 发生未知错误。",
+    "path": "/his/BasicInformationController/updateExpenseClass"
+}
+```
+
+備註：目前此 API 暂时不可用。
+
+
+
+
+
+
+
+
+
 
 
 HTTP 请求示例：
@@ -356,17 +998,7 @@ HTTP 响应示例：
 
 ```
 
-HTTP 请求示例：
 
-```http
-
-```
-
-HTTP 响应示例：
-
-```json
-
-```
 
 HTTP 请求示例：
 
@@ -379,6 +1011,22 @@ HTTP 响应示例：
 ```json
 
 ```
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
 
 
 

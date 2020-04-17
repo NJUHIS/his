@@ -34,7 +34,7 @@ public class PersonalInformationController {
      */
     @RequestMapping("/addPatient")
     public Patient addPatient(@RequestBody Patient patient, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(patient);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -46,7 +46,7 @@ public class PersonalInformationController {
 
     @RequestMapping("/getUserById")
     public User getUserById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -59,7 +59,7 @@ public class PersonalInformationController {
 
     @RequestMapping("/updateUser")
     public User updateInvoice(@RequestBody User user, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(user);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -72,7 +72,7 @@ public class PersonalInformationController {
 
     @RequestMapping("/userSignIn")
     public User userSignIn(@RequestParam String username, @RequestParam String password,HttpServletResponse httpServletResponse ){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive("username",username);
         quickLogger.logReceive("password",password);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
@@ -85,7 +85,7 @@ public class PersonalInformationController {
 
     @RequestMapping("patientSignIn")
     public Patient patient(@RequestParam String username, @RequestParam String password, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive("username",username);
         quickLogger.logReceive("password",password);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
@@ -99,7 +99,7 @@ public class PersonalInformationController {
 
     @RequestMapping("/getPatientById")
     public Patient getIPatientById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(id);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
@@ -113,7 +113,7 @@ public class PersonalInformationController {
 
     @RequestMapping("/updatePatient")
     public Patient updateInvoice(@RequestBody Patient patient,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoked();
+        quickLogger.logInvoke();
         quickLogger.logReceive(patient);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 

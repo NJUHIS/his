@@ -33,6 +33,8 @@ public class BasicInformationService {
     private SettleCategoryMapper settleCategoryMapper;
     @Autowired
     private RegisterLevelMapper registerLevelMapper;
+    @Autowired
+    private SchedulingMapper schedulingMapper;
 
     public List<Department> getAllDepartments(ResultMessage resultMessage){
         return departmentMapper.selectAll();
@@ -161,12 +163,10 @@ public class BasicInformationService {
     }
 
 
-    //TODO 待测试
         public List<ConstantType> getAllConstantTypes(ResultMessage resultMessage){
         return constantTypeMapper.selectAll();
     }
 
-    //TODO 待测试
     public ConstantType addConstantType(ConstantType constantType,ResultMessage resultMessage){
         try {
             constantTypeMapper.insert(constantType);
@@ -178,7 +178,6 @@ public class BasicInformationService {
         }
     }
 
-    //TODO 待测试
     public ConstantType getConstantTypeById(Integer id, ResultMessage resultMessage){
         ConstantType constantType=constantTypeMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
         if(constantType!=null){
@@ -190,7 +189,7 @@ public class BasicInformationService {
 
     }
 
-    //TODO 待测试
+
     public ConstantType updateConstantType(ConstantType constantType, ResultMessage resultMessage){
         getConstantTypeById(constantType.getId(),resultMessage);
         if(resultMessage.isSuccessful()) {//如果 id 存在
@@ -208,12 +207,12 @@ public class BasicInformationService {
     }
 
 
-    //TODO 待测试
+
     public List<ExpenseClass> getAllExpenseClasses(ResultMessage resultMessage){
         return expenseClassMapper.selectAll();
     }
 
-    //TODO 待测试
+
     public ExpenseClass addExpenseClass(ExpenseClass expenseClass,ResultMessage resultMessage){
         try {
             expenseClassMapper.insert(expenseClass);
@@ -225,43 +224,43 @@ public class BasicInformationService {
         }
     }
 
-//    //TODO 待测试
-//    public ExpenseClass getExpenseClassById(Integer id, ResultMessage resultMessage){
-//        ExpenseClass expenseClass=expenseClassMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
-//        if(expenseClass!=null){
-//            return expenseClass;
-//        }else{
-//            resultMessage.setClientError(ResultMessage.EXPENSE_TYPE_NOT_EXIST);
-//            return null;
-//        }
-//
-//    }
-//
-//    //TODO 待测试
-//    public ExpenseClass updateExpenseClass(ExpenseClass expenseClass, ResultMessage resultMessage){
-//        getExpenseClassById(expenseClass.getId(),resultMessage);
-//        if(resultMessage.isSuccessful()) {//如果 id 存在
-//            try {
-//                expenseClassMapper.updateByPrimaryKey(expenseClass);
-//                return getExpenseClassById(expenseClass.getId(),resultMessage);
-//            } catch (Exception exception) {
-//                exception.printStackTrace();
-//                resultMessage.setUnknownError();
-//                return null;
-//            }
-//        }else{
-//            return null;
-//        }
-//    }
 
+    public ExpenseClass getExpenseClassById(Integer id, ResultMessage resultMessage){
+        ExpenseClass expenseClass=expenseClassMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(expenseClass!=null){
+            return expenseClass;
+        }else{
+            resultMessage.setClientError(ResultMessage.ErrorMessage.EXPENSE_TYPE_NOT_EXIST);
+            return null;
+        }
 
+    }
 
     //TODO 待测试
+    public ExpenseClass updateExpenseClass(ExpenseClass expenseClass, ResultMessage resultMessage){
+        getExpenseClassById(expenseClass.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                expenseClassMapper.updateByPrimaryKey(expenseClass);
+                return getExpenseClassById(expenseClass.getId(),resultMessage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+
+
+
     public List<SettleCategory> getAllSettleCategories(ResultMessage resultMessage){
         return settleCategoryMapper.selectAll();
     }
 
-    //TODO 待测试
+
     public SettleCategory addSettleCategory(SettleCategory settleCategory,ResultMessage resultMessage){
         try {
             settleCategoryMapper.insert(settleCategory);
@@ -273,7 +272,7 @@ public class BasicInformationService {
         }
     }
 
-    //TODO 待测试
+
     public SettleCategory getSettleCategoryById(Integer id, ResultMessage resultMessage){
         SettleCategory settleCategory=settleCategoryMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
         if(settleCategory!=null){
@@ -285,7 +284,7 @@ public class BasicInformationService {
 
     }
 
-    //TODO 待测试
+
     public SettleCategory updateSettleCategory(SettleCategory settleCategory, ResultMessage resultMessage){
         getSettleCategoryById(settleCategory.getId(),resultMessage);
         if(resultMessage.isSuccessful()) {//如果 id 存在
@@ -309,7 +308,7 @@ public class BasicInformationService {
         return registerLevelMapper.selectAll();
     }
 
-    //TODO 待测试
+
     public RegisterLevel addRegisterLevel(RegisterLevel registerLevel,ResultMessage resultMessage){
         try {
             registerLevelMapper.insert(registerLevel);
@@ -321,7 +320,7 @@ public class BasicInformationService {
         }
     }
 
-    //TODO 待测试
+
     public RegisterLevel getRegisterLevelById(Integer id, ResultMessage resultMessage){
         RegisterLevel registerLevel=registerLevelMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
         if(registerLevel!=null){
@@ -333,7 +332,7 @@ public class BasicInformationService {
 
     }
 
-    //TODO 待测试
+
     public RegisterLevel updateRegisterLevel(RegisterLevel registerLevel, ResultMessage resultMessage){
         getRegisterLevelById(registerLevel.getId(),resultMessage);
         if(resultMessage.isSuccessful()) {//如果 id 存在
@@ -350,27 +349,51 @@ public class BasicInformationService {
         }
     }
 
+        //TODO 待测试
+    public List<Scheduling> getAllSchedulings(ResultMessage resultMessage){
+        return schedulingMapper.selectAll();
+    }
 
+    //TODO 待测试
+    public Scheduling addScheduling(Scheduling scheduling,ResultMessage resultMessage){
+        try {
+            schedulingMapper.insert(scheduling);
+            return scheduling;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage.setUnknownError();
+            return null;
+        }
+    }
 
+    //TODO 待测试
+    public Scheduling getSchedulingById(Integer id, ResultMessage resultMessage){
+        Scheduling scheduling=schedulingMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(scheduling!=null){
+            return scheduling;
+        }else{
+            resultMessage.setClientError(ResultMessage.ErrorMessage.SCHEDULE_NOT_EXIST);
+            return null;
+        }
 
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //TODO 待测试
+    public Scheduling updateScheduling(Scheduling scheduling, ResultMessage resultMessage){
+        getSchedulingById(scheduling.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                schedulingMapper.updateByPrimaryKey(scheduling);
+                return getSchedulingById(scheduling.getId(),resultMessage);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.setUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
 
 
 
