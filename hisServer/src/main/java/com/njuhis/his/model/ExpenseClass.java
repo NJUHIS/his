@@ -9,14 +9,6 @@ public class ExpenseClass {
     private String expname;//费用类型名称
     private String expcode;//费用类型编码
 
-
-
-
-
-
-
-
-
     @JsonIgnore
     private Integer delmark;
 

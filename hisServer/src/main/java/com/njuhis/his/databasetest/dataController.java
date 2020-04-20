@@ -137,5 +137,14 @@ public class dataController {
         prescriptionDetailedMapper.insert(new PrescriptionDetailed());
         checkDetailedMapper.insert(new CheckDetailed());
     }
+    @Autowired
+    ExpenseClassMapper expenseClassMapper;
+    @RequestMapping("/exp")
+    void exp(){
+        ExpenseClass aa = new ExpenseClass();
+        aa.setId(22);
 
+        aa.setDelmark(1);
+        expenseClassMapper.updateByPrimaryKey(aa);
+    }
 }
