@@ -30,30 +30,30 @@ By Paul
   ```java
   Date fromVisitDate;//预约看诊日期范围下限
   //standard forms ("yyyy-MM-dd")
-  Integer fromNoon;//预约看诊午别范围下限
+  fromNoon;//预约看诊午别范围下限
   //1 - 凌晨
   //2 - 早上
   //3 - 下午
   //4 - 晚上
-  Date toVisitDate;//预约看诊日期范围上限
+  toVisitDate;//预约看诊日期范围上限
   //standard forms ("yyyy-MM-dd")
-  Integer toNoon;//预约看诊午别范围上限
+  toNoon;//预约看诊午别范围上限
   //1 - 凌晨
   //2 - 早上
   //3 - 下午
   //4 - 晚上
-  Integer deptid;//看诊科室主键ID
-  Integer userid;//医生的医院员工主键ID
-  Integer registid;//挂号类型主键ID
-  Integer settleid;//结算类型主键ID
-  Integer isbook;//是否需要病历本
+  departmentId;//看诊科室主键ID
+  userId;//医生的医院员工主键ID
+  registrationTypeId;//挂号类型主键ID
+  settlementTypeId;//结算类型主键ID
+  needBook;//是否需要病历本
   //1-需要
   //0-不需要
-  Integer registerid;//挂号员的医院员工主键ID
-  Integer visitstate;//看诊状态
+  registrarId;//挂号员的医院员工主键ID
+  visitState;//看诊状态
   //0-未看诊
   //1-已看诊或正在看诊
-  Integer patientid;//患者主键ID
+  patientId;//患者主键ID
   ```
 
   返回：Register 列表

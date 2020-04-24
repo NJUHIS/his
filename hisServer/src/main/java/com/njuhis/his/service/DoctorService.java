@@ -6,8 +6,12 @@ import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 //import com.sun.tools.javac.comp.Check;
 //import com.sun.tools.javac.comp.Check;
+import com.sun.tools.javac.comp.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DoctorService {
@@ -223,12 +227,32 @@ public class DoctorService {
         }
     }
 
+    public List<CheckApply> getCheckAppliesByConditions(Integer userId,Integer state,ResultMessage resultMessage){
+        List<CheckApply> allCheckApplies=checkApplyMapper.selectAllJoin();
+        List<CheckApply>  filteredCheckApplies=new ArrayList<>();
+        for(CheckApply checkApply:allCheckApplies){
+            if(
+                    (userId==null||userId.equals(checkApply.getUserId()))
+                    &&(state==null||state.equals(checkApply.getState()))
+            )
+                filteredCheckApplies.add(checkApply);
 
+        }
+        return filteredCheckApplies;
 
+    }
 
-
-
-
-
+    public List<Prescription> getPrescriptionsByConditions(Integer userId,Integer prescriptionState,ResultMessage resultMessage){
+        List<Prescription> allPrescriptions=prescriptionMapper.selectAllJoin();
+        List<Prescription>  filteredPrescriptions=new ArrayList<>();
+        for(Prescription prescription:allPrescriptions){
+            if(
+                    (userId==null||userId.equals(prescription.getUserId()))
+                    &&(prescriptionState==null||prescriptionState.equals(prescription.getPrescriptionState()))
+            )
+                filteredPrescriptions.add(prescription);
+        }
+        return filteredPrescriptions;
+    }
 
 }

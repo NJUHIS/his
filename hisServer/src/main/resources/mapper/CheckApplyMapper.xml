@@ -3,7 +3,6 @@
 <mapper namespace="com.njuhis.his.mapper.CheckApplyMapper">
   <resultMap id="BaseResultMap" type="com.njuhis.his.model.CheckApply">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="Name" jdbcType="VARCHAR" property="name" />
     <result column="Medical_Id" jdbcType="INTEGER" property="medicalId" />
     <result column="Creation_Time" jdbcType="BIGINT" property="creationTime" />
     <result column="Total_Sum" jdbcType="DECIMAL" property="totalSum" />
@@ -37,18 +36,18 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.njuhis.his.model.CheckApply" useGeneratedKeys="true"  keyProperty="id">
-    insert into checkapply (id, Name, Medical_Id, 
+    insert into checkapply (id, Medical_Id,
       Creation_Time, Total_Sum, Objective, 
       User_Id, state, Invoice_Number, 
       DelMark)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{medicalId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER},  #{medicalId,jdbcType=INTEGER},
       #{creationTime,jdbcType=BIGINT}, #{totalSum,jdbcType=DECIMAL}, #{objective,jdbcType=VARCHAR}, 
       #{userId,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}, #{invoiceNumber,jdbcType=VARCHAR}, 
       #{delmark,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.CheckApply">
     update checkapply
-    set Name = #{name,jdbcType=VARCHAR},
+    set
       Medical_Id = #{medicalId,jdbcType=INTEGER},
       Creation_Time = #{creationTime,jdbcType=BIGINT},
       Total_Sum = #{totalSum,jdbcType=DECIMAL},
@@ -60,33 +59,31 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, Name, Medical_Id, Creation_Time, Total_Sum, Objective, User_Id, state, 
+    select id, Medical_Id, Creation_Time, Total_Sum, Objective, User_Id, state,
     Invoice_Number, DelMark
     from checkapply
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, Name, Medical_Id, Creation_Time, Total_Sum, Objective, User_Id, state, 
+    select id,  Medical_Id, Creation_Time, Total_Sum, Objective, User_Id, state,
     Invoice_Number, DelMark
     from checkapply
   </select>
   <select id="selectAllJoin" resultMap="BaseResultMapCollection">
-    select c.id, c.Name, c.Medical_Id, c.Creation_Time, c.Total_Sum, c.Objective, c.User_Id, c.state,
+    select c.id,  c.Medical_Id, c.Creation_Time, c.Total_Sum, c.Objective, c.User_Id, c.state,
     c.Invoice_Number, c.DelMark,d.id did, d.CheckAppId, d.CheckProjId, d.DeptId, d.CreationTime, d.Position, d.State dstate, d.Price,
     d.Identification, d.InspectTime, d.Result, d.ResultTime, d.operatorId, d.entryClerkId, d.DelMark ddelmark
-    from checkapply c
-    inner join checkdetailed d on c.id = d.CheckAppId
+    from checkapply c left join checkdetailed d on c.id = d.CheckAppId
   </select>
   <select id="selectByMedicalId" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
-    select c.id, c.Name, c.Medical_Id, c.Creation_Time, c.Total_Sum, c.Objective, c.User_Id, c.state,
+    select c.id, c.Medical_Id, c.Creation_Time, c.Total_Sum, c.Objective, c.User_Id, c.state,
     c.Invoice_Number, c.DelMark,d.id did, d.CheckAppId, d.CheckProjId, d.DeptId, d.CreationTime, d.Position, d.State dstate, d.Price,
     d.Identification, d.InspectTime, d.Result, d.ResultTime, d.operatorId, d.entryClerkId, d.DelMark ddelmark
-    from checkapply c
-    inner join checkdetailed d on c.id = d.CheckAppId
-    where c.Medical_Id = {#medicalId,jdbcType=INTEGER}
+    from checkapply c inner join checkdetailed d on c.id = d.CheckAppId
+    where c.Medical_Id = #{medicalId,jdbcType=INTEGER}
   </select>
   <select id="selectByPrimaryKeyJoin" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
-    select c.id, c.Name, c.Medical_Id, c.Creation_Time, c.Total_Sum, c.Objective, c.User_Id, c.state,
+    select c.id,  c.Medical_Id, c.Creation_Time, c.Total_Sum, c.Objective, c.User_Id, c.state,
     c.Invoice_Number, c.DelMark,d.id did, d.CheckAppId, d.CheckProjId, d.DeptId, d.CreationTime, d.Position, d.State dstate, d.Price,
     d.Identification, d.InspectTime, d.Result, d.ResultTime, d.operatorId, d.entryClerkId, d.DelMark ddelmark
     from checkapply c

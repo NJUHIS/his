@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/data")
-public class dataController {
+public class DataController {
     @Autowired
     DrugsMapper drugsMapper;
     @Autowired

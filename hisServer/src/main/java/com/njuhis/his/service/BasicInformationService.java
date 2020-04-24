@@ -10,6 +10,8 @@ import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -393,6 +395,54 @@ public class BasicInformationService {
         }else{
             return null;
         }
+    }
+
+    public List<Scheduling> getSchedulingsByConditions(Date fromScheduleDate,
+                                                       Integer fromNoon,
+                                                       Date toScheduleDate,
+                                                       Integer toNoon,
+                                                       Integer deptId,
+                                                       Integer userId,
+                                                       Integer state,
+                                                       ResultMessage resultMessage){
+
+        if(fromScheduleDate==null&&fromNoon!=null||fromScheduleDate!=null&&fromNoon==null){
+            resultMessage.setClientError("\'From Schedule Date\' and \'From Noon\' are invalid. 「起始排班日期」和「起始排班午别」无效。" );
+            return null;
+        }
+
+        if(toScheduleDate==null&&toNoon!=null||toScheduleDate!=null&&toNoon==null){
+            resultMessage.setClientError("\'To Schedule Date\' and \'To Noon\' are invalid. 「结束排班日期」和「结束排班午别」无效。" );
+            return null;
+        }
+
+        if(fromScheduleDate==null){
+            fromScheduleDate=new Date(1901-1900, 6-1, 12); //1901-06-12
+            fromNoon=1;
+        }
+
+        if(toScheduleDate==null){
+            toScheduleDate=new Date(2201-1900, 6-1, 12); //2201-06-12
+            toNoon=4;
+        }
+
+
+        List<Scheduling> allSchedulings=getAllSchedulings(resultMessage);
+        List<Scheduling> filteredSchedulings=new ArrayList<>();
+        for(Scheduling scheduling:allSchedulings){
+            if ((deptId == null || deptId.equals(scheduling.getDeptid()))
+                    && (userId == null || userId.equals(scheduling.getUserid()))
+                    && (state == null || state.equals(scheduling.getState()))
+                    && (fromScheduleDate.compareTo(scheduling.getScheddate())<0
+                        ||fromScheduleDate.compareTo(scheduling.getScheddate())==0&&fromNoon<=scheduling.getNoon())
+                    &&(toScheduleDate.compareTo(scheduling.getScheddate())>0
+                        ||toScheduleDate.compareTo(scheduling.getScheddate())==0&&toNoon>=scheduling.getNoon())
+            ) {
+                filteredSchedulings.add(scheduling);
+
+            }
+        }
+        return filteredSchedulings;
     }
 
 

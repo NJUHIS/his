@@ -5,12 +5,15 @@ import com.njuhis.his.service.BasicInformationService;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletResponse;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +27,23 @@ public class BasicInformationController {
     @Autowired
     private BasicInformationService basicInformationService;
     private QuickLogger quickLogger = new QuickLogger(this.getClass());
+
+
+    /**
+     * 这个函数使得這個 Controller 可以把 yyyy-MM-dd 的 String RequestParam 轉化為 Date 類型
+     * @param binder
+     * @param request
+     */
+    @InitBinder
+    public void initBinder(WebDataBinder binder, WebRequest request) {
+        //转换日期
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
+    }
+
+
+
+
 
     /**
      * 獲取所有的科室
@@ -471,9 +491,31 @@ public class BasicInformationController {
     }
 
 
+    @RequestMapping("/getSchedulingsByConditions")
+    public List<Scheduling> getSchedulingsByConditions(@RequestParam(required = false) Date fromScheduleDate,
+                                                       @RequestParam(required = false) Integer fromNoon,
+                                                       @RequestParam(required = false) Date toScheduleDate,
+                                                       @RequestParam(required = false) Integer toNoon,
+                                                       @RequestParam(required = false) Integer deptId,
+                                                       @RequestParam(required = false) Integer userId,
+                                                       @RequestParam(required = false) Integer state,
+                                                       HttpServletResponse httpServletResponse) {
+        quickLogger.logInvoke();
+        quickLogger.logReceive("fromScheduleDate",fromScheduleDate,
+                "fromNoon",fromNoon,
+                "toScheduleDate",toScheduleDate,
+                "toNoon",toNoon,
+                "deptId",deptId,
+                "userId",userId,
+                "state",state
+        );
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
+        List<Scheduling> result=basicInformationService.getSchedulingsByConditions(fromScheduleDate,fromNoon,toScheduleDate,toNoon,deptId,userId,state,resultMessage);
 
-
+        quickLogger.logReturn(result);
+        return result;
+    }
 
 
 

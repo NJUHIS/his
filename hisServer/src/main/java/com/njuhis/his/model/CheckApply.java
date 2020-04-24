@@ -29,13 +29,6 @@ public class CheckApply {
 
 
 
-
-    /**
-     * @deprecated
-     */
-    @JsonIgnore
-    private String name;
-
     @JsonIgnore
     private Integer delmark;
 
@@ -53,19 +46,7 @@ public class CheckApply {
     public List<CheckDetailed> getCheckDetailedList() {
         return checkDetailedList;
     }
-    /**
-     * @deprecated
-     */
-    public String getName() {
-        return name;
-    }
 
-    /**
-     * @deprecated
-     */
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
 
     public Integer getMedicalId() {
         return medicalId;

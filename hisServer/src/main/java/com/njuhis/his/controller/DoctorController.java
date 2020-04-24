@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Paul
@@ -222,6 +224,35 @@ public class DoctorController {
         quickLogger.logReturn(result);
         return result;
 
+    }
+
+
+    @RequestMapping("/getCheckAppliesByConditions")
+    public List<CheckApply> getCheckAppliesByConditions(@RequestParam(required = false) Integer userId,
+                                                        @RequestParam(required = false) Integer state,
+                                                        HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive("userId",userId,"state",state);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        List<CheckApply> result=doctorService.getCheckAppliesByConditions(userId,state,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+    @RequestMapping("/getPrescriptionsByConditions")
+    public List<Prescription> getPrescriptionsByConditions(@RequestParam(required = false) Integer userId,
+                                                           @RequestParam(required=false) Integer prescriptionState,
+                                                           HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive("userId",userId,"prescriptionState",prescriptionState);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        List<Prescription> result=doctorService.getPrescriptionsByConditions(userId,prescriptionState,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
     }
 
 

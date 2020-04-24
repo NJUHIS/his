@@ -66,8 +66,8 @@
     p.Invoice_id, p.DelMark,pd.id pdid, pd.PrescriptionId, pd.DrugsId, pd.Useage, pd.Dosage, pd.Frequency, pd.Price,
     pd.quantity,d.id did, d.Drugs_Code, d.Drugs_Name
     from prescription p
-    inner join PrescriptionDetailed pd on pd.PrescriptionId = p.id
-    inner join Drugs d on d.id = pd.DrugsID
+    left join prescriptiondetailed pd on pd.PrescriptionId = p.id
+    left join drugs d on d.id = pd.DrugsID
   </select>
 
 
@@ -76,8 +76,8 @@
     p.Invoice_id, p.DelMark,pd.id pdid, pd.PrescriptionId, pd.DrugsId, pd.Useage, pd.Dosage, pd.Frequency, pd.Price,
     pd.quantity,d.id did, d.Drugs_Code, d.Drugs_Name
     from prescription p
-    inner join PrescriptionDetailed pd on pd.PrescriptionId = p.id
-    inner join Drugs d on d.id = pd.DrugsID
+    inner join prescriptiondetailed pd on pd.PrescriptionId = p.id
+    inner join drugs d on d.id = pd.DrugsID
     where p.Medical_Id = #{MedicalId,jdbcType=INTEGER}
   </select>
 </mapper>

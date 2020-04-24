@@ -7,12 +7,16 @@ import com.njuhis.his.service.RegistrationService;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletResponse;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author Paul
@@ -26,6 +30,18 @@ public class RegistrationController {
     @Autowired
     private RegistrationService registrationService;
 
+
+    /**
+     * 这个函数使得這個 Controller 可以把 yyyy-MM-dd 的 String RequestParam 轉化為 Date 類型
+     * @param binder
+     * @param request
+     */
+    @InitBinder
+    public void initBinder(WebDataBinder binder, WebRequest request) {
+        //转换日期
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
+    }
 
     @RequestMapping("/addRegistration")
     public Register addRegistration(@RequestBody Register registration, HttpServletResponse httpServletResponse){
@@ -148,6 +164,45 @@ public class RegistrationController {
         quickLogger.logReturn(result);
         return result;
 
+    }
+
+    @RequestMapping("/getRegistrationsByConditions")
+    public List<Register> getRegistrationsByConditions(
+            @RequestParam(required = false)Date fromVisitDate,
+            @RequestParam(required = false)Integer fromNoon,
+            @RequestParam(required = false)Date toVisitDate,
+            @RequestParam(required = false)Integer toNoon,
+            @RequestParam(required = false)Integer departmentId,
+            @RequestParam(required = false)Integer userId,
+            @RequestParam(required = false)Integer registrationTypeId,
+            @RequestParam(required = false)Integer settlementTypeId,
+            @RequestParam(required = false)Integer needBook,
+            @RequestParam(required = false)Integer registrarId,
+            @RequestParam(required = false)Integer visitState,
+            @RequestParam(required = false)Integer patientId,
+            HttpServletResponse httpServletResponse
+    ){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(
+    "fromVisitDate",              fromVisitDate,
+              "fromNoon",                  fromNoon,
+              "toVisitDate",               toVisitDate,
+              "toNoon",                    toNoon,
+              "departmentId",              departmentId,
+              "userId",                    userId,
+              "registrationTypeId",        registrationTypeId,
+              "settlementTypeId",          settlementTypeId,
+              "needBook",                  needBook,
+              "registrarId",               registrarId,
+              "visitState",                visitState,
+              "patientId",                 patientId
+        );
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        List<Register> result=registrationService.getRegistrationsByConditions(fromVisitDate,fromNoon,toVisitDate,toNoon,departmentId,userId,registrationTypeId,settlementTypeId,needBook,registrarId,visitState,patientId,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
     }
 
 

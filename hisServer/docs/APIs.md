@@ -1134,16 +1134,57 @@ HTTP 响应示例：
 
 
 
+### 1.32 根据多个条件获取排班列表 /getSchedulingsByConditions
+
+参数：如果参数为null或省略，表示该条件不设限。如果日期下限和午别下限为null，说明不设置下限。上限同理。fromScheduleDate和fromNoon要么同时有数值，要么同时为null或省略，toScheduleDate和toNoon 同理。
+
+```java
+fromScheduleDate;//排班日期范围下限
+//standard forms ("yyyy-MM-dd")
+fromNoon;//排班午别范围下限
+//1 - 凌晨
+//2 - 早上
+//3 - 下午
+//4 - 晚上
+toScheduleDate;//排班日期范围上限
+//standard forms ("yyyy-MM-dd")
+toNoon;//排班午别范围上限
+//1 - 凌晨
+//2 - 早上
+//3 - 下午
+//4 - 晚上
+deptId;//被排班医生的所属部门主键ID
+userId;//被排班的医生的医院员工主键ID
+state;//排班的状态
+```
+
+返回：符合条件的排班的列表。
+
 HTTP 请求示例：
 
 ```http
+GET /his/BasicInformationController/getSchedulingsByConditions?userId=1&deptId=1&state=1&fromScheduleDate=2020-04-24&fromNoon=2&toScheduleDate=2020-04-25&toNoon=3 HTTP/1.1
+Host: localhost:9002
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+[
+    {
+        "id": 5,
+        "scheddate": "2020-04-24",
+        "deptid": 1,
+        "userid": 1,
+        "noon": 2,
+        "registquota": 20,
+        "state": 1,
+        "user": null,
+        "department": null
+    }
+]
 ```
 
 
@@ -1890,22 +1931,78 @@ HTTP 响应示例：
 }
 ```
 
+### 3.10 根据多个条件获取挂号列表 /getRegistrationsByConditions
 
+参数：如果参数为null或省略，表示该条件不设限。如果日期下限和午别下限为null，说明不设置下限。上限同理。fromVisitDate和fromNoon要么同时有数值，要么同时为null或省略，toVisitDate和toNoon 同理。
 
+```java
+Date fromVisitDate;//预约看诊日期范围下限
+//standard forms ("yyyy-MM-dd")
+fromNoon;//预约看诊午别范围下限
+//1 - 凌晨
+//2 - 早上
+//3 - 下午p
+//4 - 晚上
+toVisitDate;//预约看诊日期范围上限
+//standard forms ("yyyy-MM-dd")
+toNoon;//预约看诊午别范围上限
+//1 - 凌晨
+//2 - 早上
+//3 - 下午
+//4 - 晚上
+departmentId;//看诊科室主键ID
+userId;//医生的医院员工主键ID
+registrationTypeId;//挂号类型主键ID
+settlementTypeId;//结算类型主键ID
+needBook;//是否需要病历本
+//1-需要
+//0-不需要
+registrarId;//挂号员的医院员工主键ID
+visitState;//看诊状态
+//0-未看诊
+//1-已看诊或正在看诊
+patientId;//患者主键ID
+```
 
-
-
+返回：符合条件的挂号的列表。
 
 HTTP 请求示例：
 
 ```http
+GET /his/RegistrationController/getRegistrationsByConditions?userId=1&departmentId=1&visitState=1&fromVisitDate=2020-04-24&fromNoon=1&toVisitDate=2020-04-25&toNoon=1&registrationTypeId=1&needBook=1&patientId=1&settlementTypeId=1&registrarId=1 HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+[
+    {
+        "id": 5,
+        "realname": "sdfsdf",
+        "gender": 1,
+        "idnumber": "sdfsdfdsfs",
+        "birthdate": null,
+        "age": null,
+        "homeaddress": null,
+        "casenumber": null,
+        "visitdate": "2020-04-24",
+        "noon": 1,
+        "deptid": 1,
+        "userid": 1,
+        "registid": 1,
+        "settleid": 1,
+        "isbook": 1,
+        "registertime": null,
+        "registerid": 1,
+        "visitstate": 1,
+        "patientid": 1,
+        "patientCostsList": null
+    }
+]
 ```
 
 
@@ -2615,35 +2712,84 @@ HTTP 响应示例：
 
 
 
+### 4.16 根据多个条件获取检查（检验或处置）列表 /getCheckAppliesByConditions
 
+参数：如果参数为null或省略，表示该条件不设限。
+
+```java
+userId;//开立医生的医院员工主键ID
+state;//检查（检验或处置）状态
+```
+
+返回：符合条件的检查（检验或处置）的列表
 
 HTTP 请求示例：
 
 ```http
+GET /his/DoctorController/getCheckAppliesByConditions?userId=3&state=1 HTTP/1.1
+Host: localhost:9002
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+[
+    {
+        "id": 2,
+        "medicalId": 1,
+        "creationTime": null,
+        "totalSum": null,
+        "objective": null,
+        "userId": 3,
+        "state": 1,
+        "invoiceNumber": null,
+        "checkDetailedList": []
+    }
+]
 ```
 
 
 
 
 
+### 4.17 根据多个条件获取处方列表 /getPrescriptionsByConditions
+
+参数：如果参数为null或省略，表示该条件不设限。
+
+```java
+userId;//开立医生的医院员工主键ID
+prescriptionState;//处方状态
+```
+
+返回：符合条件的处方的列表
+
 HTTP 请求示例：
 
 ```http
+GET /his/DoctorController/getPrescriptionsByConditions?userId=1&prescriptionState=1 HTTP/1.1
+Host: localhost:9002
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+[
+    {
+        "id": 2,
+        "medicalId": null,
+        "userId": 1,
+        "prescriptionName": null,
+        "prescriptionState": 1,
+        "prescriptionTime": null,
+        "invoiceId": null,
+        "prescriptionDetailedList": []
+    }
+]
 ```
+
+
 
 
 

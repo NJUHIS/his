@@ -32,6 +32,31 @@ public class QuickLogger {
     }
 
     //二级
+
+    public void log(Object... objects){
+        try {
+            StringBuilder message=new StringBuilder();
+            for (Object object:objects) {
+                message.append(objectMapper.writeValueAsString(object)).append(" ");
+            }
+            log(message.toString(),3);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
+    public void logReceive(Object... objects){
+        try {
+            StringBuilder message=new StringBuilder().append("Received ");
+            for (Object object:objects) {
+                message.append(objectMapper.writeValueAsString(object)).append(" ");
+            }
+            log(message.toString(),3);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+    }
+
     public void log(String message) {
         log(message, 3);
 
@@ -87,4 +112,6 @@ public class QuickLogger {
         }
         System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<---------------------------------");
     }
+
+
 }

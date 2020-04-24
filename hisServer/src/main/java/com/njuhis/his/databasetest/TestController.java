@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/hello")
-public class testController {
+public class TestController {
     @RequestMapping("/")
     public String selectAllDrugs(){
         return "hello xjy!";

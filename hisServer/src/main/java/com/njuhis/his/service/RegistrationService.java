@@ -12,7 +12,10 @@ import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.Registration;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Service
@@ -159,6 +162,67 @@ public class RegistrationService {
         }else{
             return null;
         }
+    }
+
+    public List<Register> getRegistrationsByConditions(
+            Date fromVisitDate,
+            Integer fromNoon,
+            Date toVisitDate,
+            Integer toNoon,
+            Integer departmentId,
+            Integer userId,
+            Integer registrationTypeId,
+            Integer settlementTypeId,
+            Integer needBook,
+            Integer registrarId,
+            Integer visitState,
+            Integer patientId,
+            ResultMessage resultMessage
+    ){
+        if(fromVisitDate==null&&fromNoon!=null||fromVisitDate!=null&&fromNoon==null){
+            resultMessage.setClientError("\'From Appointment Date\' and \'From Noon\' are invalid. 「起始预约日期」和「起始预约午别」无效。" );
+            return null;
+        }
+
+        if(toVisitDate==null&&toNoon!=null||toVisitDate!=null&&toNoon==null){
+            resultMessage.setClientError("\'To Appointment Date\' and \'To Noon\' are invalid. 「结束预约日期」和「结束预约午别」无效。" );
+            return null;
+        }
+
+        if(fromVisitDate==null){
+            fromVisitDate=new Date(1901-1900, 6-1, 12); //1901-06-12
+            fromNoon=1;
+        }
+
+        if(toVisitDate==null){
+            toVisitDate=new Date(2201-1900, 6-1, 12); //2201-06-12
+            toNoon=4;
+        }
+
+
+        List<Register> registrations=registerMapper.selectAll();
+        List<Register> filteredRegistrations=new ArrayList<>();
+
+        for(Register registration:registrations){
+            if ((departmentId == null || departmentId.equals(registration.getDeptid()))
+                    && (userId == null || userId.equals(registration.getUserid()))
+                    && (visitState == null || visitState.equals(registration.getVisitstate()))
+                    &&(registrationTypeId==null||registrationTypeId.equals(registration.getRegistid()))
+                    &&(settlementTypeId==null||settlementTypeId.equals(registration.getSettleid()))
+                    &&(registrarId==null||registrarId.equals(registration.getRegisterid()))
+                    &&(needBook==null||needBook.equals(registration.getIsbook()))
+                    &&(patientId==null||patientId.equals(registration.getPatientid()))
+                    && (fromVisitDate.compareTo(registration.getVisitdate())<0
+                    ||fromVisitDate.compareTo(registration.getVisitdate())==0&&fromNoon<=registration.getNoon())
+                    &&(toVisitDate.compareTo(registration.getVisitdate())>0
+                    ||toVisitDate.compareTo(registration.getVisitdate())==0&&toNoon>=registration.getNoon())
+            ) {
+                filteredRegistrations.add(registration);
+
+            }
+
+        }
+        return filteredRegistrations;
     }
 
 }

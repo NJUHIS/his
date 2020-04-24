@@ -8,18 +8,13 @@ import java.util.List;
 @Component
 public interface CheckApplyMapper {
     int deleteByPrimaryKey(Integer id);
-
     int insert(CheckApply record);
-
     CheckApply selectByPrimaryKey(Integer id);
 
+    @Deprecated
     List<CheckApply> selectAll();
-
     int updateByPrimaryKey(CheckApply record);
-
     List<CheckApply> selectAllJoin();
-
     CheckApply selectByMedicalId(Integer medicalId);
-
     CheckApply selectByPrimaryKeyJoin(Integer id);
 }

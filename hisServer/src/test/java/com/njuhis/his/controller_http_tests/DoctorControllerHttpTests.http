@@ -160,3 +160,14 @@ Content-Type: application/json
 }
 
 
+###
+GET /his/DoctorController/getCheckAppliesByConditions?userId=3&state=1 HTTP/1.1
+Host: localhost:9002
+
+
+###
+GET /his/DoctorController/getPrescriptionsByConditions?userId=1&prescriptionState=1 HTTP/1.1
+Host: localhost:9002
+
+
+
