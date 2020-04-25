@@ -42,7 +42,8 @@ public class Register {
     private Integer registerid;//挂号员的医院员工主键ID
     private Integer visitstate;//看诊状态
     //0-未看诊
-    //1-已看诊或正在看诊
+    //1-正在看诊
+    //2-诊毕
     private Integer patientid;//患者主键ID
 
 

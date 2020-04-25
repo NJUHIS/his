@@ -69,6 +69,9 @@ public class User {
     // 4 - 药房人员
     // 5 - 财务人员
     // 6 - 行政人员
+    // 7 - 管理员
+    // 8 - 检查人员
+    // 9 - 处置人员
 
     private Integer doctitleid;//医生职称。
     // 1-主任医师
@@ -80,7 +83,7 @@ public class User {
     private Integer deptid;//医生所在科室主键ID
     private Integer registerLevelId;//医生挂号类型主键ID
     private String idnumber;//身份证号
-    
+
     private List<Scheduling> schedulingList; //排班的列表
 }
 ```
@@ -223,7 +226,8 @@ public class Register {
     private Integer registerid;//挂号员的医院员工主键ID
     private Integer visitstate;//看诊状态
     //0-未看诊
-    //1-已看诊或正在看诊
+    //1-正在看诊
+    //2-诊毕
     private Integer patientid;//患者主键ID
 
 }

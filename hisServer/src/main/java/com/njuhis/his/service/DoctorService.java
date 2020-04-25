@@ -30,8 +30,12 @@ public class DoctorService {
     private PrescriptionDetailedMapper prescriptionDetailedMapper;
 
 
-
-
+    /**
+     * 接診
+     * @param registrationId
+     * @param resultMessage
+     * @return
+     */
     public Register admit(Integer registrationId, ResultMessage resultMessage){
         Register registration=registrationService.getRegistrationById(registrationId,resultMessage);
         if(resultMessage.isSuccessful()){

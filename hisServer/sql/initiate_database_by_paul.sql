@@ -572,7 +572,7 @@ DROP TABLE IF EXISTS `registlevel`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `registlevel` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `RegistCode` varchar(64) NOT NULL,
+  `RegistCode` varchar(64),
   `RegistName` varchar(64) NOT NULL,
   `IsDefault` int(1) DEFAULT NULL COMMENT '0 - 不默认\n            1 - 默认',
   `Sequence` int(3) DEFAULT NULL,

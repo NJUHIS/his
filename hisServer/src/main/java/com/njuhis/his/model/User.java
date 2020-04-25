@@ -17,6 +17,9 @@ public class User {
     // 4 - 药房人员
     // 5 - 财务人员
     // 6 - 行政人员
+    // 7 - 管理员
+    // 8 - 检查人员
+    // 9 - 处置人员
 
     private Integer doctitleid;//医生职称。
     // 1-主任医师
