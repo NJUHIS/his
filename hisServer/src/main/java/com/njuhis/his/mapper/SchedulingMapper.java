@@ -11,7 +11,7 @@ public interface SchedulingMapper {
 
     int insert(Scheduling record);
 
-    Scheduling selectByPrimaryKey(Integer id);
+    Scheduling selectByPrimaryKeyExcludingDeleted(Integer id);
 
     List<Scheduling> selectAll();
 

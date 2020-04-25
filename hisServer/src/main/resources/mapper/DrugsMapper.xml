@@ -30,7 +30,7 @@
       #{drugsFormat,jdbcType=VARCHAR}, #{drugsUnit,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, 
       #{drugsDosage,jdbcType=VARCHAR}, #{drugsType,jdbcType=VARCHAR}, #{drugsPrice,jdbcType=DECIMAL}, 
       #{mnemonicCode,jdbcType=VARCHAR}, #{creationDate,jdbcType=TIMESTAMP}, #{lastUpdateDate,jdbcType=TIMESTAMP}, 
-      #{delmark,jdbcType=INTEGER})
+      0)
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Drugs">
     update drugs
@@ -44,8 +44,7 @@
       Drugs_Price = #{drugsPrice,jdbcType=DECIMAL},
       Mnemonic_Code = #{mnemonicCode,jdbcType=VARCHAR},
       Creation_Date = #{creationDate,jdbcType=TIMESTAMP},
-      Last_Update_Date = #{lastUpdateDate,jdbcType=TIMESTAMP},
-      DelMark = #{delmark,jdbcType=INTEGER}
+      Last_Update_Date = #{lastUpdateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

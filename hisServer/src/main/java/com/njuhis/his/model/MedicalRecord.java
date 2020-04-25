@@ -20,13 +20,7 @@ public class MedicalRecord {
     // 1 - 已预约
     // 2 - 进行中
     // 3 - 已完成/诊毕；
-
-    private String caseNumber;//病历编码
-
     private List<Diagnosis> diagnosisList;
-
-
-
 
 
 
@@ -45,13 +39,6 @@ public class MedicalRecord {
 
     }
 
-    public String getCaseNumber() {
-        return caseNumber;
-    }
-
-    public void setCaseNumber(String caseNumber) {
-        this.caseNumber = caseNumber == null ? null : caseNumber.trim();
-    }
 
     public Integer getRegisterId() {
         return registerId;

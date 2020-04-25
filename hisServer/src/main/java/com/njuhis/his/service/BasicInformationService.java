@@ -1,13 +1,11 @@
 package com.njuhis.his.service;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.njuhis.his.mapper.*;
 import com.njuhis.his.model.*;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,6 +35,8 @@ public class BasicInformationService {
     private RegisterLevelMapper registerLevelMapper;
     @Autowired
     private SchedulingMapper schedulingMapper;
+    @Autowired
+    private UtilityService utilityService;
 
     public List<Department> getAllDepartments(ResultMessage resultMessage){
         return departmentMapper.selectAll();
@@ -51,12 +51,16 @@ public class BasicInformationService {
 
         try {
             userMapper.insert(user);
-            return user;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         }catch (Exception exception){
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+
+        return personalInformationService.getUserById(user.getId(),resultMessage);
     }
 
     public List<User> getUsersBetweenScheduleDates(Long startDate, Long endDate,int pageNumber, int pageSize,  ResultMessage resultMessage){
@@ -81,12 +85,15 @@ public class BasicInformationService {
     public Department addDepartment(Department department, ResultMessage resultMessage){
         try {
             departmentMapper.insert(department);
-            return department;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         } catch (Exception exception) {
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+        return getDepartmentById(department.getId(),resultMessage);
     }
 
     public Department getDepartmentById(Integer id, ResultMessage resultMessage){
@@ -94,7 +101,7 @@ public class BasicInformationService {
         if(department!=null){
             return department;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.DEPARTMENT_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.DEPARTMENT_NOT_EXIST);
             return null;
         }
 
@@ -108,7 +115,7 @@ public class BasicInformationService {
                 return getDepartmentById(department.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -128,12 +135,15 @@ public class BasicInformationService {
     public ConstantItem addConstantItem(ConstantItem constantItem,ResultMessage resultMessage){
         try {
             constantItemMapper.insert(constantItem);
-            return constantItem;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         } catch (Exception exception) {
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+        return getConstantItemById(constantItem.getId(),resultMessage);
     }
 
 
@@ -142,7 +152,7 @@ public class BasicInformationService {
         if(constantItem!=null){
             return constantItem;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.CONSTANT_ITEM_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.CONSTANT_ITEM_NOT_EXIST);
             return null;
         }
     }
@@ -156,7 +166,7 @@ public class BasicInformationService {
                 return getConstantItemById(constantItem.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -172,12 +182,15 @@ public class BasicInformationService {
     public ConstantType addConstantType(ConstantType constantType,ResultMessage resultMessage){
         try {
             constantTypeMapper.insert(constantType);
-            return constantType;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         } catch (Exception exception) {
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+        return getConstantTypeById(constantType.getId(),resultMessage);
     }
 
     public ConstantType getConstantTypeById(Integer id, ResultMessage resultMessage){
@@ -185,7 +198,7 @@ public class BasicInformationService {
         if(constantType!=null){
             return constantType;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.CONSTANT_TYPE_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.CONSTANT_TYPE_NOT_EXIST);
             return null;
         }
 
@@ -200,7 +213,7 @@ public class BasicInformationService {
                 return getConstantTypeById(constantType.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -218,12 +231,15 @@ public class BasicInformationService {
     public ExpenseClass addExpenseClass(ExpenseClass expenseClass,ResultMessage resultMessage){
         try {
             expenseClassMapper.insert(expenseClass);
-            return expenseClass;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         } catch (Exception exception) {
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+        return getExpenseClassById(expenseClass.getId(),resultMessage);
     }
 
 
@@ -232,7 +248,7 @@ public class BasicInformationService {
         if(expenseClass!=null){
             return expenseClass;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.EXPENSE_TYPE_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.EXPENSE_TYPE_NOT_EXIST);
             return null;
         }
 
@@ -247,7 +263,7 @@ public class BasicInformationService {
                 return getExpenseClassById(expenseClass.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -266,12 +282,15 @@ public class BasicInformationService {
     public SettleCategory addSettleCategory(SettleCategory settleCategory,ResultMessage resultMessage){
         try {
             settleCategoryMapper.insert(settleCategory);
-            return settleCategory;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         } catch (Exception exception) {
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+        return getSettleCategoryById(settleCategory.getId(),resultMessage);
     }
 
 
@@ -280,7 +299,7 @@ public class BasicInformationService {
         if(settleCategory!=null){
             return settleCategory;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.SETTLEMENT_TYPE_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.SETTLEMENT_TYPE_NOT_EXIST);
             return null;
         }
 
@@ -295,7 +314,7 @@ public class BasicInformationService {
                 return getSettleCategoryById(settleCategory.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -314,12 +333,15 @@ public class BasicInformationService {
     public RegisterLevel addRegisterLevel(RegisterLevel registerLevel,ResultMessage resultMessage){
         try {
             registerLevelMapper.insert(registerLevel);
-            return registerLevel;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         } catch (Exception exception) {
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+        return getRegisterLevelById(registerLevel.getId(),resultMessage);
     }
 
 
@@ -328,7 +350,7 @@ public class BasicInformationService {
         if(registerLevel!=null){
             return registerLevel;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.REGISTRATION_TYPE_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.REGISTRATION_TYPE_NOT_EXIST);
             return null;
         }
 
@@ -343,7 +365,7 @@ public class BasicInformationService {
                 return getRegisterLevelById(registerLevel.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -360,21 +382,25 @@ public class BasicInformationService {
     public Scheduling addScheduling(Scheduling scheduling,ResultMessage resultMessage){
         try {
             schedulingMapper.insert(scheduling);
-            return scheduling;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         } catch (Exception exception) {
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+
+        return getSchedulingById(scheduling.getId(),resultMessage);
     }
 
     //TODO 待测试
     public Scheduling getSchedulingById(Integer id, ResultMessage resultMessage){
-        Scheduling scheduling=schedulingMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        Scheduling scheduling=schedulingMapper.selectByPrimaryKeyExcludingDeleted(id);//如果失败，并不会抛出异常，只会返回null。
         if(scheduling!=null){
             return scheduling;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.SCHEDULE_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.SCHEDULE_NOT_EXIST);
             return null;
         }
 
@@ -389,7 +415,7 @@ public class BasicInformationService {
                 return getSchedulingById(scheduling.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -407,12 +433,12 @@ public class BasicInformationService {
                                                        ResultMessage resultMessage){
 
         if(fromScheduleDate==null&&fromNoon!=null||fromScheduleDate!=null&&fromNoon==null){
-            resultMessage.setClientError("\'From Schedule Date\' and \'From Noon\' are invalid. 「起始排班日期」和「起始排班午别」无效。" );
+            resultMessage.sendClientError("\'From Schedule Date\' and \'From Noon\' are invalid. 「起始排班日期」和「起始排班午别」无效。" );
             return null;
         }
 
         if(toScheduleDate==null&&toNoon!=null||toScheduleDate!=null&&toNoon==null){
-            resultMessage.setClientError("\'To Schedule Date\' and \'To Noon\' are invalid. 「结束排班日期」和「结束排班午别」无效。" );
+            resultMessage.sendClientError("\'To Schedule Date\' and \'To Noon\' are invalid. 「结束排班日期」和「结束排班午别」无效。" );
             return null;
         }
 

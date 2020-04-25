@@ -18,7 +18,7 @@
       DiseaseICD, DiseaseType, DelMark
       )
     values (#{id,jdbcType=INTEGER}, #{diseasecode,jdbcType=VARCHAR}, #{diseasename,jdbcType=VARCHAR}, 
-      #{diseaseicd,jdbcType=VARCHAR}, #{diseasetype,jdbcType=VARCHAR}, #{delmark,jdbcType=INTEGER}
+      #{diseaseicd,jdbcType=VARCHAR}, #{diseasetype,jdbcType=VARCHAR}, 0
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Disease">
@@ -26,8 +26,7 @@
     set DiseaseCode = #{diseasecode,jdbcType=VARCHAR},
       DiseaseName = #{diseasename,jdbcType=VARCHAR},
       DiseaseICD = #{diseaseicd,jdbcType=VARCHAR},
-      DiseaseType = #{diseasetype,jdbcType=VARCHAR},
-      DelMark = #{delmark,jdbcType=INTEGER}
+      DiseaseType = #{diseasetype,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

@@ -15,13 +15,12 @@
     insert into constanttype (id, ConstantTypeCode, ConstantTypeName, 
       DelMark)
     values (#{id,jdbcType=INTEGER}, #{constanttypecode,jdbcType=VARCHAR}, #{constanttypename,jdbcType=VARCHAR}, 
-      #{delmark,jdbcType=INTEGER})
+      0)
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.ConstantType">
     update constanttype
     set ConstantTypeCode = #{constanttypecode,jdbcType=VARCHAR},
-      ConstantTypeName = #{constanttypename,jdbcType=VARCHAR},
-      DelMark = #{delmark,jdbcType=INTEGER}
+      ConstantTypeName = #{constanttypename,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

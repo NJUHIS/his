@@ -3,10 +3,7 @@
 <mapper namespace="com.njuhis.his.mapper.SettleCategoryMapper">
   <resultMap id="BaseResultMap" type="com.njuhis.his.model.SettleCategory">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="SettleCode" jdbcType="VARCHAR" property="settlecode" />
     <result column="SettleName" jdbcType="VARCHAR" property="settlename" />
-    <result column="IsDefault" jdbcType="INTEGER" property="isdefault" />
-    <result column="Sequence" jdbcType="INTEGER" property="sequence" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -14,29 +11,24 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.njuhis.his.model.SettleCategory" useGeneratedKeys="true"  keyProperty="id">
-    insert into settlecategory (id, SettleCode, SettleName, 
-      IsDefault, Sequence, DelMark
+    insert into settlecategory (id, SettleName, DelMark
       )
-    values (#{id,jdbcType=INTEGER}, #{settlecode,jdbcType=VARCHAR}, #{settlename,jdbcType=VARCHAR}, 
-      #{isdefault,jdbcType=INTEGER}, #{sequence,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER}, #{settlename,jdbcType=VARCHAR},0
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.SettleCategory">
     update settlecategory
-    set SettleCode = #{settlecode,jdbcType=VARCHAR},
-      SettleName = #{settlename,jdbcType=VARCHAR},
-      IsDefault = #{isdefault,jdbcType=INTEGER},
-      Sequence = #{sequence,jdbcType=INTEGER},
-      DelMark = #{delmark,jdbcType=INTEGER}
+    set
+      SettleName = #{settlename,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, SettleCode, SettleName, IsDefault, Sequence, DelMark
+    select id,  SettleName,  DelMark
     from settlecategory
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, SettleCode, SettleName, IsDefault, Sequence, DelMark
+    select id, SettleName,  DelMark
     from settlecategory
   </select>
 </mapper>

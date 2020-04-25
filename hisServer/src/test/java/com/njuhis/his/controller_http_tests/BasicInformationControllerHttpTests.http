@@ -269,14 +269,13 @@ Content-Type: application/json
 {
   "scheddate": "2019-03-02",
   "deptid": 3,
-  "userid": 1,
+  "userid": 5,
   "noon": 1,
   "registquota": 3,
   "state": 0,
   "user": null,
   "department": null
 }
-
 
 ###
 GET /his/BasicInformationController/getSchedulingsByConditions?userId=1&deptId=1&state=1&fromScheduleDate=2020-04-24&fromNoon=2&toScheduleDate=2020-04-25&toNoon=3 HTTP/1.1

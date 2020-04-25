@@ -3,7 +3,6 @@
 <mapper namespace="com.njuhis.his.mapper.MedicalRecordMapper">
   <resultMap id="BaseResultMap" type="com.njuhis.his.model.MedicalRecord">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="Case_Number" jdbcType="VARCHAR" property="caseNumber" />
     <result column="Register_Id" jdbcType="INTEGER" property="registerId" />
     <result column="Medical_Readme" jdbcType="VARCHAR" property="medicalReadme" />
     <result column="Medical_Present" jdbcType="VARCHAR" property="medicalPresent" />
@@ -38,20 +37,20 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.njuhis.his.model.MedicalRecord" useGeneratedKeys="true"  keyProperty="id">
-    insert into medicalrecord (id, Case_Number, Register_Id, 
-      Medical_Readme, Medical_Present, Present_Treat, 
-      Medical_History, Medical_Allergy, Medical_Physique, 
-      Medical_Diagnosis, Medical_Handling, Case_State, 
+    insert into medicalrecord (id,  Register_Id,
+      Medical_Readme, Medical_Present, Present_Treat,
+      Medical_History, Medical_Allergy, Medical_Physique,
+      Medical_Diagnosis, Medical_Handling, Case_State,
       DelMark)
-    values (#{id,jdbcType=INTEGER}, #{caseNumber,jdbcType=VARCHAR}, #{registerId,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{registerId,jdbcType=INTEGER},
       #{medicalReadme,jdbcType=VARCHAR}, #{medicalPresent,jdbcType=VARCHAR}, #{presentTreat,jdbcType=VARCHAR}, 
       #{medicalHistory,jdbcType=VARCHAR}, #{medicalAllergy,jdbcType=VARCHAR}, #{medicalPhysique,jdbcType=VARCHAR}, 
       #{medicalDiagnosis,jdbcType=VARCHAR}, #{medicalHandling,jdbcType=VARCHAR}, #{caseState,jdbcType=INTEGER}, 
-      #{delmark,jdbcType=INTEGER})
+      0)
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.MedicalRecord">
     update medicalrecord
-    set Case_Number = #{caseNumber,jdbcType=VARCHAR},
+    set
       Register_Id = #{registerId,jdbcType=INTEGER},
       Medical_Readme = #{medicalReadme,jdbcType=VARCHAR},
       Medical_Present = #{medicalPresent,jdbcType=VARCHAR},
@@ -61,25 +60,24 @@
       Medical_Physique = #{medicalPhysique,jdbcType=VARCHAR},
       Medical_Diagnosis = #{medicalDiagnosis,jdbcType=VARCHAR},
       Medical_Handling = #{medicalHandling,jdbcType=VARCHAR},
-      Case_State = #{caseState,jdbcType=INTEGER},
-      DelMark = #{delmark,jdbcType=INTEGER}
+      Case_State = #{caseState,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, Case_Number, Register_Id, Medical_Readme, Medical_Present, Present_Treat, 
+    select id, Register_Id, Medical_Readme, Medical_Present, Present_Treat,
     Medical_History, Medical_Allergy, Medical_Physique, Medical_Diagnosis, Medical_Handling, 
     Case_State, DelMark
     from medicalrecord
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, Case_Number, Register_Id, Medical_Readme, Medical_Present, Present_Treat, 
+    select id, Register_Id, Medical_Readme, Medical_Present, Present_Treat,
     Medical_History, Medical_Allergy, Medical_Physique, Medical_Diagnosis, Medical_Handling, 
     Case_State, DelMark
     from medicalrecord
   </select>
   <select id="selectAllJoin" resultMap="BaseResultMapCollection">
-    select m.id, m.Case_Number, m.Register_Id, m.Medical_Readme, m.Medical_Present, m.Present_Treat,
+    select m.id, m.Register_Id, m.Medical_Readme, m.Medical_Present, m.Present_Treat,
     m.Medical_History, m.Medical_Allergy, m.Medical_Physique, m.Medical_Diagnosis, m.Medical_Handling,
     m.Case_State, m.DelMark,d.id did, d.MedicalId, d.diseaseId, d.state,di.id diid, di.DiseaseCode, di.DiseaseName, di.DiseaseICD, di.DiseaseType, di.DelMark
     from medicalrecord m
@@ -87,7 +85,7 @@
     inner join disease di on di.id = d.diseaseid
   </select>
   <select id="selectByPrimaryKeyJoin" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
-    select m.id, m.Case_Number, m.Register_Id, m.Medical_Readme, m.Medical_Present, m.Present_Treat,
+    select m.id, m.Register_Id, m.Medical_Readme, m.Medical_Present, m.Present_Treat,
     m.Medical_History, m.Medical_Allergy, m.Medical_Physique, m.Medical_Diagnosis, m.Medical_Handling,
     m.Case_State, m.DelMark,d.id did, d.MedicalId, d.diseaseId, d.state,di.id diid, di.DiseaseCode, di.DiseaseName, di.DiseaseICD, di.DiseaseType, di.DelMark
     from medicalrecord m

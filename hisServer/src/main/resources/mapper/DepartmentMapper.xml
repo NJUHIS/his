@@ -42,7 +42,7 @@
       DeptCategory, DeptTypeID, DelMark
       )
     values (#{id,jdbcType=INTEGER}, #{deptcode,jdbcType=VARCHAR}, #{deptname,jdbcType=VARCHAR}, 
-      #{deptcategory,jdbcType=VARCHAR}, #{depttypeid,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER}
+      #{deptcategory,jdbcType=VARCHAR}, #{depttypeid,jdbcType=INTEGER}, 0
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Department">
@@ -50,8 +50,7 @@
     set DeptCode = #{deptcode,jdbcType=VARCHAR},
       DeptName = #{deptname,jdbcType=VARCHAR},
       DeptCategory = #{deptcategory,jdbcType=VARCHAR},
-      DeptTypeID = #{depttypeid,jdbcType=INTEGER},
-      DelMark = #{delmark,jdbcType=INTEGER}
+      DeptTypeID = #{depttypeid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

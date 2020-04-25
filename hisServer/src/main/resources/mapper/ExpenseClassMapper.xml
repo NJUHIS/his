@@ -15,13 +15,12 @@
     insert into expenseclass (ID, ExpCode, ExpName, 
       DelMark)
     values (#{id,jdbcType=INTEGER}, #{expcode,jdbcType=VARCHAR}, #{expname,jdbcType=VARCHAR}, 
-      #{delmark,jdbcType=INTEGER})
+      0)
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.ExpenseClass">
     update expenseclass
     set ExpCode = #{expcode,jdbcType=VARCHAR},
-      ExpName = #{expname,jdbcType=VARCHAR},
-      DelMark = #{delmark,jdbcType=INTEGER}
+      ExpName = #{expname,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

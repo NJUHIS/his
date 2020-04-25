@@ -20,11 +20,11 @@ public class CheckApply {
     //3 - 已收费，未检验检查处置
     //4 - 正在检验检查处置或等待结果
     //5 - 检验检查处置已完成，结果已出
-    private String invoiceNumber;//发票编码
-
-
-
+    private Integer invoiceId;//发票主键ID
     private List<CheckDetailed> checkDetailedList ;
+
+
+
 
 
 
@@ -96,12 +96,12 @@ public class CheckApply {
         this.state = state;
     }
 
-    public String getInvoiceNumber() {
-        return invoiceNumber;
+    public Integer getInvoiceId() {
+        return invoiceId;
     }
 
-    public void setInvoiceNumber(String invoiceNumber) {
-        this.invoiceNumber = invoiceNumber == null ? null : invoiceNumber.trim();
+    public void setInvoiceId(Integer invoiceId) {
+        this.invoiceId = invoiceId;
     }
 
     public Integer getDelmark() {

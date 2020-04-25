@@ -1,0 +1,1 @@
+INSERT INTO his.register (id, RealName, Gender, IDnumber, BirthDate, Age, AgeType, HomeAddress, MedicalRecordId, VisitDate, Noon, DeptId, UserId, RegistId, SettleID, IsBook, RegisterTime, RegisterID, VisitState, patientID) VALUES (100, 'Nelson', 1, '443478199006016289', null, null, null, null, null, '2020-06-18', 1, 1, 100, 100, 100, 0, 1587831205053, 101, 0, 100);

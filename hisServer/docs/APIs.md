@@ -1024,7 +1024,7 @@ HTTP 响应示例：
 HTTP 请求示例：
 
 ```http
-GET /his/BasicInformationController/getSchedulingById?id=1 HTTP/1.1
+GET /his/BasicInformationController/getSchedulingById?id=14 HTTP/1.1
 Host: localhost:9002
 
 
@@ -1035,15 +1035,34 @@ HTTP 响应示例：
 
 ```json
 {
-    "id": 1,
-    "scheddate": "2019-03-01",
+    "id": 14,
+    "scheddate": "2019-03-02",
     "deptid": 3,
-    "userid": 1,
+    "userid": 5,
     "noon": 1,
     "registquota": 3,
     "state": 0,
-    "user": null,
-    "department": null
+    "user": {
+        "id": 5,
+        "username": "jkjnlj",
+        "password": null,
+        "realname": "jkljlj",
+        "usertypeid": null,
+        "doctitleid": null,
+        "isscheduling": null,
+        "deptid": 3,
+        "registerLevelId": 1,
+        "idnumber": null,
+        "schedulingList": null
+    },
+    "department": {
+        "id": 3,
+        "deptname": "普通内科",
+        "deptcategory": "11",
+        "depttypeid": 1,
+        "deptcode": "PTNK",
+        "userList": null
+    }
 }
 ```
 
@@ -1105,7 +1124,7 @@ Content-Type: application/json
 {
     "scheddate": "2019-03-02",
     "deptid": 3,
-    "userid": 1,
+    "userid": 5,
     "noon": 1,
     "registquota": 3,
     "state": 0,
@@ -1118,15 +1137,34 @@ HTTP 响应示例：
 
 ```json
 {
-    "id": 2,
+    "id": 19,
     "scheddate": "2019-03-02",
     "deptid": 3,
-    "userid": 1,
+    "userid": 5,
     "noon": 1,
     "registquota": 3,
     "state": 0,
-    "user": null,
-    "department": null
+    "user": {
+        "id": 5,
+        "username": "jkjnlj",
+        "password": null,
+        "realname": "jkljlj",
+        "usertypeid": null,
+        "doctitleid": null,
+        "isscheduling": null,
+        "deptid": 3,
+        "registerLevelId": 1,
+        "idnumber": null,
+        "schedulingList": null
+    },
+    "department": {
+        "id": 3,
+        "deptname": "普通内科",
+        "deptcategory": "11",
+        "depttypeid": 1,
+        "deptcode": "PTNK",
+        "userList": null
+    }
 }
 ```
 
@@ -2788,48 +2826,6 @@ HTTP 响应示例：
     }
 ]
 ```
-
-
-
-
-
-### 4.18 通过病历编码获取一个病历 /getMedicalRecordByCaseNumber
-
-参数：病历编码 `caseNumber`
-
-返回：病历
-
-HTTP 请求示例：
-
-```http
-GET /his/DoctorController/getMedicalRecordByCaseNumber?caseNumber=3 HTTP/1.1
-Host: localhost:9002
-
-
-
-```
-
-HTTP 响应示例：
-
-```json
-{
-    "id": 3,
-    "registerId": 5,
-    "medicalReadme": null,
-    "medicalPresent": null,
-    "presentTreat": null,
-    "medicalHistory": null,
-    "medicalAllergy": null,
-    "medicalPhysique": null,
-    "medicalDiagnosis": null,
-    "medicalHandling": null,
-    "caseState": 2,
-    "caseNumber": "3",
-    "diagnosisList": null
-}
-```
-
-
 
 
 

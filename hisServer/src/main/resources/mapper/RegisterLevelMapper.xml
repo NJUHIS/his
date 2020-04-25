@@ -3,44 +3,33 @@
 <mapper namespace="com.njuhis.his.mapper.RegisterLevelMapper">
   <resultMap id="BaseResultMap" type="com.njuhis.his.model.RegisterLevel">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="RegistCode" jdbcType="VARCHAR" property="registcode" />
     <result column="RegistName" jdbcType="VARCHAR" property="registname" />
-    <result column="IsDefault" jdbcType="INTEGER" property="isdefault" />
-    <result column="Sequence" jdbcType="INTEGER" property="sequence" />
     <result column="RegistFee" jdbcType="DECIMAL" property="registfee" />
-    <result column="RegistQuota" jdbcType="INTEGER" property="registquota" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from registlevel
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER};
   </delete>
   <insert id="insert" parameterType="com.njuhis.his.model.RegisterLevel" useGeneratedKeys="true"  keyProperty="id">
-    insert into registlevel (id, RegistCode, RegistName, 
-      IsDefault, Sequence, RegistFee, 
-      RegistQuota, DelMark)
-    values (#{id,jdbcType=INTEGER}, #{registcode,jdbcType=VARCHAR}, #{registname,jdbcType=VARCHAR}, 
-      #{isdefault,jdbcType=INTEGER}, #{sequence,jdbcType=INTEGER}, #{registfee,jdbcType=DECIMAL}, 
-      #{registquota,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER})
+    insert into registlevel (id,  RegistName, RegistFee, DelMark)
+    values (#{id,jdbcType=INTEGER}, #{registname,jdbcType=VARCHAR},
+       #{registfee,jdbcType=DECIMAL}, 0);
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.RegisterLevel">
     update registlevel
-    set RegistCode = #{registcode,jdbcType=VARCHAR},
+    set
       RegistName = #{registname,jdbcType=VARCHAR},
-      IsDefault = #{isdefault,jdbcType=INTEGER},
-      Sequence = #{sequence,jdbcType=INTEGER},
-      RegistFee = #{registfee,jdbcType=DECIMAL},
-      RegistQuota = #{registquota,jdbcType=INTEGER},
-      DelMark = #{delmark,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+      RegistFee = #{registfee,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER};
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, RegistCode, RegistName, IsDefault, Sequence, RegistFee, RegistQuota, DelMark
+    select *
     from registlevel
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, RegistCode, RegistName, IsDefault, Sequence, RegistFee, RegistQuota, DelMark
+    select *
     from registlevel
   </select>
 </mapper>

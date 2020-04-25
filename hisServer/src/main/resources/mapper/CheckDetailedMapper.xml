@@ -33,8 +33,8 @@
       #{deptid,jdbcType=INTEGER}, #{creationtime,jdbcType=BIGINT}, #{position,jdbcType=VARCHAR}, 
       #{state,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{identification,jdbcType=INTEGER}, 
       #{inspecttime,jdbcType=BIGINT}, #{result,jdbcType=VARCHAR}, #{resulttime,jdbcType=BIGINT},
-      #{operatorid,jdbcType=INTEGER}, #{entryclerkid,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER}
-      )
+      #{operatorid,jdbcType=INTEGER}, #{entryclerkid,jdbcType=INTEGER}, 0
+      );
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.CheckDetailed">
     update checkdetailed
@@ -50,21 +50,29 @@
       Result = #{result,jdbcType=VARCHAR},
       ResultTime = #{resulttime,jdbcType=BIGINT},
       operatorId = #{operatorid,jdbcType=INTEGER},
-      entryClerkId = #{entryclerkid,jdbcType=INTEGER},
-      DelMark = #{delmark,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+      entryClerkId = #{entryclerkid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER} and (DelMark is null or DelMark=0)
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, CheckAppId, CheckProjId, DeptId, CreationTime, Position, State, Price, 
-    Identification, InspectTime, Result, ResultTime, operatorId, entryClerkId, DelMark
+
+<!--  @author Paul-->
+  <select id="selectByPrimaryKeyExcludingDeleted" resultMap="BaseResultMap">
+    select *
     from checkdetailed
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id} and (DelMark is null or DelMark=0);
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, CheckAppId, CheckProjId, DeptId, CreationTime, Position, State, Price, 
-    Identification, InspectTime, Result, ResultTime, operatorId, entryClerkId, DelMark
+
+  <select id="selectAllExcludingDeleted" resultMap="BaseResultMap">
+    select *
     from checkdetailed
+    where DelMark is null or DelMark=0;
   </select>
+
+
+<!--  <select id="selectAll" resultMap="BaseResultMap">-->
+<!--    select id, CheckAppId, CheckProjId, DeptId, CreationTime, Position, State, Price, -->
+<!--    Identification, InspectTime, Result, ResultTime, operatorId, entryClerkId, DelMark-->
+<!--    from checkdetailed-->
+<!--  </select>-->
   <select id="selectByDeptId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, CheckAppId, CheckProjId, DeptId, CreationTime, Position, State, Price,
     Identification, InspectTime, Result, ResultTime, operatorId, entryClerkId, DelMark

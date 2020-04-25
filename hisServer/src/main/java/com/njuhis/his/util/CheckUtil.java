@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -39,7 +38,7 @@ public class CheckUtil {
                     }
                 }catch (Exception exception){
                     exception.printStackTrace();
-                    resultMessage.setUnknownError();
+                    resultMessage.sendUnknownError();
                     return;
                 }
 
@@ -50,7 +49,7 @@ public class CheckUtil {
             for(String fieldName:emptyFields){
                 errorMessages.append("\nThe \""+notEmptyFieldsCheckList.get(fieldName)[0]+" ("+fieldName+")\" cannot be left empty. 「"+notEmptyFieldsCheckList.get(fieldName)[1]+"」不能为空。");
             }
-            resultMessage.setClientError(errorMessages.toString());
+            resultMessage.sendClientError(errorMessages.toString());
         }
 
     }

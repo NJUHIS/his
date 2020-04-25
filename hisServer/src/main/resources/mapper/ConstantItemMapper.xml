@@ -13,17 +13,15 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.njuhis.his.model.ConstantItem" useGeneratedKeys="true"  keyProperty="id">
-    insert into constantitem (id, ConstantTypeId, ConstantCode, 
-      ConstantName, DelMark)
+    insert into constantitem (id, ConstantTypeId, ConstantCode, ConstantName, DelMark)
     values (#{id,jdbcType=INTEGER}, #{constanttypeid,jdbcType=INTEGER}, #{constantcode,jdbcType=VARCHAR}, 
-      #{constantname,jdbcType=VARCHAR}, #{delmark,jdbcType=INTEGER})
+      #{constantname,jdbcType=VARCHAR}, 0)
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.ConstantItem">
     update constantitem
     set ConstantTypeId = #{constanttypeid,jdbcType=INTEGER},
       ConstantCode = #{constantcode,jdbcType=VARCHAR},
-      ConstantName = #{constantname,jdbcType=VARCHAR},
-      DelMark = #{delmark,jdbcType=INTEGER}
+      ConstantName = #{constantname,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

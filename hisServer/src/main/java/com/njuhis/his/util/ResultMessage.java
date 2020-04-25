@@ -24,27 +24,44 @@ public class ResultMessage {
         this.httpServletResponse=httpServletResponse;
     }
     private boolean isSuccessful=true;
+    private StringBuilder errorMessage=new StringBuilder();
 
-    public void setClientError(String errorMessage){
+    public ResultMessage appendErrorMessage(String errorMessage){
+        this.errorMessage.append(errorMessage);
+        return this;
+    }
+
+    public void sendClientError(String errorMessage) {
+        this.errorMessage.append(errorMessage);
+        isSuccessful = false;
+        logger.log(Level.WARNING, makeYellow(this.errorMessage.toString()));
+        try {
+            httpServletResponse.sendError(400, this.errorMessage.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendError(String errorMessage){
+        this.errorMessage.append(errorMessage);
         isSuccessful=false;
-        logger.log(Level.WARNING,makeYellow(errorMessage));
+        logger.log(Level.SEVERE,makeRed(this.errorMessage.toString()));
         try{
-            httpServletResponse.sendError(400,errorMessage);
+            httpServletResponse.sendError(500,this.errorMessage.toString());
         }catch (IOException e){
             e.printStackTrace();
         }
     }
-    public void setUnknownError(){
-        setUnknownError(ErrorMessage.UNKNOWN_ERROR_OCCURRED);
+
+    public void sendClientError(){
+        sendClientError("");
     }
-    public void setUnknownError(String errorMessage){
-        isSuccessful=false;
-        logger.log(Level.SEVERE,makeRed(errorMessage));
-        try{
-            httpServletResponse.sendError(500,errorMessage);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+    public void sendError(){
+        sendError("");
+    }
+
+    public void sendUnknownError(){
+        sendError(ErrorMessage.UNKNOWN_ERROR_OCCURRED);
     }
 
     /**
@@ -71,6 +88,8 @@ public class ResultMessage {
         public static final String SETTLEMENT_TYPE_NOT_EXIST = "The settlement type does not exist. 该结算类型不存在。";
         public static final String SCHEDULE_NOT_EXIST="The schedule does not exist. 该排班不存在。";
         public static final String INCORRECT_PASSWORD = "Incorrect password. 密码错误。";
+        public static final String INVALID_FOREIGN_KEY ="Invalid foreign key. 存在无效外键。";
+        public static final String NULL_VALUE ="Null Value. 存在 Null 值。";
         /**
          * 未知來源錯誤
          */

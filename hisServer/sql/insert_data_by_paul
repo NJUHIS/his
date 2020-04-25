@@ -1,3 +1,0 @@
-INSERT INTO his.registlevel (id, RegistCode, RegistName, IsDefault, Sequence, RegistFee, RegistQuota, DelMark) VALUES (1, null, '专家号', null, null, 50.00, null, null);
-INSERT INTO his.registlevel (id, RegistCode, RegistName, IsDefault, Sequence, RegistFee, RegistQuota, DelMark) VALUES (2, null, '急诊号', null, null, 100.00, null, null);
-INSERT INTO his.registlevel (id, RegistCode, RegistName, IsDefault, Sequence, RegistFee, RegistQuota, DelMark) VALUES (3, null, '普通号', null, null, 20.00, null, null);

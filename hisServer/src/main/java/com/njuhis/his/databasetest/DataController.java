@@ -96,7 +96,8 @@ public class DataController {
     CheckApplyMapper checkApplyMapper;
     @RequestMapping("/cso")
     List<CheckApply> seCheckApplly(){
-        return checkApplyMapper.selectAllJoin();
+        //return checkApplyMapper.selectAllJoin();
+        return checkApplyMapper.selectAllExcludingDeleted();
     }
 
 

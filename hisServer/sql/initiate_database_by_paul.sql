@@ -5,8 +5,10 @@
 -- Server version	8.0.11
 
 
+
 set global max_allowed_packet = 2*1024*1024*10;
 SET NAMES utf8 ;
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -28,17 +30,23 @@ DROP TABLE IF EXISTS `checkapply`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `checkapply` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `Medical_Id` int(9) DEFAULT NULL,
+  `Medical_Id` int(9) NOT NULL,
   `Creation_Time` bigint(64) DEFAULT NULL,
   `Total_Sum` decimal(8,2) DEFAULT NULL,
   `Objective` varchar(512) DEFAULT NULL,
-  `User_Id` int(9) DEFAULT NULL,
-  `state` int(9) DEFAULT NULL,
-  `Invoice_Number` varchar(64) DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
+  `User_Id` int(9) NOT NULL,
+  `state` int(9) NOT NULL,
+  `InvoiceId` int(9) DEFAULT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `Index_1` (`id`),
+  constraint checkapply_invoice_id_fk
+      foreign key (InvoiceId) references invoice (id),
+  constraint checkapply_medicalrecord_id_fk
+      foreign key (Medical_Id) references medicalrecord (id),
+  constraint checkapply_user_id_fk
+      foreign key (User_Id) references user (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,8 +67,8 @@ DROP TABLE IF EXISTS `checkdetailed`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `checkdetailed` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `CheckAppId` int(9) DEFAULT NULL,
-  `CheckProjId` int(9) DEFAULT NULL,
+  `CheckAppId` int(9) NOT NULL,
+  `CheckProjId` int(9) NOT NULL,
   `DeptId` int(9) DEFAULT NULL,
   `CreationTime` bigint(64) DEFAULT NULL,
   `Position` varchar(512) DEFAULT NULL,
@@ -72,45 +80,56 @@ CREATE TABLE `checkdetailed` (
   `ResultTime` bigint(64) DEFAULT NULL,
   `operatorId` int(9) DEFAULT NULL,
   `entryClerkId` int(9) DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  KEY `Index_1` (`id`),
+  constraint checkdetailed_checkapply_id_fk
+      foreign key (CheckAppId) references checkapply (id),
+  constraint checkdetailed_fmeditem_id_fk
+      foreign key (CheckProjId) references fmeditem (id),
+  constraint checkdetailed_user_id_fk
+      foreign key (operatorId) references user (id),
+  constraint checkdetailed_user_id_2_fk
+      foreign key (entryClerkId) references user(id),
+ constraint checkdetailed_department_id_fk
+      foreign key (DeptId) references department(id)
+
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `checkdetailed`
 --
 
-LOCK TABLES `checkdetailed` WRITE;
-/*!40000 ALTER TABLE `checkdetailed` DISABLE KEYS */;
-/*!40000 ALTER TABLE `checkdetailed` ENABLE KEYS */;
-UNLOCK TABLES;
+# LOCK TABLES `checkdetailed` WRITE;
+# /*!40000 ALTER TABLE `checkdetailed` DISABLE KEYS */;
+# /*!40000 ALTER TABLE `checkdetailed` ENABLE KEYS */;
+# UNLOCK TABLES;
 
---
--- Table structure for table `checkresult`
---
-
-DROP TABLE IF EXISTS `checkresult`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `checkresult` (
-  `id` int(9) NOT NULL AUTO_INCREMENT,
-  `Case_Number` varchar(64) DEFAULT NULL,
-  `advice` varchar(255) DEFAULT NULL,
-  `result` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `checkresult`
---
-
-LOCK TABLES `checkresult` WRITE;
-/*!40000 ALTER TABLE `checkresult` DISABLE KEYS */;
-/*!40000 ALTER TABLE `checkresult` ENABLE KEYS */;
-UNLOCK TABLES;
+# --
+# -- Table structure for table `checkresult`
+# --
+#
+# DROP TABLE IF EXISTS `checkresult`;
+# /*!40101 SET @saved_cs_client     = @@character_set_client */;
+#  SET character_set_client = utf8mb4 ;
+# CREATE TABLE `checkresult` (
+#   `id` int(9) NOT NULL AUTO_INCREMENT,
+#   `Case_Number` varchar(64) DEFAULT NULL,
+#   `advice` varchar(255) DEFAULT NULL,
+#   `result` varchar(255) DEFAULT NULL,
+#   PRIMARY KEY (`id`)
+# ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+# /*!40101 SET character_set_client = @saved_cs_client */;
+#
+# --
+# -- Dumping data for table `checkresult`
+# --
+#
+# LOCK TABLES `checkresult` WRITE;
+# /*!40000 ALTER TABLE `checkresult` DISABLE KEYS */;
+# /*!40000 ALTER TABLE `checkresult` ENABLE KEYS */;
+# UNLOCK TABLES;
 
 --
 -- Table structure for table `constantitem`
@@ -121,11 +140,13 @@ DROP TABLE IF EXISTS `constantitem`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `constantitem` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `ConstantTypeId` int(9) DEFAULT NULL,
-  `ConstantCode` varchar(64) DEFAULT NULL,
-  `ConstantName` varchar(64) DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `ConstantTypeId` int(9) NOT NULL,
+  `ConstantCode` varchar(64) NOT NULL,
+  `ConstantName` varchar(64) NOT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  constraint constantitem_constanttype_id_fk
+      foreign key (ConstantTypeId) references constanttype (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -148,9 +169,9 @@ DROP TABLE IF EXISTS `constanttype`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `constanttype` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `ConstantTypeCode` varchar(64) DEFAULT NULL,
-  `ConstantTypeName` varchar(64) DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
+  `ConstantTypeCode` varchar(64) NOT NULL,
+  `ConstantTypeName` varchar(64) NOT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -178,10 +199,10 @@ CREATE TABLE `department` (
   `DeptName` varchar(64) NOT NULL,
   `DeptCategory` varchar(64) DEFAULT NULL,
   `DeptTypeID` int(9) NOT NULL,
-  `DelMark` int(1) DEFAULT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,11 +224,15 @@ DROP TABLE IF EXISTS `diagnosis`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `diagnosis` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `MedicalId` int(9) DEFAULT NULL,
-  `diseaseId` int(9) DEFAULT NULL,
-  `state` int(9) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `MedicalId` int(9) NOT NULL,
+  `diseaseId` int(9) NOT NULL,
+  `state` int(9) NOT NULL,
+  PRIMARY KEY (`id`),
+  constraint diagnosis_disease_id_fk
+      foreign key (diseaseId) references disease (id),
+  constraint diagnosis_medicalrecord_id_fk
+      foreign key (MedicalId) references medicalrecord (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -228,11 +253,11 @@ DROP TABLE IF EXISTS `disease`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `disease` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `DiseaseCode` varchar(64) DEFAULT NULL,
-  `DiseaseName` varchar(255) DEFAULT NULL,
-  `DiseaseICD` varchar(64) DEFAULT NULL,
-  `DiseaseType` varchar(64) DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
+  `DiseaseCode` varchar(64) NOT NULL,
+  `DiseaseName` varchar(255) NOT NULL,
+  `DiseaseICD` varchar(64) NOT NULL,
+  `DiseaseType` varchar(64) NOT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -258,7 +283,7 @@ DROP TABLE IF EXISTS `drugs`;
 CREATE TABLE `drugs` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `Drugs_Code` char(14) DEFAULT NULL,
-  `Drugs_Name` varchar(64) DEFAULT NULL,
+  `Drugs_Name` varchar(64) NOT NULL,
   `Drugs_Format` varchar(64) DEFAULT NULL,
   `Drugs_Unit` varchar(64) DEFAULT NULL,
   `Manufacturer` varchar(512) DEFAULT NULL,
@@ -268,7 +293,7 @@ CREATE TABLE `drugs` (
   `Mnemonic_Code` varchar(64) DEFAULT NULL,
   `Creation_Date` datetime DEFAULT NULL,
   `Last_Update_Date` datetime DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -293,9 +318,9 @@ DROP TABLE IF EXISTS `expenseclass`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `expenseclass` (
   `ID` int(9) NOT NULL AUTO_INCREMENT,
-  `ExpCode` varchar(64) DEFAULT NULL,
-  `ExpName` varchar(64) DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
+  `ExpCode` varchar(64) NOT NULL,
+  `ExpName` varchar(64) NOT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -320,14 +345,16 @@ DROP TABLE IF EXISTS `fmeditem`;
 CREATE TABLE `fmeditem` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `ItemCode` varchar(64) DEFAULT NULL,
-  `ItemName` varchar(64) DEFAULT NULL,
+  `ItemName` varchar(64) NOT NULL,
   `Format` varchar(64) DEFAULT NULL,
   `Price` decimal(8,2) DEFAULT NULL,
   `ExpClassID` int(9) DEFAULT NULL,
-  `DeptId` int(9) DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
+  `DeptId` int(9) NOT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  KEY `Index_1` (`id`)
+  KEY `Index_1` (`id`),
+  constraint fmeditem_department_id_fk
+      foreign key (DeptId) references department (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -350,14 +377,16 @@ DROP TABLE IF EXISTS `invoice`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `invoice` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `InvoiceNum` varchar(64) DEFAULT NULL,
+  `InvoiceNum` varchar(64) NOT NULL,
   `Money` decimal(8,2) DEFAULT NULL,
-  `State` int(1) DEFAULT NULL COMMENT '0 - 作废\n            1 - 正常\n            2 - 重打\n            3 - 补打\n            4 - 红冲',
+  `State` int(1) NOT NULL COMMENT '0 - 作废\n            1 - 正常\n            2 - 重打\n            3 - 补打\n            4 - 红冲',
   `CreationTime` bigint(64) DEFAULT NULL,
-  `UserId` int(9) DEFAULT NULL,
-  `DailyState` int(1) DEFAULT NULL COMMENT '0 - 未日结审核\n            1 - 已经审核\n            默认值为0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `UserId` int(9) NOT NULL,
+  `DailyState` int(1) NOT NULL COMMENT '0 - 未日结审核\n            1 - 已经审核\n            默认值为0',
+  PRIMARY KEY (`id`),
+  constraint invoice_user_id_fk
+      foreign key (UserId) references user (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,7 +407,6 @@ DROP TABLE IF EXISTS `medicalrecord`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `medicalrecord` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `Case_Number` varchar(64) DEFAULT NULL,
   `Register_Id` int(9) NOT NULL,
   `Medical_Readme` varchar(512) DEFAULT NULL,
   `Medical_Present` varchar(512) DEFAULT NULL,
@@ -388,11 +416,13 @@ CREATE TABLE `medicalrecord` (
   `Medical_Physique` varchar(512) DEFAULT NULL,
   `Medical_Diagnosis` varchar(512) DEFAULT NULL,
   `Medical_Handling` varchar(512) DEFAULT NULL,
-  `Case_State` int(9) DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
+  `Case_State` int(9) NOT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `Index_1` (`id`),
+  constraint medicalrecord_register_id_fk
+      foreign key (Register_Id) references register (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -416,10 +446,10 @@ CREATE TABLE `patient` (
   `name` varchar(45) DEFAULT NULL,
   `IDnumber` varchar(45) DEFAULT NULL,
   `phone` varchar(45) DEFAULT NULL,
-  `loginname` varchar(45) DEFAULT NULL,
+  `loginname` varchar(45) NOT NULL,
   `password` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -440,15 +470,21 @@ DROP TABLE IF EXISTS `patientcosts`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `patientcosts` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `InvoiceId` int(9) DEFAULT NULL,
-  `RegisterId` int(9) DEFAULT NULL,
+  `InvoiceId` int(9) NOT NULL,
+  `RegisterId` int(9) NOT NULL,
   `Name` varchar(64) DEFAULT NULL,
   `Price` decimal(8,2) DEFAULT NULL,
-  `DeptId` varchar(64) DEFAULT NULL,
-  `State` int(1) DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='在实际环境，患者查询费用明细情况较多，费用会从多张表中综合查询，性能较慢；为了提升性能，单独建立本表';
+  `DeptId` int(9) NOT NULL,
+  `State` int(1) NOT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  constraint patientcosts_department_id_fk
+      foreign key (DeptId) references department (id),
+  constraint patientcosts_invoice_id_fk
+      foreign key (InvoiceId) references invoice (id),
+  constraint patientcosts_register_id_fk
+      foreign key (RegisterId) references register (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='在实际环境，患者查询费用明细情况较多，费用会从多张表中综合查询，性能较慢；为了提升性能，单独建立本表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -469,16 +505,23 @@ DROP TABLE IF EXISTS `prescription`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `prescription` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `Medical_Id` int(9) DEFAULT NULL,
-  `User_Id` int(9) DEFAULT NULL,
+  `Medical_Id` int(9) NOT NULL,
+  `User_Id` int(9) NOT NULL,
   `Prescription_Name` varchar(64) DEFAULT NULL,
-  `Prescription_State` int(1) DEFAULT NULL,
+  `Prescription_State` int(1) NOT NULL,
   `Prescription_Time` bigint(64) DEFAULT NULL,
-  `Invoice_id` varchar(64) DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
+  `Invoice_id` int(9) DEFAULT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  KEY `Index_1` (`id`),
+  constraint prescription_user_id_fk
+      foreign key (User_Id) references user (id),
+  constraint prescription_medicalrecord_id_fk
+      foreign key (Medical_Id) references medicalrecord (id),
+  constraint prescription_invoice_id_fk
+      foreign key (Invoice_id) references invoice (id)
+
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -499,16 +542,20 @@ DROP TABLE IF EXISTS `prescriptiondetailed`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `prescriptiondetailed` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `PrescriptionId` int(9) DEFAULT NULL,
-  `DrugsId` int(9) DEFAULT NULL,
+  `PrescriptionId` int(9) NOT NULL,
+  `DrugsId` int(9) NOT NULL,
   `Useage` varchar(64) DEFAULT NULL,
   `Dosage` varchar(64) DEFAULT NULL,
   `Frequency` varchar(64) DEFAULT NULL,
   `Price` decimal(8,2) DEFAULT NULL,
-  `quantity` int(11) DEFAULT NULL,
+  `quantity` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  KEY `Index_1` (`id`),
+  constraint prescriptiondetailed_drugs_id_fk
+      foreign key (DrugsId) references drugs (id),
+  constraint prescriptiondetailed_prescription_id_fk
+      foreign key (PrescriptionId) references prescription (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -529,28 +576,42 @@ DROP TABLE IF EXISTS `register`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `register` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `RealName` varchar(64) DEFAULT NULL,
-  `Gender` int(9) DEFAULT NULL,
-  `IDnumber` varchar(18) DEFAULT NULL,
+  `RealName` varchar(64) NOT NULL,
+  `Gender` int(9) NOT NULL,
+  `IDnumber` varchar(45) NOT NULL,
   `BirthDate` date DEFAULT NULL,
   `Age` int(3) DEFAULT NULL,
   `AgeType` int(9) DEFAULT NULL,
   `HomeAddress` varchar(64) DEFAULT NULL,
-  `CaseNumber` varchar(64) DEFAULT NULL,
-  `VisitDate` date DEFAULT NULL,
-  `Noon` int(9) DEFAULT NULL,
-  `DeptId` int(9) DEFAULT NULL,
-  `UserId` int(9) DEFAULT NULL,
-  `RegistId` int(9) DEFAULT NULL,
-  `SettleID` int(9) DEFAULT NULL,
-  `IsBook` int(1) DEFAULT NULL,
-  `RegisterTime` bigint(64) DEFAULT NULL,
-  `RegisterID` int(9) DEFAULT NULL,
-  `VisitState` int(9) DEFAULT NULL,
-  `patientID` int(9) DEFAULT NULL,
+  `MedicalRecordId` int(9) DEFAULT NULL,
+  `VisitDate` date NOT NULL,
+  `Noon` int(9) NOT NULL,
+  `DeptId` int(9) NOT NULL,
+  `UserId` int(9) NOT NULL,
+  `RegistId` int(9) NOT NULL,
+  `SettleID` int(9) NOT NULL,
+  `IsBook` int(1)  NOT NULL,
+  `RegisterTime` bigint(64) NOT NULL,
+  `RegisterID` int(9) NOT NULL,
+  `VisitState` int(9) NOT NULL,
+  `patientID` int(9) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  KEY `Index_1` (`id`),
+  constraint register_medicalrecord_id_fk
+      foreign key (MedicalRecordId) references medicalrecord (id),
+  constraint register_department_id_fk
+      foreign key (DeptId) references department (id),
+  constraint register_patient_id_fk
+      foreign key (patientID) references patient (id),
+  constraint register_registlevel_id_fk
+      foreign key (RegistId) references registlevel (id),
+  constraint register_settlecategory_id_fk
+      foreign key (SettleID) references settlecategory (id),
+  constraint register_user_id_fk
+      foreign key (RegisterID) references user (id),
+  constraint register_user_id_fk_2
+      foreign key (UserId) references user (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -572,13 +633,9 @@ DROP TABLE IF EXISTS `registlevel`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `registlevel` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `RegistCode` varchar(64),
   `RegistName` varchar(64) NOT NULL,
-  `IsDefault` int(1) DEFAULT NULL COMMENT '0 - 不默认\n            1 - 默认',
-  `Sequence` int(3) DEFAULT NULL,
-  `RegistFee` decimal(8,2) DEFAULT NULL,
-  `RegistQuota` int(3) DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
+  `RegistFee` decimal(8,2) NOT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -604,13 +661,17 @@ CREATE TABLE `scheduling` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `SchedDate` date NOT NULL,
   `DeptId` int(9) NOT NULL,
-  `UserId` int(9) DEFAULT NULL,
+  `UserId` int(9) NOT NULL,
   `Noon` int(11) NOT NULL,
   `RegistQuota` int(3) NOT NULL,
   `State` int(1) DEFAULT NULL COMMENT '1=有效  0=无效',
   PRIMARY KEY (`id`),
-  KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  KEY `Index_1` (`id`),
+  constraint scheduling_department_id_fk
+      foreign key (DeptId) references department (id),
+  constraint scheduling_user_id_fk
+      foreign key (UserId) references user (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -632,24 +693,21 @@ DROP TABLE IF EXISTS `settlecategory`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `settlecategory` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `SettleCode` varchar(64) NOT NULL,
   `SettleName` varchar(64) NOT NULL,
-  `IsDefault` int(1) DEFAULT NULL,
-  `Sequence` int(3) ,
-  `DelMark` int(1) DEFAULT NULL COMMENT '1为删除',
+  `DelMark` int(1) NOT NULL DEFAULT 0 COMMENT '1为删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `settlecategory`
 --
 
-LOCK TABLES `settlecategory` WRITE;
-/*!40000 ALTER TABLE `settlecategory` DISABLE KEYS */;
-INSERT INTO `settlecategory` VALUES (1,'zf','自费',1,1,0),(2,'yb','医保',0,2,0),(3,'nb','农保',0,3,0);
-/*!40000 ALTER TABLE `settlecategory` ENABLE KEYS */;
-UNLOCK TABLES;
+# LOCK TABLES `settlecategory` WRITE;
+# /*!40000 ALTER TABLE `settlecategory` DISABLE KEYS */;
+# INSERT INTO `settlecategory` VALUES (1,'zf','自费',1,1,0),(2,'yb','医保',0,2,0),(3,'nb','农保',0,3,0);
+# /*!40000 ALTER TABLE `settlecategory` ENABLE KEYS */;
+# UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
@@ -662,18 +720,23 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `UserName` varchar(64) NOT NULL,
-  `Password` varchar(64) DEFAULT NULL,
+  `Password` varchar(64) NOT NULL,
   `RealName` varchar(64) NOT NULL,
-  `UserTypeID` int(9) DEFAULT NULL COMMENT '1 - 挂号人员\n            2 - 门诊医生\n            3 - 医技医生\n            4 - 药房人员\n            5 - 财务人员\n            6 - 行政人员\n            ',
+  `UserTypeID` int(9) NOT NULL COMMENT '1 - 挂号人员\n            2 - 门诊医生\n            3 - 医技医生\n            4 - 药房人员\n            5 - 财务人员\n            6 - 行政人员\n            ',
   `DocTitleID` int(9) DEFAULT NULL,
   `IsScheduling` int(9) DEFAULT NULL,
-  `DeptId` int(9) NOT NULL,
+  `DeptId` int(9) DEFAULT NULL,
   `RegistId` int(9) DEFAULT NULL,
-  `DelMark` int(1) DEFAULT NULL,
+  `DelMark` int(1) NOT NULL DEFAULT 0,
   `IDnumber` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `Index_1` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  KEY `Index_1` (`id`),
+  constraint user_department_id_fk
+      foreign key (DeptId) references department (id),
+  constraint user_registlevel_id_fk
+      foreign key (RegistId) references registlevel (id)
+
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

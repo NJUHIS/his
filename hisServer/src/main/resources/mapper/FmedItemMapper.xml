@@ -21,7 +21,7 @@
       DeptId, DelMark)
     values (#{id,jdbcType=INTEGER}, #{itemcode,jdbcType=VARCHAR}, #{itemname,jdbcType=VARCHAR}, 
       #{format,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{expclassid,jdbcType=INTEGER}, 
-      #{deptid,jdbcType=INTEGER}, #{delmark,jdbcType=INTEGER})
+      #{deptid,jdbcType=INTEGER}, 0)
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.FmedItem">
     update fmeditem
@@ -30,8 +30,7 @@
       Format = #{format,jdbcType=VARCHAR},
       Price = #{price,jdbcType=DECIMAL},
       ExpClassID = #{expclassid,jdbcType=INTEGER},
-      DeptId = #{deptid,jdbcType=INTEGER},
-      DelMark = #{delmark,jdbcType=INTEGER}
+      DeptId = #{deptid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

@@ -10,7 +10,7 @@
     <result column="Age" jdbcType="INTEGER" property="age" />
     <result column="AgeType" jdbcType="INTEGER" property="agetype" />
     <result column="HomeAddress" jdbcType="VARCHAR" property="homeaddress" />
-    <result column="CaseNumber" jdbcType="VARCHAR" property="casenumber" />
+    <result column="MedicalRecordId" jdbcType="INTEGER" property="medicalRecordId" />
     <result column="VisitDate" jdbcType="DATE" property="visitdate" />
     <result column="Noon" jdbcType="INTEGER" property="noon" />
     <result column="DeptId" jdbcType="INTEGER" property="deptid" />
@@ -39,14 +39,14 @@
   <insert id="insert" parameterType="com.njuhis.his.model.Register" useGeneratedKeys="true"  keyProperty="id">
     insert into register (id, RealName, Gender, 
       IDnumber, BirthDate, Age, 
-      AgeType, HomeAddress, CaseNumber, 
+      AgeType, HomeAddress, MedicalRecordId,
       VisitDate, Noon, DeptId, 
       UserId, RegistId, SettleID, 
       IsBook, RegisterTime, RegisterID, 
       VisitState, patientID)
     values (#{id,jdbcType=INTEGER}, #{realname,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, 
       #{idnumber,jdbcType=VARCHAR}, #{birthdate,jdbcType=DATE}, #{age,jdbcType=INTEGER}, 
-      #{agetype,jdbcType=INTEGER}, #{homeaddress,jdbcType=VARCHAR}, #{casenumber,jdbcType=VARCHAR}, 
+      #{agetype,jdbcType=INTEGER}, #{homeaddress,jdbcType=VARCHAR}, #{medicalRecordId,jdbcType=INTEGER},
       #{visitdate,jdbcType=DATE}, #{noon,jdbcType=INTEGER}, #{deptid,jdbcType=INTEGER}, 
       #{userid,jdbcType=INTEGER}, #{registid,jdbcType=INTEGER}, #{settleid,jdbcType=INTEGER}, 
       #{isbook,jdbcType=INTEGER}, #{registertime,jdbcType=BIGINT}, #{registerid,jdbcType=INTEGER}, 
@@ -61,7 +61,7 @@
       Age = #{age,jdbcType=INTEGER},
       AgeType = #{agetype,jdbcType=INTEGER},
       HomeAddress = #{homeaddress,jdbcType=VARCHAR},
-      CaseNumber = #{casenumber,jdbcType=VARCHAR},
+      MedicalRecordId = #{medicalRecordId,jdbcType=INTEGER},
       VisitDate = #{visitdate,jdbcType=DATE},
       Noon = #{noon,jdbcType=INTEGER},
       DeptId = #{deptid,jdbcType=INTEGER},
@@ -76,27 +76,27 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, RealName, Gender, IDnumber, BirthDate, Age, AgeType, HomeAddress, CaseNumber, 
+    select id, RealName, Gender, IDnumber, BirthDate, Age, AgeType, HomeAddress, MedicalRecordId,
     VisitDate, Noon, DeptId, UserId, RegistId, SettleID, IsBook, RegisterTime, RegisterID, 
     VisitState, patientID
     from register
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, RealName, Gender, IDnumber, BirthDate, Age, AgeType, HomeAddress, CaseNumber, 
+    select id, RealName, Gender, IDnumber, BirthDate, Age, AgeType, HomeAddress, MedicalRecordId,
     VisitDate, Noon, DeptId, UserId, RegistId, SettleID, IsBook, RegisterTime, RegisterID, 
     VisitState, patientID
     from register
   </select>
   <select id="selectByIdNumber" parameterType="java.lang.String" resultMap="BaseResultMap">
-  select id, RealName, Gender, IDnumber, BirthDate, Age, AgeType, HomeAddress, CaseNumber,
+  select id, RealName, Gender, IDnumber, BirthDate, Age, AgeType, HomeAddress, MedicalRecordId,
   VisitDate, Noon, DeptId, UserId, RegistId, SettleID, IsBook, RegisterTime, RegisterID,
   VisitState, patientID
   from register
   where idnumber = #{idnumber}
   </select>
   <select id="selectByPatientId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-  select id, RealName, Gender, IDnumber, BirthDate, Age, AgeType, HomeAddress, CaseNumber,
+  select id, RealName, Gender, IDnumber, BirthDate, Age, AgeType, HomeAddress, MedicalRecordId,
   VisitDate, Noon, DeptId, UserId, RegistId, SettleID, IsBook, RegisterTime, RegisterID,
   VisitState, patientID
   from register
@@ -104,14 +104,14 @@
   </select>
 
   <select id="selectAllCost" resultMap="BaseResultMapCost">
-    select r.id, r.RealName, r.Gender, r.IDnumber, r.BirthDate, r.Age, r.AgeType, r.HomeAddress, r.CaseNumber,
+    select r.id, r.RealName, r.Gender, r.IDnumber, r.BirthDate, r.Age, r.AgeType, r.HomeAddress, r.MedicalRecordId,
     r.VisitDate, r.Noon, r.DeptId, r.UserId, r.RegistId, r.SettleID, r.IsBook, r.RegisterTime, r.RegisterID,
     r.VisitState, r.patientID,c.id cid, c.InvoiceId, c.RegisterId, c.Name, c.Price, c.DeptId, c.State, c.DelMark
     from register r
     inner join patientcosts c where c.RegisterId=r.id
   </select>
   <select id="selectByPrimaryKeyCost" parameterType="java.lang.Integer" resultMap="BaseResultMapCost">
-    select r.id, r.RealName, r.Gender, r.IDnumber, r.BirthDate, r.Age, r.AgeType, r.HomeAddress, r.CaseNumber,
+    select r.id, r.RealName, r.Gender, r.IDnumber, r.BirthDate, r.Age, r.AgeType, r.HomeAddress, r.MedicalRecordId,
     r.VisitDate, r.Noon, r.DeptId, r.UserId, r.RegistId, r.SettleID, r.IsBook, r.RegisterTime, r.RegisterID,
     r.VisitState, r.patientID,c.id cid, c.InvoiceId, c.RegisterId, c.Name, c.Price, c.DeptId, c.State, c.DelMark
     from register r

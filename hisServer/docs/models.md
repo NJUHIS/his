@@ -197,7 +197,7 @@ public class SettleCategory {
 ```java
 //挂号
 public class Register {
- private Integer id;//挂号主键ID
+    private Integer id;//挂号主键ID
     private String realname;//患者真实姓名
     private Integer gender; //患者性别
     //1 - 男性
@@ -207,9 +207,9 @@ public class Register {
     private Date birthdate;//患者出生日期
     private Integer age;//患者年龄
     private String homeaddress;//患者家庭住址
-    private String casenumber;//病历编码。
+    private Integer medicalRecordId;//病历主键ID
     private Date visitdate;//预约看诊日期
-    //standard forms ("yyyy-MM-dd")
+    //standard forms ("yyyy-MM-dd"))
     private Integer noon;//预约看诊午别
     //1 - 凌晨
     //2 - 早上
@@ -229,7 +229,7 @@ public class Register {
     //1-正在看诊
     //2-诊毕
     private Integer patientid;//患者主键ID
-
+    private List<PatientCosts> patientCostsList;
 }
 ```
 
@@ -254,8 +254,7 @@ public class MedicalRecord {
     // 1 - 已预约
     // 2 - 进行中
     // 3 - 已完成/诊毕；
-
-    private String caseNumber;//病历编码
+    private List<Diagnosis> diagnosisList;
 }
 ```
 
@@ -327,19 +326,21 @@ public class PrescriptionDetailed {
 //检查（检验或处置）
 //这个类是个巨无霸，耦合了非常多的业务。包括检查Examination、检验Test和处置Disposal
 public class CheckApply {
-    private Integer id;//检查（检验或处置）主键ID
+    private Integer id;//检验检查处置主键ID
     private Integer medicalId;//病历主键ID
     private Long creationTime; //生效时间。以医生确认发出的时间为准。毫秒数。
-    private BigDecimal totalSum; //总金额。自动根据检查（检验或处置）明细计算。
+    private BigDecimal totalSum; //总金额。自动根据检验检查处置明细计算。
     private String objective; //目的和要求
     private Integer userId;//开立医生的医院员工主键ID
-    private Integer state;//检查（检验或处置）状态
+    private Integer state;//检验检查处置状态
     //1 - 编辑中
     //2 - 已开立并发出，未收费
-    //3 - 已收费，未检查（检验或处置）
-    //4 - 正在检查（检验或处置）或等待结果
-    //5 - 检查（检验或处置）已完成，结果已出
-    private String invoiceNumber;//发票编码
+    //3 - 已收费，未检验检查处置
+    //4 - 正在检验检查处置或等待结果
+    //5 - 检验检查处置已完成，结果已出
+    private Integer invoiceId;//发票主键ID
+    private List<CheckDetailed> checkDetailedList ;
+}
 ```
 
 ### 14. FmedItem - 非药品项目 Non-drug Item

@@ -1,0 +1,2 @@
+INSERT INTO his.user (id, UserName, Password, RealName, UserTypeID, DocTitleID, IsScheduling, DeptId, RegistId, DelMark, IDnumber) VALUES (100, 'robin', 'password', 'Robin', 2, 1, null, 1, 100, 0, null);
+INSERT INTO his.user (id, UserName, Password, RealName, UserTypeID, DocTitleID, IsScheduling, DeptId, RegistId, DelMark, IDnumber) VALUES (101, 'mike', 'password', 'Mike', 1, null, null, null, null, 0, null);

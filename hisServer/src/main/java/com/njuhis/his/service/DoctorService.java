@@ -6,8 +6,8 @@ import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 //import com.sun.tools.javac.comp.Check;
 //import com.sun.tools.javac.comp.Check;
-import com.sun.tools.javac.comp.Check;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,7 +28,8 @@ public class DoctorService {
     private CheckDetailedMapper checkDetailedMapper;
     @Autowired
     private PrescriptionDetailedMapper prescriptionDetailedMapper;
-
+    @Autowired
+    private UtilityService utilityService;
 
     /**
      * 接診
@@ -40,7 +41,7 @@ public class DoctorService {
         Register registration=registrationService.getRegistrationById(registrationId,resultMessage);if(!resultMessage.isSuccessful()) return null;
 
         if(registration.getVisitstate().equals(1)){
-            resultMessage.setClientError("The patient of this registration is visiting the doctor. 该挂号的病人正在被医生接诊中。");
+            resultMessage.sendClientError("The patient of this registration is visiting the doctor. 该挂号的病人正在被医生接诊中。");
             return null;
         }
 
@@ -50,10 +51,8 @@ public class DoctorService {
         medicalRecord.setCaseState(2); //病歷狀態：進行中
 
         medicalRecord=addMedicalRecord(medicalRecord,resultMessage);if(!resultMessage.isSuccessful()) return null;
-        medicalRecord.setCaseNumber(medicalRecord.getId().toString());
-        registration.setCasenumber(medicalRecord.getId().toString());
+        registration.setMedicalRecordId(medicalRecord.getId());
 
-        updateMedicalRecord(medicalRecord,resultMessage);if(!resultMessage.isSuccessful()) return null;
         registration=registrationService.updateRegistration(registration,resultMessage);
 
         return registration;
@@ -62,50 +61,50 @@ public class DoctorService {
     public MedicalRecord getMedicalRecordById(Integer id,ResultMessage resultMessage){
         MedicalRecord medicalRecord=medicalRecordMapper.selectByPrimaryKey(id);
         if(medicalRecord==null){
-            resultMessage.setClientError(ResultMessage.ErrorMessage.MEDICAL_RECORD_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.MEDICAL_RECORD_NOT_EXIST);
         }
         return medicalRecord;
     }
 
-    public MedicalRecord getMedicalRecordByCaseNumber(String caseNumber,ResultMessage resultMessage){
-        Integer medicalRecordId=Integer.valueOf(caseNumber);
-        return getMedicalRecordById(medicalRecordId,resultMessage);
-    }
-
-
 
     public CheckApply getCheckApplyById(Integer id, ResultMessage resultMessage){
-        CheckApply checkApply=checkApplyMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        CheckApply checkApply=checkApplyMapper.selectByPrimaryKeyExcludingDeleted(id);//如果失败，并不会抛出异常，只会返回null。
         if(checkApply!=null){
             return checkApply;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.EXAMINATION_TEST_DISPOSAL_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.EXAMINATION_TEST_DISPOSAL_NOT_EXIST);
             return null;
         }
-
     }
 
     public MedicalRecord addMedicalRecord(MedicalRecord medicalRecord, ResultMessage resultMessage){
         try {
             medicalRecordMapper.insert(medicalRecord);
-            return medicalRecord;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         }catch (Exception exception){
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+        return getMedicalRecordById(medicalRecord.getId(),resultMessage);
     }
 
 
     public CheckApply addCheckApply(CheckApply checkApply, ResultMessage resultMessage){
         try {
             checkApplyMapper.insert(checkApply);
-            return checkApply;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         }catch (Exception exception){
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+
+        return  getCheckApplyById(checkApply.getId(),resultMessage);
     }
 
     public CheckApply updateCheckApply(CheckApply checkApply, ResultMessage resultMessage){
@@ -116,7 +115,7 @@ public class DoctorService {
                 return getCheckApplyById(checkApply.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -133,7 +132,7 @@ public class DoctorService {
                 return getMedicalRecordById(medicalRecord.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -144,12 +143,15 @@ public class DoctorService {
     public Prescription addPrescription(Prescription prescription, ResultMessage resultMessage){
         try {
             prescriptionMapper.insert(prescription);
-            return prescription;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         } catch (Exception exception) {
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+        return getPrescriptionById(prescription.getId(),resultMessage);
     }
 
 
@@ -158,7 +160,7 @@ public class DoctorService {
         if(prescription!=null){
             return prescription;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.PRESCRIPTION_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.PRESCRIPTION_NOT_EXIST);
             return null;
         }
 
@@ -173,7 +175,7 @@ public class DoctorService {
                 return getPrescriptionById(prescription.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -184,21 +186,24 @@ public class DoctorService {
     public CheckDetailed addCheckDetailed(CheckDetailed checkDetailed,ResultMessage resultMessage){
         try {
             checkDetailedMapper.insert(checkDetailed);
-            return checkDetailed;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         } catch (Exception exception) {
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+        return getCheckDetailedById(checkDetailed.getId(),resultMessage);
     }
 
 
     public CheckDetailed getCheckDetailedById(Integer id, ResultMessage resultMessage){
-        CheckDetailed checkDetailed=checkDetailedMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        CheckDetailed checkDetailed=checkDetailedMapper.selectByPrimaryKeyExcludingDeleted(id);//如果失败，并不会抛出异常，只会返回null。
         if(checkDetailed!=null){
             return checkDetailed;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.EXAMINATION_TEST_DISPOSAL_DETAIL_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.EXAMINATION_TEST_DISPOSAL_DETAIL_NOT_EXIST);
             return null;
         }
 
@@ -213,7 +218,7 @@ public class DoctorService {
                 return getCheckDetailedById(checkDetailed.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -225,12 +230,15 @@ public class DoctorService {
     public PrescriptionDetailed addPrescriptionDetailed(PrescriptionDetailed prescriptionDetailed,ResultMessage resultMessage){
         try {
             prescriptionDetailedMapper.insert(prescriptionDetailed);
-            return prescriptionDetailed;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         } catch (Exception exception) {
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+        return getPrescriptionDetailedById(prescriptionDetailed.getId(),resultMessage);
     }
 
 
@@ -239,7 +247,7 @@ public class DoctorService {
         if(prescriptionDetailed!=null){
             return prescriptionDetailed;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.PRESCRIPTION_DETAIL_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.PRESCRIPTION_DETAIL_NOT_EXIST);
             return null;
         }
 
@@ -254,7 +262,7 @@ public class DoctorService {
                 return getPrescriptionDetailedById(prescriptionDetailed.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -263,7 +271,7 @@ public class DoctorService {
     }
 
     public List<CheckApply> getCheckAppliesByConditions(Integer userId,Integer state,ResultMessage resultMessage){
-        List<CheckApply> allCheckApplies=checkApplyMapper.selectAllJoin();
+        List<CheckApply> allCheckApplies=checkApplyMapper.selectAllExcludingDeleted();
         List<CheckApply>  filteredCheckApplies=new ArrayList<>();
         for(CheckApply checkApply:allCheckApplies){
             if(

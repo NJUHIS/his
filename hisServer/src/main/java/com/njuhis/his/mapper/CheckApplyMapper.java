@@ -7,14 +7,36 @@ import java.util.List;
 
 @Component
 public interface CheckApplyMapper {
+    @Deprecated
     int deleteByPrimaryKey(Integer id);
     int insert(CheckApply record);
-    CheckApply selectByPrimaryKey(Integer id);
+
+    int updateByPrimaryKey(CheckApply record);
+
 
     @Deprecated
-    List<CheckApply> selectAll();
-    int updateByPrimaryKey(CheckApply record);
-    List<CheckApply> selectAllJoin();
     CheckApply selectByMedicalId(Integer medicalId);
-    CheckApply selectByPrimaryKeyJoin(Integer id);
+
+    /**
+     * @author Paul
+     * @param id
+     * @return
+     */
+    CheckApply selectByPrimaryKeyExcludingDeleted(Integer id);
+
+    /**
+     * @author Paul
+     * @return
+     */
+    List<CheckApply> selectAllExcludingDeleted();
+
+
+
+
+
+//    List<CheckApply> selectAllJoin();
+//    @Deprecated
+//    CheckApply selectByPrimaryKey(Integer id);
+//    @Deprecated
+//    List<CheckApply> selectAll();
 }

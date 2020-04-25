@@ -9,10 +9,11 @@ import com.njuhis.his.model.PatientCosts;
 import com.njuhis.his.model.Register;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
+import org.omg.CORBA.INVALID_ACTIVITY;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.Registration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,8 @@ public class RegistrationService {
     private PatientCostsMapper patientCostsMapper;
     @Autowired
     private RegistrationDataCleaner registrationDataCleaner;
+    @Autowired
+    private UtilityService utilityService;
 
 
     public Register addRegistration(Register registration, ResultMessage resultMessage){
@@ -41,24 +44,28 @@ public class RegistrationService {
         registration.setVisitstate(0);//看診狀態為 未看診。
         registration.setRegistertime(new Date().getTime());//掛號的時間。
 
-        try{
+        try {
             registerMapper.insert(registration);
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
+
         }catch (Exception exception){
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
-
-        return registration;
+        return getRegistrationById(registration.getId(),resultMessage);
 
     }
+
 
     public Register getRegistrationById(Integer id, ResultMessage resultMessage){
         Register registration=registerMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
         if(registration!=null){
             return registration;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.REGISTRATION_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.REGISTRATION_NOT_EXIST);
             return null;
         }
 
@@ -72,7 +79,7 @@ public class RegistrationService {
                 return getRegistrationById(registration.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -84,12 +91,15 @@ public class RegistrationService {
     public Invoice addInvoice(Invoice invoice,ResultMessage resultMessage){
             try {
                 invoiceMapper.insert(invoice);
-                return invoice;
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
+            return getInvoiceById(invoice.getId(),resultMessage);
     }
 
 
@@ -98,7 +108,7 @@ public class RegistrationService {
         if(invoice!=null){
             return invoice;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.INVOICE_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.INVOICE_NOT_EXIST);
             return null;
         }
 
@@ -113,7 +123,7 @@ public class RegistrationService {
                 return getInvoiceById(invoice.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -124,12 +134,15 @@ public class RegistrationService {
     public PatientCosts addPatientCosts(PatientCosts patientCosts, ResultMessage resultMessage){
         try {
             patientCostsMapper.insert(patientCosts);
-            return patientCosts;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         } catch (Exception exception) {
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+        return getPatientCostsById(patientCosts.getId(),resultMessage);
     }
 
 
@@ -138,7 +151,7 @@ public class RegistrationService {
         if(patientCosts!=null){
             return patientCosts;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.INVOICE_DETAIL_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.INVOICE_DETAIL_NOT_EXIST);
             return null;
         }
 
@@ -153,7 +166,7 @@ public class RegistrationService {
                 return getPatientCostsById(patientCosts.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -177,12 +190,12 @@ public class RegistrationService {
             ResultMessage resultMessage
     ){
         if(fromVisitDate==null&&fromNoon!=null||fromVisitDate!=null&&fromNoon==null){
-            resultMessage.setClientError("\'From Appointment Date\' and \'From Noon\' are invalid. 「起始预约日期」和「起始预约午别」无效。" );
+            resultMessage.sendClientError("\'From Appointment Date\' and \'From Noon\' are invalid. 「起始预约日期」和「起始预约午别」无效。" );
             return null;
         }
 
         if(toVisitDate==null&&toNoon!=null||toVisitDate!=null&&toNoon==null){
-            resultMessage.setClientError("\'To Appointment Date\' and \'To Noon\' are invalid. 「结束预约日期」和「结束预约午别」无效。" );
+            resultMessage.sendClientError("\'To Appointment Date\' and \'To Noon\' are invalid. 「结束预约日期」和「结束预约午别」无效。" );
             return null;
         }
 

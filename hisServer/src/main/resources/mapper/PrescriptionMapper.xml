@@ -37,7 +37,7 @@
       Invoice_id, DelMark)
     values (#{id,jdbcType=INTEGER}, #{medicalId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
       #{prescriptionName,jdbcType=VARCHAR}, #{prescriptionState,jdbcType=INTEGER}, #{prescriptionTime,jdbcType=BIGINT}, 
-      #{invoiceId,jdbcType=VARCHAR}, #{delmark,jdbcType=INTEGER})
+      #{invoiceId,jdbcType=VARCHAR}, 0)
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Prescription">
     update prescription
@@ -46,8 +46,7 @@
       Prescription_Name = #{prescriptionName,jdbcType=VARCHAR},
       Prescription_State = #{prescriptionState,jdbcType=INTEGER},
       Prescription_Time = #{prescriptionTime,jdbcType=BIGINT},
-      Invoice_id = #{invoiceId,jdbcType=VARCHAR},
-      DelMark = #{delmark,jdbcType=INTEGER}
+      Invoice_id = #{invoiceId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

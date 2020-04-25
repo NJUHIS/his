@@ -7,6 +7,7 @@ import com.njuhis.his.model.User;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,38 +20,42 @@ public class PersonalInformationService {
     private PatientMapper patientMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UtilityService utilityService;
 
     public Patient addPatient(Patient patient, ResultMessage resultMessage){
 
         //确保用户名不存在。
-        makeSurePatientUsernameNotExist(patient.getLoginname(),resultMessage);
-        if(!resultMessage.isSuccessful()) return null;//异常流程。用户名已存在。返回。
+        makeSurePatientUsernameNotExist(patient.getLoginname(),resultMessage);if(!resultMessage.isSuccessful()) return null;//异常流程。用户名已存在。返回。
 
         try {
             patientMapper.insert(patient);
-            return patient;
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
         }catch (Exception exception){
             exception.printStackTrace();
-            resultMessage.setUnknownError();
+            resultMessage.sendUnknownError();
             return null;
         }
+        return getPatientById(patient.getId(),resultMessage);
     }
 
     public User getUserById(Integer id, ResultMessage resultMessage){
         User user=userMapper.selectByPrimaryKey(id);
-        if(user==null) resultMessage.setClientError(ResultMessage.ErrorMessage.USER_NOT_EXIST); //异常流程
+        if(user==null) resultMessage.sendClientError(ResultMessage.ErrorMessage.USER_NOT_EXIST); //异常流程
         return user;
     }
 
     public User getUserByUsername(String username, ResultMessage resultMessage){
         User user=userMapper.selectByUserName(username);
-        if(user==null) resultMessage.setClientError(ResultMessage.ErrorMessage.USER_NOT_EXIST); //异常流程
+        if(user==null) resultMessage.sendClientError(ResultMessage.ErrorMessage.USER_NOT_EXIST); //异常流程
         return user;
     }
 
     public Patient getPatientByUsername(String username, ResultMessage resultMessage){
         Patient patient=patientMapper.selectByLoginName(username);
-        if(patient==null) resultMessage.setClientError(ResultMessage.ErrorMessage.PATIENT_NOT_EXIST); //异常流程
+        if(patient==null) resultMessage.sendClientError(ResultMessage.ErrorMessage.PATIENT_NOT_EXIST); //异常流程
         return patient;
     }
 
@@ -62,7 +67,7 @@ public class PersonalInformationService {
                 return getUserById(user.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -78,7 +83,7 @@ public class PersonalInformationService {
             return user;
 
         }else{//密码错误，异常流程
-            resultMessage.setClientError(ResultMessage.ErrorMessage.INCORRECT_PASSWORD);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.INCORRECT_PASSWORD);
             return null;
         }
 
@@ -92,7 +97,7 @@ public class PersonalInformationService {
             return patient;
 
         }else{//密码错误，异常流程
-            resultMessage.setClientError(ResultMessage.ErrorMessage.INCORRECT_PASSWORD);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.INCORRECT_PASSWORD);
             return null;
         }
 
@@ -104,7 +109,7 @@ public class PersonalInformationService {
         if(patient!=null){
             return patient;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.PATIENT_NOT_EXIST);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.PATIENT_NOT_EXIST);
             return null;
         }
 
@@ -120,7 +125,7 @@ public class PersonalInformationService {
                 return getPatientById(patient.getId(),resultMessage);
             } catch (Exception exception) {
                 exception.printStackTrace();
-                resultMessage.setUnknownError();
+                resultMessage.sendUnknownError();
                 return null;
             }
         }else{
@@ -150,7 +155,7 @@ public class PersonalInformationService {
         if(!ifPatientUsernameExist(patientUsername)){
             return resultMessage;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.PATIENT_USERNAME_EXISTED);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.PATIENT_USERNAME_EXISTED);
             return resultMessage;
         }
     }
@@ -177,7 +182,7 @@ public class PersonalInformationService {
         if(!ifUserUsernameExist(userUsername)){
             return resultMessage;
         }else{
-            resultMessage.setClientError(ResultMessage.ErrorMessage.WORKER_USERNAME_EXISTED);
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.WORKER_USERNAME_EXISTED);
             return resultMessage;
         }
     }

@@ -1,0 +1,1 @@
+INSERT INTO his.settlecategory (id, SettleName, DelMark) VALUES (100, '自费', 0);

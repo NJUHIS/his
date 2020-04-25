@@ -30,9 +30,6 @@ public class Scheduling {
 
 
 
-
-
-
     public void setUser(User user) {
         this.user = user;
     }

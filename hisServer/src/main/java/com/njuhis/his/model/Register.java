@@ -23,7 +23,7 @@ public class Register {
     private Date birthdate;//患者出生日期
     private Integer age;//患者年龄
     private String homeaddress;//患者家庭住址
-    private String casenumber;//病历编码。
+    private Integer medicalRecordId;//病历主键ID
     private Date visitdate;//预约看诊日期
     //standard forms ("yyyy-MM-dd"))
     private Integer noon;//预约看诊午别
@@ -45,8 +45,6 @@ public class Register {
     //1-正在看诊
     //2-诊毕
     private Integer patientid;//患者主键ID
-
-
     private List<PatientCosts> patientCostsList;
 
 
@@ -127,13 +125,7 @@ public class Register {
         this.homeaddress = homeaddress == null ? null : homeaddress.trim();
     }
 
-    public String getCasenumber() {
-        return casenumber;
-    }
 
-    public void setCasenumber(String casenumber) {
-        this.casenumber = casenumber == null ? null : casenumber.trim();
-    }
 
     @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh", timezone="GMT+8")
     public Date getVisitdate() {
@@ -224,6 +216,14 @@ public class Register {
         this.patientid = patientid;
     }
 
+
+    public Integer getMedicalRecordId() {
+        return medicalRecordId;
+    }
+
+    public void setMedicalRecordId(Integer medicalRecordId) {
+        this.medicalRecordId = medicalRecordId;
+    }
 
     public List<PatientCosts> getPatientCostsList() {
         return patientCostsList;

@@ -21,26 +21,7 @@ public class RegisterLevel {
 
     @JsonIgnore
     private Integer delmark;//删除标记 1-是 0-否
-    /**
-     * @deprecated
-     */
-    @JsonIgnore
-    private Integer registquota;//挂号级别限额
-    /**
-     * @deprecated
-     */
-    @JsonIgnore
-    private Integer isdefault;
-    /**
-     * @deprecated
-     */
-    @JsonIgnore
-    private Integer sequence;
-    /**
-     * @deprecated
-     */
-    @JsonIgnore
-    private String registcode;
+
 
     public Integer getId() {
         return id;
@@ -49,19 +30,7 @@ public class RegisterLevel {
     public void setId(Integer id) {
         this.id = id;
     }
-    /**
-     * @deprecated
-     */
-    public String getRegistcode() {
-        return registcode;
-    }
 
-    /**
-     * @deprecated
-     */
-    public void setRegistcode(String registcode) {
-        this.registcode = registcode == null ? null : registcode.trim();
-    }
 
     public String getRegistname() {
         return registname;
@@ -70,30 +39,7 @@ public class RegisterLevel {
     public void setRegistname(String registname) {
         this.registname = registname == null ? null : registname.trim();
     }
-    /**
-     * @deprecated
-     */
-    public Integer getIsdefault() {
-        return isdefault;
-    }
-    /**
-     * @deprecated
-     */
-    public void setIsdefault(Integer isdefault) {
-        this.isdefault = isdefault;
-    }
-    /**
-     * @deprecated
-     */
-    public Integer getSequence() {
-        return sequence;
-    }
-    /**
-     * @deprecated
-     */
-    public void setSequence(Integer sequence) {
-        this.sequence = sequence;
-    }
+
 
     public BigDecimal getRegistfee() {
         return registfee;
@@ -102,18 +48,7 @@ public class RegisterLevel {
     public void setRegistfee(BigDecimal registfee) {
         this.registfee = registfee;
     }
-    /**
-     * @deprecated
-     */
-    public Integer getRegistquota() {
-        return registquota;
-    }
-    /**
-     * @deprecated
-     */
-    public void setRegistquota(Integer registquota) {
-        this.registquota = registquota;
-    }
+
 
     public Integer getDelmark() {
         return delmark;

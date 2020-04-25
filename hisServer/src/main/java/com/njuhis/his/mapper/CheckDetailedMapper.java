@@ -11,9 +11,9 @@ public interface CheckDetailedMapper {
 
     int insert(CheckDetailed record);
 
-    CheckDetailed selectByPrimaryKey(Integer id);
+    CheckDetailed selectByPrimaryKeyExcludingDeleted(Integer id);
 
-    List<CheckDetailed> selectAll();
+    List<CheckDetailed> selectAllExcludingDeleted();
 
     int updateByPrimaryKey(CheckDetailed record);
 
