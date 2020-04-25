@@ -2793,20 +2793,40 @@ HTTP 响应示例：
 
 
 
+### 4.18 通过病历编码获取一个病历 /getMedicalRecordByCaseNumber
 
+参数：病历编码 `caseNumber`
 
-
+返回：病历
 
 HTTP 请求示例：
 
 ```http
+GET /his/DoctorController/getMedicalRecordByCaseNumber?caseNumber=3 HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+{
+    "id": 3,
+    "registerId": 5,
+    "medicalReadme": null,
+    "medicalPresent": null,
+    "presentTreat": null,
+    "medicalHistory": null,
+    "medicalAllergy": null,
+    "medicalPhysique": null,
+    "medicalDiagnosis": null,
+    "medicalHandling": null,
+    "caseState": 2,
+    "caseNumber": "3",
+    "diagnosisList": null
+}
 ```
 
 

@@ -49,9 +49,6 @@ public class RegistrationService {
             return null;
         }
 
-        registration.setCasenumber(registration.getId().toString());//保存後設置病歷編碼。
-        registration=updateRegistration(registration,resultMessage);
-
         return registration;
 
     }

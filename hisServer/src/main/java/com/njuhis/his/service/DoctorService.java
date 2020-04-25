@@ -37,11 +37,25 @@ public class DoctorService {
      * @return
      */
     public Register admit(Integer registrationId, ResultMessage resultMessage){
-        Register registration=registrationService.getRegistrationById(registrationId,resultMessage);
-        if(resultMessage.isSuccessful()){
-            registration.setVisitstate(1);
-            registration=registrationService.updateRegistration(registration,resultMessage);
+        Register registration=registrationService.getRegistrationById(registrationId,resultMessage);if(!resultMessage.isSuccessful()) return null;
+
+        if(registration.getVisitstate().equals(1)){
+            resultMessage.setClientError("The patient of this registration is visiting the doctor. 该挂号的病人正在被医生接诊中。");
+            return null;
         }
+
+        registration.setVisitstate(1);//掛號狀態：正在看診
+        MedicalRecord medicalRecord=new MedicalRecord();
+        medicalRecord.setRegisterId(registrationId);
+        medicalRecord.setCaseState(2); //病歷狀態：進行中
+
+        medicalRecord=addMedicalRecord(medicalRecord,resultMessage);if(!resultMessage.isSuccessful()) return null;
+        medicalRecord.setCaseNumber(medicalRecord.getId().toString());
+        registration.setCasenumber(medicalRecord.getId().toString());
+
+        updateMedicalRecord(medicalRecord,resultMessage);if(!resultMessage.isSuccessful()) return null;
+        registration=registrationService.updateRegistration(registration,resultMessage);
+
         return registration;
     }
 
@@ -53,6 +67,12 @@ public class DoctorService {
         return medicalRecord;
     }
 
+    public MedicalRecord getMedicalRecordByCaseNumber(String caseNumber,ResultMessage resultMessage){
+        Integer medicalRecordId=Integer.valueOf(caseNumber);
+        return getMedicalRecordById(medicalRecordId,resultMessage);
+    }
+
+
 
     public CheckApply getCheckApplyById(Integer id, ResultMessage resultMessage){
         CheckApply checkApply=checkApplyMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
@@ -63,6 +83,17 @@ public class DoctorService {
             return null;
         }
 
+    }
+
+    public MedicalRecord addMedicalRecord(MedicalRecord medicalRecord, ResultMessage resultMessage){
+        try {
+            medicalRecordMapper.insert(medicalRecord);
+            return medicalRecord;
+        }catch (Exception exception){
+            exception.printStackTrace();
+            resultMessage.setUnknownError();
+            return null;
+        }
     }
 
 

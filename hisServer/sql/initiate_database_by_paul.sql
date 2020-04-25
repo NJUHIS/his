@@ -378,7 +378,7 @@ DROP TABLE IF EXISTS `medicalrecord`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `medicalrecord` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `Case_Number` varchar(64) NOT NULL,
+  `Case_Number` varchar(64) DEFAULT NULL,
   `Register_Id` int(9) NOT NULL,
   `Medical_Readme` varchar(512) DEFAULT NULL,
   `Medical_Present` varchar(512) DEFAULT NULL,

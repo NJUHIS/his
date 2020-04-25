@@ -51,6 +51,18 @@ public class DoctorController {
         return result;
     }
 
+    @RequestMapping("/getMedicalRecordByCaseNumber")
+    public MedicalRecord getMedicalRecordByCaseNumber(@RequestParam String caseNumber, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(caseNumber);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        MedicalRecord result=doctorService.getMedicalRecordByCaseNumber(caseNumber, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
     @RequestMapping("/addCheckApply")
     public CheckApply addCheckApply(@RequestBody CheckApply checkApply,HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
