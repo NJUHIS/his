@@ -271,6 +271,20 @@ public class DoctorController {
         return result;
     }
 
+    @RequestMapping("/confirmCheckApply")
+    public CheckApply confirmCheckApply(@RequestParam Integer checkApplyId,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(checkApplyId);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        CheckApply result=doctorService.confirmCheckApply(checkApplyId,resultMessage);
+
+        quickLogger.logReceive(result);
+        return result;
+    }
+
+
+
 
 
 

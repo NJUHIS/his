@@ -43,21 +43,27 @@ public class DoctorService {
      * @return
      */
     public Register admit(Integer registrationId, ResultMessage resultMessage){
+
         Register registration=registrationService.getRegistrationById(registrationId,resultMessage);if(!resultMessage.isSuccessful()) return null;
 
-        if(registration.getVisitstate().equals(1)){
+        if(registration.getVisitstate()==1){
             resultMessage.sendClientError("The patient of this registration is visiting the doctor. 该挂号的病人正在被医生接诊中。");
+            return null;
+        }else if(registration.getVisitstate()!=0){
+            resultMessage.sendClientError("The visit state is not 0-HaveNotVisited. 看诊状态不是 0-未看诊。");
             return null;
         }
 
-        registration.setVisitstate(1);//掛號狀態：正在看診
+        registration.setVisitstate(1);//掛號狀態：1-正在看診
+
         MedicalRecord medicalRecord=new MedicalRecord();
         medicalRecord.setRegisterId(registrationId);
         medicalRecord.setCaseState(2); //病歷狀態：進行中
+        medicalRecord.setId(registrationId);
 
-        medicalRecord=addMedicalRecord(medicalRecord,resultMessage);if(!resultMessage.isSuccessful()) return null;
         registration.setMedicalRecordId(medicalRecord.getId());
 
+        addMedicalRecord(medicalRecord,resultMessage);if(!resultMessage.isSuccessful()) return null;
         registration=registrationService.updateRegistration(registration,resultMessage);
 
         return registration;
@@ -107,6 +113,7 @@ public class DoctorService {
         checkApply.setUserId(register.getUserid());
 
         checkApply.setState(1);// 1 - 编辑中
+        checkApply.setId(medicalRecord.getId());
 
         try {
             checkApplyMapper.insert(checkApply);
@@ -311,6 +318,20 @@ public class DoctorService {
                 filteredPrescriptions.add(prescription);
         }
         return filteredPrescriptions;
+    }
+
+    public CheckApply confirmCheckApply(Integer checkApplyId, ResultMessage resultMessage){
+        CheckApply checkApply=getCheckApplyById(checkApplyId,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        if(checkApply.getState()!=1){//如果不是 1-编辑中
+            resultMessage.sendClientError("The state is not 1-Editing. 状态不是 1-编辑中。");
+            return null;
+        }
+
+        checkApply.setState(2);// 2-已开立并发出，未收费
+        checkApply=updateCheckApply(checkApply,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        return checkApply;
     }
 
 }

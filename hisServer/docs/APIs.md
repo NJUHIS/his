@@ -2295,7 +2295,7 @@ HTTP 响应示例：
 
 返回：更新/保存成功后返回保存后的检查（检验或处置）。理论上返回体应该和请求体一模一样。
 
-說明：請勿直接使用此 update 方法来直接改变 state。请使用相关的其他方法。因为直接使用 update 改变 state 缺少对数据的必要的检查。
+說明：請勿直接使用此 update 方法来直接改变 state。请使用相关的其他方法。因为直接使用 update 改变 state 缺少对数据的必要的检查。确认开出请使用 API 4.18 confirmCheckApply。
 
 HTTP 请求示例：
 
@@ -2831,17 +2831,37 @@ HTTP 响应示例：
 
 
 
+### 4.18 确认开出检查（检验或处置） /confirmCheckApply
 
+请求参数：检查（检验或处置）主键ID `checkApplyId`
+
+说明：此方法将检查（检验或处置）状态由“1-编辑中"变为“2 - 已开立并发出，未收费”。
+
+返回：状态改变后的检查（检验或处置）
 
 HTTP 请求示例：
 
 ```http
+POST /his/DoctorController/confirmCheckApply?checkApplyId=200 HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+{
+    "id": 200,
+    "medicalId": 200,
+    "creationTime": null,
+    "totalSum": null,
+    "objective": null,
+    "userId": 100,
+    "state": 2,
+    "invoiceId": null,
+    "checkDetailedList": []
+}
 ```
 
