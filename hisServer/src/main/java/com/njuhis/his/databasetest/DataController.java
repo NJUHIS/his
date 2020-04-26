@@ -124,10 +124,10 @@ public class DataController {
     @Autowired
     PatientCostsMapper patientCostsMapper;
     @RequestMapping("/cost")
-    CostPo costPo(){
-        CostPo costPo =new CostPo(0,0,999,1000002);
+    CostVo costPo(){
+        CostVo costVo =new CostVo(0,0,999,1000002);
 
-        return  patientCostsMapper.selectCostInvoice(costPo);
+        return  patientCostsMapper.selectCostInvoice(costVo);
     }
     @Autowired
     PrescriptionDetailedMapper prescriptionDetailedMapper;

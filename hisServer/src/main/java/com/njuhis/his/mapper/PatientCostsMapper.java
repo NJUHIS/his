@@ -1,6 +1,6 @@
 package com.njuhis.his.mapper;
 
-import com.njuhis.his.model.CostPo;
+import com.njuhis.his.model.CostVo;
 import com.njuhis.his.model.PatientCosts;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,9 @@ public interface PatientCostsMapper {
 
     List<PatientCosts> selectByRegisterId(Integer RegisterId);
 
-    CostPo selectCostInvoice(CostPo costPo);
+    CostVo selectCostInvoice(CostVo costVo);
 
-    CostPo selectCostRegister(CostPo costPo);
+    CostVo selectCostRegister(CostVo costVo);
+
+
 }

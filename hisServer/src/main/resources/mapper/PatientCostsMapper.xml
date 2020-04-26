@@ -11,7 +11,7 @@
     <result column="State" jdbcType="INTEGER" property="state" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
-  <resultMap id="BaseResultMapCost" type="com.njuhis.his.model.CostPo">
+  <resultMap id="BaseResultMapCost" type="com.njuhis.his.model.CostVo">
     <result column="Sum1" jdbcType="DECIMAL" property="sum" />
     <result column="Count1" jdbcType="INTEGER" property="count" />
   </resultMap>
@@ -51,12 +51,12 @@
     from patientcosts
     where RegisterId = #{RegisterId,jdbcType=INTEGER}
   </select>
-  <select id="selectCostInvoice" parameterType="com.njuhis.his.model.CostPo" resultMap="BaseResultMapCost">
+  <select id="selectCostInvoice" parameterType="com.njuhis.his.model.CostVo" resultMap="BaseResultMapCost">
     SELECT sum(p.Price) Sum1,count(i.id) Count1 FROM patientcosts p
     inner join invoice  i on  p.InvoiceId = i.id
     where i.CreationTime between #{begintime} and #{endtime}
   </select>
-  <select id="selectCostRegister" parameterType="com.njuhis.his.model.CostPo" resultMap="BaseResultMapCost">
+  <select id="selectCostRegister" parameterType="com.njuhis.his.model.CostVo" resultMap="BaseResultMapCost">
     SELECT sum(p.Price) Sum1,count(i.id) Count1 patientcosts p
     inner join register  r on  p.RegisterId = r.id
     where r.RegisterTime between #{begintime} and #{endtime}

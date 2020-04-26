@@ -1,15 +1,15 @@
 package com.njuhis.his.model;
 
-public class CostPo {
+public class CostVo {
     private double sum;
     private int count;
     private long begintime;
     private long endtime;
-    public CostPo(){
+    public CostVo(){
 
     }
 
-    public CostPo( double sum, int count, long begintime, long endtime) {
+    public CostVo(double sum, int count, long begintime, long endtime) {
 
         this.sum = sum;
         this.count = count;
