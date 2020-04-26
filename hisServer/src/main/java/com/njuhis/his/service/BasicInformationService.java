@@ -117,6 +117,9 @@ public class BasicInformationService {
             try {
                 departmentMapper.updateByPrimaryKey(department);
                 return getDepartmentById(department.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -168,6 +171,9 @@ public class BasicInformationService {
             try {
                 constantItemMapper.updateByPrimaryKey(constantItem);
                 return getConstantItemById(constantItem.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -215,6 +221,9 @@ public class BasicInformationService {
             try {
                 constantTypeMapper.updateByPrimaryKey(constantType);
                 return getConstantTypeById(constantType.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -265,6 +274,9 @@ public class BasicInformationService {
             try {
                 expenseClassMapper.updateByPrimaryKey(expenseClass);
                 return getExpenseClassById(expenseClass.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -316,6 +328,9 @@ public class BasicInformationService {
             try {
                 settleCategoryMapper.updateByPrimaryKey(settleCategory);
                 return getSettleCategoryById(settleCategory.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -367,6 +382,9 @@ public class BasicInformationService {
             try {
                 registerLevelMapper.updateByPrimaryKey(registerLevel);
                 return getRegisterLevelById(registerLevel.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -432,6 +450,9 @@ public class BasicInformationService {
             try {
                 schedulingMapper.updateByPrimaryKey(scheduling);
                 return getSchedulingById(scheduling.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();

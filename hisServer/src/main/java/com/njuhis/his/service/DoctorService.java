@@ -135,6 +135,9 @@ public class DoctorService {
             try {
                 checkApplyMapper.updateByPrimaryKey(checkApply);
                 return getCheckApplyById(checkApply.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -152,6 +155,9 @@ public class DoctorService {
             try {
                 medicalRecordMapper.updateByPrimaryKey(medicalRecord);
                 return getMedicalRecordById(medicalRecord.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -201,6 +207,9 @@ public class DoctorService {
             try {
                 prescriptionMapper.updateByPrimaryKey(prescription);
                 return getPrescriptionById(prescription.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -212,6 +221,7 @@ public class DoctorService {
     }
 
     public CheckDetailed addCheckDetailed(CheckDetailed checkDetailed,ResultMessage resultMessage){
+        checkDetailed.setState(1);     // 1 - 未检验检查处置
         try {
             checkDetailedMapper.insert(checkDetailed);
         }catch (DataIntegrityViolationException exception) {
@@ -244,6 +254,9 @@ public class DoctorService {
             try {
                 checkDetailedMapper.updateByPrimaryKey(checkDetailed);
                 return getCheckDetailedById(checkDetailed.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -288,6 +301,9 @@ public class DoctorService {
             try {
                 prescriptionDetailedMapper.updateByPrimaryKey(prescriptionDetailed);
                 return getPrescriptionDetailedById(prescriptionDetailed.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();

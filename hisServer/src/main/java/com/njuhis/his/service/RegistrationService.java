@@ -111,6 +111,9 @@ public class RegistrationService {
             try {
                 registerMapper.updateByPrimaryKey(registration);
                 return getRegistrationById(registration.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -155,6 +158,9 @@ public class RegistrationService {
             try {
                 invoiceMapper.updateByPrimaryKey(invoice);
                 return getInvoiceById(invoice.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -198,6 +204,9 @@ public class RegistrationService {
             try {
                 patientCostsMapper.updateByPrimaryKey(patientCosts);
                 return getPatientCostsById(patientCosts.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
