@@ -2621,7 +2621,7 @@ HTTP 响应示例：
 
 返回：更新/保存成功后返回保存后的检查（检验或处置）明细。理论上返回体应该和请求体一模一样。
 
-
+說明：請勿直接使用此 update 方法来改变 state。请使用相关的其他方法。因为直接使用 update 改变 state 缺少对数据的必要的检查。开始进行一项检查（检验或处置）明细 请使用 API 5.1 startCheckDetailed。结束一项检查（检验或处置）明细 请使用API 5.2 finishCheckDetailed。报告一项检查（检验或处置）明细请使用 API 5.3 finishCheckDetailed。
 
 HTTP 请求示例：
 
@@ -2923,54 +2923,130 @@ HTTP 响应示例：
 
 
 
+## 5. 门诊医技工作站 /MedicalTechnologyController
 
+
+
+### 5.1 开始进行一项检查（检验或处置）明细 /startCheckDetailed
+
+请求参数：检查（检验或处置）明细主键 ID `checkDetailedId`
+
+说明：此方法将此检查（检验或处置）明细的状态由“1 - 未检验检查处置”变为"2 - 检验检查处置中"。
+
+返回：状态改变后的检查（检验或处置）明细。
 
 HTTP 请求示例：
 
 ```http
+POST /his/MedicalTechnologyController/startCheckDetailed?checkDetailedId=2 HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+{
+    "id": 2,
+    "checkappid": 200,
+    "checkprojid": 1,
+    "deptid": null,
+    "position": null,
+    "state": 2,
+    "price": null,
+    "identification": 1,
+    "inspecttime": null,
+    "result": null,
+    "resulttime": null,
+    "operatorid": null,
+    "entryclerkid": null
+}
 ```
 
 
 
+### 5.2 结束一项检查（检验或处置）明细 /finishCheckDetailed
 
+请求参数：检查（检验或处置）明细主键 ID `checkDetailedId`
+
+说明：此方法将此检查（检验或处置）明细的状态由“2 - 检验检查处置中”变为"3 - 检验检查处置完成，结果未出"。
+
+返回：状态改变后的检查（检验或处置）明细。
 
 
 
 HTTP 请求示例：
 
 ```http
+POST /his/MedicalTechnologyController/finishCheckDetailed?checkDetailedId=1 HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+{
+    "id": 1,
+    "checkappid": 200,
+    "checkprojid": 1,
+    "deptid": null,
+    "position": null,
+    "state": 3,
+    "price": null,
+    "identification": 1,
+    "inspecttime": null,
+    "result": null,
+    "resulttime": null,
+    "operatorid": null,
+    "entryclerkid": null
+}
 ```
 
 
 
+### 5.3 报告一项检查（检验或处置）明细 /reportCheckDetailed
 
+请求参数：检查（检验或处置）明细主键 ID `checkDetailedId`
+
+说明：此方法将此检查（检验或处置）明细的状态由“3 - 检验检查处置完成，结果未出”变为"4 - 结果已出"。此方法会检查该 CheckApply 下面所有的 CheckDetailed 是否全部都是结果已出。如果是，则将CheckApply的状态设为 "5 - 检验检查处置已完成，结果已出"。
+
+返回：状态改变后的检查（检验或处置）明细。
 
 
 
 HTTP 请求示例：
 
 ```http
+POST /his/MedicalTechnologyController/reportCheckDetailed?checkDetailedId=3 HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+{
+    "id": 3,
+    "checkappid": 200,
+    "checkprojid": 2,
+    "deptid": null,
+    "position": null,
+    "state": 4,
+    "price": null,
+    "identification": 1,
+    "inspecttime": null,
+    "result": null,
+    "resulttime": null,
+    "operatorid": null,
+    "entryclerkid": null
+}
 ```
 
 
