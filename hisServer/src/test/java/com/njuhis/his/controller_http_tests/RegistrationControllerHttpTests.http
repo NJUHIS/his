@@ -3,16 +3,14 @@ Host: localhost:9002
 Content-Type: application/json
 
 {
-  "realname": "MyRealName",
-  "gender": 3,
-  "idnumber": 323123123,
-  "deptid": 5,
-  "visitdate":"2020-12-19",
-  "patientid":1,
-  "registid":1,
-  "registerid":1,
-  "settleid":1,
-  "userid":1
+  "realname": "Nelson",
+  "gender": 1,
+  "patientid": 100,
+  "registerid": 101,
+  "isbook": 0,
+  "settleid": 100,
+  "idnumber": "7989688077809873",
+  "scheduleId":1
 }
 
 ###
@@ -50,25 +48,26 @@ Host: localhost:9002
 Content-Type: application/json
 
 {
-  "id": 1,
-  "realname": "MyRealjjjjrName",
-  "gender": null,
-  "idnumber": null,
+  "id": 103,
+  "realname": "Nelson",
+  "gender": 1,
+  "idnumber": "7989688077809873",
   "birthdate": null,
-  "age": null,
+  "age": 30,
   "homeaddress": null,
-  "casenumber": null,
-  "visitdate": null,
-  "noon": null,
-  "deptid": null,
-  "userid": null,
-  "registid": null,
-  "settleid": null,
-  "registertime": null,
-  "registerid": null,
-  "visitstate": null,
-  "patientid": null,
-  "diagnosisList": null
+  "medicalRecordId": null,
+  "visitdate": "2020-06-18",
+  "noon": 1,
+  "deptid": 1,
+  "userid": 100,
+  "registid": 100,
+  "settleid": 100,
+  "isbook": 0,
+  "registertime": 1587837243219,
+  "registerid": 101,
+  "visitstate": 0,
+  "patientid": 100,
+  "patientCostsList": null
 }
 
 ###
@@ -119,7 +118,15 @@ Content-Type: application/json
 
 
 ###
-GET /his/RegistrationController/getRegistrationsByConditions?userId=1&departmentId=1&visitState=1&fromVisitDate=2020-04-24&fromNoon=1&toVisitDate=2020-04-25&toNoon=1&registrationTypeId=1&needBook=1&patientId=1&settlementTypeId=1&registrarId=1 HTTP/1.1
+GET /his/RegistrationController/getRegistrationsByConditions?userId=100&departmentId=1&visitState=0&fromVisitDate=2020-04-24&fromNoon=1&toVisitDate=2020-12-25&toNoon=1&registrationTypeId=100&needBook=0&patientId=100&settlementTypeId=100&registrarId=101&scheduleId=1 HTTP/1.1
 Host: localhost:9002
+
+
+
+
+
+
+
+###
 
 

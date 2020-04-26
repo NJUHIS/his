@@ -580,8 +580,7 @@ CREATE TABLE `register` (
   `Gender` int(9) NOT NULL,
   `IDnumber` varchar(45) NOT NULL,
   `BirthDate` date DEFAULT NULL,
-  `Age` int(3) DEFAULT NULL,
-  `AgeType` int(9) DEFAULT NULL,
+  `Age` int(9) DEFAULT NULL,
   `HomeAddress` varchar(64) DEFAULT NULL,
   `MedicalRecordId` int(9) DEFAULT NULL,
   `VisitDate` date NOT NULL,
@@ -595,6 +594,7 @@ CREATE TABLE `register` (
   `RegisterID` int(9) NOT NULL,
   `VisitState` int(9) NOT NULL,
   `patientID` int(9) NOT NULL,
+  `scheduleId` int(9) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`),
   constraint register_medicalrecord_id_fk
@@ -610,7 +610,9 @@ CREATE TABLE `register` (
   constraint register_user_id_fk
       foreign key (RegisterID) references user (id),
   constraint register_user_id_fk_2
-      foreign key (UserId) references user (id)
+      foreign key (UserId) references user (id),
+  constraint register_scheduling_id_fk
+      foreign key (scheduleId) references scheduling (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -663,8 +665,9 @@ CREATE TABLE `scheduling` (
   `DeptId` int(9) NOT NULL,
   `UserId` int(9) NOT NULL,
   `Noon` int(11) NOT NULL,
-  `RegistQuota` int(3) NOT NULL,
-  `State` int(1) DEFAULT NULL COMMENT '1=有效  0=无效',
+  `RegistQuota` int(9) NOT NULL,
+  `State` int(1) DEFAULT NULL,
+  `remainingQuota` int(9) NOT NULL ,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`),
   constraint scheduling_department_id_fk

@@ -73,10 +73,12 @@ public class RegistrationController {
         quickLogger.logReceive(register);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        Register result=registrationService.updateRegistration(register, resultMessage);
+        resultMessage.sendClientError("This API has been deprecated. 此 API 已作废。");return null;
 
-        quickLogger.logReturn(result);
-        return result;
+//        Register result=registrationService.updateRegistration(register, resultMessage);
+//
+//        quickLogger.logReturn(result);
+//        return result;
 
     }
 
@@ -180,6 +182,7 @@ public class RegistrationController {
             @RequestParam(required = false)Integer registrarId,
             @RequestParam(required = false)Integer visitState,
             @RequestParam(required = false)Integer patientId,
+            @RequestParam(required = false)Integer scheduleId,
             HttpServletResponse httpServletResponse
     ){
         quickLogger.logInvoke();
@@ -195,11 +198,12 @@ public class RegistrationController {
               "needBook",                  needBook,
               "registrarId",               registrarId,
               "visitState",                visitState,
-              "patientId",                 patientId
+              "patientId",                 patientId,
+              "scheduleId",                scheduleId
         );
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        List<Register> result=registrationService.getRegistrationsByConditions(fromVisitDate,fromNoon,toVisitDate,toNoon,departmentId,userId,registrationTypeId,settlementTypeId,needBook,registrarId,visitState,patientId,resultMessage);
+        List<Register> result=registrationService.getRegistrationsByConditions(fromVisitDate,fromNoon,toVisitDate,toNoon,departmentId,userId,registrationTypeId,settlementTypeId,needBook,registrarId,visitState,patientId,scheduleId,resultMessage);
 
         quickLogger.logReturn(result);
         return result;

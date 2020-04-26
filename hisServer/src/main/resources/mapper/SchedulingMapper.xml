@@ -9,6 +9,7 @@
     <result column="Noon" jdbcType="INTEGER" property="noon" />
     <result column="RegistQuota" jdbcType="INTEGER" property="registquota" />
     <result column="State" jdbcType="INTEGER" property="state" />
+    <result column="remainingQuota" jdbcType="INTEGER" property="remainingQuota" />
   </resultMap>
   <resultMap id="BaseResultMapCollection" type="com.njuhis.his.model.Scheduling" extends="BaseResultMap">
     <association property="user"  javaType="com.njuhis.his.model.User">
@@ -45,7 +46,8 @@
     UserId,
     Noon,
     RegistQuota,
-    State
+    State,
+    remainingQuota
     )
     values (
     #{id,jdbcType=INTEGER},
@@ -54,7 +56,8 @@
     #{userid,jdbcType=INTEGER},
     #{noon,jdbcType=INTEGER},
     #{registquota,jdbcType=INTEGER},
-    #{state,jdbcType=INTEGER}
+    #{state,jdbcType=INTEGER},
+    #{remainingQuota}
     )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Scheduling">
@@ -65,6 +68,7 @@
       Noon = #{noon,jdbcType=INTEGER},
       RegistQuota = #{registquota,jdbcType=INTEGER},
       State = #{state,jdbcType=INTEGER}
+      remainingQuota=#{remainingQuota}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKeyExcludingDeleted" resultMap="BaseResultMapCollection">
@@ -75,11 +79,11 @@
 
 
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, SchedDate, DeptId, UserId, Noon, RegistQuota, State
+    select id, SchedDate, DeptId, UserId, Noon, RegistQuota, State, remainingQuota
     from scheduling
   </select>
   <select id="selectByDepartmentAndNoon" parameterType="com.njuhis.his.model.Scheduling" resultMap="BaseResultMapCollection">
-    select d.deptname,d.id,u.username,s.RegistQuota,s.id,s.SchedDate,s.deptid,s.userid,s.noon,s.state from scheduling s inner join department d on s.deptid =d.id
+    select d.deptname,d.id,u.username,s.RegistQuota,s.id,s.SchedDate,s.deptid,s.userid,s.noon,s.state,s.remainingQuota from scheduling s inner join department d on s.deptid =d.id
     inner join user u on s.userid= u.id
     where s.SchedDate=#{scheddate} and noon = #{noon} and s.deptid=#{deptid}
   </select>

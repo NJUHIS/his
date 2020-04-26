@@ -1,17 +1,19 @@
 package com.njuhis.his.service;
 
+import com.njuhis.his.datacleaner.DoctorDataCleaner;
 import com.njuhis.his.mapper.*;
 import com.njuhis.his.model.*;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
-//import com.sun.tools.javac.comp.Check;
-//import com.sun.tools.javac.comp.Check;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//import com.sun.tools.javac.comp.Check;
+//import com.sun.tools.javac.comp.Check;
 
 @Service
 public class DoctorService {
@@ -30,6 +32,9 @@ public class DoctorService {
     private PrescriptionDetailedMapper prescriptionDetailedMapper;
     @Autowired
     private UtilityService utilityService;
+    @Autowired
+    private DoctorDataCleaner doctorDataCleaner;
+
 
     /**
      * 接診
@@ -93,6 +98,16 @@ public class DoctorService {
 
 
     public CheckApply addCheckApply(CheckApply checkApply, ResultMessage resultMessage){
+        /**
+         * 根据 medical record id 来 填写 user id。
+         */
+        doctorDataCleaner.cleanCheckApply(checkApply,resultMessage);if(!resultMessage.isSuccessful())return null;
+        MedicalRecord medicalRecord=getMedicalRecordById(checkApply.getMedicalId(),resultMessage);if(!resultMessage.isSuccessful())return null;
+        Register register=registrationService.getRegistrationById(medicalRecord.getRegisterId(),resultMessage);if(!resultMessage.isSuccessful())return null;
+        checkApply.setUserId(register.getUserid());
+
+        checkApply.setState(1);// 1 - 编辑中
+
         try {
             checkApplyMapper.insert(checkApply);
         }catch (DataIntegrityViolationException exception) {

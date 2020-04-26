@@ -979,7 +979,7 @@ HTTP 响应示例：
 
 備註：目前此 API 暂时不可用。
 
-###1.28 获取所有排班 /getAllScheduling
+###1.28 获取所有排班 /getAllScheduling 
 
 参数：无
 
@@ -1001,21 +1001,34 @@ HTTP 响应示例：
 [
     {
         "id": 1,
-        "scheddate": "2019-03-01",
-        "deptid": 3,
-        "userid": 1,
+        "scheddate": "2020-12-02",
+        "deptid": 1,
+        "userid": 100,
         "noon": 1,
         "registquota": 3,
-        "state": 0,
+        "state": 3,
         "user": null,
-        "department": null
+        "department": null,
+        "remainingQuota": 3
+    },
+    {
+        "id": 2,
+        "scheddate": "2020-12-02",
+        "deptid": 1,
+        "userid": 100,
+        "noon": 1,
+        "registquota": 3,
+        "state": 3,
+        "user": null,
+        "department": null,
+        "remainingQuota": 3
     }
 ]
 ```
 
 
 
-### 1.29 通过主键ID获取一个排班 /getSchedulingById
+### 1.29 通过主键ID获取一个排班 /getSchedulingById 
 
 参数：排班的主键ID `id`
 
@@ -1024,10 +1037,8 @@ HTTP 响应示例：
 HTTP 请求示例：
 
 ```http
-GET /his/BasicInformationController/getSchedulingById?id=14 HTTP/1.1
+GET /his/BasicInformationController/getSchedulingById?id=2 HTTP/1.1
 Host: localhost:9002
-
-
 
 ```
 
@@ -1035,84 +1046,65 @@ HTTP 响应示例：
 
 ```json
 {
-    "id": 14,
-    "scheddate": "2019-03-02",
-    "deptid": 3,
-    "userid": 5,
+    "id": 2,
+    "scheddate": "2020-12-02",
+    "deptid": 1,
+    "userid": 100,
     "noon": 1,
     "registquota": 3,
-    "state": 0,
+    "state": 3,
     "user": {
-        "id": 5,
-        "username": "jkjnlj",
-        "password": null,
-        "realname": "jkljlj",
-        "usertypeid": null,
-        "doctitleid": null,
+        "id": 100,
+        "username": "robin",
+        "password": "password",
+        "realname": "Robin",
+        "usertypeid": 2,
+        "doctitleid": 1,
         "isscheduling": null,
-        "deptid": 3,
-        "registerLevelId": 1,
+        "deptid": 1,
+        "registerLevelId": 100,
         "idnumber": null,
         "schedulingList": null
     },
     "department": {
-        "id": 3,
-        "deptname": "普通内科",
+        "id": 1,
+        "deptname": "心血管内科",
         "deptcategory": "11",
         "depttypeid": 1,
-        "deptcode": "PTNK",
+        "deptcode": "XXGNK",
         "userList": null
-    }
+    },
+    "remainingQuota": 3
 }
 ```
 
-### 1.30 更新/保存一个排班/updateScheduling
+### ~~1.30 更新/保存一个排班/updateScheduling（已作废）~~ 
 
 请求体：一个主键ID非null的排班。所有字段必须完整，否则会被null取代。
 
 返回：更新/保存成功后返回保存后的排班。理论上返回体应该和请求体一模一样。
 
+**说明：此 API 已作废。规定排班成功之后不可修改。**
+
 HTTP 请求示例：
 
 ```http
-POST /his/BasicInformationController/updateScheduling HTTP/1.1
-Host: localhost:9002
-Content-Type: application/json
 
-{
-    "id": 1,
-    "scheddate": "2019-03-02",
-    "deptid": 3,
-    "userid": 1,
-    "noon": 1,
-    "registquota": 3,
-    "state": 0,
-    "user": null,
-    "department": null
-}
 ```
 
 HTTP 响应示例：
 
 ```json
-{
-    "id": 1,
-    "scheddate": "2019-03-02",
-    "deptid": 3,
-    "userid": 1,
-    "noon": 1,
-    "registquota": 3,
-    "state": 0,
-    "user": null,
-    "department": null
-}
+
 ```
 
-### 1.31 新增一个排班 /addScheduling
+### 1.31 新增一个排班 /addScheduling 
 
 请求体：主键ID为null的排班。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
 返回：新增成功后返回主键ID非null的字段完整的排班。
+
+说明：规定新增排班成功之后不可修改。deptid, state 不需要由前台填写，由后台根据 userid 自动填写。即使前台填写了，也会被后台的自动填写所覆盖。
 
 HTTP 请求示例：
 
@@ -1122,14 +1114,10 @@ Host: localhost:9002
 Content-Type: application/json
 
 {
-    "scheddate": "2019-03-02",
-    "deptid": 3,
-    "userid": 5,
+    "userid": 100,
+    "scheddate": "2020-12-02",
     "noon": 1,
-    "registquota": 3,
-    "state": 0,
-    "user": null,
-    "department": null
+    "registquota": 3
 }
 ```
 
@@ -1137,34 +1125,35 @@ HTTP 响应示例：
 
 ```json
 {
-    "id": 19,
-    "scheddate": "2019-03-02",
-    "deptid": 3,
-    "userid": 5,
+    "id": 3,
+    "scheddate": "2020-12-02",
+    "deptid": 1,
+    "userid": 100,
     "noon": 1,
     "registquota": 3,
-    "state": 0,
+    "state": 3,
     "user": {
-        "id": 5,
-        "username": "jkjnlj",
-        "password": null,
-        "realname": "jkljlj",
-        "usertypeid": null,
-        "doctitleid": null,
+        "id": 100,
+        "username": "robin",
+        "password": "password",
+        "realname": "Robin",
+        "usertypeid": 2,
+        "doctitleid": 1,
         "isscheduling": null,
-        "deptid": 3,
-        "registerLevelId": 1,
+        "deptid": 1,
+        "registerLevelId": 100,
         "idnumber": null,
         "schedulingList": null
     },
     "department": {
-        "id": 3,
-        "deptname": "普通内科",
+        "id": 1,
+        "deptname": "心血管内科",
         "deptcategory": "11",
         "depttypeid": 1,
-        "deptcode": "PTNK",
+        "deptcode": "XXGNK",
         "userList": null
-    }
+    },
+    "remainingQuota": 3
 }
 ```
 
@@ -1201,8 +1190,11 @@ state;//排班的状态
 HTTP 请求示例：
 
 ```http
-GET /his/BasicInformationController/getSchedulingsByConditions?userId=1&deptId=1&state=1&fromScheduleDate=2020-04-24&fromNoon=2&toScheduleDate=2020-04-25&toNoon=3 HTTP/1.1
+GET /his/BasicInformationController/getSchedulingsByConditions?userId=100&deptId=1&state=3&fromScheduleDate=2020-04-24&fromNoon=2&toScheduleDate=2020-12-25&toNoon=3 HTTP/1.1
 Host: localhost:9002
+
+
+
 
 
 ```
@@ -1212,15 +1204,40 @@ HTTP 响应示例：
 ```json
 [
     {
-        "id": 5,
-        "scheddate": "2020-04-24",
+        "id": 1,
+        "scheddate": "2020-12-02",
         "deptid": 1,
-        "userid": 1,
-        "noon": 2,
-        "registquota": 20,
-        "state": 1,
+        "userid": 100,
+        "noon": 1,
+        "registquota": 3,
+        "state": 3,
         "user": null,
-        "department": null
+        "department": null,
+        "remainingQuota": 3
+    },
+    {
+        "id": 2,
+        "scheddate": "2020-12-02",
+        "deptid": 1,
+        "userid": 100,
+        "noon": 1,
+        "registquota": 3,
+        "state": 3,
+        "user": null,
+        "department": null,
+        "remainingQuota": 3
+    },
+    {
+        "id": 3,
+        "scheddate": "2020-12-02",
+        "deptid": 1,
+        "userid": 100,
+        "noon": 1,
+        "registquota": 3,
+        "state": 3,
+        "user": null,
+        "department": null,
+        "remainingQuota": 3
     }
 ]
 ```
@@ -1578,19 +1595,25 @@ HTTP 响应示例：
 
 ## 3. 门诊挂号收费 /RegistrationController
 
-###  3.1 挂号/新增一个挂号 /addRegistration
+###  3.1 挂号/新增一个挂号 /addRegistration 
 
 请求体：一个主键ID为null的挂号。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
 关键必须字段：
 
-> patientid
-> userid
-> registid
-> settleid
-> registerid
+```java
+patientid
+settleid
+registerid
+scheduleId
+realname
+isbook
+等
+```
 
 返回：挂号成功后返回主键ID非null的字段完整的挂号。
+
+说明：规定挂号成功之后不可修改。visitdate, noon, userid, registid, deptid, state 不需要由前台填写，由后台根据 scheduleId 自动填写。即使前台填写了，也会被后台的自动填写所覆盖。
 
 HTTP 请求示例：
 
@@ -1600,16 +1623,14 @@ Host: localhost:9002
 Content-Type: application/json
 
 {
-  "realname": "MyRealName",	
-	"gender": 3,
-  "idnumber": 323123123,
-  "deptid": 5,
-	"visitdate":"2020-12-19",
-	"patientid":1,
-	"registid":1,
-	"registerid":1,
-	"settleid":1,
-	"userid":1
+    "realname": "Nelson",
+    "gender": 1,
+    "patientid": 100,
+    "registerid": 101,
+    "isbook": 0,
+    "settleid": 100,
+    "idnumber": "7989688077809873",
+    "scheduleId":1
 }
 ```
 
@@ -1617,29 +1638,29 @@ HTTP 响应示例：
 
 ```json
 {
-    "id": null,
-    "realname": "MyRealName",
-    "gender": 3,
-    "idnumber": "323123123",
+    "id": 4,
+    "realname": "Nelson",
+    "gender": 1,
+    "idnumber": "7989688077809873",
     "birthdate": null,
     "age": null,
     "homeaddress": null,
-    "casenumber": null,
-    "visitdate": "2020-12-19T00:00:00.000+0000",
-    "noon": null,
-    "deptid": 5,
-    "userid": 1,
-    "registid": 1,
-    "settleid": 1,
-    "isbook": null,
-    "registertime": null,
-    "registerid": 1,
-    "visitstate": null,
-    "patientid": 1
+    "medicalRecordId": null,
+    "visitdate": "2020-12-02",
+    "noon": 1,
+    "deptid": 1,
+    "userid": 100,
+    "registid": 100,
+    "settleid": 100,
+    "isbook": 0,
+    "registertime": 1587874337411,
+    "registerid": 101,
+    "visitstate": 0,
+    "patientid": 100,
+    "scheduleId": 1,
+    "patientCostsList": null
 }
 ```
-
-备注：目前返回的挂号id字段有数据的功能还未实现。
 
 
 
@@ -1680,7 +1701,7 @@ HTTP 响应示例：
 
 
 
-### 3.3 通过主键ID获取一个挂号 /getRegistrationById
+### 3.3 通过主键ID获取一个挂号 /getRegistrationById 
 
 参数：挂号的主键ID `id`
 
@@ -1693,6 +1714,7 @@ GET /his/RegistrationController/getRegistrationById?id=1 HTTP/1.1
 Host: localhost:9002
 
 
+
 ```
 
 HTTP 响应示例：
@@ -1700,25 +1722,26 @@ HTTP 响应示例：
 ```json
 {
     "id": 1,
-    "realname": "ahillatty",
+    "realname": "Nelson",
     "gender": 1,
-    "idnumber": "112222222",
-    "birthdate": "2020-01-01T06:00:00.000+0000",
-    "age": 1,
-    "homeaddress": "asdasdasd",
-    "casenumber": "1",
-    "visitdate": "2020-03-20T05:00:00.000+0000",
+    "idnumber": "7989688077809873",
+    "birthdate": null,
+    "age": null,
+    "homeaddress": null,
+    "medicalRecordId": null,
+    "visitdate": "2020-12-02",
     "noon": 1,
-    "deptid": 3,
-    "userid": 1,
-    "registid": 1,
-    "settleid": 1,
-    "isbook": 1,
-    "registertime": 11111,
-    "registerid": 1,
-    "visitstate": 1,
-    "patientid": 0,
-    "diagnosisList": null
+    "deptid": 1,
+    "userid": 100,
+    "registid": 100,
+    "settleid": 100,
+    "isbook": 0,
+    "registertime": 1587844363369,
+    "registerid": 101,
+    "visitstate": 0,
+    "patientid": 100,
+    "scheduleId": 1,
+    "patientCostsList": null
 }
 ```
 
@@ -1759,66 +1782,24 @@ HTTP 响应示例：
 
 
 
-### 3.5 更新/保存一个挂号 /updateRegistration
+### ~~3.5 更新/保存一个挂号 /updateRegistration（已作废）~~
 
 请求体：一个主键ID非null的挂号。所有字段必须完整，否则会被null取代。
 
 返回：更新/保存成功后返回保存后的挂号。理论上返回体应该和请求体一模一样。
 
+**说明：此 API 已作废。规定挂号成功之后不可修改。**
+
 HTTP 请求示例：
 
 ```http
-POST /his/RegistrationController/updateRegistration HTTP/1.1
-Host: localhost:9002
-Content-Type: application/json
 
-{
-    "id": 1,
-    "realname": "MyRealjjjjrName",
-    "gender": null,
-    "idnumber": null,
-    "birthdate": null,
-    "age": null,
-    "homeaddress": null,
-    "casenumber": null,
-    "visitdate": null,
-    "noon": null,
-    "deptid": null,
-    "userid": null,
-    "registid": null,
-    "settleid": null,
-    "registertime": null,
-    "registerid": null,
-    "visitstate": null,
-    "patientid": null,
-    "diagnosisList": null
-}
 ```
 
 HTTP 响应示例：
 
 ```json
-{
-    "id": 1,
-    "realname": "MyRealjjjjrName",
-    "gender": null,
-    "idnumber": null,
-    "birthdate": null,
-    "age": null,
-    "homeaddress": null,
-    "casenumber": null,
-    "visitdate": null,
-    "noon": null,
-    "deptid": null,
-    "userid": null,
-    "registid": null,
-    "settleid": null,
-    "registertime": null,
-    "registerid": null,
-    "visitstate": null,
-    "patientid": null,
-    "diagnosisList": null
-}
+
 ```
 
 
@@ -1969,7 +1950,7 @@ HTTP 响应示例：
 }
 ```
 
-### 3.10 根据多个条件获取挂号列表 /getRegistrationsByConditions
+### 3.10 根据多个条件获取挂号列表 /getRegistrationsByConditions （待更新）
 
 参数：如果参数为null或省略，表示该条件不设限。如果日期下限和午别下限为null，说明不设置下限。上限同理。fromVisitDate和fromNoon要么同时有数值，要么同时为null或省略，toVisitDate和toNoon 同理。
 
@@ -2000,6 +1981,7 @@ visitState;//看诊状态
 //0-未看诊
 //1-已看诊或正在看诊
 patientId;//患者主键ID
+scheduleId;//排班主键ID
 ```
 
 返回：符合条件的挂号的列表。
@@ -2007,7 +1989,7 @@ patientId;//患者主键ID
 HTTP 请求示例：
 
 ```http
-GET /his/RegistrationController/getRegistrationsByConditions?userId=1&departmentId=1&visitState=1&fromVisitDate=2020-04-24&fromNoon=1&toVisitDate=2020-04-25&toNoon=1&registrationTypeId=1&needBook=1&patientId=1&settlementTypeId=1&registrarId=1 HTTP/1.1
+GET /his/RegistrationController/getRegistrationsByConditions?userId=100&departmentId=1&visitState=0&fromVisitDate=2020-04-24&fromNoon=1&toVisitDate=2020-12-25&toNoon=1&registrationTypeId=100&needBook=0&patientId=100&settlementTypeId=100&registrarId=101&scheduleId=1 HTTP/1.1
 Host: localhost:9002
 
 
@@ -2019,25 +2001,49 @@ HTTP 响应示例：
 ```json
 [
     {
-        "id": 5,
-        "realname": "sdfsdf",
+        "id": 1,
+        "realname": "Nelson",
         "gender": 1,
-        "idnumber": "sdfsdfdsfs",
+        "idnumber": "7989688077809873",
         "birthdate": null,
         "age": null,
         "homeaddress": null,
-        "casenumber": null,
-        "visitdate": "2020-04-24",
+        "medicalRecordId": null,
+        "visitdate": "2020-12-02",
         "noon": 1,
         "deptid": 1,
-        "userid": 1,
-        "registid": 1,
-        "settleid": 1,
-        "isbook": 1,
-        "registertime": null,
-        "registerid": 1,
-        "visitstate": 1,
-        "patientid": 1,
+        "userid": 100,
+        "registid": 100,
+        "settleid": 100,
+        "isbook": 0,
+        "registertime": 1587844363369,
+        "registerid": 101,
+        "visitstate": 0,
+        "patientid": 100,
+        "scheduleId": 1,
+        "patientCostsList": null
+    },
+    {
+        "id": 2,
+        "realname": "Nelson",
+        "gender": 1,
+        "idnumber": "7989688077809873",
+        "birthdate": null,
+        "age": null,
+        "homeaddress": null,
+        "medicalRecordId": null,
+        "visitdate": "2020-12-02",
+        "noon": 1,
+        "deptid": 1,
+        "userid": 100,
+        "registid": 100,
+        "settleid": 100,
+        "isbook": 0,
+        "registertime": 1587844369810,
+        "registerid": 101,
+        "visitstate": 0,
+        "patientid": 100,
+        "scheduleId": 1,
         "patientCostsList": null
     }
 ]
@@ -2125,13 +2131,16 @@ HTTP 响应示例：
 
 返回：操作成功后返回数据更新后的挂号
 
-说明：接诊收治之前的挂号是没有病历编码的。只有接诊收治之后才会生成一张病历，并且挂号有响应的病历编码。
+说明：接诊收治之前的挂号是没有病历编码的。只有接诊收治之后才会生成一张病历，并且挂号有响应的病历主键ID。
 
 HTTP 请求示例1：
 
 ```http
-POST /his/DoctorController/admit?registrationId=1 HTTP/1.1
+POST /his/DoctorController/admit?registrationId=100 HTTP/1.1
 Host: localhost:9002
+
+
+
 
 ```
 
@@ -2139,25 +2148,26 @@ HTTP 响应示例1：
 
 ```json
 {
-    "id": 1,
-    "realname": "ahillatty",
+    "id": 100,
+    "realname": "Nelson",
     "gender": 1,
-    "idnumber": "112222222",
-    "birthdate": "2020-01-01T06:00:00.000+0000",
-    "age": 1,
-    "homeaddress": "asdasdasd",
-    "casenumber": "1",
-    "visitdate": "2020-03-20T05:00:00.000+0000",
+    "idnumber": "7989688077809873",
+    "birthdate": null,
+    "age": null,
+    "homeaddress": null,
+    "medicalRecordId": 1,
+    "visitdate": "2020-06-18",
     "noon": 1,
-    "deptid": 3,
-    "userid": 1,
-    "registid": 1,
-    "settleid": 1,
-    "isbook": 1,
-    "registertime": 11111,
-    "registerid": 1,
+    "deptid": 1,
+    "userid": 100,
+    "registid": 100,
+    "settleid": 100,
+    "isbook": 0,
+    "registertime": 1587836976547,
+    "registerid": 101,
     "visitstate": 1,
-    "patientid": 0
+    "patientid": 100,
+    "patientCostsList": null
 }
 ```
 
@@ -2204,7 +2214,7 @@ HTTP 响应示例：
 ```json
 {
     "id": 1,
-    "registerId": 1,
+    "registerId": 100,
     "medicalReadme": null,
     "medicalPresent": null,
     "presentTreat": null,
@@ -2213,8 +2223,8 @@ HTTP 响应示例：
     "medicalPhysique": null,
     "medicalDiagnosis": null,
     "medicalHandling": null,
-    "caseState": null,
-    "caseNumber": ""
+    "caseState": 2,
+    "diagnosisList": null
 }
 ```
 
@@ -2225,6 +2235,8 @@ HTTP 响应示例：
 请求体：主键ID为null的检查（检验或处置）。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
 返回：新增成功后返回主键ID非null的字段完整的检查（检验或处置）。
+
+说明：userId, state 不需要由前台填写，由后台根据 medicalId 自动填写。即使前台填写了，也会被后台的自动填写所覆盖。
 
 HTTP 请求示例：
 
@@ -2242,18 +2254,17 @@ HTTP 响应示例：
 
 ```json
 {
-    "id": null,
+    "id": 1,
     "medicalId": 1,
     "creationTime": null,
     "totalSum": null,
     "objective": null,
-    "userId": null,
-    "state": null,
-    "invoiceNumber": null
+    "userId": 100,
+    "state": 1,
+    "invoiceId": null,
+    "checkDetailedList": []
 }
 ```
-
-备注：目前返回的检查检验处置的id字段有数据的功能还未实现。
 
 
 
@@ -2278,14 +2289,14 @@ HTTP 响应示例：
 ```json
 {
     "id": 1,
-    "medicalId": null,
+    "medicalId": 1,
     "creationTime": null,
     "totalSum": null,
     "objective": null,
-    "userId": null,
-    "state": null,
-    "invoiceNumber": null,
-    "checkDetailedList": null
+    "userId": 100,
+    "state": 1,
+    "invoiceId": null,
+    "checkDetailedList": []
 }
 ```
 
@@ -2297,6 +2308,8 @@ HTTP 响应示例：
 
 返回：更新/保存成功后返回保存后的检查（检验或处置）。理论上返回体应该和请求体一模一样。
 
+說明：請勿直接使用此 update 方法来直接改变 state。请使用相关的其他方法。因为直接使用 update 改变 state 缺少对数据的必要的检查。
+
 HTTP 请求示例：
 
 ```http
@@ -2306,14 +2319,14 @@ Content-Type: application/json
 
 {
     "id": 1,
-    "medicalId": null,
+    "medicalId": 1,
     "creationTime": null,
     "totalSum": null,
-    "objective": "I don't know....",
-    "userId": null,
-    "state": null,
-    "invoiceNumber": null,
-    "checkDetailedList": null
+    "objective": "sdfsdfsdfsdfsdf",
+    "userId": 100,
+    "state": 1,
+    "invoiceId": null,
+    "checkDetailedList": []
 }
 ```
 
@@ -2322,14 +2335,14 @@ HTTP 响应示例：
 ```json
 {
     "id": 1,
-    "medicalId": null,
+    "medicalId": 1,
     "creationTime": null,
     "totalSum": null,
-    "objective": "I don't know....",
-    "userId": null,
-    "state": null,
-    "invoiceNumber": null,
-    "checkDetailedList": null
+    "objective": "sdfsdfsdfsdfsdf",
+    "userId": 100,
+    "state": 1,
+    "invoiceId": null,
+    "checkDetailedList": []
 }
 ```
 
@@ -2341,6 +2354,8 @@ HTTP 响应示例：
 
 返回：更新/保存成功后返回保存后的病历。理论上返回体应该和请求体一模一样。
 
+說明：請勿直接使用此 update 方法来改变 state。请使用相关的其他方法。因为直接使用 update 改变 state 缺少对数据的必要的检查。
+
 HTTP 请求示例：
 
 ```http
@@ -2350,8 +2365,8 @@ Content-Type: application/json
 
 {
     "id": 1,
-    "registerId": 1,
-    "medicalReadme": "脑残",
+    "registerId": 2,
+    "medicalReadme": "sdfsdfsdfsdf",
     "medicalPresent": null,
     "presentTreat": null,
     "medicalHistory": null,
@@ -2359,8 +2374,8 @@ Content-Type: application/json
     "medicalPhysique": null,
     "medicalDiagnosis": null,
     "medicalHandling": null,
-    "caseState": null,
-    "caseNumber": "3"
+    "caseState": 2,
+    "diagnosisList": null
 }
 ```
 
@@ -2369,8 +2384,8 @@ HTTP 响应示例：
 ```json
 {
     "id": 1,
-    "registerId": 1,
-    "medicalReadme": "脑残",
+    "registerId": 2,
+    "medicalReadme": "sdfsdfsdfsdf",
     "medicalPresent": null,
     "presentTreat": null,
     "medicalHistory": null,
@@ -2378,8 +2393,8 @@ HTTP 响应示例：
     "medicalPhysique": null,
     "medicalDiagnosis": null,
     "medicalHandling": null,
-    "caseState": null,
-    "caseNumber": "3"
+    "caseState": 2,
+    "diagnosisList": null
 }
 ```
 
@@ -2764,7 +2779,7 @@ state;//检查（检验或处置）状态
 HTTP 请求示例：
 
 ```http
-GET /his/DoctorController/getCheckAppliesByConditions?userId=3&state=1 HTTP/1.1
+GET /his/DoctorController/getCheckAppliesByConditions? HTTP/1.1
 Host: localhost:9002
 
 ```
@@ -2774,14 +2789,14 @@ HTTP 响应示例：
 ```json
 [
     {
-        "id": 2,
+        "id": 1,
         "medicalId": 1,
         "creationTime": null,
         "totalSum": null,
-        "objective": null,
-        "userId": 3,
+        "objective": "sdfsdfsdfsdfsdf",
+        "userId": 100,
         "state": 1,
-        "invoiceNumber": null,
+        "invoiceId": null,
         "checkDetailedList": []
     }
 ]

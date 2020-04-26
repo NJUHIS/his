@@ -4,8 +4,11 @@ Host: localhost:9002
 ###
 
 
-POST /his/DoctorController/admit?registrationId=10010 HTTP/1.1
+POST /his/DoctorController/admit?registrationId=100 HTTP/1.1
 Host: localhost:9002
+
+
+
 
 ###
 
@@ -49,8 +52,8 @@ Content-Type: application/json
 
 {
   "id": 1,
-  "registerId": 1,
-  "medicalReadme": "脑残",
+  "registerId": 2,
+  "medicalReadme": "sdfsdfsdfsdf",
   "medicalPresent": null,
   "presentTreat": null,
   "medicalHistory": null,
@@ -58,8 +61,8 @@ Content-Type: application/json
   "medicalPhysique": null,
   "medicalDiagnosis": null,
   "medicalHandling": null,
-  "caseState": null,
-  "caseNumber": "3"
+  "caseState": 2,
+  "diagnosisList": null
 }
 
 ###

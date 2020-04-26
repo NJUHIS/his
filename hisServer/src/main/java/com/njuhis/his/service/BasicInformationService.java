@@ -1,5 +1,6 @@
 package com.njuhis.his.service;
 
+import com.njuhis.his.datacleaner.BasicInformationDataCleaner;
 import com.njuhis.his.mapper.*;
 import com.njuhis.his.model.*;
 import com.njuhis.his.util.QuickLogger;
@@ -37,6 +38,9 @@ public class BasicInformationService {
     private SchedulingMapper schedulingMapper;
     @Autowired
     private UtilityService utilityService;
+    @Autowired
+    private BasicInformationDataCleaner basicInformationDataCleaner;
+
 
     public List<Department> getAllDepartments(ResultMessage resultMessage){
         return departmentMapper.selectAll();
@@ -380,6 +384,21 @@ public class BasicInformationService {
 
     //TODO 待测试
     public Scheduling addScheduling(Scheduling scheduling,ResultMessage resultMessage){
+        basicInformationDataCleaner.cleanScheduling(scheduling,resultMessage);if(!resultMessage.isSuccessful())return null;
+        User user=personalInformationService.getUserById(scheduling.getUserid(),resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        if(user.getUsertypeid()!=2){
+            resultMessage.sendClientError("Not a clinic doctor. No need to be scheduled. 不是一位门诊医生。不必被排班。");
+            return null;
+        }
+
+        scheduling.setDeptid(user.getDeptid());
+
+        //TODO 排班时间必须大于现在时间。
+
+        scheduling.setRemainingQuota(scheduling.getRegistquota());
+        scheduling.setState(3);//3 - 未进行。
+
         try {
             schedulingMapper.insert(scheduling);
         }catch (DataIntegrityViolationException exception) {
