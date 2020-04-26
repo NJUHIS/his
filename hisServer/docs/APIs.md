@@ -2393,7 +2393,7 @@ HTTP 响应示例：
 
 返回：新增成功后返回主键ID非null的字段完整的处方。
 
-
+说明：userid 不需要由前台填写，由后台根据 mId 自动填写。即使前台填写了，也会被后台的自动填写所覆盖。
 
 HTTP 请求示例：
 
@@ -2403,7 +2403,7 @@ Host: localhost:9002
 Content-Type: application/json
 
 {
-	"prescriptionName":"含笑半步癲"
+	"medicalId":200
 }
 ```
 
@@ -2411,11 +2411,11 @@ HTTP 响应示例：
 
 ```json
 {
-    "id": 11,
-    "medicalId": null,
-    "userId": null,
-    "prescriptionName": "含笑半步癲",
-    "prescriptionState": null,
+    "id": 200,
+    "medicalId": 200,
+    "userId": 100,
+    "prescriptionName": null,
+    "prescriptionState": 1,
     "prescriptionTime": null,
     "invoiceId": null,
     "prescriptionDetailedList": null

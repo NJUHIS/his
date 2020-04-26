@@ -2,7 +2,9 @@ package com.njuhis.his.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //处方
 public class Prescription {
@@ -98,5 +100,27 @@ public class Prescription {
 
     public void setDelmark(Integer delmark) {
         this.delmark = delmark;
+    }
+
+    //不能為空的字段
+    @JsonIgnore
+    private static final String[][] notEmptyFieldsCheckListString =new String[][]{
+            //字段名+英文名+中文翻譯
+            {"medicalId","Medical Record ID","病历主键ID"}
+
+    };
+    @JsonIgnore
+    private static final Map<String, String[]> notEmptyFieldsCheckList =new HashMap<>();
+    public Prescription(){
+        for(String[]fieldToCheckNotEmpty: notEmptyFieldsCheckListString){
+            String[] fieldTranslations=new String[]{
+                    fieldToCheckNotEmpty[1],fieldToCheckNotEmpty[2]
+            };
+            notEmptyFieldsCheckList.put(fieldToCheckNotEmpty[0],fieldTranslations);
+        }
+    }
+
+    public static Map<String, String[]> getNotEmptyFieldsCheckList() {
+        return notEmptyFieldsCheckList;
     }
 }

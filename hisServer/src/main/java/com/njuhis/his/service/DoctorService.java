@@ -163,6 +163,12 @@ public class DoctorService {
     }
 
     public Prescription addPrescription(Prescription prescription, ResultMessage resultMessage){
+        doctorDataCleaner.cleanPrescriptionForAddPrescription(prescription,resultMessage);if(!resultMessage.isSuccessful())return null;
+        Register register=registrationService.getRegistrationById(prescription.getMedicalId(),resultMessage);if(!resultMessage.isSuccessful())return null;
+        prescription.setId(prescription.getMedicalId());
+        prescription.setUserId(register.getUserid());
+        prescription.setPrescriptionState(1);    //1 - 编辑中
+
         try {
             prescriptionMapper.insert(prescription);
         }catch (DataIntegrityViolationException exception) {
