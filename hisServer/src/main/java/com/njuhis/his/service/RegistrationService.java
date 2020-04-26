@@ -4,10 +4,7 @@ import com.njuhis.his.datacleaner.RegistrationDataCleaner;
 import com.njuhis.his.mapper.InvoiceMapper;
 import com.njuhis.his.mapper.PatientCostsMapper;
 import com.njuhis.his.mapper.RegisterMapper;
-import com.njuhis.his.model.Invoice;
-import com.njuhis.his.model.PatientCosts;
-import com.njuhis.his.model.Register;
-import com.njuhis.his.model.Scheduling;
+import com.njuhis.his.model.*;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +32,8 @@ public class RegistrationService {
     private UtilityService utilityService;
     @Autowired
     private BasicInformationService basicInformationService;
+    @Autowired
+    private PersonalInformationService personalInformationService;
 
 
     public Register addRegistration(Register registration, ResultMessage resultMessage){
@@ -43,7 +42,7 @@ public class RegistrationService {
         registrationDataCleaner.cleanRegistration(registration,resultMessage);if(!resultMessage.isSuccessful()) return null;
 
         /**
-         * TODO 通过 scheduleId 来填写 deptid, userid, visitdate,noon,registrationtypeid。
+         * 通过 scheduleId 来填写 deptid, userid, visitdate,noon,registrationtypeid。
          */
         Scheduling scheduling=basicInformationService.getSchedulingById(registration.getScheduleId(),resultMessage);if(!resultMessage.isSuccessful()) return null;
 
@@ -55,8 +54,6 @@ public class RegistrationService {
         if(scheduling.getRemainingQuota()<=0){
             resultMessage.sendClientError("Fully booked. Not enough quota. 挂号已满，配额不足。");
             return null;
-        }else{
-            scheduling.setRemainingQuota(scheduling.getRemainingQuota()-1);
         }
 
         registration.setUserid(scheduling.getUserid());
@@ -69,9 +66,20 @@ public class RegistrationService {
         registration.setRegistertime(new Date().getTime());//掛號的時間。
 
 
+        Patient patient=personalInformationService.getPatientById(registration.getPatientid(),resultMessage);if(!resultMessage.isSuccessful()) return null;
+        registration.setBirthdate(patient.getBirthday());
+        registration.setHomeaddress(patient.getHomeAddress());
+        registration.setGender(patient.getGender());
+        registration.setRealname(patient.getName());
+        registration.setIdnumber(patient.getIdnumber());
+
+        scheduling.setRemainingQuota(scheduling.getRemainingQuota()-1);
+
 
         try {
             registerMapper.insert(registration);
+            basicInformationService.updateScheduling(scheduling,resultMessage);if(!resultMessage.isSuccessful()) return null;
+
         }catch (DataIntegrityViolationException exception) {
             utilityService.dealDataIntegrityViolationException(resultMessage, exception);
             return null;

@@ -13,7 +13,7 @@ public interface SchedulingMapper {
 
     Scheduling selectByPrimaryKeyExcludingDeleted(Integer id);
 
-    List<Scheduling> selectAll();
+    List<Scheduling> selectAllExcludingDeleted();
 
     int updateByPrimaryKey(Scheduling record);
 

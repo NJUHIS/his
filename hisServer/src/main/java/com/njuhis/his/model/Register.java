@@ -81,9 +81,11 @@ public class Register {
         this.idnumber = idnumber == null ? null : idnumber.trim();
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh", timezone="GMT+8")
     public Date getBirthdate() {
         return birthdate;
     }
+
 
     public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;

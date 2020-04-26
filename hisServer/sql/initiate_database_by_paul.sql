@@ -444,10 +444,13 @@ DROP TABLE IF EXISTS `patient`;
 CREATE TABLE `patient` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) DEFAULT NULL,
-  `IDnumber` varchar(45) DEFAULT NULL,
+  `IDnumber` varchar(45) NOT NULL,
   `phone` varchar(45) DEFAULT NULL,
-  `loginname` varchar(45) NOT NULL,
-  `password` varchar(45) DEFAULT NULL,
+  `loginname` varchar(45) NOT NULL UNIQUE ,
+  `gender` int(2) NOT NULL,
+  `birthday` date NOT NULL,
+  `homeAddress` varchar(64) NOT NULL,
+  `password` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -577,11 +580,11 @@ DROP TABLE IF EXISTS `register`;
 CREATE TABLE `register` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `RealName` varchar(64) NOT NULL,
-  `Gender` int(9) NOT NULL,
+  `Gender` int(2) NOT NULL,
   `IDnumber` varchar(45) NOT NULL,
-  `BirthDate` date DEFAULT NULL,
+  `BirthDate` date NOT NULL,
   `Age` int(9) DEFAULT NULL,
-  `HomeAddress` varchar(64) DEFAULT NULL,
+  `HomeAddress` varchar(64) NOT NULL,
   `MedicalRecordId` int(9) DEFAULT NULL,
   `VisitDate` date NOT NULL,
   `Noon` int(9) NOT NULL,
@@ -591,7 +594,7 @@ CREATE TABLE `register` (
   `SettleID` int(9) NOT NULL,
   `IsBook` int(1)  NOT NULL,
   `RegisterTime` bigint(64) NOT NULL,
-  `RegisterID` int(9) NOT NULL,
+  `RegisterID` int(9) DEFAULT NULL,
   `VisitState` int(9) NOT NULL,
   `patientID` int(9) NOT NULL,
   `scheduleId` int(9) NOT NULL,

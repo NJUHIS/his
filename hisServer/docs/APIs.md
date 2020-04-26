@@ -1183,6 +1183,7 @@ toNoon;//排班午别范围上限
 deptId;//被排班医生的所属部门主键ID
 userId;//被排班的医生的医院员工主键ID
 state;//排班的状态
+registerLevelId;//查询时医生的挂号类型主键ID，(未必是新增排班时候的医生的挂号类型主键ID，因为医生的挂号类型主键ID可能改变。)
 ```
 
 返回：符合条件的排班的列表。
@@ -1190,10 +1191,8 @@ state;//排班的状态
 HTTP 请求示例：
 
 ```http
-GET /his/BasicInformationController/getSchedulingsByConditions?userId=100&deptId=1&state=3&fromScheduleDate=2020-04-24&fromNoon=2&toScheduleDate=2020-12-25&toNoon=3 HTTP/1.1
+GET /his/BasicInformationController/getSchedulingsByConditions?userId=100&deptId=1&state=3&fromScheduleDate=2020-04-24&fromNoon=2&toScheduleDate=2020-12-25&toNoon=3&registerLevelId=100 HTTP/1.1
 Host: localhost:9002
-
-
 
 
 
@@ -1211,33 +1210,28 @@ HTTP 响应示例：
         "noon": 1,
         "registquota": 3,
         "state": 3,
-        "user": null,
-        "department": null,
-        "remainingQuota": 3
-    },
-    {
-        "id": 2,
-        "scheddate": "2020-12-02",
-        "deptid": 1,
-        "userid": 100,
-        "noon": 1,
-        "registquota": 3,
-        "state": 3,
-        "user": null,
-        "department": null,
-        "remainingQuota": 3
-    },
-    {
-        "id": 3,
-        "scheddate": "2020-12-02",
-        "deptid": 1,
-        "userid": 100,
-        "noon": 1,
-        "registquota": 3,
-        "state": 3,
-        "user": null,
-        "department": null,
-        "remainingQuota": 3
+        "user": {
+            "id": 100,
+            "username": "robin",
+            "password": "password",
+            "realname": "Robin",
+            "usertypeid": 2,
+            "doctitleid": 1,
+            "isscheduling": null,
+            "deptid": 1,
+            "registerLevelId": 100,
+            "idnumber": null,
+            "schedulingList": null
+        },
+        "department": {
+            "id": 1,
+            "deptname": "心血管内科",
+            "deptcategory": "11",
+            "depttypeid": 1,
+            "deptcode": "XXGNK",
+            "userList": null
+        },
+        "remainingQuota": 2
     }
 ]
 ```
@@ -1604,16 +1598,13 @@ HTTP 响应示例：
 ```java
 patientid
 settleid
-registerid
 scheduleId
-realname
 isbook
-等
 ```
 
 返回：挂号成功后返回主键ID非null的字段完整的挂号。
 
-说明：规定挂号成功之后不可修改。visitdate, noon, userid, registid, deptid, state 不需要由前台填写，由后台根据 scheduleId 自动填写。即使前台填写了，也会被后台的自动填写所覆盖。
+说明：规定挂号成功之后不可修改。visitdate, noon, userid, registid, deptid, idnumber, gender, homeaddress, birthdate, age, realname, state 不需要由前台填写，由后台根据 scheduleId 自动填写。即使前台填写了，也会被后台的自动填写所覆盖。
 
 HTTP 请求示例：
 
@@ -1623,13 +1614,9 @@ Host: localhost:9002
 Content-Type: application/json
 
 {
-    "realname": "Nelson",
-    "gender": 1,
     "patientid": 100,
-    "registerid": 101,
     "isbook": 0,
     "settleid": 100,
-    "idnumber": "7989688077809873",
     "scheduleId":1
 }
 ```
@@ -1654,7 +1641,7 @@ HTTP 响应示例：
     "settleid": 100,
     "isbook": 0,
     "registertime": 1587874337411,
-    "registerid": 101,
+    "registerid": null,
     "visitstate": 0,
     "patientid": 100,
     "scheduleId": 1,
@@ -2131,7 +2118,7 @@ HTTP 响应示例：
 
 返回：操作成功后返回数据更新后的挂号
 
-说明：接诊收治之前的挂号是没有病历编码的。只有接诊收治之后才会生成一张病历，并且挂号有响应的病历主键ID。
+说明：接诊收治之前的挂号是没有病历主鍵ID的。只有接诊收治之后才会生成一张病历，并且挂号有响应的病历主键ID。
 
 HTTP 请求示例1：
 

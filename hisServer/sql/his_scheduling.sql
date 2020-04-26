@@ -1,0 +1,1 @@
+INSERT INTO his.scheduling (id, SchedDate, DeptId, UserId, Noon, RegistQuota, State, remainingQuota) VALUES (1, '2020-12-02', 1, 100, 1, 3, 3, 3);

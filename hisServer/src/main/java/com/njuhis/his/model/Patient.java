@@ -1,6 +1,10 @@
 package com.njuhis.his.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 //患者
 public class Patient {
     private Integer id;//患者主键ID
@@ -9,13 +13,35 @@ public class Patient {
     private String phone;//患者手机号
     private String loginname;//患者登陆名
     private String password;//患者密码
+    private String homeAddress;//家庭住址
+    private Integer gender;//性別。1-男 2-女 3-其他
+    private Date birthday;//生日
 
 
+    public String getHomeAddress() {
+        return homeAddress;
+    }
 
+    public void setHomeAddress(String homeAddress) {
+        this.homeAddress = homeAddress;
+    }
 
+    public Integer getGender() {
+        return gender;
+    }
 
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
 
+    @JsonFormat(pattern = "yyyy-MM-dd", locale = "zh", timezone="GMT+8")
+    public Date getBirthday() {
+        return birthday;
+    }
 
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
     public Integer getId() {
         return id;

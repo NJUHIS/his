@@ -379,7 +379,7 @@ public class BasicInformationService {
 
         //TODO 待测试
     public List<Scheduling> getAllSchedulings(ResultMessage resultMessage){
-        return schedulingMapper.selectAll();
+        return schedulingMapper.selectAllExcludingDeleted();
     }
 
     //TODO 待测试
@@ -449,6 +449,7 @@ public class BasicInformationService {
                                                        Integer deptId,
                                                        Integer userId,
                                                        Integer state,
+                                                       Integer registerLevelId,
                                                        ResultMessage resultMessage){
 
         if(fromScheduleDate==null&&fromNoon!=null||fromScheduleDate!=null&&fromNoon==null){
@@ -478,6 +479,7 @@ public class BasicInformationService {
             if ((deptId == null || deptId.equals(scheduling.getDeptid()))
                     && (userId == null || userId.equals(scheduling.getUserid()))
                     && (state == null || state.equals(scheduling.getState()))
+                    &&(registerLevelId==null||registerLevelId.equals(scheduling.getUser().getRegisterLevelId()))
                     && (fromScheduleDate.compareTo(scheduling.getScheddate())<0
                         ||fromScheduleDate.compareTo(scheduling.getScheddate())==0&&fromNoon<=scheduling.getNoon())
                     &&(toScheduleDate.compareTo(scheduling.getScheddate())>0
