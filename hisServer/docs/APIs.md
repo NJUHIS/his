@@ -2295,7 +2295,7 @@ HTTP 响应示例：
 
 返回：更新/保存成功后返回保存后的检查（检验或处置）。理论上返回体应该和请求体一模一样。
 
-說明：請勿直接使用此 update 方法来直接改变 state。请使用相关的其他方法。因为直接使用 update 改变 state 缺少对数据的必要的检查。确认开出请使用 API 4.18 confirmCheckApply。
+說明：請勿直接使用此 update 方法来直接改变 state。请使用相关的其他方法。因为直接使用 update 改变 state 缺少对数据的必要的检查。确认开出检查（检验或处置）请使用 API 4.18 confirmCheckApply。付款检查（检验或处置）请使用API 4.19 payCheckApply。
 
 HTTP 请求示例：
 
@@ -2864,4 +2864,134 @@ HTTP 响应示例：
     "checkDetailedList": []
 }
 ```
+
+
+
+### 4.19 付款检查（检验或处置） /payCheckApply
+
+请求参数：检查（检验或处置）主键ID `checkApplyId`
+
+说明：此方法将检查（检验或处置）状态由“2 - 已开立并发出，未收费”变为   "3 - 已收费，未检验检查处置"
+
+返回：状态改变后的检查（检验或处置）
+
+HTTP 请求示例：
+
+```http
+POST /his/DoctorController/payCheckApply?checkApplyId=200 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 200,
+    "medicalId": 200,
+    "creationTime": null,
+    "totalSum": null,
+    "objective": null,
+    "userId": 100,
+    "state": 3,
+    "invoiceId": null,
+    "checkDetailedList": []
+}
+```
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
 

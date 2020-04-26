@@ -334,4 +334,18 @@ public class DoctorService {
         return checkApply;
     }
 
+    public CheckApply payCheckApply(Integer checkApplyId, ResultMessage resultMessage){
+        CheckApply checkApply=getCheckApplyById(checkApplyId,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        if(checkApply.getState()!=2){//如果不是 2-已开立并发出，未收费
+            resultMessage.sendClientError("The state is not 2. 状态不是 2-已开出未收费");
+            return null;
+        }
+
+        checkApply.setState(3);// 3 - 已收费，未检验检查处置
+        checkApply=updateCheckApply(checkApply,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        return checkApply;
+    }
+
 }
