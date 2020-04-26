@@ -284,17 +284,7 @@ public class DoctorController {
     }
 
 
-    @RequestMapping("/payCheckApply")
-    public CheckApply payCheckApply(@RequestParam Integer checkApplyId,HttpServletResponse httpServletResponse){
-        quickLogger.logInvoke();
-        quickLogger.logReceive(checkApplyId);
-        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        CheckApply result=doctorService.payCheckApply(checkApplyId,resultMessage);
-
-        quickLogger.logReceive(result);
-        return result;
-    }
 
 
 

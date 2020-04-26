@@ -1,5 +1,6 @@
 package com.njuhis.his.controller;
 
+import com.njuhis.his.model.CheckApply;
 import com.njuhis.his.model.Invoice;
 import com.njuhis.his.model.PatientCosts;
 import com.njuhis.his.model.Register;
@@ -209,8 +210,17 @@ public class RegistrationController {
         return result;
     }
 
+    @RequestMapping("/payCheckApply")
+    public CheckApply payCheckApply(@RequestParam Integer checkApplyId, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(checkApplyId);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
+        CheckApply result=registrationService.payCheckApply(checkApplyId,resultMessage);
 
+        quickLogger.logReceive(result);
+        return result;
+    }
 
 }
 

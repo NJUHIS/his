@@ -34,6 +34,8 @@ public class RegistrationService {
     private BasicInformationService basicInformationService;
     @Autowired
     private PersonalInformationService personalInformationService;
+    @Autowired
+    private DoctorService doctorService;
 
 
     public Register addRegistration(Register registration, ResultMessage resultMessage){
@@ -279,6 +281,21 @@ public class RegistrationService {
 
         }
         return filteredRegistrations;
+    }
+
+
+    public CheckApply payCheckApply(Integer checkApplyId, ResultMessage resultMessage){
+        CheckApply checkApply=doctorService.getCheckApplyById(checkApplyId,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        if(checkApply.getState()!=2){//如果不是 2-已开立并发出，未收费
+            resultMessage.sendClientError("The state is not 2. 状态不是 2-已开出未收费");
+            return null;
+        }
+
+        checkApply.setState(3);// 3 - 已收费，未检验检查处置
+        checkApply=doctorService.updateCheckApply(checkApply,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        return checkApply;
     }
 
 }
