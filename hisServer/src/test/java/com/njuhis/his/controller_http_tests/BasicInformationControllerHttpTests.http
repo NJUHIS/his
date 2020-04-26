@@ -267,14 +267,10 @@ Host: localhost:9002
 Content-Type: application/json
 
 {
-  "scheddate": "2019-03-02",
-  "deptid": 3,
-  "userid": 5,
+  "userid": 100,
+  "scheddate": "2020-12-02",
   "noon": 1,
-  "registquota": 3,
-  "state": 0,
-  "user": null,
-  "department": null
+  "registquota": 3
 }
 
 ###

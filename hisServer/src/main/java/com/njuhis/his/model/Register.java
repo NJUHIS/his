@@ -3,12 +3,11 @@ package com.njuhis.his.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.mybatis.generator.config.IgnoredColumn;
 
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 //挂号
 @Data
@@ -45,14 +44,9 @@ public class Register {
     //1-正在看诊
     //2-诊毕
     private Integer patientid;//患者主键ID
+    private Integer scheduleId;//排班主键ID
     private List<PatientCosts> patientCostsList;
 
-
-    @JsonIgnore
-    /**
-     * @deprecated
-     */
-    private Integer agetype;//患者年龄类型
 
 
     public Integer getId() {
@@ -101,20 +95,6 @@ public class Register {
 
     public void setAge(Integer age) {
         this.age = age;
-    }
-
-    /**
-     * @deprecated
-     */
-    public Integer getAgetype() {
-        return agetype;
-    }
-
-    /**
-     * @deprecated
-     */
-    public void setAgetype(Integer agetype) {
-        this.agetype = agetype;
     }
 
     public String getHomeaddress() {
@@ -216,6 +196,13 @@ public class Register {
         this.patientid = patientid;
     }
 
+    public Integer getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(Integer scheduleId) {
+        this.scheduleId = scheduleId;
+    }
 
     public Integer getMedicalRecordId() {
         return medicalRecordId;
@@ -238,13 +225,14 @@ public class Register {
     private static final String[][] notEmptyFieldsCheckListString =new String[][]{
             //字段名+英文名+中文翻譯
             {"patientid","Patient ID","患者主键ID"},
-            {"noon","Part of Day","预约看诊午别"},
+//            {"noon","Part of Day","预约看诊午别"},
             {"isbook","Need Book","是否需要病历本"},
-            {"visitdate","Appointment Date","预约看诊日期"},
-            {"userid","Doctor ID","医生的医院员工主键ID"},
+//            {"visitdate","Appointment Date","预约看诊日期"},
+//            {"userid","Doctor ID","医生的医院员工主键ID"},
             {"settleid","Settlement Type ID","结算类型主键ID"},
-            {"registid","Registration Type ID","挂号类型主键ID"},
-            {"deptid","Department ID","看诊科室主键ID"}
+//            {"registid","Registration Type ID","挂号类型主键ID"},
+//            {"deptid","Department ID","看诊科室主键ID"}
+            {"scheduleId","Schedule ID","排班主键ID"}
 
     };
     @JsonIgnore

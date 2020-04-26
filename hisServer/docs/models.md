@@ -172,6 +172,7 @@ public class Scheduling {
     //3 - 未进行
     private User user; //被排班的医生
     private Department department;////被排班医生的所属部门
+    private Integer remainingQuota; //剩余的挂号名额。
 }
 ```
 
@@ -229,6 +230,7 @@ public class Register {
     //1-正在看诊
     //2-诊毕
     private Integer patientid;//患者主键ID
+    private Integer scheduleId;//排班主键ID
     private List<PatientCosts> patientCostsList;
 }
 ```

@@ -7,9 +7,9 @@ import com.njuhis.his.mapper.RegisterMapper;
 import com.njuhis.his.model.Invoice;
 import com.njuhis.his.model.PatientCosts;
 import com.njuhis.his.model.Register;
+import com.njuhis.his.model.Scheduling;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
-import org.omg.CORBA.INVALID_ACTIVITY;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -33,16 +33,42 @@ public class RegistrationService {
     private RegistrationDataCleaner registrationDataCleaner;
     @Autowired
     private UtilityService utilityService;
+    @Autowired
+    private BasicInformationService basicInformationService;
 
 
     public Register addRegistration(Register registration, ResultMessage resultMessage){
 
         //數據清洗
-        registrationDataCleaner.cleanRegistration(registration,resultMessage);
-        if(!resultMessage.isSuccessful()) return null;
+        registrationDataCleaner.cleanRegistration(registration,resultMessage);if(!resultMessage.isSuccessful()) return null;
+
+        /**
+         * TODO 通过 scheduleId 来填写 deptid, userid, visitdate,noon,registrationtypeid。
+         */
+        Scheduling scheduling=basicInformationService.getSchedulingById(registration.getScheduleId(),resultMessage);if(!resultMessage.isSuccessful()) return null;
+
+        if(scheduling.getUser().getUsertypeid()!=2){
+            resultMessage.sendClientError("Not a clinic doctor. 不是一位门诊医生。");
+            return null;
+        }
+
+        if(scheduling.getRemainingQuota()<=0){
+            resultMessage.sendClientError("Fully booked. Not enough quota. 挂号已满，配额不足。");
+            return null;
+        }else{
+            scheduling.setRemainingQuota(scheduling.getRemainingQuota()-1);
+        }
+
+        registration.setUserid(scheduling.getUserid());
+        registration.setDeptid(scheduling.getUser().getDeptid());
+        registration.setVisitdate(scheduling.getScheddate());
+        registration.setNoon(scheduling.getNoon());
+        registration.setRegistid(scheduling.getUser().getRegisterLevelId());
 
         registration.setVisitstate(0);//看診狀態為 未看診。
         registration.setRegistertime(new Date().getTime());//掛號的時間。
+
+
 
         try {
             registerMapper.insert(registration);
@@ -187,7 +213,9 @@ public class RegistrationService {
             Integer registrarId,
             Integer visitState,
             Integer patientId,
+            Integer scheduleId,
             ResultMessage resultMessage
+
     ){
         if(fromVisitDate==null&&fromNoon!=null||fromVisitDate!=null&&fromNoon==null){
             resultMessage.sendClientError("\'From Appointment Date\' and \'From Noon\' are invalid. 「起始预约日期」和「起始预约午别」无效。" );
@@ -215,6 +243,7 @@ public class RegistrationService {
 
         for(Register registration:registrations){
             if ((departmentId == null || departmentId.equals(registration.getDeptid()))
+                    && (scheduleId==null||scheduleId.equals(registration.getScheduleId()))
                     && (userId == null || userId.equals(registration.getUserid()))
                     && (visitState == null || visitState.equals(registration.getVisitstate()))
                     &&(registrationTypeId==null||registrationTypeId.equals(registration.getRegistid()))

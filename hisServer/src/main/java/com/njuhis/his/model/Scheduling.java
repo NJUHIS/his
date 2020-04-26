@@ -3,8 +3,11 @@ package com.njuhis.his.model;
 //import com.sun.tools.corba.se.idl.IncludeGen;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 //排班
 public class Scheduling {
@@ -25,6 +28,7 @@ public class Scheduling {
     //3 - 未进行
     private User user; //被排班的医生
     private Department department;////被排班医生的所属部门
+    private Integer remainingQuota; //剩余的挂号名额。
 
 
 
@@ -87,6 +91,13 @@ public class Scheduling {
         this.noon = noon;
     }
 
+    public Integer getRemainingQuota() {
+        return remainingQuota;
+    }
+
+    public void setRemainingQuota(Integer remainingQuota) {
+        this.remainingQuota = remainingQuota;
+    }
 
     public Integer getRegistquota() {
         return registquota;
@@ -102,5 +113,26 @@ public class Scheduling {
 
     public void setState(Integer state) {
         this.state = state;
+    }
+    //不能為空的字段
+    @JsonIgnore
+    private static final String[][] notEmptyFieldsCheckListString =new String[][]{
+            //字段名+英文名+中文翻譯
+            {"userid","Doctor ID","医生主键ID"}
+
+    };
+    @JsonIgnore
+    private static final Map<String, String[]> notEmptyFieldsCheckList =new HashMap<>();
+    public Scheduling(){
+        for(String[]fieldToCheckNotEmpty: notEmptyFieldsCheckListString){
+            String[] fieldTranslations=new String[]{
+                    fieldToCheckNotEmpty[1],fieldToCheckNotEmpty[2]
+            };
+            notEmptyFieldsCheckList.put(fieldToCheckNotEmpty[0],fieldTranslations);
+        }
+    }
+
+    public static Map<String, String[]> getNotEmptyFieldsCheckList() {
+        return notEmptyFieldsCheckList;
     }
 }
