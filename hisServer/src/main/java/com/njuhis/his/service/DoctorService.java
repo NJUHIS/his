@@ -192,10 +192,11 @@ public class DoctorService {
         return prescriptionMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
     }
 
+    //4.7
     public Prescription addPrescription(Prescription prescription, ResultMessage resultMessage){
         doctorDataCleaner.cleanPrescriptionForAddPrescription(prescription,resultMessage);if(!resultMessage.isSuccessful())return null;
 
-        Prescription originalPrescription=getPrescriptionById(prescription.getId());
+        Prescription originalPrescription=getPrescriptionById(prescription.getMedicalId());
         if(originalPrescription!=null){
             resultMessage.sendClientError("The prescription of this medical record has existed. Please do not create again. 该病历的处方已存在。请不要重复创建。");
             return null;
