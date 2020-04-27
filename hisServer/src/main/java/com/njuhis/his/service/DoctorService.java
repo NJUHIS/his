@@ -113,7 +113,6 @@ public class DoctorService {
         checkApply.setUserId(register.getUserid());
 
         checkApply.setState(1);// 1 - 编辑中
-        checkApply.setId(medicalRecord.getId());
 
         try {
             checkApplyMapper.insert(checkApply);
