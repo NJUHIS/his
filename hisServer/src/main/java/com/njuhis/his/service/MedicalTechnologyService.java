@@ -23,7 +23,7 @@ public class MedicalTechnologyService {
 
         checkDetailed.setState(2);// 2 - 检验检查处置中
 
-        checkDetailed = doctorService.updateCheckDetailed(checkDetailed, resultMessage);
+        checkDetailed = doctorService.updateCheckDetailedInternal(checkDetailed, resultMessage);
         if (!resultMessage.isSuccessful()) return null;
         return checkDetailed;
     }
@@ -37,7 +37,7 @@ public class MedicalTechnologyService {
 
         checkDetailed.setState(3);// 3 - 检验检查处置完成，结果未出
 
-        checkDetailed = doctorService.updateCheckDetailed(checkDetailed, resultMessage);
+        checkDetailed = doctorService.updateCheckDetailedInternal(checkDetailed, resultMessage);
         if (!resultMessage.isSuccessful()) return null;
         return checkDetailed;
     }
@@ -49,7 +49,7 @@ public class MedicalTechnologyService {
         //TODO 检查状态初始值
         //TODO 检查CheckApply状态
         checkDetailed.setState(4);// 4 - 结果已出
-        checkDetailed = doctorService.updateCheckDetailed(checkDetailed, resultMessage);if (!resultMessage.isSuccessful()) return null;
+        checkDetailed = doctorService.updateCheckDetailedInternal(checkDetailed, resultMessage);if (!resultMessage.isSuccessful()) return null;
 
         reportCheckApply(checkDetailed.getCheckappid(),resultMessage);if(!resultMessage.isSuccessful())return null;
 
@@ -73,7 +73,7 @@ public class MedicalTechnologyService {
         }
         if(allReported){
             checkApply.setState(5);//5 - 检验检查处置已完成，结果已出
-            doctorService.updateCheckApply(checkApply,resultMessage);if(!resultMessage.isSuccessful())return;
+            doctorService.updateCheckApplyInternal(checkApply,resultMessage);if(!resultMessage.isSuccessful())return;
         }
     }
 

@@ -98,7 +98,7 @@ public class DoctorController {
         quickLogger.logReceive(checkApply);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        CheckApply result=doctorService.updateCheckApply(checkApply, resultMessage);
+        CheckApply result=doctorService.updateCheckApplyExternal(checkApply, resultMessage);
 
         quickLogger.logReturn(result);
         return result;
@@ -111,7 +111,7 @@ public class DoctorController {
         quickLogger.logReceive(medicalRecord);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        MedicalRecord result=doctorService.updateMedicalRecord(medicalRecord, resultMessage);
+        MedicalRecord result=doctorService.updateMedicalRecordExternal(medicalRecord, resultMessage);
 
         quickLogger.logReturn(result);
         return result;
@@ -151,7 +151,7 @@ public class DoctorController {
         quickLogger.logReceive(prescription);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        Prescription result=doctorService.updatePrescription(prescription, resultMessage);
+        Prescription result=doctorService.updatePrescriptionExternal(prescription, resultMessage);
 
         quickLogger.logReturn(result);
         return result;
@@ -193,7 +193,7 @@ public class DoctorController {
         quickLogger.logReceive(checkDetailed);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        CheckDetailed result=doctorService.updateCheckDetailed(checkDetailed, resultMessage);
+        CheckDetailed result=doctorService.updateCheckDetailedExternal(checkDetailed, resultMessage);
 
         quickLogger.logReturn(result);
         return result;

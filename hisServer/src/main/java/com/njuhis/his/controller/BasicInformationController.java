@@ -483,7 +483,9 @@ public class BasicInformationController {
         quickLogger.logReceive(scheduling);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        resultMessage.sendClientError("This API has been deprecated. 此 API 已作废。");return null;
+        resultMessage.sendClientError("This API has been deprecated. 此 API 已作废。");
+        quickLogger.logReturn(null);
+        return null;
 
 //        Scheduling result=basicInformationService.updateScheduling(scheduling, resultMessage);
 //

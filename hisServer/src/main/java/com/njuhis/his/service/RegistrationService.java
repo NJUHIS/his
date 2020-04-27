@@ -293,7 +293,7 @@ public class RegistrationService {
         }
 
         checkApply.setState(3);// 3 - 已收费，未检验检查处置
-        checkApply=doctorService.updateCheckApply(checkApply,resultMessage);if(!resultMessage.isSuccessful())return null;
+        checkApply=doctorService.updateCheckApplyInternal(checkApply,resultMessage);if(!resultMessage.isSuccessful())return null;
 
         return checkApply;
     }

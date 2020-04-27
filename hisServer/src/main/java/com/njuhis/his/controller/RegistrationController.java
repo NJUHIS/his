@@ -74,7 +74,10 @@ public class RegistrationController {
         quickLogger.logReceive(register);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        resultMessage.sendClientError("This API has been deprecated. 此 API 已作废。");return null;
+        resultMessage.sendClientError("This API has been deprecated. 此 API 已作废。");
+        quickLogger.logReturn(null);
+        return null;
+
 
 //        Register result=registrationService.updateRegistration(register, resultMessage);
 //
