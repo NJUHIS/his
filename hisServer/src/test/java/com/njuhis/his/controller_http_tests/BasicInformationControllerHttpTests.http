@@ -274,6 +274,9 @@ Content-Type: application/json
 }
 
 ###
-GET /his/BasicInformationController/getSchedulingsByConditions?userId=1&deptId=1&state=1&fromScheduleDate=2020-04-24&fromNoon=2&toScheduleDate=2020-04-25&toNoon=3 HTTP/1.1
+GET /his/BasicInformationController/getSchedulingsByConditions?userId=100&deptId=1&state=3&fromScheduleDate=2020-04-24&fromNoon=2&toScheduleDate=2020-12-25&toNoon=3&registerLevelId=100 HTTP/1.1
 Host: localhost:9002
+
+
+
 

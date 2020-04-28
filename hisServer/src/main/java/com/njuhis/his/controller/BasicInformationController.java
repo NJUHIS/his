@@ -483,7 +483,9 @@ public class BasicInformationController {
         quickLogger.logReceive(scheduling);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        resultMessage.sendClientError("This API has been deprecated. 此 API 已作废。");return null;
+        resultMessage.sendClientError("This API has been deprecated. 此 API 已作废。");
+        quickLogger.logReturn(null);
+        return null;
 
 //        Scheduling result=basicInformationService.updateScheduling(scheduling, resultMessage);
 //
@@ -501,6 +503,7 @@ public class BasicInformationController {
                                                        @RequestParam(required = false) Integer deptId,
                                                        @RequestParam(required = false) Integer userId,
                                                        @RequestParam(required = false) Integer state,
+                                                       @RequestParam(required = false) Integer registerLevelId,
                                                        HttpServletResponse httpServletResponse) {
         quickLogger.logInvoke();
         quickLogger.logReceive("fromScheduleDate",fromScheduleDate,
@@ -509,11 +512,12 @@ public class BasicInformationController {
                 "toNoon",toNoon,
                 "deptId",deptId,
                 "userId",userId,
-                "state",state
+                "state",state,
+                "registerLevelId",registerLevelId
         );
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        List<Scheduling> result=basicInformationService.getSchedulingsByConditions(fromScheduleDate,fromNoon,toScheduleDate,toNoon,deptId,userId,state,resultMessage);
+        List<Scheduling> result=basicInformationService.getSchedulingsByConditions(fromScheduleDate,fromNoon,toScheduleDate,toNoon,deptId,userId,state,registerLevelId,resultMessage);
 
         quickLogger.logReturn(result);
         return result;

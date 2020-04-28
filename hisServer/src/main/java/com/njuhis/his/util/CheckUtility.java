@@ -10,7 +10,7 @@ import java.util.Map;
  * @author Paul
  */
 @Component
-public class CheckUtil {
+public class CheckUtility {
 
     public void checkNotEmpty(Object object, Map<String,String[]> notEmptyFieldsCheckList, ResultMessage resultMessage) {
         Class objectClass = object.getClass();

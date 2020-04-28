@@ -1,1 +1,1 @@
-INSERT INTO his.patient (id, name, IDnumber, phone, loginname, password) VALUES (100, 'Nelson', null, null, 'nelson', 'password');
+INSERT INTO his.patient (id, name, IDnumber, phone, loginname, gender, birthday, homeAddress, password) VALUES (100, 'Nelson', '123456198011101234', null, 'nelson', 1, '1980-11-10', 'Shanghai', 'password');

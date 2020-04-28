@@ -1,0 +1,14 @@
+POST /his/MedicalTechnologyController/startCheckDetailed?checkDetailedId=2 HTTP/1.1
+Host: localhost:9002
+
+
+###
+POST /his/MedicalTechnologyController/finishCheckDetailed?checkDetailedId=1 HTTP/1.1
+Host: localhost:9002
+
+
+###
+POST /his/MedicalTechnologyController/reportCheckDetailed?checkDetailedId=3 HTTP/1.1
+Host: localhost:9002
+
+

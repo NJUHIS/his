@@ -116,6 +116,9 @@ public class Patient {
     private String phone;//患者手机号
     private String loginname;//患者登陆名
     private String password;//患者密码
+    private String homeAddress;//家庭住址
+    private Integer gender;//性別。1-男 2-女 3-其他
+    private Date birthday;//生日
 }
 ```
 
@@ -443,7 +446,7 @@ public class CheckDetailed {
     private Integer deptid;//执行科室主键ID
     private String position;//检验检查处置明细目的和要求
     private Integer state;//检验检查处置明细状态
-    // 1 - 等待检验检查处置
+    // 1 - 未检验检查处置
     // 2 - 检验检查处置中
     // 3 - 检验检查处置完成，结果未出
     // 4 - 结果已出

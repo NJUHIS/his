@@ -65,6 +65,9 @@ public class PersonalInformationService {
             try {
                 userMapper.updateByPrimaryKey(user);
                 return getUserById(user.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();
@@ -123,6 +126,9 @@ public class PersonalInformationService {
             try {
                 patientMapper.updateByPrimaryKey(patient);
                 return getPatientById(patient.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
             } catch (Exception exception) {
                 exception.printStackTrace();
                 resultMessage.sendUnknownError();

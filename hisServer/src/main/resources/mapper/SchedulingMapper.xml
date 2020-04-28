@@ -11,7 +11,7 @@
     <result column="State" jdbcType="INTEGER" property="state" />
     <result column="remainingQuota" jdbcType="INTEGER" property="remainingQuota" />
   </resultMap>
-  <resultMap id="BaseResultMapCollection" type="com.njuhis.his.model.Scheduling" extends="BaseResultMap">
+  <resultMap id="BaseResultMapAssociation" type="com.njuhis.his.model.Scheduling" extends="BaseResultMap">
     <association property="user"  javaType="com.njuhis.his.model.User">
       <id column="UserId" jdbcType="INTEGER" property="id" />
       <result column="UserName" jdbcType="VARCHAR" property="username" />
@@ -68,21 +68,22 @@
       Noon = #{noon,jdbcType=INTEGER},
       RegistQuota = #{registquota,jdbcType=INTEGER},
       State = #{state,jdbcType=INTEGER}
-      remainingQuota=#{remainingQuota}
+      ,remainingQuota=#{remainingQuota}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKeyExcludingDeleted" resultMap="BaseResultMapCollection">
+  <select id="selectByPrimaryKeyExcludingDeleted" resultMap="BaseResultMapAssociation">
     select *, user.id as UserId,department.id as DepartmentId, user.DelMark as UserDelMark, department.DelMark as DepartmentDelMark
     from (scheduling left join user on scheduling.UserId=user.id) left join department on scheduling.DeptId=department.id
     where scheduling.id = #{id}
   </select>
 
 
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, SchedDate, DeptId, UserId, Noon, RegistQuota, State, remainingQuota
-    from scheduling
+  <select id="selectAllExcludingDeleted" resultMap="BaseResultMapAssociation">
+    select *, user.id as UserId,department.id as DepartmentId, user.DelMark as UserDelMark, department.DelMark as DepartmentDelMark
+    from (scheduling left join user on scheduling.UserId=user.id) left join department on scheduling.DeptId=department.id
   </select>
-  <select id="selectByDepartmentAndNoon" parameterType="com.njuhis.his.model.Scheduling" resultMap="BaseResultMapCollection">
+
+  <select id="selectByDepartmentAndNoon" parameterType="com.njuhis.his.model.Scheduling" resultMap="BaseResultMapAssociation">
     select d.deptname,d.id,u.username,s.RegistQuota,s.id,s.SchedDate,s.deptid,s.userid,s.noon,s.state,s.remainingQuota from scheduling s inner join department d on s.deptid =d.id
     inner join user u on s.userid= u.id
     where s.SchedDate=#{scheddate} and noon = #{noon} and s.deptid=#{deptid}
