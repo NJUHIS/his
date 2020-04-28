@@ -1,5 +1,7 @@
 package com.njuhis.his.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.njuhis.his.model.*;
 import com.njuhis.his.service.AdministrationService;
 import com.njuhis.his.util.QuickLogger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Paul
@@ -37,5 +40,56 @@ public class AdministrationController {
         DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
     }
+    public List<DepartmentVo> getDepartmentAndDoctor(){
+        return null;
+    }
 
+    public List<CostVo> getReceivableAccounts(){
+        return null;
+    };
+    public List<CostVo> getReceivableAccountsByDays(){
+        return null;
+    };
+    public List<CostVo> getReceivableAccountsByWeeks(){
+        return null;
+    };
+    public List<CostVo> getReceivableAccountsByMonths(){
+        return null;
+    };
+
+    public List<CostVo> getReceivedAccounts(){
+        return null;
+    };
+    public List<CostVo> getReceivedAccountsByDays(){
+        return null;
+    };
+    public List<CostVo> getReceivedAccountsByWeeks(){
+        return null;
+    };
+    public List<CostVo> getReceivedAccountsByMonths(){
+        return null;
+    };
+
+    public List<PatientVo> getPatAccount(){
+        return null;
+    }
+    public List<PatientVo> getPatAccountByDays(){
+        return null;
+    }
+    public List<PatientVo> getPatAccountByWeeks(){
+        return null;
+    }
+    public List<PatientVo> getPatAccountByMonths(){
+        return null;
+    }
+
+    public PageInfo<PatientCosts> getPatientCostList(){
+        return null;
+    }
+    public PageInfo<CheckDetailed> getCheckDetailedList(){
+        return null;
+    }
+    public PageInfo<Register> getRegisterList(){
+        return null;
+    }
 }
