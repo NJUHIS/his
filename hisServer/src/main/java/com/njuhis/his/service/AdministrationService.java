@@ -1,12 +1,16 @@
 package com.njuhis.his.service;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.njuhis.his.mapper.DepartmentMapper;
+import com.njuhis.his.mapper.PatientCostsMapper;
 import com.njuhis.his.model.*;
 import com.njuhis.his.util.QuickLogger;
+import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +21,8 @@ public class AdministrationService {
     @Autowired
     DepartmentMapper departmentMapper;
 
-    public List<DepartmentVo> getDepartmentAndDoctor(){
+    public List<DepartmentVo> getDepartmentAndDoctor(ResultMessage resultMessage){
+
         List<Department> departments=new ArrayList<>();
         departments=departmentMapper.selectAllJoin();
         List<DepartmentVo> list=new ArrayList<>();
@@ -53,7 +58,8 @@ public class AdministrationService {
         return list;
     }
 
-    public List<CostVo> getReceivableAccounts(int startTime,int endTime){
+    public List<CostVo> getReceivableAccounts(int startTime,int endTime,ResultMessage resultMessage){
+
         return null;
     };
     public List<CostVo> getReceivableAccountsByDays(){
@@ -92,13 +98,21 @@ public class AdministrationService {
         return null;
     }
 
-    public PageInfo<PatientCosts> getPatientCostList(Patient patient){
-        return null;
+
+    @Autowired
+    PatientCostsMapper patientCostsMapper;
+    public PageInfo<PatientCosts> getPatientCostList(Integer currPage,PatientCosts patientCosts){
+        if(currPage == null) currPage = 1;
+        PageHelper.startPage(currPage, 8);
+        PageInfo<PatientCosts> pageInfo = new PageInfo<>(patientCostsMapper.selectByConditions(patientCosts));
+        return pageInfo;
     }
+
     public PageInfo<CheckDetailed> getCheckDetailedList(CheckDetailed checkDetailed){
         return null;
     }
     public PageInfo<Register> getRegisterList(Register register){
+
         return null;
     }
 }

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.njuhis.his.model.*;
 import com.njuhis.his.service.AdministrationService;
 import com.njuhis.his.util.QuickLogger;
+import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
@@ -42,13 +43,26 @@ public class AdministrationController {
         DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
     }
-    @RequestMapping("/dep")
-    public List<DepartmentVo> getDepartmentAndDoctor(HttpServletResponse httpServletResponse){
-        return administrationService.getDepartmentAndDoctor();
-    }
 
+
+
+    @RequestMapping("/getDepartmentAndDoctor")
+    public List<DepartmentVo> getDepartmentAndDoctor(HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+        List<DepartmentVo> res= administrationService.getDepartmentAndDoctor(resultMessage);
+        quickLogger.logReturn(res);
+        return res;
+    }
+    @RequestMapping("/getReceivableAccounts")
     public List<CostVo> getReceivableAccounts(@RequestParam Integer startTime, @RequestParam Integer endTime,HttpServletResponse httpServletResponse){
-        return administrationService.getReceivableAccounts(startTime,endTime);
+        quickLogger.logInvoke();
+        quickLogger.logReceive(startTime);
+        quickLogger.logReceive(endTime);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+        List<CostVo> res = administrationService.getReceivableAccounts(startTime,endTime,resultMessage);
+        quickLogger.logReturn(res);
+        return res;
     };
     public List<CostVo> getReceivableAccountsByDays(@RequestParam Integer id,HttpServletResponse httpServletResponse){
         return administrationService.getReceivableAccountsByDays();
@@ -86,8 +100,13 @@ public class AdministrationController {
         return null;
     }
 
-    public PageInfo<PatientCosts> getPatientCostList(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        return null;
+    public PageInfo<PatientCosts> getPatientCostList(@RequestParam Integer currPage, @RequestParam PatientCosts patientCosts,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(currPage);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+        PageInfo<PatientCosts> res = administrationService.getPatientCostList(currPage,patientCosts);
+        quickLogger.logReturn(res);
+        return res;
     }
     public PageInfo<CheckDetailed> getCheckDetailedList(@RequestParam Integer id, HttpServletResponse httpServletResponse){
         return null;

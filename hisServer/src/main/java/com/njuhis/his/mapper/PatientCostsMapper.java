@@ -24,5 +24,5 @@ public interface PatientCostsMapper {
 
     CostVo selectCostRegister(CostVo costVo);
 
-
+    List<PatientCosts> selectByConditions(PatientCosts patientCosts);
 }
