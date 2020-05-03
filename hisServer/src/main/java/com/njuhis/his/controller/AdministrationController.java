@@ -9,9 +9,11 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,37 +42,38 @@ public class AdministrationController {
         DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
     }
-    public List<DepartmentVo> getDepartmentAndDoctor(){
-        return null;
+    @RequestMapping("/dep")
+    public List<DepartmentVo> getDepartmentAndDoctor(HttpServletResponse httpServletResponse){
+        return administrationService.getDepartmentAndDoctor();
     }
 
-    public List<CostVo> getReceivableAccounts(){
-        return null;
+    public List<CostVo> getReceivableAccounts(@RequestParam Integer startTime, @RequestParam Integer endTime,HttpServletResponse httpServletResponse){
+        return administrationService.getReceivableAccounts(startTime,endTime);
     };
-    public List<CostVo> getReceivableAccountsByDays(){
-        return null;
+    public List<CostVo> getReceivableAccountsByDays(@RequestParam Integer id,HttpServletResponse httpServletResponse){
+        return administrationService.getReceivableAccountsByDays();
     };
-    public List<CostVo> getReceivableAccountsByWeeks(){
-        return null;
+    public List<CostVo> getReceivableAccountsByWeeks(@RequestParam Integer id,HttpServletResponse httpServletResponse){
+        return administrationService.getReceivableAccountsByWeeks();
     };
-    public List<CostVo> getReceivableAccountsByMonths(){
-        return null;
-    };
-
-    public List<CostVo> getReceivedAccounts(){
-        return null;
-    };
-    public List<CostVo> getReceivedAccountsByDays(){
-        return null;
-    };
-    public List<CostVo> getReceivedAccountsByWeeks(){
-        return null;
-    };
-    public List<CostVo> getReceivedAccountsByMonths(){
-        return null;
+    public List<CostVo> getReceivableAccountsByMonths(@RequestParam Integer id,HttpServletResponse httpServletResponse){
+        return administrationService.getReceivableAccountsByMonths();
     };
 
-    public List<PatientVo> getPatAccount(){
+    public List<CostVo> getReceivedAccounts(@RequestParam Integer startTime, @RequestParam Integer endTime,HttpServletResponse httpServletResponse){
+        return administrationService.getReceivedAccounts(startTime,endTime);
+    };
+    public List<CostVo> getReceivedAccountsByDays(@RequestParam Integer id,HttpServletResponse httpServletResponse){
+        return administrationService.getReceivedAccountsByDays();
+    };
+    public List<CostVo> getReceivedAccountsByWeeks(@RequestParam Integer id,HttpServletResponse httpServletResponse){
+        return administrationService.getReceivedAccountsByWeeks();
+    };
+    public List<CostVo> getReceivedAccountsByMonths(@RequestParam Integer id,HttpServletResponse httpServletResponse){
+        return administrationService.getReceivedAccountsByMonths();
+    };
+
+    public List<PatientVo> getPatAccount(@RequestParam Integer startTime, @RequestParam Integer endTime,HttpServletResponse httpServletResponse){
         return null;
     }
     public List<PatientVo> getPatAccountByDays(){
@@ -83,13 +86,13 @@ public class AdministrationController {
         return null;
     }
 
-    public PageInfo<PatientCosts> getPatientCostList(){
+    public PageInfo<PatientCosts> getPatientCostList(@RequestParam Integer id, HttpServletResponse httpServletResponse){
         return null;
     }
-    public PageInfo<CheckDetailed> getCheckDetailedList(){
+    public PageInfo<CheckDetailed> getCheckDetailedList(@RequestParam Integer id, HttpServletResponse httpServletResponse){
         return null;
     }
-    public PageInfo<Register> getRegisterList(){
+    public PageInfo<Register> getRegisterList(@RequestParam Integer id, HttpServletResponse httpServletResponse){
         return null;
     }
 }

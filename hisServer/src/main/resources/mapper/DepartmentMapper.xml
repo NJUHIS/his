@@ -69,8 +69,8 @@
      u.UserName, u.Password, u.RealName, u.UserTypeID, u.DocTitleID, u.IsScheduling, u.DeptId,
     u.RegistId, u.DelMark, u.IDnumber
     from department d
-    inner join User u on u.DeptId = d.id
-    inner join Scheduling s on s.userId = u.id
+    left join User u on u.DeptId = d.id
+    left join Scheduling s on s.userId = u.id
   </select>
   <select id="selectByPrimaryKeyJoin" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select d.id, d.DeptCode, d.DeptName, d.DeptCategory, d.DeptTypeID, d.DelMark,
@@ -78,8 +78,8 @@
      u.UserName, u.Password, u.RealName, u.UserTypeID, u.DocTitleID, u.IsScheduling, u.DeptId,
     u.RegistId, u.DelMark, u.IDnumber
     from department d
-    inner join User u on u.DeptId = d.id
-    inner join Scheduling s on s.userId = u.id
+    left join User u on u.DeptId = d.id
+    left join Scheduling s on s.userId = u.id
     where id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>
