@@ -1,5 +1,6 @@
 package com.njuhis.his.mapper;
 
+import com.njuhis.his.model.Patient;
 import com.njuhis.his.model.PatientVo;
 import com.njuhis.his.model.Register;
 import org.springframework.stereotype.Component;
@@ -24,4 +25,6 @@ public interface RegisterMapper {
     List<Register> selectAllCost();
 
     List<PatientVo> selectPatAccont(PatientVo patientVo);
+
+    PatientVo selectPatientCount(PatientVo patientVo);
 }

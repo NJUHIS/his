@@ -8,10 +8,7 @@ import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletResponse;
@@ -55,10 +52,14 @@ public class AdministrationController {
         return res;
     }
     @RequestMapping("/getReceivableAccounts")
-    public List<CostVo> getReceivableAccounts(@RequestParam Integer startTime, @RequestParam Integer endTime,HttpServletResponse httpServletResponse){
+    public List<CostVo> getReceivableAccounts(@RequestBody CostVo costVo, HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
+        System.out.println(costVo.getBegintime());
+        Long startTime = costVo.getBegintime();
+        Long endTime = costVo.getEndtime();
         quickLogger.logReceive(startTime);
         quickLogger.logReceive(endTime);
+
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
         List<CostVo> res = administrationService.getReceivableAccounts(startTime,endTime,resultMessage);
         quickLogger.logReturn(res);

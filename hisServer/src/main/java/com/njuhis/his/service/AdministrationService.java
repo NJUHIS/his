@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,8 @@ public class AdministrationService {
 
     @Autowired
     DepartmentMapper departmentMapper;
-
+    @Autowired
+    PatientCostsMapper patientCostsMapper;
     public List<DepartmentVo> getDepartmentAndDoctor(ResultMessage resultMessage){
 
         List<Department> departments=new ArrayList<>();
@@ -58,11 +60,31 @@ public class AdministrationService {
         return list;
     }
 
-    public List<CostVo> getReceivableAccounts(int startTime,int endTime,ResultMessage resultMessage){
-
-        return null;
+    public List<CostVo> getReceivableAccounts(Long startTime,Long endTime,ResultMessage resultMessage){
+        int days=(int)(endTime-startTime)/86400000;
+        List<CostVo> costVoList=new ArrayList<>();
+        for (int i=0;i<days;i++){
+            CostVo costVo=new CostVo();
+            costVo.setBegintime(startTime-startTime%86400000+i*86400000);
+            costVo.setEndtime(startTime-startTime%86400000+(i+1)*86400000);
+            costVoList.add(costVo);
+        }
+        SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
+        System.out.println(costVoList.size());
+        List<CostVo> costVoListRes=new ArrayList<>();
+        for (int i=0;i<days;i++){
+            System.out.println(sdf.format(costVoList.get(i).getBegintime()));
+            CostVo newCost = patientCostsMapper.selectCostRegister(costVoList.get(i));
+            if (newCost==null)
+                newCost=new CostVo();
+            newCost.setBegintime(costVoList.get(i).getBegintime());
+            newCost.setEndtime(costVoList.get(i).getEndtime());
+            costVoListRes.add(newCost);
+        }
+        return costVoListRes;
     };
     public List<CostVo> getReceivableAccountsByDays(){
+
         return null;
     };
     public List<CostVo> getReceivableAccountsByWeeks(){
@@ -99,8 +121,7 @@ public class AdministrationService {
     }
 
 
-    @Autowired
-    PatientCostsMapper patientCostsMapper;
+
     public PageInfo<PatientCosts> getPatientCostList(Integer currPage,PatientCosts patientCosts){
         if(currPage == null) currPage = 1;
         PageHelper.startPage(currPage, 8);

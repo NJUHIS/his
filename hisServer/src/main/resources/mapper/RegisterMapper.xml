@@ -32,6 +32,10 @@
       <result column="state" jdbcType="INTEGER" property="state" />
     </collection>
   </resultMap>
+
+  <resultMap id="BaseResultMapCount" type="com.njuhis.his.model.PatientVo">
+    <result column="Count1" jdbcType="INTEGER" property="count" />
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from register
     where id = #{id,jdbcType=INTEGER}
@@ -118,5 +122,9 @@
     inner join patientcosts c where c.RegisterId=r.id
     where id = #{id,jdbcType=INTEGER}
   </select>
-
+  <select id="selectPatientCount" parameterType="com.njuhis.his.model.PatientVo" resultMap="BaseResultMapCount">
+  select count(id) count1
+  from register
+  where  RegisterTime between #{begintime} and #{endtime}
+  </select>
 </mapper>

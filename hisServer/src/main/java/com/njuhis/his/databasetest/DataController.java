@@ -2,11 +2,15 @@ package com.njuhis.his.databasetest;
 
 import com.njuhis.his.mapper.*;
 import com.njuhis.his.model.*;
+import com.njuhis.his.service.AdministrationService;
+import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -147,5 +151,34 @@ public class DataController {
 
         aa.setDelmark(1);
         expenseClassMapper.updateByPrimaryKey(aa);
+    }
+
+    @RequestMapping("rcp")
+    PatientVo patientVo(){
+
+
+        Date d =new Date(1000000000000l);
+
+        SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
+        //86400000
+
+        System.out.println("rcp");
+        PatientVo patientVo = new PatientVo();
+        patientVo.setBegintime(1);
+        patientVo.setEndtime(11115);
+        return registerMapper.selectPatientCount(patientVo);
+
+    }
+    @Autowired
+    AdministrationService administrationService;
+    @RequestMapping("test")
+    List<CostVo> test(HttpServletResponse httpServletResponse){
+        Date d =new Date(100000000000l);
+        Date d1 =new Date(100900000000l);
+        SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
+        System.out.println(sdf.format(d));
+        System.out.println(sdf.format(d1));
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+        return administrationService.getReceivableAccounts(100000000000l,100900000000l,resultMessage);
     }
 }

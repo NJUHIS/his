@@ -57,7 +57,7 @@
     where i.CreationTime between #{begintime} and #{endtime}
   </select>
   <select id="selectCostRegister" parameterType="com.njuhis.his.model.CostVo" resultMap="BaseResultMapCost">
-    SELECT sum(p.Price) Sum1,count(i.id) Count1 patientcosts p
+    SELECT sum(p.Price) Sum1,count(r.id) Count1 FROM patientcosts p
     inner join register  r on  p.RegisterId = r.id
     where r.RegisterTime between #{begintime} and #{endtime}
     group by r.id

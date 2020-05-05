@@ -81,5 +81,6 @@
     left join User u on u.DeptId = d.id
     left join Scheduling s on s.userId = u.id
     where id = #{id,jdbcType=INTEGER}
+    order by d.id desc
   </select>
 </mapper>
