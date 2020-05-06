@@ -172,13 +172,7 @@ public class DataController {
     @Autowired
     AdministrationService administrationService;
     @RequestMapping("test")
-    List<CostVo> test(HttpServletResponse httpServletResponse){
-        Date d =new Date(100000000000l);
-        Date d1 =new Date(100900000000l);
-        SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
-        System.out.println(sdf.format(d));
-        System.out.println(sdf.format(d1));
-        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
-        return administrationService.getReceivableAccounts(100000000000l,100900000000l,resultMessage);
+    List<Register> test(){
+        return registerMapper.selectByConditions("内分泌");
     }
 }

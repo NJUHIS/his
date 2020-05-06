@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.njuhis.his.mapper.DepartmentMapper;
 import com.njuhis.his.mapper.PatientCostsMapper;
+import com.njuhis.his.mapper.RegisterMapper;
 import com.njuhis.his.model.*;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
@@ -61,7 +62,8 @@ public class AdministrationService {
     }
 
     public List<CostVo> getReceivableAccounts(Long startTime,Long endTime,ResultMessage resultMessage){
-        int days=(int)(endTime-startTime)/86400000;
+        int days=(int)((endTime-startTime)/86400000);
+        System.out.println(days);
         List<CostVo> costVoList=new ArrayList<>();
         for (int i=0;i<days;i++){
             CostVo costVo=new CostVo();
@@ -84,7 +86,6 @@ public class AdministrationService {
         return costVoListRes;
     };
     public List<CostVo> getReceivableAccountsByDays(){
-
         return null;
     };
     public List<CostVo> getReceivableAccountsByWeeks(){
@@ -94,8 +95,29 @@ public class AdministrationService {
         return null;
     };
 
-    public List<CostVo> getReceivedAccounts(int startTime,int endTime){
-        return null;
+    public List<CostVo> getReceivedAccounts(Long startTime,Long endTime,ResultMessage resultMessage){
+        int days=(int)((endTime-startTime)/86400000);
+        System.out.println(days);
+        List<CostVo> costVoList=new ArrayList<>();
+        for (int i=0;i<days;i++){
+            CostVo costVo=new CostVo();
+            costVo.setBegintime(startTime-startTime%86400000+i*86400000);
+            costVo.setEndtime(startTime-startTime%86400000+(i+1)*86400000);
+            costVoList.add(costVo);
+        }
+        SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
+        System.out.println(costVoList.size());
+        List<CostVo> costVoListRes=new ArrayList<>();
+        for (int i=0;i<days;i++){
+            System.out.println(sdf.format(costVoList.get(i).getBegintime()));
+            CostVo newCost = patientCostsMapper.selectCostInvoice(costVoList.get(i));
+            if (newCost==null)
+                newCost=new CostVo();
+            newCost.setBegintime(costVoList.get(i).getBegintime());
+            newCost.setEndtime(costVoList.get(i).getEndtime());
+            costVoListRes.add(newCost);
+        }
+        return costVoListRes;
     };
     public List<CostVo> getReceivedAccountsByDays(){
         return null;
@@ -107,8 +129,28 @@ public class AdministrationService {
         return null;
     };
 
-    public List<PatientVo> getPatAccount(){
-        return null;
+    public List<PatientVo> getPatAccount(Long startTime,Long endTime,ResultMessage resultMessage){
+        int days=(int)((endTime-startTime)/86400000);
+        System.out.println(days);
+        List<PatientVo> patVoList=new ArrayList<>();
+        for (int i=0;i<days;i++){
+            PatientVo patVo=new PatientVo();
+            patVo.setBegintime(startTime-startTime%86400000+i*86400000);
+            patVo.setEndtime(startTime-startTime%86400000+(i+1)*86400000);
+            patVoList.add(patVo);
+        }
+        List<PatientVo> patVoListRes=new ArrayList<>();
+        SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
+        for (int i=0;i<days;i++){
+            System.out.println(sdf.format(patVoList.get(i).getBegintime()));
+            PatientVo newpat = registerMapper.selectPatientCount(patVoList.get(i));
+            if (newpat==null)
+                newpat=new PatientVo();
+            newpat.setBegintime(patVoList.get(i).getBegintime());
+            newpat.setEndtime(patVoList.get(i).getEndtime());
+            patVoListRes.add(newpat);
+        }
+        return patVoListRes;
     }
     public List<PatientVo> getPatAccountByDays(){
         return null;
@@ -122,18 +164,22 @@ public class AdministrationService {
 
 
 
-    public PageInfo<PatientCosts> getPatientCostList(Integer currPage,PatientCosts patientCosts){
+    public PageInfo<PatientCosts> getPatientCostList(Integer currPage,String conditions){
         if(currPage == null) currPage = 1;
         PageHelper.startPage(currPage, 8);
-        PageInfo<PatientCosts> pageInfo = new PageInfo<>(patientCostsMapper.selectByConditions(patientCosts));
+        PageInfo<PatientCosts> pageInfo = new PageInfo<>(patientCostsMapper.selectByConditions(conditions));
         return pageInfo;
     }
 
     public PageInfo<CheckDetailed> getCheckDetailedList(CheckDetailed checkDetailed){
         return null;
     }
-    public PageInfo<Register> getRegisterList(Register register){
-
-        return null;
+    @Autowired
+    RegisterMapper registerMapper;
+    public PageInfo<Register> getRegisterList(Integer currPage,String conditions){
+        if(currPage == null) currPage = 1;
+        PageHelper.startPage(currPage, 8);
+        PageInfo<Register> pageInfo = new PageInfo<>(registerMapper.selectByConditions(conditions));
+        return pageInfo;
     }
 }

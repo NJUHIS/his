@@ -74,9 +74,19 @@ public class AdministrationController {
     public List<CostVo> getReceivableAccountsByMonths(@RequestParam Integer id,HttpServletResponse httpServletResponse){
         return administrationService.getReceivableAccountsByMonths();
     };
+    @RequestMapping("/getReceivedAccounts")
+    public List<CostVo> getReceivedAccounts(@RequestBody CostVo costVo, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        System.out.println(costVo.getBegintime());
+        Long startTime = costVo.getBegintime();
+        Long endTime = costVo.getEndtime();
+        quickLogger.logReceive(startTime);
+        quickLogger.logReceive(endTime);
 
-    public List<CostVo> getReceivedAccounts(@RequestParam Integer startTime, @RequestParam Integer endTime,HttpServletResponse httpServletResponse){
-        return administrationService.getReceivedAccounts(startTime,endTime);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+        List<CostVo> res = administrationService.getReceivedAccounts(startTime,endTime,resultMessage);
+        quickLogger.logReturn(res);
+        return res;
     };
     public List<CostVo> getReceivedAccountsByDays(@RequestParam Integer id,HttpServletResponse httpServletResponse){
         return administrationService.getReceivedAccountsByDays();
@@ -87,9 +97,15 @@ public class AdministrationController {
     public List<CostVo> getReceivedAccountsByMonths(@RequestParam Integer id,HttpServletResponse httpServletResponse){
         return administrationService.getReceivedAccountsByMonths();
     };
-
-    public List<PatientVo> getPatAccount(@RequestParam Integer startTime, @RequestParam Integer endTime,HttpServletResponse httpServletResponse){
-        return null;
+    @RequestMapping("/getPatAccounts")
+    public List<PatientVo> getPatAccount(@RequestBody PatientVo patientVo, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(patientVo.getBegintime());
+        quickLogger.logReceive(patientVo.getEndtime());
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+        List<PatientVo> res =administrationService.getPatAccount(patientVo.getBegintime(),patientVo.getEndtime(),resultMessage);
+        quickLogger.logReturn(res);
+        return res;
     }
     public List<PatientVo> getPatAccountByDays(){
         return null;
@@ -101,18 +117,25 @@ public class AdministrationController {
         return null;
     }
 
-    public PageInfo<PatientCosts> getPatientCostList(@RequestParam Integer currPage, @RequestParam PatientCosts patientCosts,HttpServletResponse httpServletResponse){
+    public PageInfo<PatientCosts> getPatientCostList(@RequestParam Integer currPage, @RequestParam String conditions,HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
         quickLogger.logReceive(currPage);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
-        PageInfo<PatientCosts> res = administrationService.getPatientCostList(currPage,patientCosts);
+        PageInfo<PatientCosts> res = administrationService.getPatientCostList(currPage,conditions);
         quickLogger.logReturn(res);
         return res;
     }
     public PageInfo<CheckDetailed> getCheckDetailedList(@RequestParam Integer id, HttpServletResponse httpServletResponse){
         return null;
     }
-    public PageInfo<Register> getRegisterList(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        return null;
+    @RequestMapping("/Register")
+    public PageInfo<Register> getRegisterList(@RequestParam Integer currPage, @RequestParam String conditions,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(currPage);
+        quickLogger.logReceive(conditions);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+        PageInfo<Register> res = administrationService.getRegisterList(currPage,conditions);
+        quickLogger.logReturn(res);
+        return res;
     }
 }

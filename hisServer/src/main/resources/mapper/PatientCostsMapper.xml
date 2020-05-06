@@ -62,4 +62,9 @@
     where r.RegisterTime between #{begintime} and #{endtime}
     group by r.id
   </select>
+  <select id="selectByConditions" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, InvoiceId, RegisterId, Name, Price, DeptId, State, DelMark
+    from patientcosts
+    where id like %#{conditions}% or name like %#{conditions}
+  </select>
 </mapper>

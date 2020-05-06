@@ -46,8 +46,28 @@ public class Register {
     private Integer patientid;//患者主键ID
     private Integer scheduleId;//排班主键ID
     private List<PatientCosts> patientCostsList;
+    private User user;
+    private Department department;
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public static String[][] getNotEmptyFieldsCheckListString() {
+        return notEmptyFieldsCheckListString;
+    }
 
     public Integer getId() {
         return id;

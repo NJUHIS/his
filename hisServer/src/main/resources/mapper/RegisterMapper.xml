@@ -32,7 +32,16 @@
       <result column="state" jdbcType="INTEGER" property="state" />
     </collection>
   </resultMap>
-
+  <resultMap id="BaseResultMapDoctorAndDep" type="com.njuhis.his.model.Register" extends="BaseResultMap">
+    <association property="user" column="Userid" javaType="com.njuhis.his.model.User">
+      <id column="uid" jdbcType="INTEGER" property="id" />
+      <result column="uname" jdbcType="VARCHAR" property="realname" />
+    </association>
+    <association property="department" column="Userid" javaType="com.njuhis.his.model.Department">
+      <id column="did" jdbcType="INTEGER" property="id" />
+      <result column="deptname" jdbcType="VARCHAR" property="deptname" />
+    </association>
+  </resultMap>
   <resultMap id="BaseResultMapCount" type="com.njuhis.his.model.PatientVo">
     <result column="Count1" jdbcType="INTEGER" property="count" />
   </resultMap>
@@ -126,5 +135,17 @@
   select count(id) count1
   from register
   where  RegisterTime between #{begintime} and #{endtime}
+  </select>
+  <select id="selectByConditions" parameterType="java.lang.String" resultMap="BaseResultMapDoctorAndDep">
+    select r.id, r.RealName, r.Gender, r.IDnumber, r.BirthDate, r.Age, r.HomeAddress, r.MedicalRecordId,
+    r.VisitDate, r.Noon, r.DeptId, r.UserId, r.RegistId, r.SettleID, r.IsBook, r.RegisterTime, r.RegisterID,
+    r.VisitState, r.patientID, r.scheduleId,u.id uid,u.realname uname,d.id did,d.deptname
+    from register r
+    inner join user u on r.UserId = u.id
+    inner join department d on r.deptid = d.id
+    where r.id like concat('%',concat(#{conditions},'%'))
+    or r.RealName like concat('%',concat(#{conditions},'%'))
+    or d.deptname like concat('%',concat(#{conditions},'%'))
+    or u.realname like concat('%',concat(#{conditions},'%'))
   </select>
 </mapper>
