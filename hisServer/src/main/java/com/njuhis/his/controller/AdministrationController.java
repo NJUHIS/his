@@ -40,9 +40,6 @@ public class AdministrationController {
         DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
     }
-
-
-
     @RequestMapping("/getDepartmentAndDoctor")
     public List<DepartmentVo> getDepartmentAndDoctor(HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
@@ -88,15 +85,6 @@ public class AdministrationController {
         quickLogger.logReturn(res);
         return res;
     };
-    public List<CostVo> getReceivedAccountsByDays(@RequestParam Integer id,HttpServletResponse httpServletResponse){
-        return administrationService.getReceivedAccountsByDays();
-    };
-    public List<CostVo> getReceivedAccountsByWeeks(@RequestParam Integer id,HttpServletResponse httpServletResponse){
-        return administrationService.getReceivedAccountsByWeeks();
-    };
-    public List<CostVo> getReceivedAccountsByMonths(@RequestParam Integer id,HttpServletResponse httpServletResponse){
-        return administrationService.getReceivedAccountsByMonths();
-    };
     @RequestMapping("/getPatAccounts")
     public List<PatientVo> getPatAccount(@RequestBody PatientVo patientVo, HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
@@ -106,15 +94,6 @@ public class AdministrationController {
         List<PatientVo> res =administrationService.getPatAccount(patientVo.getBegintime(),patientVo.getEndtime(),resultMessage);
         quickLogger.logReturn(res);
         return res;
-    }
-    public List<PatientVo> getPatAccountByDays(){
-        return null;
-    }
-    public List<PatientVo> getPatAccountByWeeks(){
-        return null;
-    }
-    public List<PatientVo> getPatAccountByMonths(){
-        return null;
     }
 
     public PageInfo<PatientCosts> getPatientCostList(@RequestParam Integer currPage, @RequestParam String conditions,HttpServletResponse httpServletResponse){
