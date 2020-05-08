@@ -8,13 +8,14 @@ import org.junit.After;
 * BasicInformationService Tester. 
 * 
 * @author <Authors name> 
-* @since <pre>ÎåÔÂ 7, 2020</pre> 
+* @since <pre>äº”æœˆ 7, 2020</pre> 
 * @version 1.0 
 */ 
 public class BasicInformationServiceTest { 
 
 @Before
-public void before() throws Exception { 
+public void before() throws Exception {
+    Thread.sleep(3000);
 } 
 
 @After

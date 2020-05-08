@@ -1,23 +1,58 @@
 package test.com.njuhis.his.controller; 
 
-import org.junit.Test; 
+import com.njuhis.his.HisApplication;
+import com.njuhis.his.model.User;
+import org.junit.Test;
 import org.junit.Before; 
-import org.junit.After; 
+import org.junit.After;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 /** 
 * AdministrationController Tester. 
 * 
 * @author <Authors name> 
-* @since <pre>ŒÂ‘¬ 7, 2020</pre> 
+* @since <pre>‰∫îÊúà 7, 2020</pre> 
 * @version 1.0 
-*/ 
-public class AdministrationControllerTest { 
+*/
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = HisApplication.class)
+public class AdministrationControllerTest {
+    @Autowired
+    private WebApplicationContext wac;
 
+    private MockMvc mvc;
+    private MockHttpSession session;
 @Before
-public void before() throws Exception { 
-} 
+public void before() throws Exception {
+    mvc = MockMvcBuilders.webAppContextSetup(wac).build(); //ÂàùÂßãÂåñMockMvcÂØπË±°
+    session = new MockHttpSession();
+    User admin = new User();
+    session.setAttribute("user",admin);
+    Thread.sleep(1890);
+}
+    @Test
+    public void testGetDepartmentAndDoctor() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/AdministrationController/getDepartmentAndDoctor")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .accept(MediaType.APPLICATION_JSON_UTF8)
+                .session(session)
+        ).andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+    }
 
-@After
+    @After
 public void after() throws Exception { 
 } 
 
@@ -36,10 +71,6 @@ public void testInitBinder() throws Exception {
 * Method: getDepartmentAndDoctor(HttpServletResponse httpServletResponse) 
 * 
 */ 
-@Test
-public void testGetDepartmentAndDoctor() throws Exception { 
-//TODO: Test goes here... 
-} 
 
 /** 
 * 

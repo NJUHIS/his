@@ -8,6 +8,8 @@ import com.njuhis.his.mapper.RegisterMapper;
 import com.njuhis.his.model.*;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
+import com.sun.xml.internal.bind.v2.runtime.output.Encoded;
+import org.omg.IOP.Encoding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,15 +87,6 @@ public class AdministrationService {
         }
         return costVoListRes;
     };
-    public List<CostVo> getReceivableAccountsByDays(){
-        return null;
-    };
-    public List<CostVo> getReceivableAccountsByWeeks(){
-        return null;
-    };
-    public List<CostVo> getReceivableAccountsByMonths(){
-        return null;
-    };
 
     public List<CostVo> getReceivedAccounts(Long startTime,Long endTime,ResultMessage resultMessage){
         int days=(int)((endTime-startTime)/86400000);
@@ -119,15 +112,6 @@ public class AdministrationService {
         }
         return costVoListRes;
     };
-    public List<CostVo> getReceivedAccountsByDays(){
-        return null;
-    };
-    public List<CostVo> getReceivedAccountsByWeeks(){
-        return null;
-    };
-    public List<CostVo> getReceivedAccountsByMonths(){
-        return null;
-    };
 
     public List<PatientVo> getPatAccount(Long startTime,Long endTime,ResultMessage resultMessage){
         int days=(int)((endTime-startTime)/86400000);
@@ -151,15 +135,6 @@ public class AdministrationService {
             patVoListRes.add(newpat);
         }
         return patVoListRes;
-    }
-    public List<PatientVo> getPatAccountByDays(){
-        return null;
-    }
-    public List<PatientVo> getPatAccountByWeeks(){
-        return null;
-    }
-    public List<PatientVo> getPatAccountByMonths(){
-        return null;
     }
 
 

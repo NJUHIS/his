@@ -173,6 +173,7 @@ public class DataController {
     AdministrationService administrationService;
     @RequestMapping("test")
     List<Register> test(){
+        System.out.println("啥玩意");
         return registerMapper.selectByConditions("内分泌");
     }
 }

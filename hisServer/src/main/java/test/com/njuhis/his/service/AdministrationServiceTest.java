@@ -14,7 +14,8 @@ import org.junit.After;
 public class AdministrationServiceTest { 
 
 @Before
-public void before() throws Exception { 
+public void before() throws Exception {
+    Thread.sleep(1800);
 } 
 
 @After
