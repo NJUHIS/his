@@ -26,10 +26,42 @@ public class CheckDetailed {
     private Long resulttime;//此明细出检验检查处置结果的时间。毫秒数。
     private Integer operatorid;//此明细的检验检查处置人员的医院员工主键ID
     private Integer entryclerkid;//此明细的结果录入人员的医院员工主键ID
+    private Department department;
+    private User user1;
+    private User user2;
+    private FmedItem fmedItem;
 
+    public FmedItem getFmedItem() {
+        return fmedItem;
+    }
 
+    public void setFmedItem(FmedItem fmedItem) {
+        this.fmedItem = fmedItem;
+    }
 
+    public Department getDepartment() {
+        return department;
+    }
 
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public User getUser1() {
+        return user1;
+    }
+
+    public void setUser1(User user1) {
+        this.user1 = user1;
+    }
+
+    public User getUser2() {
+        return user2;
+    }
+
+    public void setUser2(User user2) {
+        this.user2 = user2;
+    }
 
     @JsonIgnore
     private Integer delmark;

@@ -32,7 +32,7 @@ public interface CheckApplyMapper {
 
 
 
-
+    List<CheckApply> selectByConditions(String conditions);
 
 //    List<CheckApply> selectAllJoin();
 //    @Deprecated

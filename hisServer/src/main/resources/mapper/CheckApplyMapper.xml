@@ -31,6 +31,63 @@
       <result column="CheckDetailedDelMark" jdbcType="INTEGER" property="delmark" />
     </collection>
   </resultMap>
+  <resultMap id="BaseResultMapConditions" type="com.njuhis.his.model.CheckApply" extends="BaseResultMap">
+    <association property="register" column="Medical_Id" javaType="com.njuhis.his.model.Register">
+      <id column="rid" jdbcType="INTEGER" property="id" />
+      <result column="RealName" jdbcType="VARCHAR" property="realname" />
+      <result column="Gender" jdbcType="INTEGER" property="gender" />
+      <result column="IDnumber" jdbcType="VARCHAR" property="idnumber" />
+      <result column="BirthDate" jdbcType="DATE" property="birthdate" />
+      <result column="Age" jdbcType="INTEGER" property="age" />
+      <result column="HomeAddress" jdbcType="VARCHAR" property="homeaddress" />
+      <result column="MedicalRecordId" jdbcType="INTEGER" property="medicalRecordId" />
+      <result column="VisitDate" jdbcType="DATE" property="visitdate" />
+      <result column="Noon" jdbcType="INTEGER" property="noon" />
+      <result column="DeptId" jdbcType="INTEGER" property="deptid" />
+      <result column="UserId" jdbcType="INTEGER" property="userid" />
+      <result column="RegistId" jdbcType="INTEGER" property="registid" />
+      <result column="SettleID" jdbcType="INTEGER" property="settleid" />
+      <result column="IsBook" jdbcType="INTEGER" property="isbook" />
+      <result column="RegisterTime" jdbcType="BIGINT" property="registertime" />
+      <result column="RegisterID" jdbcType="INTEGER" property="registerid" />
+      <result column="VisitState" jdbcType="INTEGER" property="visitstate" />
+      <result column="patientID" jdbcType="INTEGER" property="patientid" />
+      <result column="scheduleId" jdbcType="INTEGER" property="scheduleId"/>
+    </association>
+    <collection property="checkDetailedList" ofType="com.njuhis.his.model.CheckDetailed">
+      <id column="CheckDetailedId" jdbcType="INTEGER" property="id" />
+      <result column="CheckAppId" jdbcType="INTEGER" property="checkappid" />
+      <result column="CheckProjId" jdbcType="INTEGER" property="checkprojid" />
+      <result column="DeptId" jdbcType="INTEGER" property="deptid" />
+      <result column="CreationTime" jdbcType="BIGINT" property="creationtime" />
+      <result column="Position" jdbcType="VARCHAR" property="position" />
+      <result column="CheckDetailedState" jdbcType="INTEGER" property="state" />
+      <result column="Price" jdbcType="DECIMAL" property="price" />
+      <result column="Identification" jdbcType="INTEGER" property="identification" />
+      <result column="InspectTime" jdbcType="BIGINT" property="inspecttime" />
+      <result column="Result" jdbcType="VARCHAR" property="result" />
+      <result column="ResultTime" jdbcType="BIGINT" property="resulttime" />
+      <result column="operatorId" jdbcType="INTEGER" property="operatorid" />
+      <result column="entryClerkId" jdbcType="INTEGER" property="entryclerkid" />
+      <result column="CheckDetailedDelMark" jdbcType="INTEGER" property="delmark" />
+      <association property="department" column="DeptId" javaType="com.njuhis.his.model.Department">
+        <id column="did" jdbcType="INTEGER" property="id" />
+        <result column="deptname" jdbcType="VARCHAR" property="deptname" />
+      </association>
+      <association property="user1" column="Userid" javaType="com.njuhis.his.model.User">
+        <id column="uid1" jdbcType="INTEGER" property="id" />
+        <result column="uname1" jdbcType="VARCHAR" property="realname" />
+      </association>
+      <association property="user2" column="Userid" javaType="com.njuhis.his.model.User">
+        <id column="uid2" jdbcType="INTEGER" property="id" />
+        <result column="uname2" jdbcType="VARCHAR" property="realname" />
+      </association>
+      <association property="fmedItem" column="Userid" javaType="com.njuhis.his.model.FmedItem">
+        <id column="fid" jdbcType="INTEGER" property="id" />
+        <result column="ItemName" jdbcType="VARCHAR" property="itemname" />
+      </association>
+    </collection>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from checkapply
     where id = #{id,jdbcType=INTEGER}
@@ -81,4 +138,24 @@
     from checkapply left join checkdetailed on checkapply.id = checkdetailed.CheckAppId
     where (checkapply.DelMark is null or checkapply.DelMark=0) and (checkdetailed.DelMark is null or checkdetailed.DelMark=0);
   </select>
+
+
+
+  <select id="selectByConditions" parameterType="java.lang.String" resultMap="BaseResultMapConditions">
+    select c.id, c.Medical_Id, c.Creation_Time, c.Total_Sum, c.Objective, c.User_Id, c.state,
+    c.InvoiceId, c.DelMark,d.id, d.CheckAppId, d.CheckProjId, d.DeptId, d.CreationTime, d.Position, d.State dstate, d.Price,
+    d.Identification, d.InspectTime, d.Result, d.ResultTime, d.operatorId, d.entryClerkId, d.DelMark,r.id rid, r.RealName, r.Gender, r.IDnumber,   r.BirthDate, r.Age, r.HomeAddress, r.MedicalRecordId,
+    r.VisitDate, r.Noon, r.DeptId, r.UserId, r.RegistId, r.SettleID, r.IsBook, r.RegisterTime, r.RegisterID,
+    r.VisitState, r.patientID, r.scheduleId,u1.id uid1,u2.id uid2,u1.realname uname1,u2.realname uname2,dd.deptname,f.id fid,f.ItemName
+    from checkapply c
+    inner join checkdetailed d on c.id = d.CheckAppId
+    inner join Register r on c.Medical_Id=r.id
+    left join USER u1 on d.operatorId = u1.id
+    left join USER u2 on d.entryClerkId =u2.id
+    inner join department dd on d.deptid =dd.id
+    inner join FmedItem f on f.id  = d.CheckProjId
+    where c.id like concat('%',concat(#{conditions},'%'))
+    or r.RealName like concat('%',concat(#{conditions},'%'))
+  </select>
+
 </mapper>

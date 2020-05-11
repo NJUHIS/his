@@ -25,11 +25,24 @@
   </resultMap>
 
   <resultMap id="BaseResultMapCost" type="com.njuhis.his.model.Register" extends="BaseResultMap">
+    <association property="invoice" column="InvoiceId" javaType="com.njuhis.his.model.Invoice">
+      <id column="iid" jdbcType="INTEGER" property="id" />
+      <result column="InvoiceNum" jdbcType="VARCHAR" property="invoicenum" />
+      <result column="Money" jdbcType="DECIMAL" property="money" />
+      <result column="State" jdbcType="INTEGER" property="state" />
+      <result column="CreationTime" jdbcType="BIGINT" property="creationtime" />
+      <result column="UserId" jdbcType="INTEGER" property="userid" />
+      <result column="DailyState" jdbcType="INTEGER" property="dailystate" />
+    </association>
     <collection property="patientCostsList" ofType="com.njuhis.his.model.PatientCosts">
-      <id column="did" jdbcType="INTEGER" property="id" />
-      <result column="MedicalId" jdbcType="INTEGER" property="medicalid" />
-      <result column="diseaseId" jdbcType="INTEGER" property="diseaseid" />
-      <result column="state" jdbcType="INTEGER" property="state" />
+      <id column="cid" jdbcType="INTEGER" property="id" />
+      <result column="InvoiceId" jdbcType="INTEGER" property="invoiceid" />
+      <result column="RegisterId" jdbcType="INTEGER" property="registerid" />
+      <result column="Name" jdbcType="VARCHAR" property="name" />
+      <result column="Price" jdbcType="DECIMAL" property="price" />
+      <result column="DeptId" jdbcType="VARCHAR" property="deptid" />
+      <result column="State" jdbcType="INTEGER" property="state" />
+      <result column="DelMark" jdbcType="INTEGER" property="delmark" />
     </collection>
   </resultMap>
   <resultMap id="BaseResultMapDoctorAndDep" type="com.njuhis.his.model.Register" extends="BaseResultMap">
@@ -147,5 +160,17 @@
     or r.RealName like concat('%',concat(#{conditions},'%'))
     or d.deptname like concat('%',concat(#{conditions},'%'))
     or u.realname like concat('%',concat(#{conditions},'%'))
+  </select>
+  <select id="selectCostByConditions" resultMap="BaseResultMapCost">
+    select r.id, r.RealName, r.Gender, r.IDnumber, r.BirthDate, r.Age, r.HomeAddress, r.MedicalRecordId,
+    r.VisitDate, r.Noon, r.DeptId, r.UserId, r.RegistId, r.SettleID, r.IsBook, r.RegisterTime, r.RegisterID,
+    r.VisitState, r.patientID, r.scheduleId, c.id cid, c.InvoiceId, c.RegisterId, c.Name, c.Price, c.DeptId, c.State, c.DelMark,
+    i.id iid, i.InvoiceNum, i.Money, i.State, i.CreationTime, i.UserId, i.DailyState
+    from register r
+    inner join patientcosts c on c.RegisterId=r.id
+    inner join invoice i on c.InvoiceId = i.id
+    where r.id like concat('%',concat(#{conditions},'%'))
+    or r.RealName like concat('%',concat(#{conditions},'%'))
+    or i.InvoiceNum like concat('%',concat(#{conditions},'%'))
   </select>
 </mapper>

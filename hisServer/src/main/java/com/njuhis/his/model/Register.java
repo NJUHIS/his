@@ -48,6 +48,24 @@ public class Register {
     private List<PatientCosts> patientCostsList;
     private User user;
     private Department department;
+    private Double sum;
+    private Invoice invoice;
+
+    public Double getSum() {
+        return sum;
+    }
+
+    public void setSum(Double sum) {
+        this.sum = sum;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
 
     public User getUser() {
         return user;

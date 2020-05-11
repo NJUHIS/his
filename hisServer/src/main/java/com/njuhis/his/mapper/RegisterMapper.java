@@ -29,4 +29,5 @@ public interface RegisterMapper {
     PatientVo selectPatientCount(PatientVo patientVo);
 
     List<Register> selectByConditions(String conditions);
+    List<Register> selectCostByConditions(String conditions);
 }

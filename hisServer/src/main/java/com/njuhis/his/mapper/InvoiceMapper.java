@@ -20,4 +20,6 @@ public interface InvoiceMapper {
     List<Invoice> selectAllJoin();
 
     Invoice selectByPrimaryKeyJoin(Integer id);
+
+    List<Invoice> selectByConditions(String conditions);
 }

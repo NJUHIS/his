@@ -89,7 +89,8 @@
     m.Medical_History, m.Medical_Allergy, m.Medical_Physique, m.Medical_Diagnosis, m.Medical_Handling,
     m.Case_State, m.DelMark,d.id did, d.MedicalId, d.diseaseId, d.state,di.id diid, di.DiseaseCode, di.DiseaseName, di.DiseaseICD, di.DiseaseType, di.DelMark
     from medicalrecord m
-    inner join diagnosis d on d.MedicalId =m.id
-    inner join disease di on di.id = d.diseaseid
+    left join diagnosis d on d.MedicalId =m.id
+    left join disease di on di.id = d.diseaseid
+    where m.id = #{id,jdbcType=INTEGER}
   </select>
 </mapper>

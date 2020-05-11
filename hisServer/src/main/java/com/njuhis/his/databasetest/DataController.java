@@ -171,9 +171,10 @@ public class DataController {
     }
     @Autowired
     AdministrationService administrationService;
+
     @RequestMapping("test")
-    List<Register> test(){
+    List<CheckApply> test(){
         System.out.println("啥玩意");
-        return registerMapper.selectByConditions("内分泌");
+        return checkApplyMapper.selectByConditions("");
     }
 }

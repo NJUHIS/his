@@ -15,7 +15,7 @@ public class PatientCosts {
     private Integer state;//状态
     // 1 - 未交费
     // 2 - 已交费
-
+    private Register register;
 
 
 

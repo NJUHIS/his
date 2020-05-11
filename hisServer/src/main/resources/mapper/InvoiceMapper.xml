@@ -22,6 +22,40 @@
       <result column="pdelmark" jdbcType="INTEGER" property="delmark" />
     </collection>
   </resultMap>
+  <resultMap id="BaseResultMapConditions" type="com.njuhis.his.model.Invoice" extends="BaseResultMap">
+    <collection property="patientCostsList" ofType="com.njuhis.his.model.PatientCosts">
+      <id column="pid" jdbcType="INTEGER" property="id" />
+      <result column="InvoiceId" jdbcType="INTEGER" property="invoiceid" />
+      <result column="RegisterId" jdbcType="INTEGER" property="registerid" />
+      <result column="Name" jdbcType="VARCHAR" property="name" />
+      <result column="Price" jdbcType="DECIMAL" property="price" />
+      <result column="DeptId" jdbcType="VARCHAR" property="deptid" />
+      <result column="pstate" jdbcType="INTEGER" property="state" />
+      <result column="pdelmark" jdbcType="INTEGER" property="delmark" />
+      <association property="register" column="registerId" javaType="com.njuhis.his.model.Register">
+        <id column="rid" jdbcType="INTEGER" property="id" />
+        <result column="RealName" jdbcType="VARCHAR" property="realname" />
+        <result column="Gender" jdbcType="INTEGER" property="gender" />
+        <result column="IDnumber" jdbcType="VARCHAR" property="idnumber" />
+        <result column="BirthDate" jdbcType="DATE" property="birthdate" />
+        <result column="Age" jdbcType="INTEGER" property="age" />
+        <result column="HomeAddress" jdbcType="VARCHAR" property="homeaddress" />
+        <result column="MedicalRecordId" jdbcType="INTEGER" property="medicalRecordId" />
+        <result column="VisitDate" jdbcType="DATE" property="visitdate" />
+        <result column="Noon" jdbcType="INTEGER" property="noon" />
+        <result column="DeptId" jdbcType="INTEGER" property="deptid" />
+        <result column="UserId" jdbcType="INTEGER" property="userid" />
+        <result column="RegistId" jdbcType="INTEGER" property="registid" />
+        <result column="SettleID" jdbcType="INTEGER" property="settleid" />
+        <result column="IsBook" jdbcType="INTEGER" property="isbook" />
+        <result column="RegisterTime" jdbcType="BIGINT" property="registertime" />
+        <result column="RegisterID" jdbcType="INTEGER" property="registerid" />
+        <result column="VisitState" jdbcType="INTEGER" property="visitstate" />
+        <result column="patientID" jdbcType="INTEGER" property="patientid" />
+        <result column="scheduleId" jdbcType="INTEGER" property="scheduleId"/>
+      </association>
+    </collection>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from invoice
     where id = #{id,jdbcType=INTEGER}
@@ -65,5 +99,16 @@
     from invoice i
     inner join patientCosts p on p.InvoiceId = i.id
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByConditions" parameterType="java.lang.String" resultMap="BaseResultMapConditions">
+    select i.id, i.InvoiceNum, i.Money, i.State, i.CreationTime, i.UserId, i.DailyState,
+    p.id pid, p.InvoiceId, p.RegisterId, p.Name, p.Price, p.DeptId, p.State pstate, p.DelMark pdelmark,r.id rid, r.RealName, r.Gender, r.IDnumber, r.BirthDate, r.Age, r.HomeAddress, r.MedicalRecordId,
+    r.VisitDate, r.Noon, r.DeptId, r.UserId, r.RegistId, r.SettleID, r.IsBook, r.RegisterTime, r.RegisterID,
+    r.VisitState, r.patientID, r.scheduleId
+    from invoice i
+    left join patientCosts p on p.InvoiceId = i.id
+    left join Register r on p.RegisterId=r.id
+     where i.id like concat('%',concat(#{conditions},'%'))
+    or r.RealName like concat('%',concat(#{conditions},'%'))
   </select>
 </mapper>

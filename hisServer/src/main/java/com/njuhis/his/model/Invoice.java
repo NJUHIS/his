@@ -21,6 +21,7 @@ public class Invoice {
     private List<PatientCosts> patientCostsList; //发票明细的列表
 
 
+
     public Integer getId() {
         return id;
     }

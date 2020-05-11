@@ -62,14 +62,21 @@ public class AdministrationController {
         quickLogger.logReturn(res);
         return res;
     };
-    public List<CostVo> getReceivableAccountsByDays(@RequestParam Integer id,HttpServletResponse httpServletResponse){
-        return administrationService.getReceivableAccountsByDays();
-    };
-    public List<CostVo> getReceivableAccountsByWeeks(@RequestParam Integer id,HttpServletResponse httpServletResponse){
+    @RequestMapping("/getReceivableAccountsW")
+    public List<CostVo> getReceivableAccountsByWeeks(HttpServletResponse httpServletResponse){
         return administrationService.getReceivableAccountsByWeeks();
     };
-    public List<CostVo> getReceivableAccountsByMonths(@RequestParam Integer id,HttpServletResponse httpServletResponse){
+    @RequestMapping("/getReceivedAccountsW")
+    public List<CostVo> getReceivedAccountsByWeeks(HttpServletResponse httpServletResponse){
+        return administrationService.getReceivedAccountsByWeeks();
+    };
+    @RequestMapping("/getReceivableAccountsM")
+    public List<CostVo> getReceivableAccountsByMonths(HttpServletResponse httpServletResponse){
         return administrationService.getReceivableAccountsByMonths();
+    };
+    @RequestMapping("/getReceivedAccountsM")
+    public List<CostVo> getReceivedAccountsByMonths(HttpServletResponse httpServletResponse){
+        return administrationService.getReceivedAccountsByMonths();
     };
     @RequestMapping("/getReceivedAccounts")
     public List<CostVo> getReceivedAccounts(@RequestBody CostVo costVo, HttpServletResponse httpServletResponse){
@@ -95,17 +102,23 @@ public class AdministrationController {
         quickLogger.logReturn(res);
         return res;
     }
-
-    public PageInfo<PatientCosts> getPatientCostList(@RequestParam Integer currPage, @RequestParam String conditions,HttpServletResponse httpServletResponse){
+    @RequestMapping("/Cost")
+    public PageInfo<Register> getPatientCostList(@RequestParam Integer currPage, @RequestParam String conditions,HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
         quickLogger.logReceive(currPage);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
-        PageInfo<PatientCosts> res = administrationService.getPatientCostList(currPage,conditions);
+        PageInfo<Register> res = administrationService.getPatientCostList(currPage,conditions);
         quickLogger.logReturn(res);
         return res;
     }
-    public PageInfo<CheckDetailed> getCheckDetailedList(@RequestParam Integer id, HttpServletResponse httpServletResponse){
-        return null;
+    @RequestMapping("/Check")
+    public PageInfo<CheckApply> getCheckDetailedList(@RequestParam Integer currPage, @RequestParam String conditions, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(currPage);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+        PageInfo<CheckApply> res = administrationService.getCheckDetailedList(currPage,conditions);
+        quickLogger.logReturn(res);
+        return res;
     }
     @RequestMapping("/Register")
     public PageInfo<Register> getRegisterList(@RequestParam Integer currPage, @RequestParam String conditions,HttpServletResponse httpServletResponse){
@@ -116,5 +129,13 @@ public class AdministrationController {
         PageInfo<Register> res = administrationService.getRegisterList(currPage,conditions);
         quickLogger.logReturn(res);
         return res;
+    }
+    @RequestMapping ("/getMR")
+    public MedicalRecord getMedicalR(@RequestParam Integer id){
+        return  administrationService.getMedicalR(id);
+    }
+    @RequestMapping ("/getPres")
+    public Prescription prescription(@RequestParam Integer id){
+        return  administrationService.getPrescirption(id);
     }
 }

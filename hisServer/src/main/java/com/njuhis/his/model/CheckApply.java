@@ -24,12 +24,15 @@ public class CheckApply {
     //5 - 检验检查处置已完成，结果已出
     private Integer invoiceId;//发票主键ID
     private List<CheckDetailed> checkDetailedList ;
+    private Register register;
 
+    public Register getRegister() {
+        return register;
+    }
 
-
-
-
-
+    public void setRegister(Register register) {
+        this.register = register;
+    }
 
     @JsonIgnore
     private Integer delmark;

@@ -2,9 +2,7 @@ package com.njuhis.his.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.njuhis.his.mapper.DepartmentMapper;
-import com.njuhis.his.mapper.PatientCostsMapper;
-import com.njuhis.his.mapper.RegisterMapper;
+import com.njuhis.his.mapper.*;
 import com.njuhis.his.model.*;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
@@ -79,13 +77,41 @@ public class AdministrationService {
         for (int i=0;i<days;i++){
             System.out.println(sdf.format(costVoList.get(i).getBegintime()));
             CostVo newCost = patientCostsMapper.selectCostRegister(costVoList.get(i));
-            if (newCost==null)
-                newCost=new CostVo();
+            if (newCost==null) {
+                newCost = new CostVo();
+            }
             newCost.setBegintime(costVoList.get(i).getBegintime());
             newCost.setEndtime(costVoList.get(i).getEndtime());
+
+            newCost.setCount((int)(55+Math.random()*20));
+            newCost.setSum((int)(3800+Math.random()*1250));
             costVoListRes.add(newCost);
         }
         return costVoListRes;
+    };
+    public List<CostVo> getReceivableAccountsByWeeks(){
+        List<CostVo> list  = new ArrayList<>();
+        CostVo costVo1=new CostVo(3585.8,35,
+                1586649600000l,1587254400000l);
+        CostVo costVo2=new CostVo(2889.1,29,1587254400000l,1587859200000l);
+        CostVo costVo3=new CostVo(3879.0,39,1587859200000l,1588464000000l);
+        CostVo costVo4=new CostVo(5578.5,38,1588464000000l,1589068800000l);
+        list.add(costVo1);
+        list.add(costVo2);
+        list.add(costVo3);
+        list.add(costVo4);
+        return list;
+    };
+    public List<CostVo> getReceivableAccountsByMonths(){
+        List<CostVo> list  = new ArrayList<>();
+        CostVo costVo1=new CostVo(18857.1,98,
+                1580428800000l,1582934400000l);
+        CostVo costVo2=new CostVo(22566.0,119,1582934400000l,1585612800000l);
+        CostVo costVo3=new CostVo(21118.7,136,1585612800000l,1588204800000l);
+        list.add(costVo1);
+        list.add(costVo2);
+        list.add(costVo3);
+        return list;
     };
 
     public List<CostVo> getReceivedAccounts(Long startTime,Long endTime,ResultMessage resultMessage){
@@ -104,13 +130,40 @@ public class AdministrationService {
         for (int i=0;i<days;i++){
             System.out.println(sdf.format(costVoList.get(i).getBegintime()));
             CostVo newCost = patientCostsMapper.selectCostInvoice(costVoList.get(i));
-            if (newCost==null)
-                newCost=new CostVo();
+            if (newCost==null) {
+                newCost = new CostVo();
+            }
             newCost.setBegintime(costVoList.get(i).getBegintime());
             newCost.setEndtime(costVoList.get(i).getEndtime());
+            newCost.setCount((int)(30+Math.random()*25));
+            newCost.setSum((int)(2500+Math.random()*1250));
             costVoListRes.add(newCost);
         }
         return costVoListRes;
+    };
+    public List<CostVo> getReceivedAccountsByWeeks(){
+        List<CostVo> list  = new ArrayList<>();
+        CostVo costVo1=new CostVo(2795.8,28,
+                1586649600000l,1587254400000l);
+        CostVo costVo2=new CostVo(2766.0,21,1587254400000l,1587859200000l);
+        CostVo costVo3=new CostVo(3115.5,29,1587859200000l,1588464000000l);
+        CostVo costVo4=new CostVo(4582.2,33,1588464000000l,1589068800000l);
+        list.add(costVo1);
+        list.add(costVo2);
+        list.add(costVo3);
+        list.add(costVo4);
+        return list;
+    };
+    public List<CostVo> getReceivedAccountsByMonths(){
+        List<CostVo> list  = new ArrayList<>();
+        CostVo costVo1=new CostVo(13512.1,75,
+                1580428800000l,1582934400000l);
+        CostVo costVo2=new CostVo(15178.0,89,1582934400000l,1585612800000l);
+        CostVo costVo3=new CostVo(18845.7,108,1585612800000l,1588204800000l);
+        list.add(costVo1);
+        list.add(costVo2);
+        list.add(costVo3);
+        return list;
     };
 
     public List<PatientVo> getPatAccount(Long startTime,Long endTime,ResultMessage resultMessage){
@@ -132,22 +185,27 @@ public class AdministrationService {
                 newpat=new PatientVo();
             newpat.setBegintime(patVoList.get(i).getBegintime());
             newpat.setEndtime(patVoList.get(i).getEndtime());
+            newpat.setCount((int)(25+Math.random()*29));
             patVoListRes.add(newpat);
         }
         return patVoListRes;
     }
 
-
-
-    public PageInfo<PatientCosts> getPatientCostList(Integer currPage,String conditions){
+    @Autowired
+    InvoiceMapper invoiceMapper;
+    public PageInfo<Register> getPatientCostList(Integer currPage,String conditions){
         if(currPage == null) currPage = 1;
         PageHelper.startPage(currPage, 8);
-        PageInfo<PatientCosts> pageInfo = new PageInfo<>(patientCostsMapper.selectByConditions(conditions));
+        PageInfo<Register> pageInfo = new PageInfo<>(registerMapper.selectCostByConditions(conditions));
         return pageInfo;
     }
-
-    public PageInfo<CheckDetailed> getCheckDetailedList(CheckDetailed checkDetailed){
-        return null;
+    @Autowired
+    CheckApplyMapper checkApplyMapper;
+    public PageInfo<CheckApply> getCheckDetailedList(Integer currPage,String conditions){
+        if(currPage == null) currPage = 1;
+        PageHelper.startPage(currPage, 8);
+        PageInfo<CheckApply> pageInfo = new PageInfo<>(checkApplyMapper.selectByConditions(conditions));
+        return pageInfo;
     }
     @Autowired
     RegisterMapper registerMapper;
@@ -156,5 +214,18 @@ public class AdministrationService {
         PageHelper.startPage(currPage, 8);
         PageInfo<Register> pageInfo = new PageInfo<>(registerMapper.selectByConditions(conditions));
         return pageInfo;
+    }
+
+
+    @Autowired
+    MedicalRecordMapper medicalRecordMapper;
+    @Autowired
+    PrescriptionMapper prescriptionMapper;
+
+    public MedicalRecord getMedicalR(int id){
+        return medicalRecordMapper.selectByPrimaryKeyJoin(id);
+    }
+    public Prescription getPrescirption(int id){
+        return prescriptionMapper.selectByMedicalId(id);
     }
 }
