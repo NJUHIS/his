@@ -3,13 +3,11 @@ package com.njuhis.his.databasetest;
 import com.njuhis.his.mapper.*;
 import com.njuhis.his.model.*;
 import com.njuhis.his.service.AdministrationService;
-import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -116,7 +114,7 @@ public class DataController {
     MedicalRecordMapper medicalRecordMapper;
     @RequestMapping("/rso")
     List<MedicalRecord> seRegister(){
-        return  medicalRecordMapper.selectAllJoin();
+        return  medicalRecordMapper.selectAllExcludingDeleted();
     }
 
 

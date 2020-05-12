@@ -191,9 +191,9 @@ public class RegistrationController {
     ){
         quickLogger.logInvoke();
         quickLogger.logReceive(
-    "fromVisitDate",              fromVisitDate,
+    "fromVisitDate",              new java.text.SimpleDateFormat("yyyy-MM-dd").format(fromVisitDate),
               "fromNoon",                  fromNoon,
-              "toVisitDate",               toVisitDate,
+              "toVisitDate",               new java.text.SimpleDateFormat("yyyy-MM-dd").format(toVisitDate),
               "toNoon",                    toNoon,
               "departmentId",              departmentId,
               "userId",                    userId,

@@ -2905,6 +2905,43 @@ HTTP 响应示例：
 
 
 
+### 4.19 根据多个条件获取病历列表 /getMedicalRecordsByConditions
+
+HTTP 请求示例：
+
+```http
+GET /his/DoctorController/getMedicalRecordsByConditions?userId=104&patientId=1&registrationId=1&caseState=2 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 1,
+        "registerId": 1,
+        "medicalReadme": null,
+        "medicalPresent": null,
+        "presentTreat": null,
+        "medicalHistory": null,
+        "medicalAllergy": null,
+        "medicalPhysique": null,
+        "medicalDiagnosis": null,
+        "medicalHandling": null,
+        "caseState": 2,
+        "diagnosisList": []
+    }
+]
+```
+
+
+
+
+
 
 
 HTTP 请求示例：
@@ -2918,6 +2955,70 @@ HTTP 响应示例：
 ```json
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+
 
 
 

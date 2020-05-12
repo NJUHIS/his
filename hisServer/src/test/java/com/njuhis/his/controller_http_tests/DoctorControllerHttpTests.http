@@ -183,3 +183,9 @@ POST /his/DoctorController/confirmCheckApply?checkApplyId=200 HTTP/1.1
 Host: localhost:9002
 
 
+###
+GET /his/DoctorController/getMedicalRecordsByConditions?userId=104&patientId=1&registrationId=1&caseState=2 HTTP/1.1
+Host: localhost:9002
+
+
+

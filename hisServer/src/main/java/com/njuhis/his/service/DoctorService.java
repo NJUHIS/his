@@ -434,5 +434,25 @@ public class DoctorService {
     }
 
 
+    public List<MedicalRecord> getMedicalRecordsByConditions(Integer userId, Integer patientId, Integer registrationId,Integer caseState,ResultMessage resultMessage){
+        List<MedicalRecord> allMedicalRecords=medicalRecordMapper.selectAllExcludingDeleted();
+        List<MedicalRecord>  filteredMedicalRecords=new ArrayList<>();
+        for(MedicalRecord medicalRecord:allMedicalRecords){
+            Register register=registrationService.getRegistrationById(medicalRecord.getId(),resultMessage);if(!resultMessage.isSuccessful())return null;
+
+            if(
+                    (userId==null||userId.equals(register.getUserid()))
+                    &&(patientId==null||patientId.equals(register.getPatientid()))
+                     &&(registrationId==null||registrationId.equals(register.getId()))
+                     &&(caseState==null||caseState.equals(medicalRecord.getCaseState()))
+            )
+                filteredMedicalRecords.add(medicalRecord);
+
+        }
+        return filteredMedicalRecords;
+
+    }
+
+
 
 }

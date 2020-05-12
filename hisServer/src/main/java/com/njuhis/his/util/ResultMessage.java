@@ -87,12 +87,15 @@ public class ResultMessage {
         public static final String REGISTRATION_TYPE_NOT_EXIST = "The registration type does not exist. 该挂号类型不存在。";
         public static final String SETTLEMENT_TYPE_NOT_EXIST = "The settlement type does not exist. 该结算类型不存在。";
         public static final String SCHEDULE_NOT_EXIST="The schedule does not exist. 该排班不存在。";
+        public static final String DRUG_NOT_EXIST="The drug does not exist. 该药品不存在。";
+        public static final String NONDRUG_ITEM_NOT_EXIST="The non-drug item does not exist. 该非药品项目不存在。";
         public static final String INCORRECT_PASSWORD = "Incorrect password. 密码错误。";
         public static final String INVALID_FOREIGN_KEY ="Invalid foreign key. 存在无效外键。";
         public static final String NULL_VALUE ="Null Value. 存在 Null 值。";
         public static final String CANNOT_CHANGE_STATES_THROUGH_UPDATES="Cannot change states through updates. 无法通过更新来改变状态。";
         public static final String DO_NOT_CHANGE_MEDICAL_RECORD_ID="Please do not change the Medical Record ID。请不要改变病历的主键 ID。";
         public static final String DO_NOT_CHANGE_EXAMINATION_TEST_DISPOSAL_ID="Please do not change the Examination (Test or Disposal) ID。请不要改变检查（检验或处置）的主键 ID。";
+        public static final String DIAGNOSIS_NOT_EXIST="The diagnosis does not exist. 该诊断不存在。";
         /**
          * 未知來源錯誤
          */

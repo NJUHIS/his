@@ -1,7 +1,10 @@
 package com.njuhis.his.service;
 
+import com.njuhis.his.mapper.DiagnosisMapper;
+import com.njuhis.his.mapper.FmedItemMapper;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +38,20 @@ public class UtilityService {
             resultMessage.sendUnknownError();
         }
     }
+
+
+    @Autowired
+    FmedItemMapper fmedItemMapper;
+    @Autowired
+    UtilityService utilityService;
+    @Autowired
+    DiagnosisMapper diagnosisMapper;
+
+
+    
+    
+    
+    
+    
 
 }

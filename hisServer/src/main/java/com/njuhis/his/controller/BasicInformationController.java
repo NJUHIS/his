@@ -10,6 +10,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -275,7 +276,7 @@ public class BasicInformationController {
 
 
 
-
+    //TODO 待测试
     @RequestMapping(value = "/getAllRegisterLevels")
     public List<RegisterLevel> getAllRegisterLevels(HttpServletResponse httpServletResponse) {
         quickLogger.logInvoke();
@@ -284,7 +285,7 @@ public class BasicInformationController {
         return result;
     }
 
-
+    //TODO 待测试
     @RequestMapping("/addRegisterLevel")
     public RegisterLevel addRegisterLevel(@RequestBody RegisterLevel registerLevel, HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
@@ -299,7 +300,7 @@ public class BasicInformationController {
     }
 
 
-
+    //TODO 待测试
     @RequestMapping("/getRegisterLevelById")
     public RegisterLevel getRegisterLevelById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
@@ -314,7 +315,7 @@ public class BasicInformationController {
 
 
 
-
+    //TODO 待测试
     @RequestMapping("/updateRegisterLevel")
     public RegisterLevel updateRegisterLevel(@RequestBody RegisterLevel registerLevel,HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
@@ -504,11 +505,11 @@ public class BasicInformationController {
                                                        @RequestParam(required = false) Integer userId,
                                                        @RequestParam(required = false) Integer state,
                                                        @RequestParam(required = false) Integer registerLevelId,
-                                                       HttpServletResponse httpServletResponse) {
+                                                       HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest) {
         quickLogger.logInvoke();
-        quickLogger.logReceive("fromScheduleDate",fromScheduleDate,
+        quickLogger.logReceive("fromScheduleDate",new java.text.SimpleDateFormat("yyyy-MM-dd").format(fromScheduleDate),
                 "fromNoon",fromNoon,
-                "toScheduleDate",toScheduleDate,
+                "toScheduleDate", new java.text.SimpleDateFormat("yyyy-MM-dd").format(toScheduleDate),
                 "toNoon",toNoon,
                 "deptId",deptId,
                 "userId",userId,
@@ -521,6 +522,169 @@ public class BasicInformationController {
 
         quickLogger.logReturn(result);
         return result;
+    }
+
+
+    @RequestMapping(value = "/getAllDrugs")
+    public List<Drugs> getAllDrugs(HttpServletResponse httpServletResponse) {
+        quickLogger.logInvoke();
+        List<Drugs> result = basicInformationService.getAllDrugs(new ResultMessage(httpServletResponse));
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+    @RequestMapping("/addDrug")
+    public Drugs addDrug(@RequestBody Drugs drug, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(drug);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Drugs result=basicInformationService.addDrug(drug, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+
+    @RequestMapping("/getDrugById")
+    public Drugs getDrugById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Drugs result=basicInformationService.getDrugById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+
+
+    @RequestMapping("/updateDrug")
+    public Drugs updateDrug(@RequestBody Drugs drug, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(drug);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Drugs result=basicInformationService.updateDrug(drug, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+
+
+    //TODO 待测试
+    @RequestMapping(value = "/getAllFmedItems")
+    public List<FmedItem> getAllFmedItems(HttpServletResponse httpServletResponse) {
+        quickLogger.logInvoke();
+        List<FmedItem> result = basicInformationService.getAllFmedItems(new ResultMessage(httpServletResponse));
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+    //TODO 待测试
+    @RequestMapping("/addFmedItem")
+    public FmedItem addFmedItem(@RequestBody FmedItem fmedItem, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(fmedItem);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        FmedItem result=basicInformationService.addFmedItem(fmedItem, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+    //TODO 待测试
+    @RequestMapping("/getFmedItemById")
+    public FmedItem getFmedItemById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        FmedItem result=basicInformationService.getFmedItemById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+
+    //TODO 待测试
+    @RequestMapping("/updateFmedItem")
+    public FmedItem updateFmedItem(@RequestBody FmedItem fmedItem,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(fmedItem);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        FmedItem result=basicInformationService.updateFmedItem(fmedItem, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+    //TODO 待测试
+    @RequestMapping(value = "/getAllDiagnoses")
+    public List<Diagnosis> getAllDiagnoses(HttpServletResponse httpServletResponse) {
+        quickLogger.logInvoke();
+        List<Diagnosis> result = basicInformationService.getAllDiagnoses(new ResultMessage(httpServletResponse));
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+    //TODO 待测试
+    @RequestMapping("/addDiagnosis")
+    public Diagnosis addDiagnosis(@RequestBody Diagnosis diagnosis, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(diagnosis);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Diagnosis result=basicInformationService.addDiagnosis(diagnosis, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+    //TODO 待测试
+    @RequestMapping("/getDiagnosisById")
+    public Diagnosis getDiagnosisById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Diagnosis result=basicInformationService.getDiagnosisById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+
+    //TODO 待测试
+    @RequestMapping("/updateDiagnosis")
+    public Diagnosis updateDiagnosis(@RequestBody Diagnosis diagnosis,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(diagnosis);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Diagnosis result=basicInformationService.updateDiagnosis(diagnosis, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
     }
 
 

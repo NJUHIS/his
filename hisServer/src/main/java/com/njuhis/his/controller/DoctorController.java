@@ -284,13 +284,21 @@ public class DoctorController {
     }
 
 
+    @RequestMapping("/getMedicalRecordsByConditions")
+    public List<MedicalRecord> getMedicalRecordsByConditions(@RequestParam(required = false) Integer userId,
+                                                           @RequestParam(required=false) Integer patientId,
+                                                             @RequestParam(required=false) Integer registrationId,
+                                                             @RequestParam(required=false) Integer caseState,
+                                                           HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive("userId",userId,"patientId",patientId,"registrationId", registrationId,"caseState",caseState);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
+        List<MedicalRecord> result=doctorService.getMedicalRecordsByConditions(userId,patientId,registrationId,caseState,resultMessage);
 
-
-
-
-
-
+        quickLogger.logReturn(result);
+        return result;
+    }
 
 
 

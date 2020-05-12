@@ -13,22 +13,22 @@
     <result column="Medical_Diagnosis" jdbcType="VARCHAR" property="medicalDiagnosis" />
     <result column="Medical_Handling" jdbcType="VARCHAR" property="medicalHandling" />
     <result column="Case_State" jdbcType="INTEGER" property="caseState" />
-    <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+    <result column="MedicalRecord_DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
 
   <resultMap id="BaseResultMapCollection" type="com.njuhis.his.model.MedicalRecord" extends="BaseResultMap">
     <collection property="diagnosisList" ofType="com.njuhis.his.model.Diagnosis">
-      <id column="did" jdbcType="INTEGER" property="id" />
+      <id column="Diagnosis_Id" jdbcType="INTEGER" property="id" />
       <result column="MedicalId" jdbcType="INTEGER" property="medicalid" />
       <result column="diseaseId" jdbcType="INTEGER" property="diseaseid" />
       <result column="state" jdbcType="INTEGER" property="state" />
       <association property="disease" column="diseaseid" javaType="com.njuhis.his.model.Disease">
-        <id column="diid" jdbcType="INTEGER" property="id" />
+        <id column="Disease_Id" jdbcType="INTEGER" property="id" />
         <result column="DiseaseCode" jdbcType="VARCHAR" property="diseasecode" />
         <result column="DiseaseName" jdbcType="VARCHAR" property="diseasename" />
         <result column="DiseaseICD" jdbcType="VARCHAR" property="diseaseicd" />
         <result column="DiseaseType" jdbcType="VARCHAR" property="diseasetype" />
-        <result column="DelMark" jdbcType="INTEGER" property="delmark" />
+        <result column="Disease_DelMark" jdbcType="INTEGER" property="delmark" />
       </association>
     </collection>
   </resultMap>
@@ -76,18 +76,24 @@
     Case_State, DelMark
     from medicalrecord
   </select>
-  <select id="selectAllJoin" resultMap="BaseResultMapCollection">
-    select m.id, m.Register_Id, m.Medical_Readme, m.Medical_Present, m.Present_Treat,
-    m.Medical_History, m.Medical_Allergy, m.Medical_Physique, m.Medical_Diagnosis, m.Medical_Handling,
-    m.Case_State, m.DelMark,d.id did, d.MedicalId, d.diseaseId, d.state,di.id diid, di.DiseaseCode, di.DiseaseName, di.DiseaseICD, di.DiseaseType, di.DelMark
-    from medicalrecord m
-    inner join diagnosis d on d.MedicalId =m.id
-    inner join disease di on di.id = d.diseaseid
+  <select id="selectAllExcludingDeleted" resultMap="BaseResultMapCollection">
+
+    select *,diagnosis.id as Diagnosis_Id, disease.id as Disease_Id,medicalrecord.DelMark as MedicalRecord_DelMark, disease.DelMark as Disease_DelMark
+    from medicalrecord
+    left join diagnosis on diagnosis.MedicalId=medicalrecord.id
+    left join disease on disease.id=diagnosis.diseaseid
+    where (medicalrecord.DelMark is null or medicalrecord.DelMark=0) and (disease.DelMark is null or disease.DelMark=0);
+
+
+
+
+
+
   </select>
   <select id="selectByPrimaryKeyJoin" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
     select m.id, m.Register_Id, m.Medical_Readme, m.Medical_Present, m.Present_Treat,
     m.Medical_History, m.Medical_Allergy, m.Medical_Physique, m.Medical_Diagnosis, m.Medical_Handling,
-    m.Case_State, m.DelMark,d.id did, d.MedicalId, d.diseaseId, d.state,di.id diid, di.DiseaseCode, di.DiseaseName, di.DiseaseICD, di.DiseaseType, di.DelMark
+    m.Case_State, m.DelMark,d.id Diagnosis_Id, d.MedicalId, d.diseaseId, d.state,di.id Disease_Id, di.DiseaseCode, di.DiseaseName, di.DiseaseICD, di.DiseaseType, di.DelMark
     from medicalrecord m
     left join diagnosis d on d.MedicalId =m.id
     left join disease di on di.id = d.diseaseid

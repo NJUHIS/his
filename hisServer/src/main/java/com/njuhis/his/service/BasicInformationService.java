@@ -40,6 +40,12 @@ public class BasicInformationService {
     private UtilityService utilityService;
     @Autowired
     private BasicInformationDataCleaner basicInformationDataCleaner;
+    @Autowired
+    private DrugsMapper drugsMapper;
+    @Autowired
+    private FmedItemMapper fmedItemMapper;
+    @Autowired
+    private DiagnosisMapper diagnosisMapper;
 
 
     public List<Department> getAllDepartments(ResultMessage resultMessage){
@@ -512,6 +518,170 @@ public class BasicInformationService {
         }
         return filteredSchedulings;
     }
+
+
+
+    public List<Drugs> getAllDrugs(ResultMessage resultMessage){
+        return drugsMapper.selectAll();
+    }
+
+
+    public Drugs addDrug(Drugs drug,ResultMessage resultMessage){
+        try {
+            drugsMapper.insert(drug);
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage.sendUnknownError();
+            return null;
+        }
+        return getDrugById(drug.getId(),resultMessage);
+    }
+
+
+    public Drugs getDrugById(Integer id, ResultMessage resultMessage){
+        Drugs drugs=drugsMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(drugs!=null){
+            return drugs;
+        }else{
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.DRUG_NOT_EXIST);
+            return null;
+        }
+
+    }
+
+
+    public Drugs updateDrug(Drugs drug, ResultMessage resultMessage){
+        getDrugById(drug.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                drugsMapper.updateByPrimaryKey(drug);
+                return getDrugById(drug.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.sendUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+
+    public List<FmedItem> getAllFmedItems(ResultMessage resultMessage){
+        return fmedItemMapper.selectAll();
+    }
+
+
+    public FmedItem addFmedItem(FmedItem fmedItem,ResultMessage resultMessage){
+        try {
+            fmedItemMapper.insert(fmedItem);
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage.sendUnknownError();
+            return null;
+        }
+        return getFmedItemById(fmedItem.getId(),resultMessage);
+    }
+
+
+    public FmedItem getFmedItemById(Integer id, ResultMessage resultMessage){
+        FmedItem fmedItem=fmedItemMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(fmedItem!=null){
+            return fmedItem;
+        }else{
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.NONDRUG_ITEM_NOT_EXIST);
+            return null;
+        }
+
+    }
+
+
+    public FmedItem updateFmedItem(FmedItem fmedItem, ResultMessage resultMessage){
+        getFmedItemById(fmedItem.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                fmedItemMapper.updateByPrimaryKey(fmedItem);
+                return getFmedItemById(fmedItem.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.sendUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+
+
+    public List<Diagnosis> getAllDiagnoses(ResultMessage resultMessage){
+        return diagnosisMapper.selectAll();
+    }
+
+
+    public Diagnosis addDiagnosis(Diagnosis diagnosis,ResultMessage resultMessage){
+        try {
+            diagnosisMapper.insert(diagnosis);
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage.sendUnknownError();
+            return null;
+        }
+        return getDiagnosisById(diagnosis.getId(),resultMessage);
+    }
+
+
+    public Diagnosis getDiagnosisById(Integer id, ResultMessage resultMessage){
+        Diagnosis diagnosis=diagnosisMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(diagnosis!=null){
+            return diagnosis;
+        }else{
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.DIAGNOSIS_NOT_EXIST);
+            return null;
+        }
+    }
+
+
+    public Diagnosis updateDiagnosis(Diagnosis diagnosis, ResultMessage resultMessage){
+        getDiagnosisById(diagnosis.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                diagnosisMapper.updateByPrimaryKey(diagnosis);
+                return getDiagnosisById(diagnosis.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.sendUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
+
+
+
+
+
+
+
 
 
 
