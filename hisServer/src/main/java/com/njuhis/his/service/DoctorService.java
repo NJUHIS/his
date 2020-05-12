@@ -409,13 +409,14 @@ public class DoctorService {
         }
     }
 
-    public List<CheckApply> getCheckAppliesByConditions(Integer userId,Integer state,ResultMessage resultMessage){
+    public List<CheckApply> getCheckAppliesByConditions(Integer userId,Integer state,Integer registrationId, ResultMessage resultMessage){
         List<CheckApply> allCheckApplies=checkApplyMapper.selectAllExcludingDeleted();
         List<CheckApply>  filteredCheckApplies=new ArrayList<>();
         for(CheckApply checkApply:allCheckApplies){
             if(
                     (userId==null||userId.equals(checkApply.getUserId()))
                     &&(state==null||state.equals(checkApply.getState()))
+                    &&(registrationId==null||registrationId.equals(checkApply.getMedicalId()))
             )
                 filteredCheckApplies.add(checkApply);
 

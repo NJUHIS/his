@@ -3453,6 +3453,7 @@ HTTP 响应示例：
 ```java
 userId;//开立医生的医院员工主键ID
 state;//检查（检验或处置）状态
+registrtionId;//挂号主键ID
 ```
 
 返回：符合条件的检查（检验或处置）的列表
@@ -3460,8 +3461,11 @@ state;//检查（检验或处置）状态
 HTTP 请求示例：
 
 ```http
-GET /his/DoctorController/getCheckAppliesByConditions? HTTP/1.1
+GET /his/DoctorController/getCheckAppliesByConditions?userId=1&state=1&registrationId=1 HTTP/1.1
 Host: localhost:9002
+
+
+
 
 ```
 
@@ -3470,15 +3474,74 @@ HTTP 响应示例：
 ```json
 [
     {
-        "id": 1,
+        "id": 2,
         "medicalId": 1,
         "creationTime": null,
         "totalSum": null,
-        "objective": "sdfsdfsdfsdfsdf",
-        "userId": 100,
+        "objective": null,
+        "userId": 1,
         "state": 1,
         "invoiceId": null,
-        "checkDetailedList": []
+        "checkDetailedList": [
+            {
+                "id": 4,
+                "checkappid": 2,
+                "checkprojid": 1,
+                "deptid": 133,
+                "position": null,
+                "state": 1,
+                "price": 200.00,
+                "identification": 1,
+                "inspecttime": null,
+                "result": null,
+                "resulttime": null,
+                "operatorid": null,
+                "entryclerkid": null,
+                "department": null,
+                "user1": null,
+                "user2": null,
+                "fmedItem": null
+            },
+            {
+                "id": 5,
+                "checkappid": 2,
+                "checkprojid": 1,
+                "deptid": 133,
+                "position": null,
+                "state": 1,
+                "price": 200.00,
+                "identification": 1,
+                "inspecttime": null,
+                "result": null,
+                "resulttime": null,
+                "operatorid": null,
+                "entryclerkid": null,
+                "department": null,
+                "user1": null,
+                "user2": null,
+                "fmedItem": null
+            },
+            {
+                "id": 6,
+                "checkappid": 2,
+                "checkprojid": 3,
+                "deptid": 133,
+                "position": null,
+                "state": 1,
+                "price": 80.00,
+                "identification": 1,
+                "inspecttime": null,
+                "result": null,
+                "resulttime": null,
+                "operatorid": null,
+                "entryclerkid": null,
+                "department": null,
+                "user1": null,
+                "user2": null,
+                "fmedItem": null
+            }
+        ],
+        "register": null
     }
 ]
 ```

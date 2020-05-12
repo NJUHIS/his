@@ -246,12 +246,13 @@ public class DoctorController {
     @RequestMapping("/getCheckAppliesByConditions")
     public List<CheckApply> getCheckAppliesByConditions(@RequestParam(required = false) Integer userId,
                                                         @RequestParam(required = false) Integer state,
+                                                        @RequestParam(required = false) Integer registrationId,
                                                         HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
-        quickLogger.logReceive("userId",userId,"state",state);
+        quickLogger.logReceive("userId",userId,"state",state,"registrationId",registrationId);
         ResultMessage resultMessage=new ResultMessage(httpServletResponse);
 
-        List<CheckApply> result=doctorService.getCheckAppliesByConditions(userId,state,resultMessage);
+        List<CheckApply> result=doctorService.getCheckAppliesByConditions(userId,state,registrationId,resultMessage);
 
         quickLogger.logReturn(result);
         return result;
