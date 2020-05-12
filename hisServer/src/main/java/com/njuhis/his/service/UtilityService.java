@@ -1,12 +1,15 @@
 package com.njuhis.his.service;
 
-import com.njuhis.his.mapper.DiagnosisMapper;
+import com.njuhis.his.mapper.DiseaseMapper;
 import com.njuhis.his.mapper.FmedItemMapper;
+import com.njuhis.his.model.Disease;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UtilityService {
@@ -45,7 +48,58 @@ public class UtilityService {
     @Autowired
     UtilityService utilityService;
     @Autowired
-    DiagnosisMapper diagnosisMapper;
+    DiseaseMapper diseaseMapper;
+
+
+    public List<Disease> getAllDiagnoses(ResultMessage resultMessage){
+        return diseaseMapper.selectAll();
+    }
+
+
+    public Disease addDisease(Disease disease,ResultMessage resultMessage){
+        try {
+            diseaseMapper.insert(disease);
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage.sendUnknownError();
+            return null;
+        }
+        return getDiseaseById(disease.getId(),resultMessage);
+    }
+
+
+    public Disease getDiseaseById(Integer id, ResultMessage resultMessage){
+        Disease disease=diseaseMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(disease!=null){
+            return disease;
+        }else{
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.DIAGNOSIS_NOT_EXIST);
+            return null;
+        }
+    }
+
+
+    public Disease updateDisease(Disease disease, ResultMessage resultMessage){
+        getDiseaseById(disease.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                diseaseMapper.updateByPrimaryKey(disease);
+                return getDiseaseById(disease.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.sendUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
 
 
     

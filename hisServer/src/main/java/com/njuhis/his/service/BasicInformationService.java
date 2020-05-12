@@ -46,6 +46,8 @@ public class BasicInformationService {
     private FmedItemMapper fmedItemMapper;
     @Autowired
     private DiagnosisMapper diagnosisMapper;
+    @Autowired
+    private DiseaseMapper diseaseMapper;
 
 
     public List<Department> getAllDepartments(ResultMessage resultMessage){
@@ -677,6 +679,55 @@ public class BasicInformationService {
     }
 
 
+    public List<Disease> getAllDiseases(ResultMessage resultMessage){
+        return diseaseMapper.selectAll();
+    }
+
+
+    public Disease addDisease(Disease disease,ResultMessage resultMessage){
+        try {
+            diseaseMapper.insert(disease);
+        }catch (DataIntegrityViolationException exception) {
+            utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+            return null;
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            resultMessage.sendUnknownError();
+            return null;
+        }
+        return getDiseaseById(disease.getId(),resultMessage);
+    }
+
+
+    public Disease getDiseaseById(Integer id, ResultMessage resultMessage){
+        Disease disease=diseaseMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        if(disease!=null){
+            return disease;
+        }else{
+            resultMessage.sendClientError(ResultMessage.ErrorMessage.DISEASE_NOT_EXIST);
+            return null;
+        }
+    }
+
+
+    public Disease updateDisease(Disease disease, ResultMessage resultMessage){
+        getDiseaseById(disease.getId(),resultMessage);
+        if(resultMessage.isSuccessful()) {//如果 id 存在
+            try {
+                diseaseMapper.updateByPrimaryKey(disease);
+                return getDiseaseById(disease.getId(),resultMessage);
+            }catch (DataIntegrityViolationException exception) {
+                utilityService.dealDataIntegrityViolationException(resultMessage, exception);
+                return null;
+            } catch (Exception exception) {
+                exception.printStackTrace();
+                resultMessage.sendUnknownError();
+                return null;
+            }
+        }else{
+            return null;
+        }
+    }
 
 
 

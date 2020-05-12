@@ -395,3 +395,38 @@ Content-Type: application/json
   "creationDate": "2019-02-28T16:00:00.000+0000",
   "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
 }
+
+###
+GET /his/BasicInformationController/getAllDiseases HTTP/1.1
+Host: localhost:9002
+
+
+###
+GET /his/BasicInformationController/getDiseaseById?id=2 HTTP/1.1
+Host: localhost:9002
+
+
+###
+POST /his/BasicInformationController/addDisease HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "diseasecode": "ZXDXHL",
+  "diseasename": "中型[典型]霍乱23333",
+  "diseaseicd": "A00.052",
+  "diseasetype": "140"
+}
+
+###
+POST /his/BasicInformationController/updateDisease HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": 1001,
+  "diseasecode": "ZXDXHL",
+  "diseasename": "中型[典型]霍乱awsl",
+  "diseaseicd": "A00.052",
+  "diseasetype": "140"
+}

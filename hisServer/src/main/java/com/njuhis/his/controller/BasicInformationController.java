@@ -580,7 +580,7 @@ public class BasicInformationController {
 
 
 
-    //TODO 待测试
+
     @RequestMapping(value = "/getAllFmedItems")
     public List<FmedItem> getAllFmedItems(HttpServletResponse httpServletResponse) {
         quickLogger.logInvoke();
@@ -589,7 +589,7 @@ public class BasicInformationController {
         return result;
     }
 
-    //TODO 待测试
+
     @RequestMapping("/addFmedItem")
     public FmedItem addFmedItem(@RequestBody FmedItem fmedItem, HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
@@ -604,7 +604,7 @@ public class BasicInformationController {
     }
 
 
-    //TODO 待测试
+
     @RequestMapping("/getFmedItemById")
     public FmedItem getFmedItemById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
@@ -619,7 +619,7 @@ public class BasicInformationController {
 
 
 
-    //TODO 待测试
+
     @RequestMapping("/updateFmedItem")
     public FmedItem updateFmedItem(@RequestBody FmedItem fmedItem,HttpServletResponse httpServletResponse){
         quickLogger.logInvoke();
@@ -686,6 +686,61 @@ public class BasicInformationController {
         return result;
 
     }
+
+
+    //TODO 待测试
+    @RequestMapping(value = "/getAllDiseases")
+    public List<Disease> getAllDiseases(HttpServletResponse httpServletResponse) {
+        quickLogger.logInvoke();
+        List<Disease> result = basicInformationService.getAllDiseases(new ResultMessage(httpServletResponse));
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+    //TODO 待测试
+    @RequestMapping("/addDisease")
+    public Disease addDisease(@RequestBody Disease disease, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(disease);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Disease result=basicInformationService.addDisease(disease, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
+
+    //TODO 待测试
+    @RequestMapping("/getDiseaseById")
+    public Disease getDiseaseById(@RequestParam Integer id, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(id);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Disease result=basicInformationService.getDiseaseById(id,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+
+    //TODO 待测试
+    @RequestMapping("/updateDisease")
+    public Disease updateDisease(@RequestBody Disease disease,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(disease);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Disease result=basicInformationService.updateDisease(disease, resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+
+    }
+
 
 
 

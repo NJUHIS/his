@@ -1631,7 +1631,7 @@ HTTP 响应示例：
 
 ### 1.43 新增一个药品 /addDrug
 
-请求体：主键ID为null的诊断。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+请求体：主键ID为null的药品。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
 返回：新增成功后返回主键ID非null的字段完整的药品。
 
@@ -1650,9 +1650,7 @@ Content-Type: application/json
     "drugsDosage": "110",
     "drugsType": "101",
     "drugsPrice": 7.01,
-    "mnemonicCode": "FKZLHNZSY(DFK)",
-    "creationDate": "2019-02-28T16:00:00.000+0000",
-    "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
+    "mnemonicCode": "FKZLHNZSY(DFK)"
 }
 ```
 
@@ -1669,8 +1667,8 @@ HTTP 响应示例：
     "drugsType": "101",
     "drugsPrice": 7.01,
     "mnemonicCode": "FKZLHNZSY(DFK)",
-    "creationDate": "2019-02-28T16:00:00.000+0000",
-    "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
+    "creationDate": null,
+    "lastUpdateDate": null
 }
 ```
 
@@ -1719,6 +1717,158 @@ HTTP 响应示例：
     "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
 }
 ```
+
+###1.45 获取所有疾病 /getAllDiseases
+
+参数：无
+
+返回：疾病列表
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getAllDiseases HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 1,
+        "diseasecode": "GDXHL",
+        "diseasename": "古典型霍乱",
+        "diseaseicd": "A00.051",
+        "diseasetype": "140"
+    },
+    {
+        "id": 2,
+        "diseasecode": "ZXDXHL",
+        "diseasename": "中型[典型]霍乱",
+        "diseaseicd": "A00.052",
+        "diseasetype": "140"
+    }
+]
+```
+
+
+
+
+
+### 1.46 通过主键ID获取一个疾病 /getDiseaseById 
+
+参数：疾病的主键ID `id`
+
+返回：疾病
+
+
+
+
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getDiseaseById?id=2 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 2,
+    "diseasecode": "ZXDXHL",
+    "diseasename": "中型[典型]霍乱",
+    "diseaseicd": "A00.052",
+    "diseasetype": "140"
+}
+```
+
+
+
+
+
+### 1.47 新增一个疾病 /addDisease
+
+请求体：主键ID为null的疾病。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：新增成功后返回主键ID非null的字段完整的疾病。
+
+
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/addDisease HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "diseasecode": "ZXDXHL",
+    "diseasename": "中型[典型]霍乱23333",
+    "diseaseicd": "A00.052",
+    "diseasetype": "140"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1001,
+    "diseasecode": "ZXDXHL",
+    "diseasename": "中型[典型]霍乱23333",
+    "diseaseicd": "A00.052",
+    "diseasetype": "140"
+}
+```
+
+
+
+### 1.48 更新/保存一个疾病/updateDisease
+
+请求体：一个主键ID非null的疾病。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的疾病。理论上返回体应该和请求体一模一样。
+
+
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/updateDisease HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 1001,
+    "diseasecode": "ZXDXHL",
+    "diseasename": "中型[典型]霍乱awsl",
+    "diseaseicd": "A00.052",
+    "diseasetype": "140"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1001,
+    "diseasecode": "ZXDXHL",
+    "diseasename": "中型[典型]霍乱awsl",
+    "diseaseicd": "A00.052",
+    "diseasetype": "140"
+}
+```
+
+
 
 
 
@@ -3451,24 +3601,6 @@ HTTP 响应示例：
 
 
 
-HTTP 请求示例：
-
-```http
-
-```
-
-HTTP 响应示例：
-
-```json
-
-```
-
-
-
-
-
-
-
 
 
 
@@ -3484,8 +3616,6 @@ HTTP 响应示例：
 ```json
 
 ```
-
-
 
 
 
@@ -3522,8 +3652,6 @@ HTTP 响应示例：
 ```json
 
 ```
-
-
 
 
 
