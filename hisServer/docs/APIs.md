@@ -1238,6 +1238,502 @@ HTTP 响应示例：
 
 
 
+###1.33 获取所有非药品项目 /getAllFmedItems
+
+参数：无
+
+返回：非药品项目列表
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getAllFmedItems HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 1,
+        "itemname": "大抢救",
+        "format": "日",
+        "price": 200.00,
+        "expclassid": 16,
+        "deptid": 133,
+        "itemcode": "120200001"
+    },
+    {
+        "id": 2,
+        "itemname": "中抢救",
+        "format": "日",
+        "price": 150.00,
+        "expclassid": 16,
+        "deptid": 133,
+        "itemcode": "120200002"
+    }
+]
+```
+
+### 1.34 通过主键ID获取一个非药品项目 /getFmedItemById 
+
+参数：非药品项目的主键ID `id`
+
+返回：非药品项目
+
+
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getFmedItemById?id=2 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 2,
+    "itemname": "中抢救",
+    "format": "日",
+    "price": 150.00,
+    "expclassid": 16,
+    "deptid": 133,
+    "itemcode": "120200002"
+}
+
+
+
+```
+
+### 1.35 新增一个非药品项目 /addFmedItem
+
+请求体：主键ID为null的非药品项目。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：新增成功后返回主键ID非null的字段完整的非药品项目。
+
+说明：
+
+
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/addFmedItem HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "itemname": "中抢救",
+    "format": "日",
+    "price": 150.00,
+    "expclassid": 16,
+    "deptid": 133,
+    "itemcode": "120200002"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 58,
+    "itemname": "中抢救",
+    "format": "日",
+    "price": 150.00,
+    "expclassid": 16,
+    "deptid": 133,
+    "itemcode": "120200002"
+}
+```
+
+### 1.36 更新/保存一个非药品项目/updateFmedItem
+
+请求体：一个主键ID非null的非药品项目。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的非药品项目。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/updateFmedItem HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 59,
+    "itemname": "中抢救233333333",
+    "format": "日",
+    "price": 150.00,
+    "expclassid": 16,
+    "deptid": 133,
+    "itemcode": "120200002"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 59,
+    "itemname": "中抢救233333333",
+    "format": "日",
+    "price": 150.00,
+    "expclassid": 16,
+    "deptid": 133,
+    "itemcode": "120200002"
+}
+```
+
+### 1.37 新增一个诊断 /addDiagnosis
+
+请求体：主键ID为null的诊断。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：新增成功后返回主键ID非null的字段完整的诊断。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/addDiagnosis HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+	"medicalid":1,
+	"diseaseid":1
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 5,
+    "medicalid": 1,
+    "diseaseid": 1,
+    "disease": {
+        "id": 1,
+        "diseasecode": "GDXHL",
+        "diseasename": "古典型霍乱",
+        "diseaseicd": "A00.051",
+        "diseasetype": "140"
+    }
+}
+```
+
+### 1.38 更新/保存一个诊断/updateDiagnosis
+
+请求体：一个主键ID非null的诊断。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的诊断。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/updateDiagnosis HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 5,
+	"medicalid":1,
+	"diseaseid":2
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 5,
+    "medicalid": 1,
+    "diseaseid": 2,
+    "disease": {
+        "id": 2,
+        "diseasecode": "ZXDXHL",
+        "diseasename": "中型[典型]霍乱",
+        "diseaseicd": "A00.052",
+        "diseasetype": "140"
+    }
+}
+```
+
+###1.39 获取所有诊断 /getAllDiagnoses
+
+参数：无
+
+返回：诊断列表
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getAllDiagnoses HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 1,
+        "medicalid": 1,
+        "diseaseid": 1,
+        "disease": {
+            "id": 1,
+            "diseasecode": "GDXHL",
+            "diseasename": "古典型霍乱",
+            "diseaseicd": "A00.051",
+            "diseasetype": "140"
+        }
+    },
+    {
+        "id": 2,
+        "medicalid": 1,
+        "diseaseid": 1,
+        "disease": {
+            "id": 1,
+            "diseasecode": "GDXHL",
+            "diseasename": "古典型霍乱",
+            "diseaseicd": "A00.051",
+            "diseasetype": "140"
+        }
+    }
+]
+```
+
+### 1.40 通过主键ID获取一个诊断 /getDiagnosisById 
+
+参数：诊断的主键ID `id`
+
+返回：诊断
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getDiagnosisById?id=2 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 2,
+    "medicalid": 1,
+    "diseaseid": 1,
+    "disease": {
+        "id": 1,
+        "diseasecode": "GDXHL",
+        "diseasename": "古典型霍乱",
+        "diseaseicd": "A00.051",
+        "diseasetype": "140"
+    }
+}
+```
+
+### 1.41 通过主键ID获取一个药品 /getDrugById 
+
+参数：药品的主键ID `id`
+
+返回：药品
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getDrugById?id=2 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 2,
+    "drugsName": "氟康唑氯化钠注射液(大扶康)",
+    "drugsFormat": "200mg×100ml/瓶",
+    "drugsUnit": "瓶",
+    "manufacturer": "辉瑞制药有限公司",
+    "drugsDosage": "110",
+    "drugsType": "101",
+    "drugsPrice": 7.01,
+    "mnemonicCode": "FKZLHNZSY(DFK)",
+    "creationDate": "2019-02-28T16:00:00.000+0000",
+    "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
+}
+```
+
+###1.42 获取所有药品 /getAllDrugs
+
+参数：无
+
+返回：药品列表
+
+HTTP 请求示例：
+
+```http
+GET /his/BasicInformationController/getAllDrugs HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+[
+    {
+        "id": 1,
+        "drugsName": "注射用甲氨喋呤",
+        "drugsFormat": "1g×1支",
+        "drugsUnit": "支",
+        "manufacturer": "江苏恒瑞医药股份有限公司",
+        "drugsDosage": "110",
+        "drugsType": "101",
+        "drugsPrice": 15.73,
+        "mnemonicCode": "ZSYJAZZ",
+        "creationDate": "2019-02-28T16:00:00.000+0000",
+        "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
+    },
+    {
+        "id": 2,
+        "drugsName": "氟康唑氯化钠注射液(大扶康)",
+        "drugsFormat": "200mg×100ml/瓶",
+        "drugsUnit": "瓶",
+        "manufacturer": "辉瑞制药有限公司",
+        "drugsDosage": "110",
+        "drugsType": "101",
+        "drugsPrice": 7.01,
+        "mnemonicCode": "FKZLHNZSY(DFK)",
+        "creationDate": "2019-02-28T16:00:00.000+0000",
+        "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
+    }
+]
+```
+
+### 1.43 新增一个药品 /addDrug
+
+请求体：主键ID为null的诊断。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
+
+返回：新增成功后返回主键ID非null的字段完整的药品。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/addDrug HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "drugsName": "氟康唑氯化钠注射液(大扶康)23333333",
+    "drugsFormat": "200mg×100ml/瓶",
+    "drugsUnit": "瓶",
+    "manufacturer": "辉瑞制药有限公司",
+    "drugsDosage": "110",
+    "drugsType": "101",
+    "drugsPrice": 7.01,
+    "mnemonicCode": "FKZLHNZSY(DFK)",
+    "creationDate": "2019-02-28T16:00:00.000+0000",
+    "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 101,
+    "drugsName": "氟康唑氯化钠注射液(大扶康)23333333",
+    "drugsFormat": "200mg×100ml/瓶",
+    "drugsUnit": "瓶",
+    "manufacturer": "辉瑞制药有限公司",
+    "drugsDosage": "110",
+    "drugsType": "101",
+    "drugsPrice": 7.01,
+    "mnemonicCode": "FKZLHNZSY(DFK)",
+    "creationDate": "2019-02-28T16:00:00.000+0000",
+    "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
+}
+```
+
+### 1.44 更新/保存一个药品/updateDrug
+
+请求体：一个主键ID非null的药品。所有字段必须完整，否则会被null取代。
+
+返回：更新/保存成功后返回保存后的药品。理论上返回体应该和请求体一模一样。
+
+HTTP 请求示例：
+
+```http
+POST /his/BasicInformationController/updateDrug HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+    "id": 101,
+    "drugsName": "氟康唑氯化钠注射液(大扶康)awsl",
+    "drugsFormat": "200mg×100ml/瓶",
+    "drugsUnit": "瓶",
+    "manufacturer": "辉瑞制药有限公司",
+    "drugsDosage": "110",
+    "drugsType": "101",
+    "drugsPrice": 7.01,
+    "mnemonicCode": "FKZLHNZSY(DFK)",
+    "creationDate": "2019-02-28T16:00:00.000+0000",
+    "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
+}
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 101,
+    "drugsName": "氟康唑氯化钠注射液(大扶康)awsl",
+    "drugsFormat": "200mg×100ml/瓶",
+    "drugsUnit": "瓶",
+    "manufacturer": "辉瑞制药有限公司",
+    "drugsDosage": "110",
+    "drugsType": "101",
+    "drugsPrice": 7.01,
+    "mnemonicCode": "FKZLHNZSY(DFK)",
+    "creationDate": "2019-02-28T16:00:00.000+0000",
+    "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
+}
+```
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
 
 
 HTTP 请求示例：
@@ -2906,6 +3402,17 @@ HTTP 响应示例：
 
 
 ### 4.19 根据多个条件获取病历列表 /getMedicalRecordsByConditions
+
+参数：如果参数为null或省略，表示该条件不设限。
+
+```java
+userId;//医生的医院员工主键ID
+patientId;//患者的主键ID
+registerId;//挂号的主键ID
+caseState;//病历状态
+```
+
+返回：符合条件的病历的列表
 
 HTTP 请求示例：
 

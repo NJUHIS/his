@@ -438,7 +438,7 @@ public class DoctorService {
         List<MedicalRecord> allMedicalRecords=medicalRecordMapper.selectAllExcludingDeleted();
         List<MedicalRecord>  filteredMedicalRecords=new ArrayList<>();
         for(MedicalRecord medicalRecord:allMedicalRecords){
-            Register register=registrationService.getRegistrationById(medicalRecord.getId(),resultMessage);if(!resultMessage.isSuccessful())return null;
+            Register register=registrationService.getRegistrationById(medicalRecord.getRegisterId(),resultMessage);if(!resultMessage.isSuccessful())return null;
 
             if(
                     (userId==null||userId.equals(register.getUserid()))

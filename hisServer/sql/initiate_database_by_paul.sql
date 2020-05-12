@@ -226,7 +226,6 @@ CREATE TABLE `diagnosis` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `MedicalId` int(9) NOT NULL,
   `diseaseId` int(9) NOT NULL,
-  `state` int(9) NOT NULL,
   PRIMARY KEY (`id`),
   constraint diagnosis_disease_id_fk
       foreign key (diseaseId) references disease (id),
@@ -353,6 +352,8 @@ CREATE TABLE `fmeditem` (
   `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `Index_1` (`id`),
+  constraint fmeditem_expenseclass_ID_fk
+      foreign key (ExpClassID) references expenseclass (ID),
   constraint fmeditem_department_id_fk
       foreign key (DeptId) references department (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

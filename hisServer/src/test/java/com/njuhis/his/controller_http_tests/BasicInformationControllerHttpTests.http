@@ -279,4 +279,119 @@ Host: localhost:9002
 
 
 
+###
+GET /his/BasicInformationController/getAllFmedItems HTTP/1.1
+Host: localhost:9002
 
+
+###
+GET /his/BasicInformationController/getFmedItemById?id=2 HTTP/1.1
+Host: localhost:9002
+
+
+###
+POST /his/BasicInformationController/addFmedItem HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "itemname": "中抢救",
+  "format": "日",
+  "price": 150.00,
+  "expclassid": 16,
+  "deptid": 133,
+  "itemcode": "120200002"
+}
+
+###
+POST /his/BasicInformationController/updateFmedItem HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": 59,
+  "itemname": "中抢救233333333",
+  "format": "日",
+  "price": 150.00,
+  "expclassid": 16,
+  "deptid": 133,
+  "itemcode": "120200002"
+}
+
+###
+POST /his/BasicInformationController/addDiagnosis HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "medicalid":1,
+  "diseaseid":1
+}
+
+###
+POST /his/BasicInformationController/updateDiagnosis HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": 5,
+  "medicalid":1,
+  "diseaseid":2
+}
+
+###
+GET /his/BasicInformationController/getAllDiagnoses HTTP/1.1
+Host: localhost:9002
+
+
+###
+GET /his/BasicInformationController/getDiagnosisById?id=2 HTTP/1.1
+Host: localhost:9002
+
+
+###
+GET /his/BasicInformationController/getDrugById?id=2 HTTP/1.1
+Host: localhost:9002
+
+
+###
+GET /his/BasicInformationController/getAllDrugs HTTP/1.1
+Host: localhost:9002
+
+
+###
+POST /his/BasicInformationController/addDrug HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "drugsName": "氟康唑氯化钠注射液(大扶康)23333333",
+  "drugsFormat": "200mg×100ml/瓶",
+  "drugsUnit": "瓶",
+  "manufacturer": "辉瑞制药有限公司",
+  "drugsDosage": "110",
+  "drugsType": "101",
+  "drugsPrice": 7.01,
+  "mnemonicCode": "FKZLHNZSY(DFK)",
+  "creationDate": "2019-02-28T16:00:00.000+0000",
+  "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
+}
+
+###
+POST /his/BasicInformationController/updateDrug HTTP/1.1
+Host: localhost:9002
+Content-Type: application/json
+
+{
+  "id": 101,
+  "drugsName": "氟康唑氯化钠注射液(大扶康)awsl",
+  "drugsFormat": "200mg×100ml/瓶",
+  "drugsUnit": "瓶",
+  "manufacturer": "辉瑞制药有限公司",
+  "drugsDosage": "110",
+  "drugsType": "101",
+  "drugsPrice": 7.01,
+  "mnemonicCode": "FKZLHNZSY(DFK)",
+  "creationDate": "2019-02-28T16:00:00.000+0000",
+  "lastUpdateDate": "2019-02-28T16:00:00.000+0000"
+}

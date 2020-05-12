@@ -5,32 +5,42 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="MedicalId" jdbcType="INTEGER" property="medicalid" />
     <result column="diseaseId" jdbcType="INTEGER" property="diseaseid" />
-    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <resultMap id="BaseResultMapAssociation" type="com.njuhis.his.model.Diagnosis">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="MedicalId" jdbcType="INTEGER" property="medicalid" />
+    <result column="diseaseId" jdbcType="INTEGER" property="diseaseid" />
+    <association property="disease" column="diseaseid" javaType="com.njuhis.his.model.Disease">
+      <id column="Disease_Id" jdbcType="INTEGER" property="id" />
+      <result column="DiseaseCode" jdbcType="VARCHAR" property="diseasecode" />
+      <result column="DiseaseName" jdbcType="VARCHAR" property="diseasename" />
+      <result column="DiseaseICD" jdbcType="VARCHAR" property="diseaseicd" />
+      <result column="DiseaseType" jdbcType="VARCHAR" property="diseasetype" />
+      <result column="Disease_DelMark" jdbcType="INTEGER" property="delmark" />
+    </association>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from diagnosis
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.njuhis.his.model.Diagnosis" useGeneratedKeys="true"  keyProperty="id">
-    insert into diagnosis (id, MedicalId, diseaseId, 
-      state)
-    values (#{id,jdbcType=INTEGER}, #{medicalid,jdbcType=INTEGER}, #{diseaseid,jdbcType=INTEGER}, 
-      #{state,jdbcType=INTEGER})
+    insert into diagnosis (id, MedicalId, diseaseId)
+    values (#{id,jdbcType=INTEGER}, #{medicalid,jdbcType=INTEGER}, #{diseaseid,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.njuhis.his.model.Diagnosis">
     update diagnosis
     set MedicalId = #{medicalid,jdbcType=INTEGER},
-      diseaseId = #{diseaseid,jdbcType=INTEGER},
-      state = #{state,jdbcType=INTEGER}
+      diseaseId = #{diseaseid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, MedicalId, diseaseId, state
-    from diagnosis
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectByPrimaryKeyExcludingDeleted" parameterType="java.lang.Integer" resultMap="BaseResultMapAssociation">
+    select *, disease.id as Disease_Id, disease.DelMark as Disease_DelMark
+    from diagnosis left join disease on diagnosis.diseaseId=disease.id
+    where diagnosis.id = #{id} and (disease.DelMark is null or disease.DelMark=0)
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, MedicalId, diseaseId, state
-    from diagnosis
+  <select id="selectAllExcludingDeleted" resultMap="BaseResultMapAssociation">
+    select *, disease.id as Disease_Id, disease.DelMark as Disease_DelMark
+    from diagnosis left join disease on diagnosis.diseaseId=disease.id
+    where disease.DelMark is null or disease.DelMark=0
   </select>
 </mapper>

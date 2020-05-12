@@ -627,7 +627,7 @@ public class BasicInformationService {
 
 
     public List<Diagnosis> getAllDiagnoses(ResultMessage resultMessage){
-        return diagnosisMapper.selectAll();
+        return diagnosisMapper.selectAllExcludingDeleted();
     }
 
 
@@ -647,7 +647,7 @@ public class BasicInformationService {
 
 
     public Diagnosis getDiagnosisById(Integer id, ResultMessage resultMessage){
-        Diagnosis diagnosis=diagnosisMapper.selectByPrimaryKey(id);//如果失败，并不会抛出异常，只会返回null。
+        Diagnosis diagnosis=diagnosisMapper.selectByPrimaryKeyExcludingDeleted(id);//如果失败，并不会抛出异常，只会返回null。
         if(diagnosis!=null){
             return diagnosis;
         }else{

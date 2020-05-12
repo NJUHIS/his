@@ -11,9 +11,9 @@ public interface DiagnosisMapper {
 
     int insert(Diagnosis record);
 
-    Diagnosis selectByPrimaryKey(Integer id);
+    Diagnosis selectByPrimaryKeyExcludingDeleted(Integer id);
 
-    List<Diagnosis> selectAll();
+    List<Diagnosis> selectAllExcludingDeleted();
 
     int updateByPrimaryKey(Diagnosis record);
 }
