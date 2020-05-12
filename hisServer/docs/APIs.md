@@ -3075,7 +3075,7 @@ HTTP 响应示例：
 
 返回：新增成功后返回主键ID非null的字段完整的处方。
 
-说明：userid 不需要由前台填写，由后台根据 mId 自动填写。即使前台填写了，也会被后台的自动填写所覆盖。
+说明：userid 不需要由前台填写，由后台根据 medicalId 自动填写。即使前台填写了，也会被后台的自动填写所覆盖。
 
 HTTP 请求示例：
 
@@ -3187,6 +3187,8 @@ HTTP 响应示例：
 
 返回：新增成功后返回主键ID非null的字段完整的检查（检验或处置）明细。
 
+说明：deptid, price 不需要由前台填写，由后台根据 checkprojid 自动填写。即使前台填写了，也会被后台的自动填写所覆盖。
+
 HTTP 请求示例：
 
 ```http
@@ -3195,7 +3197,9 @@ Host: localhost:9002
 Content-Type: application/json
 
 {
-	"checkappid": 1
+	"checkappid": 2,
+	"checkprojid":1,
+	"identification":1
 }
 ```
 
@@ -3203,19 +3207,23 @@ HTTP 响应示例：
 
 ```json
 {
-    "id": 11,
-    "checkappid": 1,
-    "checkprojid": null,
-    "deptid": null,
+    "id": 5,
+    "checkappid": 2,
+    "checkprojid": 1,
+    "deptid": 133,
     "position": null,
-    "state": null,
-    "price": null,
-    "identification": null,
+    "state": 1,
+    "price": 200.00,
+    "identification": 1,
     "inspecttime": null,
     "result": null,
     "resulttime": null,
     "operatorid": null,
-    "entryclerkid": null
+    "entryclerkid": null,
+    "department": null,
+    "user1": null,
+    "user2": null,
+    "fmedItem": null
 }
 ```
 
@@ -3267,7 +3275,7 @@ HTTP 响应示例：
 
 返回：更新/保存成功后返回保存后的检查（检验或处置）明细。理论上返回体应该和请求体一模一样。
 
-說明：請勿直接使用此 update 方法来改变 state。请使用相关的其他方法。因为直接使用 update 改变 state 缺少对数据的必要的检查。开始进行一项检查（检验或处置）明细 请使用 API 5.1 startCheckDetailed。结束一项检查（检验或处置）明细 请使用API 5.2 finishCheckDetailed。报告一项检查（检验或处置）明细请使用 API 5.3 finishCheckDetailed。
+說明：請勿直接使用此 update 方法来改变 state。请使用相关的其他方法。因为直接使用 update 改变 state 缺少对数据的必要的检查。开始进行一项检查（检验或处置）明细 请使用 API 5.1 startCheckDetailed。结束一项检查（检验或处置）明细 请使用API 5.2 finishCheckDetailed。报告一项检查（检验或处置）明细请使用 API 5.3 finishCheckDetailed。deptid, price 不需要由前台填写，由后台根据 checkprojid 自动填写。即使前台填写了，也会被后台的自动填写所覆盖。
 
 HTTP 请求示例：
 
@@ -3277,19 +3285,19 @@ Host: localhost:9002
 Content-Type: application/json
 
 {
-    "id": 1,
-    "checkappid": 1,
-    "checkprojid": 1,
-    "deptid": 3,
-    "position": "1",
+    "id": 6,
+    "checkappid": 2,
+    "checkprojid": 3,
+    "deptid": 133,
+    "position": null,
     "state": 1,
-    "price": 1.00,
+    "price": 200.00,
     "identification": 1,
-    "inspecttime": 111111,
-    "result": "133333333333333333333333",
-    "resulttime": 1,
-    "operatorid": 1,
-    "entryclerkid": 1
+    "inspecttime": null,
+    "result": null,
+    "resulttime": null,
+    "operatorid": null,
+    "entryclerkid": null
 }
 ```
 
@@ -3297,19 +3305,23 @@ HTTP 响应示例：
 
 ```json
 {
-    "id": 1,
-    "checkappid": 1,
-    "checkprojid": 1,
-    "deptid": 3,
-    "position": "1",
+    "id": 6,
+    "checkappid": 2,
+    "checkprojid": 3,
+    "deptid": 133,
+    "position": null,
     "state": 1,
-    "price": 1.00,
+    "price": 80.00,
     "identification": 1,
-    "inspecttime": 111111,
-    "result": "133333333333333333333333",
-    "resulttime": 1,
-    "operatorid": 1,
-    "entryclerkid": 1
+    "inspecttime": null,
+    "result": null,
+    "resulttime": null,
+    "operatorid": null,
+    "entryclerkid": null,
+    "department": null,
+    "user1": null,
+    "user2": null,
+    "fmedItem": null
 }
 ```
 

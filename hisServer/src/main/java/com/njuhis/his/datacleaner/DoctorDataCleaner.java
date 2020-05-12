@@ -1,6 +1,7 @@
 package com.njuhis.his.datacleaner;
 
 import com.njuhis.his.model.CheckApply;
+import com.njuhis.his.model.CheckDetailed;
 import com.njuhis.his.model.Prescription;
 import com.njuhis.his.util.CheckUtility;
 import com.njuhis.his.util.ResultMessage;
@@ -13,6 +14,10 @@ public class DoctorDataCleaner {
     private CheckUtility checkUtility;
     public void cleanCheckApply(CheckApply checkApply, ResultMessage resultMessage){
         checkUtility.checkNotEmpty(checkApply,checkApply.getNotEmptyFieldsCheckList(),resultMessage);
+    }
+
+    public void cleanCheckDetailed(CheckDetailed checkDetailed, ResultMessage resultMessage){
+        checkUtility.checkNotEmpty(checkDetailed,checkDetailed.getNotEmptyFieldsCheckList(),resultMessage);
     }
 
     public void cleanPrescriptionForAddPrescription(Prescription prescription, ResultMessage resultMessage){

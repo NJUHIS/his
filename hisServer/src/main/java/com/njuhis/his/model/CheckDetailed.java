@@ -3,6 +3,8 @@ package com.njuhis.his.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 //检验检查处置明细
 public class CheckDetailed {
@@ -196,4 +198,28 @@ public class CheckDetailed {
     public void setDelmark(Integer delmark) {
         this.delmark = delmark;
     }
+
+
+    //不能為空的字段
+    @JsonIgnore
+    private static final String[][] notEmptyFieldsCheckListString =new String[][]{
+            //字段名+英文名+中文翻譯
+            {"checkprojid","Test (Examination or Disposal) Nondrug Item","检验检查处置项目（属于非药品项目）主键ID"}
+            ,{"identification","Test (Examination or Disposal) Type","检验检查处置明细类型"}
+    };
+    @JsonIgnore
+    private static final Map<String, String[]> notEmptyFieldsCheckList =new HashMap<>();
+    public CheckDetailed(){
+        for(String[]fieldToCheckNotEmpty: notEmptyFieldsCheckListString){
+            String[] fieldTranslations=new String[]{
+                    fieldToCheckNotEmpty[1],fieldToCheckNotEmpty[2]
+            };
+            notEmptyFieldsCheckList.put(fieldToCheckNotEmpty[0],fieldTranslations);
+        }
+    }
+
+    public static Map<String, String[]> getNotEmptyFieldsCheckList() {
+        return notEmptyFieldsCheckList;
+    }
+
 }

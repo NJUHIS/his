@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,6 +32,8 @@ public class DoctorService {
     private UtilityService utilityService;
     @Autowired
     private DoctorDataCleaner doctorDataCleaner;
+    @Autowired
+    private BasicInformationService basicInformationService;
 
 
     /**
@@ -278,9 +281,19 @@ public class DoctorService {
     }
 
 
+    private CheckDetailed autoFillCheckDetailed(CheckDetailed checkDetailed, ResultMessage resultMessage){
+        FmedItem fmedItem=basicInformationService.getFmedItemById(checkDetailed.getCheckprojid(),resultMessage);if(!resultMessage.isSuccessful()) return null;
+        checkDetailed.setPrice(fmedItem.getPrice());
+        checkDetailed.setDeptid(fmedItem.getDeptid());
+        return checkDetailed;
+    }
 
     public CheckDetailed addCheckDetailed(CheckDetailed checkDetailed,ResultMessage resultMessage){
         checkDetailed.setState(1);     // 1 - 未检验检查处置
+        doctorDataCleaner.cleanCheckDetailed(checkDetailed,resultMessage);if(!resultMessage.isSuccessful()) return null;
+        autoFillCheckDetailed(checkDetailed,resultMessage);if(!resultMessage.isSuccessful()) return null;
+
+
         try {
             checkDetailedMapper.insert(checkDetailed);
         }catch (DataIntegrityViolationException exception) {
@@ -339,6 +352,11 @@ public class DoctorService {
             resultMessage.sendClientError(ResultMessage.ErrorMessage.DO_NOT_CHANGE_EXAMINATION_TEST_DISPOSAL_ID);
             return null;
         }
+
+        doctorDataCleaner.cleanCheckDetailed(checkDetailed,resultMessage);if(!resultMessage.isSuccessful()) return null;
+        autoFillCheckDetailed(checkDetailed,resultMessage);if(!resultMessage.isSuccessful()) return null;
+
+
 
         return updateCheckDetailedInternal(checkDetailed,resultMessage);
     }
@@ -428,6 +446,9 @@ public class DoctorService {
         }
 
         checkApply.setState(2);// 2-已开立并发出，未收费
+
+        checkApply.setCreationTime(new Date().getTime());//开立时间。
+
         checkApply= updateCheckApplyInternal(checkApply,resultMessage);if(!resultMessage.isSuccessful())return null;
 
         return checkApply;
