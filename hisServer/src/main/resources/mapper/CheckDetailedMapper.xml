@@ -18,6 +18,18 @@
     <result column="entryClerkId" jdbcType="INTEGER" property="entryclerkid" />
     <result column="DelMark" jdbcType="INTEGER" property="delmark" />
   </resultMap>
+  <resultMap id="BaseResultMapAssociation" type="com.njuhis.his.model.CheckDetailed" extends="BaseResultMap">
+  <association property="fmedItem"  javaType="com.njuhis.his.model.FmedItem">
+    <id column="FmedItem_Id" jdbcType="INTEGER" property="id" />
+    <result column="ItemCode" jdbcType="VARCHAR" property="itemcode" />
+    <result column="ItemName" jdbcType="VARCHAR" property="itemname" />
+    <result column="Format" jdbcType="VARCHAR" property="format" />
+    <result column="Price" jdbcType="DECIMAL" property="price" />
+    <result column="ExpClassID" jdbcType="INTEGER" property="expclassid" />
+    <result column="FmedItem_DeptId" jdbcType="INTEGER" property="deptid" />
+    <result column="FmedItem_DelMark" jdbcType="INTEGER" property="delmark" />
+  </association>
+  </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from checkdetailed
     where id = #{id,jdbcType=INTEGER}
@@ -55,10 +67,10 @@
   </update>
 
 <!--  @author Paul-->
-  <select id="selectByPrimaryKeyExcludingDeleted" resultMap="BaseResultMap">
-    select *
-    from checkdetailed
-    where id = #{id} and (DelMark is null or DelMark=0);
+  <select id="selectByPrimaryKeyExcludingDeleted" resultMap="BaseResultMapAssociation">
+    select *, fmeditem.id as FmedItem_Id, fmeditem.DeptId as FmedItem_DeptId, fmeditem.DelMark as FmedItem_DelMark
+    from checkdetailed left join fmeditem on checkdetailed.CheckProjId=fmeditem.id
+    where checkdetailed.id = #{id} and (checkdetailed.DelMark is null or checkdetailed.DelMark=0) and (fmeditem.DelMark is null or fmeditem.DelMark=0);
   </select>
 
   <select id="selectAllExcludingDeleted" resultMap="BaseResultMap">
