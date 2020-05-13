@@ -10,8 +10,6 @@ public class Diagnosis {
     private Disease disease;
 
 
-
-
     /**
      * @deprecated
      */

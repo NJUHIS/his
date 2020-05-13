@@ -10,11 +10,11 @@ public interface MedicalRecordMapper {
 
     int insert(MedicalRecord record);
 
-    MedicalRecord selectByPrimaryKey(Integer id);
+//    MedicalRecord selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKey(MedicalRecord record);
 
     List<MedicalRecord> selectAllExcludingDeleted();
 
-    MedicalRecord selectByPrimaryKeyJoin(Integer id);
+    MedicalRecord selectByPrimaryKeyExcludingDeleted(Integer id);
 }

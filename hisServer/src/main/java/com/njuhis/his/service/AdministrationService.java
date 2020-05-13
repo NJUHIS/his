@@ -6,12 +6,9 @@ import com.njuhis.his.mapper.*;
 import com.njuhis.his.model.*;
 import com.njuhis.his.util.QuickLogger;
 import com.njuhis.his.util.ResultMessage;
-import com.sun.xml.internal.bind.v2.runtime.output.Encoded;
-import org.omg.IOP.Encoding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -223,7 +220,7 @@ public class AdministrationService {
     PrescriptionMapper prescriptionMapper;
 
     public MedicalRecord getMedicalR(int id){
-        return medicalRecordMapper.selectByPrimaryKeyJoin(id);
+        return medicalRecordMapper.selectByPrimaryKeyExcludingDeleted(id);
     }
     public Prescription getPrescirption(int id){
         return prescriptionMapper.selectByMedicalId(id);

@@ -70,7 +70,7 @@ public class DoctorService {
     }
 
     public MedicalRecord getMedicalRecordById(Integer id,ResultMessage resultMessage){
-        MedicalRecord medicalRecord=medicalRecordMapper.selectByPrimaryKey(id);
+        MedicalRecord medicalRecord=medicalRecordMapper.selectByPrimaryKeyExcludingDeleted(id);
         if(medicalRecord==null){
             resultMessage.sendClientError(ResultMessage.ErrorMessage.MEDICAL_RECORD_NOT_EXIST);
         }

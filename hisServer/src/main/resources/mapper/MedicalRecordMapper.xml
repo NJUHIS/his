@@ -63,13 +63,13 @@
       Case_State = #{caseState,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, Register_Id, Medical_Readme, Medical_Present, Present_Treat,
-    Medical_History, Medical_Allergy, Medical_Physique, Medical_Diagnosis, Medical_Handling, 
-    Case_State, DelMark
-    from medicalrecord
-    where id = #{id,jdbcType=INTEGER}
-  </select>
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
+<!--    select id, Register_Id, Medical_Readme, Medical_Present, Present_Treat,-->
+<!--    Medical_History, Medical_Allergy, Medical_Physique, Medical_Diagnosis, Medical_Handling, -->
+<!--    Case_State, DelMark-->
+<!--    from medicalrecord-->
+<!--    where id = #{id,jdbcType=INTEGER}-->
+<!--  </select>-->
   <select id="selectAll" resultMap="BaseResultMap">
     select id, Register_Id, Medical_Readme, Medical_Present, Present_Treat,
     Medical_History, Medical_Allergy, Medical_Physique, Medical_Diagnosis, Medical_Handling, 
@@ -90,13 +90,11 @@
 
 
   </select>
-  <select id="selectByPrimaryKeyJoin" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
-    select m.id, m.Register_Id, m.Medical_Readme, m.Medical_Present, m.Present_Treat,
-    m.Medical_History, m.Medical_Allergy, m.Medical_Physique, m.Medical_Diagnosis, m.Medical_Handling,
-    m.Case_State, m.DelMark,d.id Diagnosis_Id, d.MedicalId, d.diseaseId, d.state,di.id Disease_Id, di.DiseaseCode, di.DiseaseName, di.DiseaseICD, di.DiseaseType, di.DelMark
-    from medicalrecord m
-    left join diagnosis d on d.MedicalId =m.id
-    left join disease di on di.id = d.diseaseid
-    where m.id = #{id,jdbcType=INTEGER}
+  <select id="selectByPrimaryKeyExcludingDeleted" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
+ select *,diagnosis.id as Diagnosis_Id, disease.id as Disease_Id,medicalrecord.DelMark as MedicalRecord_DelMark, disease.DelMark as Disease_DelMark
+    from medicalrecord
+    left join diagnosis on diagnosis.MedicalId=medicalrecord.id
+    left join disease on disease.id=diagnosis.diseaseId
+    where medicalrecord.id=#{id} and (medicalrecord.DelMark is null or medicalrecord.DelMark=0) and (disease.DelMark is null or disease.DelMark=0);
   </select>
 </mapper>
