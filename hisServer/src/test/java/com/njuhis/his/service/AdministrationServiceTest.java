@@ -1,8 +1,8 @@
-package test.com.njuhis.his.service; 
+package com.njuhis.his.service;
 
+import org.junit.After;
+import org.junit.Before;
 import org.testng.annotations.Test;
-import org.junit.Before; 
-import org.junit.After; 
 
 /** 
 * AdministrationService Tester. 

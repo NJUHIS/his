@@ -1,8 +1,8 @@
-package test.com.njuhis.his.util; 
+package com.njuhis.his.util;
 
-import org.junit.Test; 
-import org.junit.Before; 
-import org.junit.After; 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /** 
 * ColorfulOutput Tester. 

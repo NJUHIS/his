@@ -1,15 +1,19 @@
 package com.njuhis.his.controller;
 
+import com.njuhis.his.model.Prescription;
 import com.njuhis.his.service.PharmacyService;
 import com.njuhis.his.util.QuickLogger;
+import com.njuhis.his.util.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,5 +41,22 @@ public class PharmacyController {
         DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));// CustomDateEditor为自定义日期编辑器
     }
+
+
+    @RequestMapping("/dispenseMedicine")
+    public Prescription dispenseMedicine(@RequestParam Integer prescriptionId, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(prescriptionId);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Prescription result=pharmacyService.dispenseMedicine(prescriptionId,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
+
+
+
 
 }

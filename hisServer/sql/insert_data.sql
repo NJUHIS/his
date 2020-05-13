@@ -16,7 +16,7 @@ INSERT INTO his.user (id, UserName, Password, RealName, UserTypeID, DocTitleID, 
 INSERT INTO his.user (id, UserName, Password, RealName, UserTypeID, DocTitleID, IsScheduling, DeptId, RegistId, DelMark, IDnumber) VALUES (101, 'mike', 'password', 'Mike', 1, null, null, null, null, 0, null);
 
 
-INSERT INTO his.scheduling (id, SchedDate, DeptId, UserId, Noon, RegistQuota, State, remainingQuota) VALUES (1, '2020-12-02', 1, 100, 1, 3, 3, 3);
+INSERT INTO his.scheduling (id, SchedDate, DeptId, UserId, Noon, RegistQuota, State, remainingQuota) VALUES (100, '2020-12-02', 1, 100, 1, 30, 3, 3);
 
 
 

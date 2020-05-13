@@ -284,6 +284,29 @@ public class DoctorController {
         return result;
     }
 
+    @RequestMapping("/confirmPrescription")
+    public Prescription confirmPrescription(@RequestParam Integer prescriptionId,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(prescriptionId);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Prescription result=doctorService.confirmPrescription(prescriptionId,resultMessage);
+
+        quickLogger.logReceive(result);
+        return result;
+    }
+
+    @RequestMapping("/finishDiagnosis")
+    public MedicalRecord finishDiagnosis(@RequestParam Integer medicalRecordId,HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(medicalRecordId);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        MedicalRecord result=doctorService.finishDiagnosis(medicalRecordId,resultMessage);
+
+        quickLogger.logReceive(result);
+        return result;
+    }
 
     @RequestMapping("/getMedicalRecordsByConditions")
     public List<MedicalRecord> getMedicalRecordsByConditions(@RequestParam(required = false) Integer userId,

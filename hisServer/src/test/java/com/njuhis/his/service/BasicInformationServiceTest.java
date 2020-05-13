@@ -1,8 +1,8 @@
-package test.com.njuhis.his.service; 
+package com.njuhis.his.service;
 
-import org.junit.Test; 
-import org.junit.Before; 
-import org.junit.After; 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /** 
 * BasicInformationService Tester. 

@@ -78,11 +78,11 @@
       DailyState = #{dailystate,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, InvoiceNum, Money, State, CreationTime, UserId, DailyState
-    from invoice
-    where id = #{id,jdbcType=INTEGER}
-  </select>
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
+<!--    select id, InvoiceNum, Money, State, CreationTime, UserId, DailyState-->
+<!--    from invoice-->
+<!--    where id = #{id,jdbcType=INTEGER}-->
+<!--  </select>-->
   <select id="selectAll" resultMap="BaseResultMap">
     select id, InvoiceNum, Money, State, CreationTime, UserId, DailyState
     from invoice
@@ -91,14 +91,14 @@
     select i.id, i.InvoiceNum, i.Money, i.State, i.CreationTime, i.UserId, i.DailyState,
     p.id pid, p.InvoiceId, p.RegisterId, p.Name, p.Price, p.DeptId, p.State pstate, p.DelMark pdelmark
     from invoice i
-    inner join patientCosts p on p.InvoiceId = i.id
+    inner join patientcosts p on p.InvoiceId = i.id
   </select>
-  <select id="selectByPrimaryKeyJoin" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
     select i.id, i.InvoiceNum, i.Money, i.State, i.CreationTime, i.UserId, i.DailyState,
     p.id pid, p.InvoiceId, p.RegisterId, p.Name, p.Price, p.DeptId, p.State pstate, p.DelMark pdelmark
     from invoice i
-    inner join patientCosts p on p.InvoiceId = i.id
-    where id = #{id,jdbcType=INTEGER}
+    left join patientcosts p on p.InvoiceId = i.id
+    where i.id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectByConditions" parameterType="java.lang.String" resultMap="BaseResultMapConditions">
     select i.id, i.InvoiceNum, i.Money, i.State, i.CreationTime, i.UserId, i.DailyState,
@@ -106,8 +106,8 @@
     r.VisitDate, r.Noon, r.DeptId, r.UserId, r.RegistId, r.SettleID, r.IsBook, r.RegisterTime, r.RegisterID,
     r.VisitState, r.patientID, r.scheduleId
     from invoice i
-    left join patientCosts p on p.InvoiceId = i.id
-    left join Register r on p.RegisterId=r.id
+    left join patientcosts p on p.InvoiceId = i.id
+    left join register r on p.RegisterId=r.id
      where i.id like concat('%',concat(#{conditions},'%'))
     or r.RealName like concat('%',concat(#{conditions},'%'))
   </select>

@@ -79,7 +79,6 @@ select *, fmeditem.id as FmedItem_Id, fmeditem.DeptId as FmedItem_DeptId, fmedit
     where (checkdetailed.DelMark is null or checkdetailed.DelMark=0) and (fmeditem.DelMark is null or fmeditem.DelMark=0);
   </select>
 
-
 <!--  <select id="selectAll" resultMap="BaseResultMap">-->
 <!--    select id, CheckAppId, CheckProjId, DeptId, CreationTime, Position, State, Price, -->
 <!--    Identification, InspectTime, Result, ResultTime, operatorId, entryClerkId, DelMark-->

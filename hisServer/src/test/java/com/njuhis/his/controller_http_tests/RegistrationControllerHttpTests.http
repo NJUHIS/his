@@ -135,3 +135,13 @@ Host: localhost:9002
 
 ###
 
+###
+POST /his/RegistrationController/payPrescription?prescriptionId=1 HTTP/1.1
+Host: localhost:9002
+
+
+###
+POST /his/RegistrationController/confirmInvoice?invoiceId=4 HTTP/1.1
+Host: localhost:9002
+
+

@@ -378,11 +378,11 @@ DROP TABLE IF EXISTS `invoice`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `invoice` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
-  `InvoiceNum` varchar(64) NOT NULL,
+  `InvoiceNum` varchar(64),
   `Money` decimal(8,2) DEFAULT NULL,
   `State` int(1) NOT NULL COMMENT '0 - 作废\n            1 - 正常\n            2 - 重打\n            3 - 补打\n            4 - 红冲',
   `CreationTime` bigint(64) DEFAULT NULL,
-  `UserId` int(9) NOT NULL,
+  `UserId` int(9),
   `DailyState` int(1) NOT NULL COMMENT '0 - 未日结审核\n            1 - 已经审核\n            默认值为0',
   PRIMARY KEY (`id`),
   constraint invoice_user_id_fk
@@ -478,7 +478,7 @@ CREATE TABLE `patientcosts` (
   `RegisterId` int(9) NOT NULL,
   `Name` varchar(64) DEFAULT NULL,
   `Price` decimal(8,2) DEFAULT NULL,
-  `DeptId` int(9) NOT NULL,
+  `DeptId` int(9) ,
   `State` int(1) NOT NULL,
   `DelMark` int(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),

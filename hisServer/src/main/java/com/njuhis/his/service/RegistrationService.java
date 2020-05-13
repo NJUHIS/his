@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -77,10 +78,24 @@ public class RegistrationService {
 
         scheduling.setRemainingQuota(scheduling.getRemainingQuota()-1);
 
+        Invoice invoice=new Invoice();
+        invoice.setState(1);    // 1 - 未开出
+        invoice.setDailystate(1);    // 1 - 未日结审核
+
+        PatientCosts patientCosts=new PatientCosts();
+        patientCosts.setName("Registration Expense 挂号费");
+        patientCosts.setPrice(new BigDecimal(9999));
+        patientCosts.setState(2);// 2 - 已交费
+
 
         try {
             registerMapper.insert(registration);
             basicInformationService.updateScheduling(scheduling,resultMessage);if(!resultMessage.isSuccessful()) return null;
+            invoice.setId(registration.getId());
+            patientCosts.setInvoiceid(invoice.getId());
+            patientCosts.setRegisterid(registration.getId());
+            addInvoice(invoice,resultMessage);if(!resultMessage.isSuccessful()) return null;
+            addPatientCosts(patientCosts,resultMessage);if(!resultMessage.isSuccessful()) return null;
 
         }catch (DataIntegrityViolationException exception) {
             utilityService.dealDataIntegrityViolationException(resultMessage, exception);
@@ -293,9 +308,61 @@ public class RegistrationService {
         }
 
         checkApply.setState(3);// 3 - 已收费，未检验检查处置
+
+        PatientCosts patientCosts=new PatientCosts();
+        patientCosts.setName("Test (Examination or Disposal) Expense 检验（检查或处置）费用");
+        patientCosts.setPrice(new BigDecimal(99999));
+        patientCosts.setState(2);// 2 - 已交费
+        patientCosts.setRegisterid(checkApply.getMedicalId());
+        patientCosts.setInvoiceid(checkApply.getMedicalId());
+
         checkApply=doctorService.updateCheckApplyInternal(checkApply,resultMessage);if(!resultMessage.isSuccessful())return null;
+        addPatientCosts(patientCosts,resultMessage);if(!resultMessage.isSuccessful())return null;
 
         return checkApply;
+    }
+
+    public Prescription payPrescription(Integer prescriptionId, ResultMessage resultMessage){
+        Prescription prescription=doctorService.getPrescriptionById(prescriptionId,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        if(prescription.getPrescriptionState()!=2){//如果不是 2 - 已确认并发出，未收费。
+            resultMessage.sendClientError("The state is not 2. 状态不是 2-已开出未收费");
+            return null;
+        }
+
+        prescription.setPrescriptionState(3);// 3 - 已收费，未取药。
+
+
+        PatientCosts patientCosts=new PatientCosts();
+        patientCosts.setName("Drug Expense 药品费用");
+        patientCosts.setPrice(new BigDecimal(999999));
+        patientCosts.setState(2);// 2 - 已交费
+        patientCosts.setRegisterid(prescription.getId());
+        patientCosts.setInvoiceid(prescription.getId());
+
+        prescription=doctorService.updatePrescriptionInternal(prescription,resultMessage);if(!resultMessage.isSuccessful())return null;
+        addPatientCosts(patientCosts,resultMessage);if(!resultMessage.isSuccessful())return null;
+        return prescription;
+    }
+
+    public Invoice confirmInvoice(Integer invoiceId, ResultMessage resultMessage){
+        Invoice invoice=getInvoiceById(invoiceId,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        if(invoice.getState()!=1){//如果不是 1 - 未开出
+            resultMessage.sendClientError("The state is not 1. 状态不是 1 - 未开出。");
+            return null;
+        }
+
+        // 1 - 未开出
+        // 2 - 已开出，正常状态
+
+        invoice.setState(2);// 2 - 已开出，正常状态
+
+        invoice.setCreationtime(new Date().getTime());//开立时间。
+
+        invoice= updateInvoice(invoice,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        return invoice;
     }
 
 }

@@ -455,6 +455,40 @@ public class DoctorService {
         return checkApply;
     }
 
+    public Prescription confirmPrescription(Integer checkApplyId, ResultMessage resultMessage){
+        Prescription prescription=getPrescriptionById(checkApplyId,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        if(prescription.getPrescriptionState()!=1){//如果不是 1-编辑中
+            resultMessage.sendClientError("The state is not 1-Editing. 状态不是 1-编辑中。");
+            return null;
+        }
+
+        prescription.setPrescriptionState(2);// 2-已开立并发出，未收费
+
+        prescription.setPrescriptionTime(new Date().getTime());//开立时间。
+
+        prescription= updatePrescriptionInternal(prescription,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        return prescription;
+    }
+
+    public MedicalRecord finishDiagnosis(Integer medicalRecordId, ResultMessage resultMessage){
+        MedicalRecord medicalRecord=getMedicalRecordById(medicalRecordId,resultMessage);if(!resultMessage.isSuccessful())return null;
+        if(medicalRecord.getCaseState()!=2){//如果不是 2 - 进行中
+            resultMessage.sendClientError("The state is not 2. 状态不是2 - 进行中。");
+            return null;
+        }
+        medicalRecord.setCaseState(3);// 3 - 已完成/诊毕；
+
+        Register register=registrationService.getRegistrationById(medicalRecord.getRegisterId(),resultMessage);if(!resultMessage.isSuccessful())return null;
+        register.setVisitstate(2);// 2 - 已完成/诊毕；
+
+        registrationService.updateRegistration(register,resultMessage);if(!resultMessage.isSuccessful())return null;
+        medicalRecord= updateMedicalRecordInternal(medicalRecord,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        return medicalRecord;
+    }
+
 
     public List<MedicalRecord> getMedicalRecordsByConditions(Integer userId, Integer patientId, Integer registrationId,Integer caseState,ResultMessage resultMessage){
         List<MedicalRecord> allMedicalRecords=medicalRecordMapper.selectAllExcludingDeleted();
@@ -474,6 +508,8 @@ public class DoctorService {
         return filteredMedicalRecords;
 
     }
+
+
 
 
 

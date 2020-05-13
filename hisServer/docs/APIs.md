@@ -2250,7 +2250,7 @@ isbook
 
 返回：挂号成功后返回主键ID非null的字段完整的挂号。
 
-说明：规定挂号成功之后不可修改。visitdate, noon, userid, registid, deptid, idnumber, gender, homeaddress, birthdate, age, realname, state 不需要由前台填写，由后台根据 scheduleId 自动填写。即使前台填写了，也会被后台的自动填写所覆盖。
+说明：规定挂号成功之后不可修改。visitdate, noon, userid, registid, deptid, idnumber, gender, homeaddress, birthdate, age, realname, state 不需要由前台填写，由后台根据 scheduleId 自动填写。即使前台填写了，也会被后台的自动填写所覆盖。挂号成功后后台已自动为该次看诊新建了一张发票。
 
 HTTP 请求示例：
 
@@ -2271,13 +2271,13 @@ HTTP 响应示例：
 
 ```json
 {
-    "id": 4,
+    "id": 7,
     "realname": "Nelson",
     "gender": 1,
-    "idnumber": "7989688077809873",
-    "birthdate": null,
+    "idnumber": "123456198011101234",
+    "birthdate": "1980-11-10",
     "age": null,
-    "homeaddress": null,
+    "homeaddress": "Shanghai",
     "medicalRecordId": null,
     "visitdate": "2020-12-02",
     "noon": 1,
@@ -2286,12 +2286,35 @@ HTTP 响应示例：
     "registid": 100,
     "settleid": 100,
     "isbook": 0,
-    "registertime": 1587874337411,
+    "registertime": 1589402372464,
     "registerid": null,
     "visitstate": 0,
     "patientid": 100,
-    "scheduleId": 1,
-    "patientCostsList": null
+    "scheduleId": 100,
+    "patientCostsList": null,
+    "user": null,
+    "department": null,
+    "sum": null,
+    "invoice": {
+        "id": 7,
+        "invoicenum": null,
+        "money": null,
+        "state": 1,
+        "creationtime": null,
+        "userid": 100,
+        "dailystate": 1,
+        "patientCostsList": [
+            {
+                "id": 2,
+                "invoiceid": 7,
+                "registerid": 7,
+                "name": "Registration Expense 挂号费",
+                "price": 9999.00,
+                "deptid": null,
+                "state": 2
+            }
+        ]
+    }
 }
 ```
 
@@ -2302,6 +2325,8 @@ HTTP 响应示例：
 请求体：主键ID为null的发票。请求体的字段可以不完整，只需要一些关键必须的字段即可。id 也可以直接省略。
 
 返回：新增成功后返回主键ID非null的字段完整的发票。
+
+说明：API 3.1 挂号成功后后台已自动为该次看诊新建了一张发票。
 
 HTTP 请求示例：
 
@@ -2442,6 +2467,8 @@ HTTP 响应示例：
 请求体：一个主键ID非null的发票。所有字段必须完整，否则会被null取代。
 
 返回：更新/保存成功后返回保存后的发票。理论上返回体应该和请求体一模一样。
+
+说明：API 3.11 付款检查（检验或处置）和 API 3.12 付款处方的时候，相应的发票会由后台自动更新。
 
 HTTP 请求示例：
 
@@ -2688,7 +2715,7 @@ HTTP 响应示例：
 
 请求参数：检查（检验或处置）主键ID `checkApplyId`
 
-说明：此方法将检查（检验或处置）状态由“2 - 已开立并发出，未收费”变为   "3 - 已收费，未检验检查处置"
+说明：此方法将检查（检验或处置）状态由“2 - 已开立并发出，未收费”变为   "3 - 已收费，未检验检查处置"。相应的发票会由后台自动更新。
 
 返回：状态改变后的检查（检验或处置）
 
@@ -2720,38 +2747,86 @@ HTTP 响应示例：
 
 
 
+### 3.12 付款处方 /payPrescription
 
+请求参数：处方主键ID `prescriptionId`
 
+说明：此方法将处方状态由“2 - 已开立并发出，未收费”变为   "3 - 已收费，未取药"。相应的发票会由后台自动更新。
 
-
-HTTP 请求示例：
-
-```http
-
-```
-
-HTTP 响应示例：
-
-```json
-
-```
-
-
-
-
+返回：状态改变后的处方
 
 
 
 HTTP 请求示例：
 
 ```http
+POST /his/RegistrationController/payPrescription?prescriptionId=1 HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
+{
+    "id": 1,
+    "medicalId": 1,
+    "userId": 1,
+    "prescriptionName": "處方名稱",
+    "prescriptionState": 3,
+    "prescriptionTime": 1589397027918,
+    "invoiceId": null,
+    "prescriptionDetailedList": null
+}
+```
 
+
+
+
+
+### 3.13 确认开出发票 /confirmInvoice
+
+请求参数：发票主键ID `invoiceId`
+
+说明：此方法将发票状态由“1 - 未开出"变为“2 - 已开出，正常状态”。
+
+返回：状态改变后的发票
+
+HTTP 请求示例：
+
+```http
+POST /his/RegistrationController/confirmInvoice?invoiceId=7 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 7,
+    "invoicenum": null,
+    "money": null,
+    "state": 2,
+    "creationtime": 1589404234620,
+    "userid": null,
+    "dailystate": 1,
+    "patientCostsList": [
+        {
+            "id": 2,
+            "invoiceid": 7,
+            "registerid": 7,
+            "name": "Registration Expense 挂号费",
+            "price": 9999.00,
+            "deptid": null,
+            "state": 2
+        }
+    ]
+}
 ```
 
 
@@ -3144,6 +3219,10 @@ HTTP 响应示例：
 请求体：一个主键ID非null的处方。所有字段必须完整，否则会被null取代。
 
 返回：更新/保存成功后返回保存后的处方。理论上返回体应该和请求体一模一样。
+
+说明：請勿直接使用此 update 方法来直接改变 prescriptionState。请使用相关的其他方法。
+
+
 
 HTTP 请求示例：
 
@@ -3676,23 +3755,103 @@ HTTP 响应示例：
 
 
 
+### 4.20 诊毕 /finishDiagnosis
 
+请求参数：病历主键ID `medicalRecordId`
+
+说明：此方法将病历的状态由“2 - 进行中"变为“3 - 已完成/诊毕；”。同时还将对应挂号的状态由“1 - 进行中"变为“2 - 诊毕；”。
+
+返回：状态改变后的病历
 
 
 
 HTTP 请求示例：
 
 ```http
+POST /his/DoctorController/finishDiagnosis?medicalRecordId=1 HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
+{
+    "id": 1,
+    "registerId": 1,
+    "medicalReadme": "zhusu拉開距離；看；扣水電費；看；sdfL空間樓上的積分來看；sdf",
+    "medicalPresent": "xianbingshilkjlsdjfljsdlfj",
+    "presentTreat": "xianbingzhiliaoqingkuang\nsdflkjljljljlsjdlkfjaslkfjlasjflasjf",
+    "medicalHistory": "jiwangshi........flj快速減肥歷史記錄附件四六級法拉盛ljslfjlsjlfjslsfllsjdfkljslkfjslfjsdfljlsadfjljljljdlfjlsjflsdfklklksjflskfjlsdjflasfj施蒂利克據了解來說絕對發鏈接愛上了對方盡量少打瘋了落實到附近來開始幾多分了兩件事來得及發索拉卡東方嘉盛了發動機",
+    "medicalAllergy": "guomingshi",
+    "medicalPhysique": "tigejiancha",
+    "medicalDiagnosis": "zhenduanjieguo",
+    "medicalHandling": "chuliyijian",
+    "caseState": 3,
+    "diagnosisList": [
+        {
+            "id": 1,
+            "medicalid": 1,
+            "diseaseid": 1,
+            "disease": {
+                "id": 1,
+                "diseasecode": "GDXHL",
+                "diseasename": "古典型霍乱",
+                "diseaseicd": "A00.051",
+                "diseasetype": "140"
+            }
+        },
+        {
+            "id": 2,
+            "medicalid": 1,
+            "diseaseid": 2,
+            "disease": {
+                "id": 2,
+                "diseasecode": "ZXDXHL",
+                "diseasename": "中型[典型]霍乱",
+                "diseaseicd": "A00.052",
+                "diseasetype": "140"
+            }
+        }
+      
+    ]
+}
+```
+
+### 4.21 确认开出处方 /confirmPrescription
+
+请求参数：处方主键ID `prescriptionId`
+
+说明：此方法将处方状态由“1-编辑中"变为“2 - 已开立并发出，未收费”。
+
+返回：状态改变后的处方
+
+HTTP 请求示例：
+
+```http
+POST /his/DoctorController/confirmPrescription?prescriptionId=1 HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
+HTTP 响应示例：
 
+```json
+{
+    "id": 1,
+    "medicalId": 1,
+    "userId": 1,
+    "prescriptionName": "處方名稱",
+    "prescriptionState": 2,
+    "prescriptionTime": 1589397027918,
+    "invoiceId": null,
+    "prescriptionDetailedList": null
+}
+```
 
 
 
@@ -3862,20 +4021,41 @@ HTTP 响应示例：
 
 
 
+## 6. 门诊药房工作站 /PharmacyController
 
 
 
+### 6.1 发药 /dispenseMedicine
+
+请求参数：处方主键ID `prescriptionId`
+
+说明：此方法将处方状态由“3 - 已收费，未取药" 变为 “4 - 已取药”。
+
+返回：状态改变后的处方
 
 HTTP 请求示例：
 
 ```http
+POST /his/PharmacyController/dispenseMedicine?prescriptionId=1 HTTP/1.1
+Host: localhost:9002
+
+
 
 ```
 
 HTTP 响应示例：
 
 ```json
-
+{
+    "id": 1,
+    "medicalId": 1,
+    "userId": 1,
+    "prescriptionName": "處方名稱",
+    "prescriptionState": 4,
+    "prescriptionTime": 1589397027918,
+    "invoiceId": null,
+    "prescriptionDetailedList": null
+}
 ```
 
 

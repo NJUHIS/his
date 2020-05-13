@@ -1,8 +1,8 @@
-package test.com.njuhis.his.controller; 
+package com.njuhis.his.controller;
 
-import org.junit.Test; 
-import org.junit.Before; 
-import org.junit.After; 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /** 
 * PersonalInformationController Tester. 
