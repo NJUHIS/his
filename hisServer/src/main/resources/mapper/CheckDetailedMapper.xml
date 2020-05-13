@@ -73,10 +73,10 @@
     where checkdetailed.id = #{id} and (checkdetailed.DelMark is null or checkdetailed.DelMark=0) and (fmeditem.DelMark is null or fmeditem.DelMark=0);
   </select>
 
-  <select id="selectAllExcludingDeleted" resultMap="BaseResultMap">
-    select *
-    from checkdetailed
-    where DelMark is null or DelMark=0;
+  <select id="selectAllExcludingDeleted" resultMap="BaseResultMapAssociation">
+select *, fmeditem.id as FmedItem_Id, fmeditem.DeptId as FmedItem_DeptId, fmeditem.DelMark as FmedItem_DelMark
+    from checkdetailed left join fmeditem on checkdetailed.CheckProjId=fmeditem.id
+    where (checkdetailed.DelMark is null or checkdetailed.DelMark=0) and (fmeditem.DelMark is null or fmeditem.DelMark=0);
   </select>
 
 

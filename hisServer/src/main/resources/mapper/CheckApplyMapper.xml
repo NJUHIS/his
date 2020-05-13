@@ -29,6 +29,16 @@
       <result column="operatorId" jdbcType="INTEGER" property="operatorid" />
       <result column="entryClerkId" jdbcType="INTEGER" property="entryclerkid" />
       <result column="CheckDetailedDelMark" jdbcType="INTEGER" property="delmark" />
+      <association property="fmedItem"  javaType="com.njuhis.his.model.FmedItem">
+        <id column="FmedItem_Id" jdbcType="INTEGER" property="id" />
+        <result column="ItemCode" jdbcType="VARCHAR" property="itemcode" />
+        <result column="ItemName" jdbcType="VARCHAR" property="itemname" />
+        <result column="Format" jdbcType="VARCHAR" property="format" />
+        <result column="Price" jdbcType="DECIMAL" property="price" />
+        <result column="ExpClassID" jdbcType="INTEGER" property="expclassid" />
+        <result column="FmedItem_DeptId" jdbcType="INTEGER" property="deptid" />
+        <result column="FmedItem_DelMark" jdbcType="INTEGER" property="delmark" />
+      </association>
     </collection>
   </resultMap>
   <resultMap id="BaseResultMapConditions" type="com.njuhis.his.model.CheckApply" extends="BaseResultMap">
@@ -127,15 +137,15 @@
 
 <!--  @author Paul-->
   <select id="selectByPrimaryKeyExcludingDeleted" resultMap="BaseResultMapCollection">
-    select *, checkdetailed.id as CheckDetailedId, checkdetailed.State as CheckDetailedState, checkdetailed.DelMark as CheckDetailedDelMark
-    from checkapply left join checkdetailed on checkapply.id = checkdetailed.CheckAppId
+    select *, checkdetailed.id as CheckDetailedId, checkdetailed.State as CheckDetailedState, checkdetailed.DelMark as CheckDetailedDelMark,fmeditem.id as FmedItem_Id, fmeditem.DeptId as FmedItem_DeptId, fmeditem.DelMark as FmedItem_DelMark
+    from checkapply left join checkdetailed on checkapply.id = checkdetailed.CheckAppId left join fmeditem on checkdetailed.CheckProjId=fmeditem.id
     where checkapply.id = #{id} and  (checkapply.DelMark is null or checkapply.DelMark=0) and (checkdetailed.DelMark is null or checkdetailed.DelMark=0);
   </select>
 
 <!--  @author Paul-->
   <select id="selectAllExcludingDeleted" resultMap="BaseResultMapCollection">
-    select *, checkdetailed.id as CheckDetailedId, checkdetailed.State as CheckDetailedState, checkdetailed.DelMark as CheckDetailedDelMark
-    from checkapply left join checkdetailed on checkapply.id = checkdetailed.CheckAppId
+    select *, checkdetailed.id as CheckDetailedId, checkdetailed.State as CheckDetailedState, checkdetailed.DelMark as CheckDetailedDelMark,fmeditem.id as FmedItem_Id, fmeditem.DeptId as FmedItem_DeptId, fmeditem.DelMark as FmedItem_DelMark
+    from checkapply left join checkdetailed on checkapply.id = checkdetailed.CheckAppId left join fmeditem on checkdetailed.CheckProjId=fmeditem.id
     where (checkapply.DelMark is null or checkapply.DelMark=0) and (checkdetailed.DelMark is null or checkdetailed.DelMark=0);
   </select>
 
