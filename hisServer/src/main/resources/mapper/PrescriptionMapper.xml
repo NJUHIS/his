@@ -49,14 +49,17 @@
       Invoice_id = #{invoiceId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, Medical_Id, User_Id, Prescription_Name, Prescription_State, Prescription_Time, 
-    Invoice_id, DelMark
-    from prescription
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
+    select p.id, p.Medical_Id, p.User_Id, p.Prescription_Name, p.Prescription_State, p.Prescription_Time,
+           p.Invoice_id, p.DelMark,pd.id pdid, pd.PrescriptionId, pd.DrugsId, pd.Useage, pd.Dosage, pd.Frequency, pd.Price,
+           pd.quantity,d.id did, d.Drugs_Code, d.Drugs_Name
+    from prescription p
+           left join prescriptiondetailed pd on pd.PrescriptionId = p.id
+           left join drugs d on d.id = pd.DrugsID
+    where p.id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, Medical_Id, User_Id, Prescription_Name, Prescription_State, Prescription_Time, 
+    select id, Medical_Id, User_Id, Prescription_Name, Prescription_State, Prescription_Time,
     Invoice_id, DelMark
     from prescription
   </select>
