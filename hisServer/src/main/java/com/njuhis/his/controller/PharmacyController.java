@@ -55,6 +55,18 @@ public class PharmacyController {
         return result;
     }
 
+    @RequestMapping("/returnMedicine")
+    public Prescription returnMedicine(@RequestParam Integer prescriptionId, HttpServletResponse httpServletResponse){
+        quickLogger.logInvoke();
+        quickLogger.logReceive(prescriptionId);
+        ResultMessage resultMessage=new ResultMessage(httpServletResponse);
+
+        Prescription result=pharmacyService.returnMedicine(prescriptionId,resultMessage);
+
+        quickLogger.logReturn(result);
+        return result;
+    }
+
 
 
 

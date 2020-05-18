@@ -24,6 +24,16 @@
         <id column="did" jdbcType="INTEGER" property="id" />
         <result column="Drugs_Code" jdbcType="CHAR" property="drugsCode" />
         <result column="Drugs_Name" jdbcType="VARCHAR" property="drugsName" />
+        <result column="Drugs_Format" jdbcType="VARCHAR" property="drugsFormat" />
+        <result column="Drugs_Unit" jdbcType="VARCHAR" property="drugsUnit" />
+        <result column="Manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+        <result column="Drugs_Dosage" jdbcType="VARCHAR" property="drugsDosage" />
+        <result column="Drugs_Type" jdbcType="VARCHAR" property="drugsType" />
+        <result column="Drugs_Price" jdbcType="DECIMAL" property="drugsPrice" />
+        <result column="Mnemonic_Code" jdbcType="VARCHAR" property="mnemonicCode" />
+        <result column="Creation_Date" jdbcType="TIMESTAMP" property="creationDate" />
+        <result column="Last_Update_Date" jdbcType="TIMESTAMP" property="lastUpdateDate" />
+        <result column="Drugs_DelMark" jdbcType="INTEGER" property="delmark" />
       </association>
     </collection>
   </resultMap>
@@ -52,7 +62,8 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
     select p.id, p.Medical_Id, p.User_Id, p.Prescription_Name, p.Prescription_State, p.Prescription_Time,
            p.Invoice_id, p.DelMark,pd.id pdid, pd.PrescriptionId, pd.DrugsId, pd.Useage, pd.Dosage, pd.Frequency, pd.Price,
-           pd.quantity,d.id did, d.Drugs_Code, d.Drugs_Name
+           pd.quantity,d.id did, d.Drugs_Code, d.Drugs_Name,d.Drugs_Format, d.Drugs_Unit, d.Manufacturer, d.Drugs_Dosage,
+           d.Drugs_Type, d.Drugs_Price, d.Mnemonic_Code, d.Creation_Date, d.Last_Update_Date, d.DelMark as Drugs_DelMark
     from prescription p
            left join prescriptiondetailed pd on pd.PrescriptionId = p.id
            left join drugs d on d.id = pd.DrugsID
@@ -66,7 +77,8 @@
   <select id="selectAllJoin" resultMap="BaseResultMapCollection">
     select p.id, p.Medical_Id, p.User_Id, p.Prescription_Name, p.Prescription_State, p.Prescription_Time,
     p.Invoice_id, p.DelMark,pd.id pdid, pd.PrescriptionId, pd.DrugsId, pd.Useage, pd.Dosage, pd.Frequency, pd.Price,
-    pd.quantity,d.id did, d.Drugs_Code, d.Drugs_Name
+    pd.quantity,d.id did, d.Drugs_Code, d.Drugs_Name,d.Drugs_Format, d.Drugs_Unit, d.Manufacturer, d.Drugs_Dosage,
+           d.Drugs_Type, d.Drugs_Price, d.Mnemonic_Code, d.Creation_Date, d.Last_Update_Date, d.DelMark as Drugs_DelMark
     from prescription p
     left join prescriptiondetailed pd on pd.PrescriptionId = p.id
     left join drugs d on d.id = pd.DrugsID
@@ -76,7 +88,8 @@
   <select id="selectByMedicalId" parameterType="java.lang.Integer" resultMap="BaseResultMapCollection">
     select p.id, p.Medical_Id, p.User_Id, p.Prescription_Name, p.Prescription_State, p.Prescription_Time,
     p.Invoice_id, p.DelMark,pd.id pdid, pd.PrescriptionId, pd.DrugsId, pd.Useage, pd.Dosage, pd.Frequency, pd.Price,
-    pd.quantity,d.id did, d.Drugs_Code, d.Drugs_Name
+    pd.quantity,d.id did, d.Drugs_Code, d.Drugs_Name,d.Drugs_Format, d.Drugs_Unit, d.Manufacturer, d.Drugs_Dosage,
+           d.Drugs_Type, d.Drugs_Price, d.Mnemonic_Code, d.Creation_Date, d.Last_Update_Date, d.DelMark as Drugs_DelMark
     from prescription p
     inner join prescriptiondetailed pd on pd.PrescriptionId = p.id
     inner join drugs d on d.id = pd.DrugsID

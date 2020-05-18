@@ -4019,6 +4019,48 @@ HTTP 响应示例：
 }
 ```
 
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
 
 
 ## 6. 门诊药房工作站 /PharmacyController
@@ -4057,6 +4099,69 @@ HTTP 响应示例：
     "prescriptionDetailedList": null
 }
 ```
+
+### 6.1 退药 /returnMedicine
+
+请求参数：处方主键ID `prescriptionId`
+
+说明：此方法将处方状态由 “4 - 已取药”，未取药" 变为"5 - 已退药”。
+
+返回：状态改变后的处方
+
+HTTP 请求示例：
+
+```http
+POST /his/PharmacyController/returnMedicine?prescriptionId=1 HTTP/1.1
+Host: localhost:9002
+
+
+
+```
+
+HTTP 响应示例：
+
+```json
+{
+    "id": 1,
+    "medicalId": 1,
+    "userId": 1,
+    "prescriptionName": "處方名稱",
+    "prescriptionState": 5,
+    "prescriptionTime": 1589397027918,
+    "invoiceId": null,
+    "prescriptionDetailedList": []
+}
+```
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
+
+HTTP 请求示例：
+
+```http
+
+```
+
+HTTP 响应示例：
+
+```json
+
+```
+
+
 
 
 

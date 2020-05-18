@@ -10,6 +10,21 @@
     <result column="Frequency" jdbcType="VARCHAR" property="frequency" />
     <result column="Price" jdbcType="DECIMAL" property="price" />
     <result column="quantity" jdbcType="INTEGER" property="quantity" />
+    <association property="drugs" column="DrugsId" javaType="com.njuhis.his.model.Drugs">
+      <id column="did" jdbcType="INTEGER" property="id" />
+      <result column="Drugs_Code" jdbcType="CHAR" property="drugsCode" />
+      <result column="Drugs_Name" jdbcType="VARCHAR" property="drugsName" />
+      <result column="Drugs_Format" jdbcType="VARCHAR" property="drugsFormat" />
+      <result column="Drugs_Unit" jdbcType="VARCHAR" property="drugsUnit" />
+      <result column="Manufacturer" jdbcType="VARCHAR" property="manufacturer" />
+      <result column="Drugs_Dosage" jdbcType="VARCHAR" property="drugsDosage" />
+      <result column="Drugs_Type" jdbcType="VARCHAR" property="drugsType" />
+      <result column="Drugs_Price" jdbcType="DECIMAL" property="drugsPrice" />
+      <result column="Mnemonic_Code" jdbcType="VARCHAR" property="mnemonicCode" />
+      <result column="Creation_Date" jdbcType="TIMESTAMP" property="creationDate" />
+      <result column="Last_Update_Date" jdbcType="TIMESTAMP" property="lastUpdateDate" />
+      <result column="Drugs_DelMark" jdbcType="INTEGER" property="delmark" />
+    </association>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from prescriptiondetailed
@@ -37,14 +52,16 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, PrescriptionId, DrugsId, Useage, Dosage, Frequency, Price,
-    quantity
-    from prescriptiondetailed
+    select p.id, p.PrescriptionId, p.DrugsId, p.Useage, p.Dosage, p.Frequency, p.Price,
+    p.quantity, d.id did, d.Drugs_Code, d.Drugs_Name,d.Drugs_Format, d.Drugs_Unit, d.Manufacturer, d.Drugs_Dosage,
+           d.Drugs_Type, d.Drugs_Price, d.Mnemonic_Code, d.Creation_Date, d.Last_Update_Date, d.DelMark as Drugs_DelMark
+    from prescriptiondetailed p left join drugs d on d.id=p.DrugsId
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, PrescriptionId, DrugsId, Useage, Dosage, Frequency, Price,
-    quantity
-    from prescriptiondetailed
+ select p.id, p.PrescriptionId, p.DrugsId, p.Useage, p.Dosage, p.Frequency, p.Price,
+    p.quantity, d.id did, d.Drugs_Code, d.Drugs_Name,d.Drugs_Format, d.Drugs_Unit, d.Manufacturer, d.Drugs_Dosage,
+           d.Drugs_Type, d.Drugs_Price, d.Mnemonic_Code, d.Creation_Date, d.Last_Update_Date, d.DelMark as Drugs_DelMark
+    from prescriptiondetailed p left join drugs d on d.id=p.DrugsId
   </select>
 </mapper>

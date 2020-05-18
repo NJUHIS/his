@@ -27,4 +27,19 @@ public class PharmacyService {
     }
 
 
+
+    public Prescription returnMedicine(Integer prescriptionId, ResultMessage resultMessage){
+        Prescription prescription=doctorService.getPrescriptionById(prescriptionId,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        if(prescription.getPrescriptionState()!=4){//如果不是 4 - 已取药。
+            resultMessage.sendClientError("The state is not 4. 状态不是 4 - 已取药。");
+            return null;
+        }
+
+        prescription.setPrescriptionState(5);// 5 - 已退药。
+        prescription=doctorService.updatePrescriptionInternal(prescription,resultMessage);if(!resultMessage.isSuccessful())return null;
+
+        return prescription;
+    }
+
 }

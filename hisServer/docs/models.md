@@ -300,6 +300,7 @@ public class Prescription {
     //2 - 已确认并发出，未收费。
     //3 - 已收费，未取药。
     //4 - 已取药。
+  	//5 - 已退药。
     private Long prescriptionTime;//生效时间。以医生确认发出的时间为准。毫秒数。
     private String invoiceId;//发票主键ID
 }
