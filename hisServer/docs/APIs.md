@@ -3712,7 +3712,7 @@ HTTP 响应示例：
 ```java
 userId;//医生的医院员工主键ID
 patientId;//患者的主键ID
-registerId;//挂号的主键ID
+registrationId;//挂号的主键ID
 caseState;//病历状态
 ```
 

@@ -507,9 +507,9 @@ public class BasicInformationController {
                                                        @RequestParam(required = false) Integer registerLevelId,
                                                        HttpServletResponse httpServletResponse, HttpServletRequest httpServletRequest) {
         quickLogger.logInvoke();
-        quickLogger.logReceive("fromScheduleDate",new java.text.SimpleDateFormat("yyyy-MM-dd").format(fromScheduleDate),
+        quickLogger.logReceive("fromScheduleDate",fromScheduleDate!=null?new java.text.SimpleDateFormat("yyyy-MM-dd").format(fromScheduleDate):null,
                 "fromNoon",fromNoon,
-                "toScheduleDate", new java.text.SimpleDateFormat("yyyy-MM-dd").format(toScheduleDate),
+                "toScheduleDate", toScheduleDate!=null?new java.text.SimpleDateFormat("yyyy-MM-dd").format(toScheduleDate):null,
                 "toNoon",toNoon,
                 "deptId",deptId,
                 "userId",userId,
