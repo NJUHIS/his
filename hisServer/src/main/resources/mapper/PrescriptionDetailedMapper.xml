@@ -56,7 +56,7 @@
     p.quantity, d.id did, d.Drugs_Code, d.Drugs_Name,d.Drugs_Format, d.Drugs_Unit, d.Manufacturer, d.Drugs_Dosage,
            d.Drugs_Type, d.Drugs_Price, d.Mnemonic_Code, d.Creation_Date, d.Last_Update_Date, d.DelMark as Drugs_DelMark
     from prescriptiondetailed p left join drugs d on d.id=p.DrugsId
-    where id = #{id,jdbcType=INTEGER}
+    where p.id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
  select p.id, p.PrescriptionId, p.DrugsId, p.Useage, p.Dosage, p.Frequency, p.Price,
