@@ -1,0 +1,24 @@
+@startuml
+
+
+class Prescription处方 {
+     Integer id;//处方主键ID
+     Integer medicalId;//病历主键ID
+     Integer userId;//开立医生的医院员工主键ID
+     String prescriptionName;//处方名称
+     Integer prescriptionState;//处方状态
+    //1 - 编辑中
+    //2 - 已确认并发出，未收费。
+    //3 - 已收费，未取药。
+    //4 - 已取药。
+     Long prescriptionTime;//生效时间。以医生确认发出的时间为准。毫秒数。
+     String invoiceId;//发票主键ID
+     List<PrescriptionDetailed> prescriptionDetailedList;//处方明细列表
+}
+
+Prescription处方--|>MedicalRecord病历
+Prescription处方--|>User医院员工
+Prescription处方--|>PrescriptionDetailed处方明细
+Prescription处方--|>Invoice发票
+
+@enduml

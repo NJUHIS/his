@@ -1,0 +1,26 @@
+@startuml
+
+class CheckApply检验检查处置 {
+     Integer id;//检验检查处置主键ID
+     Integer medicalId;//病历主键ID
+     Long creationTime; //生效时间。以医生确认发出的时间为准。毫秒数。
+     BigDecimal totalSum; //总金额。自动根据检验检查处置明细计算。
+     String objective; //目的和要求
+     Integer userId;//开立医生的医院员工主键ID
+     Integer state;//检验检查处置状态
+    //1 - 编辑中
+    //2 - 已开立并发出，未收费
+    //3 - 已收费，未检验检查处置
+    //4 - 正在检验检查处置或等待结果
+    //5 - 检验检查处置已完成，结果已出
+     Integer invoiceId;//发票主键ID
+     List<CheckDetailed> checkDetailedList ;//检验检查处置明细列表
+     Register register;//挂号
+}
+
+CheckApply检验检查处置--|>Register挂号
+CheckApply检验检查处置--|>MedicalRecord病历
+CheckApply检验检查处置--|>User医院员工
+CheckApply检验检查处置--|>CheckDetailed检验检查处置明细
+
+@enduml

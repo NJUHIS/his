@@ -1,6 +1,10 @@
 package com.njuhis.his.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
 
 //处方明细
 public class PrescriptionDetailed {
@@ -90,5 +94,29 @@ public class PrescriptionDetailed {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    //不能為空的字段
+    @JsonIgnore
+    private static final String[][] notEmptyFieldsCheckListString =new String[][]{
+            //字段名+英文名+中文翻譯
+            {"prescriptionid","Prescription ID","病历主键ID"},
+            {"drugsid","Drug ID","药品主键ID"},
+            {"quantity","Quantity","数量"}
+
+    };
+    @JsonIgnore
+    private static final Map<String, String[]> notEmptyFieldsCheckList =new HashMap<>();
+    public PrescriptionDetailed(){
+        for(String[]fieldToCheckNotEmpty: notEmptyFieldsCheckListString){
+            String[] fieldTranslations=new String[]{
+                    fieldToCheckNotEmpty[1],fieldToCheckNotEmpty[2]
+            };
+            notEmptyFieldsCheckList.put(fieldToCheckNotEmpty[0],fieldTranslations);
+        }
+    }
+
+    public static Map<String, String[]> getNotEmptyFieldsCheckList() {
+        return notEmptyFieldsCheckList;
     }
 }

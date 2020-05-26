@@ -1,0 +1,30 @@
+@startuml
+class MedicalRecord病历{
+    Integer id;//病历主键ID
+    Integer registerId;//挂号主键ID
+    String medicalReadme;//主诉
+    String medicalPresent;//现病史
+    String presentTreat;//现病治疗情况
+    String medicalHistory;//既往史
+    String medicalAllergy;//过敏史
+    String medicalPhysique;//体格检查
+    String medicalDiagnosis;//诊断结果
+    String medicalHandling;//处理意见
+    Integer caseState;//病历状态
+    // 1 - 已预约
+    // 2 - 进行中
+    // 3 - 已完成/诊毕；
+    List<Diagnosis> diagnosisList;//诊断列表
+
+}
+
+MedicalRecord病历 --|> Diagnosis诊断
+MedicalRecord病历 --|> Register挂号
+
+class Diagnosis诊断{
+}
+class Register挂号{
+}
+@enduml
+
+

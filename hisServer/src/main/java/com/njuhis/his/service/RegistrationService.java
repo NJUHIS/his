@@ -311,13 +311,16 @@ public class RegistrationService {
 
         PatientCosts patientCosts=new PatientCosts();
         patientCosts.setName("Test (Examination or Disposal) Expense 检验（检查或处置）费用");
-        patientCosts.setPrice(new BigDecimal(99999));
+        patientCosts.setPrice(checkApply.getTotalSum());
         patientCosts.setState(2);// 2 - 已交费
         patientCosts.setRegisterid(checkApply.getMedicalId());
         patientCosts.setInvoiceid(checkApply.getMedicalId());
+        Invoice invoice=getInvoiceById(checkApply.getMedicalId(),resultMessage);if(!resultMessage.isSuccessful())return null;
+        invoice.setMoney(invoice.getMoney().add(patientCosts.getPrice()));
 
         checkApply=doctorService.updateCheckApplyInternal(checkApply,resultMessage);if(!resultMessage.isSuccessful())return null;
         addPatientCosts(patientCosts,resultMessage);if(!resultMessage.isSuccessful())return null;
+        updateInvoice(invoice,resultMessage);if(!resultMessage.isSuccessful())return null;
 
         return checkApply;
     }
@@ -333,12 +336,20 @@ public class RegistrationService {
         prescription.setPrescriptionState(3);// 3 - 已收费，未取药。
 
 
+        BigDecimal sum=new BigDecimal(0);
+        for(PrescriptionDetailed prescriptionDetailed:prescription.getPrescriptionDetailedList()){
+            sum=sum.add(prescriptionDetailed.getPrice());
+        }
+
         PatientCosts patientCosts=new PatientCosts();
         patientCosts.setName("Drug Expense 药品费用");
-        patientCosts.setPrice(new BigDecimal(999999));
+        patientCosts.setPrice(sum);
         patientCosts.setState(2);// 2 - 已交费
         patientCosts.setRegisterid(prescription.getId());
         patientCosts.setInvoiceid(prescription.getId());
+
+        Invoice invoice=getInvoiceById(prescriptionId,resultMessage);if(!resultMessage.isSuccessful())return null;
+        invoice.setMoney(invoice.getMoney().add(patientCosts.getPrice()));
 
         prescription=doctorService.updatePrescriptionInternal(prescription,resultMessage);if(!resultMessage.isSuccessful())return null;
         addPatientCosts(patientCosts,resultMessage);if(!resultMessage.isSuccessful())return null;

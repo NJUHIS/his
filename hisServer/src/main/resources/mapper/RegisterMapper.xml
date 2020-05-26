@@ -30,7 +30,7 @@
       <result column="Money" jdbcType="DECIMAL" property="money" />
       <result column="State" jdbcType="INTEGER" property="state" />
       <result column="CreationTime" jdbcType="BIGINT" property="creationtime" />
-      <result column="UserId" jdbcType="INTEGER" property="userid" />
+      <result column="Invoice_UserId" jdbcType="INTEGER" property="userid" />
       <result column="DailyState" jdbcType="INTEGER" property="dailystate" />
       <collection property="patientCostsList" ofType="com.njuhis.his.model.PatientCosts">
         <id column="cid" jdbcType="INTEGER" property="id" />
@@ -126,7 +126,7 @@
     select r.id, r.RealName, r.Gender, r.IDnumber, r.BirthDate, r.Age, r.HomeAddress, r.MedicalRecordId,
     r.VisitDate, r.Noon, r.DeptId, r.UserId, r.RegistId, r.SettleID, r.IsBook, r.RegisterTime, r.RegisterID,
     r.VisitState, r.patientID, r.scheduleId, c.id cid, c.InvoiceId, c.RegisterId as PatientCosts_RegisterId, c.Name, c.Price, c.DeptId  as PatientCosts_DeptId, c.State as PatientCosts_State, c.DelMark,
-    i.id iid, i.InvoiceNum, i.Money, i.State, i.CreationTime, i.UserId, i.DailyState
+    i.id iid, i.InvoiceNum, i.Money, i.State, i.CreationTime, i.UserId as Invoice_UserId, i.DailyState
     from register r
     left join invoice i on r.id=i.id
     left join patientcosts c on c.InvoiceId=i.id

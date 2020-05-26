@@ -1,0 +1,50 @@
+@startuml
+class Register挂号 {
+     Integer id;//挂号主键ID
+     String realname;//患者真实姓名
+     Integer gender; //患者性别
+    //1 - 男性
+    //2 - 女性
+    //3 - 其他
+     String idnumber;//患者身份证号码
+     Date birthdate;//患者出生日期
+     Integer age;//患者年龄
+     String homeaddress;//患者家庭住址
+     Integer medicalRecordId;//病历主键ID
+     Date visitdate;//预约看诊日期
+    //standard forms "yyyy-MM-dd"
+     Integer noon;//预约看诊午别
+    //1 - 凌晨
+    //2 - 早上
+    //3 - 下午
+    //4 - 晚上
+     Integer deptid;//看诊科室主键ID
+     Integer userid;//医生的医院员工主键ID
+     Integer registid;//挂号类型主键ID
+     Integer settleid;//结算类型主键ID
+     Integer isbook;//是否需要病历本
+    //1-需要
+    //0-不需要
+     Long registertime;//挂号时间。毫秒數。
+     Integer registerid;//挂号员的医院员工主键ID
+     Integer visitstate;//看诊状态
+    //0-未看诊
+    //1-正在看诊
+    //2-诊毕
+     Integer patientid;//患者主键ID
+     Integer scheduleId;//排班主键ID
+     List<PatientCosts> patientCostsList;//发票明细
+     User user;//医院员工
+     Department department;//部门
+     Invoice invoice;//发票
+}
+
+Register挂号--|>MedicalRecord病历
+Register挂号--|>User医院员工
+Register挂号--|>Invoice发票
+Register挂号--|>PatientCosts发票明细
+Register挂号--|>Department部门
+Register挂号--|>Patient患者
+Register挂号--|>RegisterLevel挂号类型
+Register挂号--|>SettleCategory结算类型
+@enduml

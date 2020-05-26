@@ -14,6 +14,7 @@
   <resultMap id="BaseResultMapCollection" type="com.njuhis.his.model.Prescription" extends="BaseResultMap">
     <collection property="prescriptionDetailedList" ofType="com.njuhis.his.model.PrescriptionDetailed">
       <id column="pdid" jdbcType="INTEGER" property="id" />
+      <result column="PrescriptionId" jdbcType="INTEGER" property="prescriptionid"/>
       <result column="DrugsId" jdbcType="INTEGER" property="drugsid" />
       <result column="Useage" jdbcType="VARCHAR" property="useage" />
       <result column="Dosage" jdbcType="VARCHAR" property="dosage" />

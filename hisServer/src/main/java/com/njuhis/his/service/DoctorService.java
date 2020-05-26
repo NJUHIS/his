@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -362,8 +363,15 @@ public class DoctorService {
     }
 
 
+    public void fillPrescriptionDetailed(PrescriptionDetailed prescriptionDetailed,ResultMessage resultMessage){
+        Drugs drugs=basicInformationService.getDrugById(prescriptionDetailed.getDrugsid(),resultMessage);if(!resultMessage.isSuccessful()) return;
+        prescriptionDetailed.setDosage(drugs.getDrugsDosage());
+        prescriptionDetailed.setPrice(drugs.getDrugsPrice().multiply(new BigDecimal(prescriptionDetailed.getQuantity())));
 
+    }
     public PrescriptionDetailed addPrescriptionDetailed(PrescriptionDetailed prescriptionDetailed,ResultMessage resultMessage){
+        doctorDataCleaner.cleanPrescriptionDetailedForAddPrescriptionDetailed(prescriptionDetailed,resultMessage);if(!resultMessage.isSuccessful()) return null;
+        fillPrescriptionDetailed(prescriptionDetailed,resultMessage);if(!resultMessage.isSuccessful()) return null;
         try {
             prescriptionDetailedMapper.insert(prescriptionDetailed);
         }catch (DataIntegrityViolationException exception) {
@@ -445,6 +453,13 @@ public class DoctorService {
             resultMessage.sendClientError("The state is not 1-Editing. 状态不是 1-编辑中。");
             return null;
         }
+
+        BigDecimal sum=new BigDecimal(0);
+        for(CheckDetailed checkDetailed:checkApply.getCheckDetailedList()){
+            sum=sum.add(checkDetailed.getPrice());
+        }
+
+        checkApply.setTotalSum(sum);
 
         checkApply.setState(2);// 2-已开立并发出，未收费
 

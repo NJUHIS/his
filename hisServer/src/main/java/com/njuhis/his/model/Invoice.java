@@ -7,7 +7,7 @@ import java.util.List;
 public class Invoice {
     private Integer id;//发票ID
     private String invoicenum;//发票编码
-    private BigDecimal money;//发票金额
+    private BigDecimal money=new BigDecimal(0);//发票金额
     private Integer state;//发票状态
     // 1 - 未开出
     // 2 - 已开出，正常状态

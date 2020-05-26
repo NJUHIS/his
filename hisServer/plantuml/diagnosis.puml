@@ -1,0 +1,13 @@
+@startuml
+
+class Diagnosis诊断 {
+    Integer id;//诊断主键ID
+    Integer medicalid;//病历主键ID
+    Integer diseaseid;//疾病主键ID
+    Disease disease;//疾病
+}
+
+Diagnosis诊断--|>Disease疾病
+class Disease疾病{}
+
+@enduml
